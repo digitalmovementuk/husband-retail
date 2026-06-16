@@ -9,6 +9,21 @@
 <meta property="og:title" content="Global Retail Report — January 2026" />
 <meta property="og:description" content="Luxury macro outlook, the future of experience, multi-brand concept stores, art installations and global retail market updates." />
 <meta property="og:type" content="article" />
+<meta property="og:site_name" content="Husband Retail Consulting" />
+<meta property="og:url" content="https://digitalmovementuk.github.io/husband-retail/quarterly-report_v1/" />
+<meta property="og:image" content="https://digitalmovementuk.github.io/husband-retail/quarterly-report_v1/og-image.jpg" />
+<meta property="og:image:secure_url" content="https://digitalmovementuk.github.io/husband-retail/quarterly-report_v1/og-image.jpg" />
+<meta property="og:image:type" content="image/jpeg" />
+<meta property="og:image:width" content="1200" />
+<meta property="og:image:height" content="630" />
+<meta property="og:image:alt" content="Husband Retail Consulting — Global Retail Report, January 2026" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Global Retail Report — January 2026" />
+<meta name="twitter:description" content="The €1,443B luxury market, 7 experience themes, 17 concept stores and the moves reshaping retail destinations — Husband Retail Consulting." />
+<meta name="twitter:image" content="https://digitalmovementuk.github.io/husband-retail/quarterly-report_v1/og-image.jpg" />
+<link rel="icon" type="image/svg+xml" href="favicon.svg" />
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png" />
+<link rel="apple-touch-icon" href="apple-touch-icon.png" />
 <style>
 /* ============================================================
    HUSBAND RETAIL — GLOBAL RETAIL REPORT · JAN 2026
@@ -523,6 +538,43 @@ section.block{padding:clamp(64px,9vw,118px) 0;position:relative}
 .contact-meta{margin-top:46px;display:flex;flex-wrap:wrap;gap:14px 40px;justify-content:center;font-size:14px;color:#aab3cf}
 .contact-meta a{color:#fff;font-weight:600;border-bottom:1px solid rgba(255,255,255,.3)}
 .contact-meta a:hover{color:var(--gold-soft)}
+/* contact: founder card + enquiry form */
+.contact-grid{display:grid;grid-template-columns:.82fr 1.18fr;gap:clamp(28px,4vw,54px);align-items:start;
+  max-width:1060px;margin:clamp(38px,5vw,58px) auto 0;text-align:left}
+.paul-card img{width:100%;border-radius:18px;border:1px solid rgba(255,255,255,.14);
+  box-shadow:0 26px 64px -32px rgba(0,0,0,.75);display:block;aspect-ratio:3/2;object-fit:cover;object-position:center 30%}
+.paul-name{font-size:clamp(20px,2.4vw,26px);font-weight:800;color:#fff;margin-top:20px;letter-spacing:-.01em}
+.paul-role{font-size:12.5px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--gold-soft);margin-top:7px}
+.paul-bio{font-size:15px;color:#cdd4e8;line-height:1.55;margin-top:14px}
+.paul-meta{list-style:none;margin-top:18px;display:grid;gap:9px;font-size:13.5px;color:#aab3cf}
+.paul-meta a{color:#e9edf7;border-bottom:1px solid rgba(255,255,255,.28)}
+.paul-meta a:hover{color:var(--gold-soft)}
+.cform{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.12);border-radius:var(--r-lg);
+  padding:clamp(22px,3vw,34px);box-shadow:0 24px 60px -36px rgba(0,0,0,.6)}
+.cf-row{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.cf-field{display:flex;flex-direction:column;gap:7px;margin-bottom:14px;text-align:left}
+.cf-field label{font-size:12.5px;font-weight:700;letter-spacing:.04em;color:#c2c9df}
+.cf-field label span{color:#8e98b8;font-weight:500;text-transform:none;letter-spacing:0}
+.cform input,.cform textarea{width:100%;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.16);
+  border-radius:12px;padding:13px 15px;color:#fff;font-size:16px;font-family:inherit;transition:border-color .2s,background .2s}
+.cform input::placeholder,.cform textarea::placeholder{color:#8b95b6}
+.cform input:focus,.cform textarea:focus{outline:none;border-color:var(--gold-soft);background:rgba(255,255,255,.1)}
+.cform textarea{resize:vertical;min-height:110px}
+.cf-submit{width:100%;justify-content:center;margin-top:6px}
+.cf-note{font-size:12.5px;color:#9aa3c0;text-align:center;margin-top:13px}
+.cform-success{max-width:640px;margin:clamp(38px,5vw,58px) auto 0;text-align:center;
+  background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.14);border-radius:var(--r-lg);padding:46px 30px}
+.cs-icon{width:60px;height:60px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;
+  font-size:30px;color:#fff;background:linear-gradient(135deg,var(--gold),var(--gold-bright))}
+.cform-success h3{color:#fff;font-size:23px}
+.cform-success p{color:#cdd4e8;margin-top:10px}
+.cform-success a{color:var(--gold-soft);border-bottom:1px solid rgba(204,145,83,.4)}
+@media (max-width:760px){
+  .contact-grid{grid-template-columns:1fr;text-align:center}
+  .cf-row{grid-template-columns:1fr}
+  .paul-meta{justify-items:center}
+  .paul-card img{max-width:440px;margin-left:auto;margin-right:auto}
+}
 
 footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5px}
 .foot-top{display:flex;flex-wrap:wrap;justify-content:space-between;gap:24px;align-items:flex-start;
@@ -702,7 +754,7 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
     </div>
 
     <div class="lead-figure reveal">
-      <span class="lf-num">€1,443B</span>
+      <span class="lf-num" data-count="1443" data-prefix="€" data-suffix="B">€0B</span>
       <span class="lf-cap"><b>Total global luxury market, 2025E</b>Up +12/14% on 2019, easing −3/−1% on 2024 at current FX. Source: Bain &amp; Company.</span>
     </div>
 
@@ -754,12 +806,12 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
       <h3 style="font-size:clamp(20px,2.6vw,28px);margin-bottom:6px">The 2026 forecast: three scenarios</h3>
       <p style="color:var(--grey);margin-bottom:24px;max-width:70ch;letter-spacing:0">Americas stabilising, Europe suffering, China and Japan seeking long-term stability. Real GDP growth (2026F vs 2025E) sets the backdrop.</p>
       <div class="gdp-grid" style="margin-bottom:24px">
-        <div class="gdp"><div class="gv">+1.3%</div><div class="gl">Europe</div></div>
-        <div class="gdp"><div class="gv">+2.3%</div><div class="gl">North America</div></div>
-        <div class="gdp"><div class="gv">+4.3%</div><div class="gl">China</div></div>
-        <div class="gdp"><div class="gv">+0.6%</div><div class="gl">Japan</div></div>
-        <div class="gdp"><div class="gv">+3.6%</div><div class="gl">Asia (excl. CN &amp; JP)</div></div>
-        <div class="gdp"><div class="gv">+4.1%</div><div class="gl">Middle East</div></div>
+        <div class="gdp"><div class="gv" data-count="1.3" data-prefix="+" data-suffix="%">+0%</div><div class="gl">Europe</div></div>
+        <div class="gdp"><div class="gv" data-count="2.3" data-prefix="+" data-suffix="%">+0%</div><div class="gl">North America</div></div>
+        <div class="gdp"><div class="gv" data-count="4.3" data-prefix="+" data-suffix="%">+0%</div><div class="gl">China</div></div>
+        <div class="gdp"><div class="gv" data-count="0.6" data-prefix="+" data-suffix="%">+0%</div><div class="gl">Japan</div></div>
+        <div class="gdp"><div class="gv" data-count="3.6" data-prefix="+" data-suffix="%">+0%</div><div class="gl">Asia (excl. CN &amp; JP)</div></div>
+        <div class="gdp"><div class="gv" data-count="4.1" data-prefix="+" data-suffix="%">+0%</div><div class="gl">Middle East</div></div>
       </div>
       <div class="scen-grid">
         <div class="scen worse"><div class="sh">Worse case</div><div class="srange">0 / +3% YoY</div><ul>
@@ -783,11 +835,11 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
       <h3 style="font-size:clamp(20px,2.6vw,28px);margin-bottom:6px">New markets are the emerging engines</h3>
       <p style="color:var(--grey);margin-bottom:24px;max-width:70ch;letter-spacing:0">Total mono-brand stores by emerging region, 2025E — untapped potential waiting to be unlocked.</p>
       <div class="emk-grid">
-        <div class="emk"><div class="ek-h">Middle East</div><div class="ek-n">~1,000</div><div class="ek-p">UAE on an upward trajectory; Saudi outlook turning mixed.</div></div>
-        <div class="emk"><div class="ek-h">LATAM</div><div class="ek-n">~900</div><div class="ek-p">Mexico &amp; Brazil hold momentum; niche fragrances boom in Mexico.</div></div>
-        <div class="emk"><div class="ek-h">SEA</div><div class="ek-n">~840</div><div class="ek-p">Accessible brands fuel Gen Z's entry; "kawaii" drives resonance.</div></div>
-        <div class="emk"><div class="ek-h">India</div><div class="ek-n">~175</div><div class="ek-p">Demand rising abroad; global brands expand on a surging middle class.</div></div>
-        <div class="emk"><div class="ek-h">Africa</div><div class="ek-n">~150</div><div class="ek-p">New local players emerge, though distribution stays underdeveloped.</div></div>
+        <div class="emk"><div class="ek-h">Middle East</div><div class="ek-n" data-count="1000" data-prefix="~">~0</div><div class="ek-p">UAE on an upward trajectory; Saudi outlook turning mixed.</div></div>
+        <div class="emk"><div class="ek-h">LATAM</div><div class="ek-n" data-count="900" data-prefix="~">~0</div><div class="ek-p">Mexico &amp; Brazil hold momentum; niche fragrances boom in Mexico.</div></div>
+        <div class="emk"><div class="ek-h">SEA</div><div class="ek-n" data-count="840" data-prefix="~">~0</div><div class="ek-p">Accessible brands fuel Gen Z's entry; "kawaii" drives resonance.</div></div>
+        <div class="emk"><div class="ek-h">India</div><div class="ek-n" data-count="175" data-prefix="~">~0</div><div class="ek-p">Demand rising abroad; global brands expand on a surging middle class.</div></div>
+        <div class="emk"><div class="ek-h">Africa</div><div class="ek-n" data-count="150" data-prefix="~">~0</div><div class="ek-p">New local players emerge, though distribution stays underdeveloped.</div></div>
       </div>
     </div>
   </div>
@@ -937,7 +989,7 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
     </div>
 
     <div class="lead-figure reveal">
-      <span class="lf-num">7</span>
+      <span class="lf-num" data-count="7">0</span>
       <span class="lf-cap"><b>Experience themes redefining the store</b>From a sense of place and social theatre to joy commerce and the AI dreamscape.</span>
     </div>
 
@@ -1065,7 +1117,7 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
     </div>
 
     <div class="lead-figure reveal">
-      <span class="lf-num">17</span>
+      <span class="lf-num" data-count="17">0</span>
       <span class="lf-cap"><b>Multi-brand concept stores</b>Across China, Southeast Asia, the Middle East and Europe — rewriting how brands show up.</span>
     </div>
 
@@ -1126,7 +1178,7 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
           <span>Chanel</span><span>Christian Dior</span><span>Cartier</span><span>Covent Garden</span><span>Harrods</span><span>Selfridges</span>
         </div>
       </div>
-      <div class="art-stat reveal d1"><div class="as-n">18</div><div class="as-l">years transforming retail spaces, from London flagships to global destinations</div></div>
+      <div class="art-stat reveal d1"><div class="as-n" data-count="18">0</div><div class="as-l">years transforming retail spaces, from London flagships to global destinations</div></div>
     </div>
 
     <div class="art-grid">
@@ -1157,7 +1209,7 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
     </div>
 
     <div class="lead-figure reveal">
-      <span class="lf-num">35</span>
+      <span class="lf-num" data-count="35">0</span>
       <span class="lf-cap"><b>Industry moves tracked into 2026</b>Leadership, M&amp;A, new concepts and consumer shifts across fashion, sport, beauty, jewellery and watches.</span>
     </div>
 
@@ -1235,18 +1287,46 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
 <section class="block contact" id="contact">
   <span class="anchor"></span>
   <div class="wrap">
-    <div class="reveal" style="max-width:760px;margin:0 auto">
+    <div class="reveal" style="text-align:center;max-width:760px;margin:0 auto">
       <span class="eyebrow hero-eyebrow" style="justify-content:center">Husband Retail Consulting</span>
       <h2 class="section-title">Planning a retail destination?</h2>
       <p class="contact-lead">For over 100 retail projects across Asia, the Middle East and Europe — from Covent Garden to Elements and Galaxy — we turn market insight into places people cross cities to visit. Let's talk about yours.</p>
-      <div class="contact-actions">
-        <a href="mailto:info@husband-retail.com" class="btn btn-gold">Start a conversation <span class="arr">→</span></a>
-        <a href="https://husband-retail.com" target="_blank" rel="noopener" class="btn btn-ghost">Visit husband-retail.com</a>
+    </div>
+    <div class="contact-grid reveal d1">
+      <div class="paul-card">
+        <img src="paul-husband.jpg" alt="Paul Husband, Managing Partner of Husband Retail Consulting" loading="lazy" width="720" height="480" />
+        <div class="paul-name">Paul Husband</div>
+        <div class="paul-role">Managing Partner · Husband Retail Consulting</div>
+        <p class="paul-bio">Over 30 years shaping Asia's most coveted retail destinations — from Elements and Galaxy to Covent Garden.</p>
+        <ul class="paul-meta">
+          <li>📍 Room 301, 8 Queen's Road East, Wanchai, Hong Kong</li>
+          <li>☎ <a href="tel:+85226599280">+852 2659 9280</a></li>
+          <li>✉ <a href="mailto:carmen.law@husband-retail.com">carmen.law@husband-retail.com</a></li>
+        </ul>
       </div>
-      <div class="contact-meta">
-        <span>📍 Room 301, 8 Queen's Road East, Wanchai, Hong Kong</span>
-        <span>✉️ <a href="mailto:info@husband-retail.com">info@husband-retail.com</a></span>
-      </div>
+      <form class="cform" id="enquiryForm" action="https://formsubmit.co/carmen.law@husband-retail.com" method="POST">
+        <input type="hidden" name="_subject" value="New enquiry — Global Retail Report (Jan 2026)" />
+        <input type="hidden" name="_captcha" value="false" />
+        <input type="hidden" name="_template" value="table" />
+        <input type="hidden" name="_next" value="https://digitalmovementuk.github.io/husband-retail/quarterly-report_v1/?sent=1" />
+        <input type="text" name="_honey" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0" />
+        <div class="cf-row">
+          <div class="cf-field"><label for="cf-name">Full name</label><input id="cf-name" type="text" name="Name" required placeholder="Your name" /></div>
+          <div class="cf-field"><label for="cf-co">Company</label><input id="cf-co" type="text" name="Company" placeholder="Company / scheme" /></div>
+        </div>
+        <div class="cf-row">
+          <div class="cf-field"><label for="cf-email">Email</label><input id="cf-email" type="email" name="Email" required placeholder="you@company.com" /></div>
+          <div class="cf-field"><label for="cf-phone">Phone <span>(optional)</span></label><input id="cf-phone" type="tel" name="Phone" placeholder="+852 …" /></div>
+        </div>
+        <div class="cf-field"><label for="cf-msg">Your project</label><textarea id="cf-msg" name="Message" rows="4" required placeholder="Tell us about the destination, market or brief…"></textarea></div>
+        <button type="submit" class="btn btn-gold cf-submit">Send enquiry <span class="arr">→</span></button>
+        <p class="cf-note">Goes straight to the Husband Retail team — we reply personally, usually within two working days.</p>
+      </form>
+    </div>
+    <div class="cform-success reveal" id="formSuccess" hidden>
+      <div class="cs-icon">✓</div>
+      <h3>Thank you — your enquiry is on its way.</h3>
+      <p>The Husband Retail team will be in touch personally. Meanwhile, explore <a href="https://husband-retail.com" target="_blank" rel="noopener">husband-retail.com</a>.</p>
     </div>
   </div>
 </section>
@@ -1359,6 +1439,17 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
   var toTop = document.getElementById('toTop');
   toTop.addEventListener('click', function(){ window.scrollTo({top:0,behavior: reduce?'auto':'smooth'}); });
 
+  /* ---- enquiry form: confirmation after FormSubmit redirect ---- */
+  if(/[?&]sent=1/.test(location.search)){
+    var cgrid = document.querySelector('.contact-grid');
+    var succ = document.getElementById('formSuccess');
+    if(cgrid) cgrid.style.display = 'none';
+    if(succ){ succ.hidden = false; succ.classList.add('in'); }
+    var csec = document.getElementById('contact');
+    if(csec) setTimeout(function(){ csec.scrollIntoView(); }, 60);
+    try{ history.replaceState(null,'',location.pathname); }catch(e){}
+  }
+
   window.addEventListener('scroll', onScroll, {passive:true});
   window.addEventListener('resize', onScroll);
   onScroll();
@@ -1373,25 +1464,29 @@ footer{background:var(--navy-2);color:#aeb6cd;padding:48px 0 38px;font-size:13.5
   } else { revealEls.forEach(function(el){ el.classList.add('in'); }); }
 
   /* ---- animated counters ---- */
+  function fmtNum(v, dec){
+    var s = dec>0 ? v.toFixed(dec) : Math.round(v).toString();
+    var parts = s.split('.');
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return parts.join('.');
+  }
   function animateCount(el){
-    var target = parseFloat(el.getAttribute('data-count'));
+    var raw = el.getAttribute('data-count');
+    var target = parseFloat(raw);
+    var dec = ((raw.split('.')[1])||'').length;
     var pre = el.getAttribute('data-prefix')||'';
     var suf = el.getAttribute('data-suffix')||'';
-    if(reduce){ el.textContent = pre+formatNum(target)+suf; return; }
+    if(reduce){ el.textContent = pre+fmtNum(target,dec)+suf; return; }
     var dur = 1500, start = null;
     function step(ts){
       if(!start) start = ts;
       var p = Math.min((ts-start)/dur,1);
       var eased = 1 - Math.pow(1-p,3);
-      var val = target*eased;
-      el.innerHTML = pre + '<span>'+formatNum(Math.round(val))+'</span>' + (suf? '<span class="u">'+suf+'</span>':'');
-      // simpler: keep plain
-      el.textContent = pre + formatNum(Math.round(val)) + suf;
+      el.textContent = pre + fmtNum(target*eased, dec) + suf;
       if(p<1) requestAnimationFrame(step);
     }
     requestAnimationFrame(step);
   }
-  function formatNum(n){ return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ','); }
   var counters = document.querySelectorAll('[data-count]');
   if('IntersectionObserver' in window){
     var co = new IntersectionObserver(function(entries){
