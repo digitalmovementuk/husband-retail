@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Husband Retail — Site map & keyword research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#16140F;--ink-2:#2A2620;--muted:#6E6A61;--paper:#FFFFFF;--sand:#FBFBFA;--sand-2:#F3F3F1;
+  --line:#E6E1D7;--line-2:#D9D2C4;--gold:#A98A57;--gold-deep:#7A5E2E;--gold-soft:#F4EEE2;
+  --green:#3F7A52;--amber:#9A6B1E;--red:#A23B2E;
+  --maxw:1080px;--font:"Jost","Futura","Century Gothic","Helvetica Neue",Arial,sans-serif;
+  --mono:"SFMono-Regular",Consolas,"Liberation Mono",Menlo,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:var(--font);color:var(--ink);background:var(--paper);line-height:1.6;font-weight:400;-webkit-font-smoothing:antialiased}
+.wrap{max-width:var(--maxw);margin:0 auto;padding:0 32px}
+a{color:inherit;text-decoration:none}
+
+header.top{border-bottom:1px solid var(--line);background:var(--sand)}
+.top-inner{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:15px 32px;max-width:var(--maxw);margin:0 auto}
+.cobrand{font-size:13px;letter-spacing:.04em}
+.cobrand b{font-weight:600;letter-spacing:.16em}
+.cobrand .x{color:var(--gold);font-weight:300;margin:0 8px}
+.cobrand .dm{color:var(--muted);font-weight:500;letter-spacing:.16em;text-transform:uppercase;font-size:11px}
+.tag{font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-deep);border:1px solid var(--gold);padding:5px 11px;border-radius:999px;background:var(--gold-soft)}
+
+.hero{padding:52px 0 22px}
+.hero .eyebrow{font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);margin-bottom:15px}
+.hero h1{font-size:clamp(28px,4.2vw,42px);font-weight:300;letter-spacing:-.025em;line-height:1.1;margin-bottom:14px;max-width:22ch}
+.hero p{font-size:16px;color:var(--ink-2);font-weight:300;max-width:60ch}
+
+section.band{padding:30px 0}
+.sec-head{margin-bottom:18px}
+.sec-head .eyebrow{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);display:block;margin-bottom:10px}
+.sec-head h2{font-size:clamp(22px,3vw,30px);font-weight:300;letter-spacing:-.02em}
+.sec-head p{color:var(--muted);max-width:64ch;font-size:14.5px;margin-top:8px}
+
+/* ===== expandable PILL tree ===== */
+.tree-bar{display:flex;align-items:center;flex-wrap:wrap;gap:10px 14px;margin-bottom:16px}
+.tree-bar .meta{font-size:12.5px;color:var(--muted)}
+.tree-bar .meta b{color:var(--ink);font-weight:600}
+.btn-expand{margin-left:auto;padding:8px 16px;background:transparent;border:1px solid var(--gold);border-radius:999px;font-family:var(--font);font-size:11.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--gold-deep);cursor:pointer;transition:all .2s ease}
+.btn-expand:hover{background:var(--gold-soft)}
+
+.proot{display:inline-flex;align-items:center;gap:11px;padding:11px 22px;background:var(--ink);color:#fff;border-radius:999px;margin-bottom:14px}
+.proot .rd{width:8px;height:8px;border-radius:50%;background:#D8BC8B}
+.proot .rh{font-family:var(--mono);font-weight:500;font-size:14px;letter-spacing:.02em}
+.proot .rs{font-size:12px;color:rgba(255,255,255,.6)}
+
+.ptree{display:flex;flex-direction:column;gap:10px;margin-left:18px;padding-left:24px;border-left:1.5px solid var(--line-2)}
+.pnode{position:relative}
+.pnode::before{content:"";position:absolute;left:-24px;top:23px;width:18px;height:1.5px;background:var(--line-2)}
+.ppill{list-style:none;cursor:pointer;display:flex;align-items:center;gap:13px;padding:13px 22px;background:var(--sand);border:1px solid var(--line);border-radius:999px;transition:all .18s ease}
+.ppill::-webkit-details-marker{display:none}
+.ppill:hover{border-color:var(--gold)}
+.pnode[open]>.ppill{background:var(--gold-soft);border-color:#e6d3ad}
+.ppill .pn{font-size:11.5px;font-weight:600;color:var(--gold-deep);font-variant-numeric:tabular-nums;letter-spacing:.04em}
+.ppill .pt{font-weight:500;font-size:15px;letter-spacing:-.01em;color:var(--ink)}
+.ppill .pp{font-family:var(--mono);font-size:12px;color:var(--muted);margin-left:2px}
+.ppill .pc{margin-left:auto;font-size:11px;font-weight:600;letter-spacing:.04em;color:var(--ink-2);background:#fff;border:1px solid var(--line);border-radius:999px;padding:3px 11px;white-space:nowrap}
+.ppill .chev{color:var(--muted);font-size:11px;transition:transform .22s ease}
+.pnode[open]>.ppill .chev{transform:rotate(180deg)}
+
+.pkids{display:flex;flex-direction:column;gap:8px;margin:12px 0 4px;padding-left:14px}
+.ppage{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding:10px 18px;background:var(--paper);border:1px solid var(--line);border-radius:999px;transition:all .18s ease}
+.ppage:hover{border-color:var(--gold);background:var(--sand)}
+.ppage .slug{font-family:var(--mono);font-size:13px;font-weight:500;color:var(--ink)}
+.ppage .slug .dom{color:var(--muted);font-weight:400}
+.ppage .pk{font-size:12px;color:var(--gold-deep)}
+.ppage .pk .a{color:var(--muted)}
+.ppage .pdot{width:8px;height:8px;border-radius:50%;flex:0 0 auto;margin-left:auto}
+.pdot.lo{background:var(--green)}.pdot.me{background:var(--amber)}.pdot.hi{background:var(--red)}.pdot.br{background:var(--gold)}.pdot.ai{background:#3a5f86}
+.ppage.hub{background:var(--ink);border-color:var(--ink)}
+.ppage.hub .slug,.ppage.hub .slug .dom{color:#fff}
+.ppage.hub .pk{color:#D8BC8B}
+.pnest{display:flex;flex-direction:column;gap:7px;margin:8px 0 2px 22px;padding-left:20px;border-left:1.5px dashed var(--line-2)}
+.pnest .ppage{padding:8px 16px;background:var(--sand)}
+.pnest .ppage .slug{font-size:12.5px}
+
+/* ===== keyword research results ===== */
+.analysis{background:var(--ink);color:#fff;border-radius:5px;border-left:5px solid var(--gold);padding:24px 28px;margin-bottom:22px}
+.analysis .k{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:#D8BC8B;margin-bottom:12px}
+.analysis p{font-size:15px;font-weight:300;line-height:1.5;color:rgba(255,255,255,.9)}
+.analysis p b{color:#fff;font-weight:500}
+.tablewrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--paper)}
+table{width:100%;border-collapse:collapse;font-size:13.5px}
+thead th{text-align:left;font-size:10.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:13px 14px;border-bottom:1px solid var(--line);white-space:nowrap;background:var(--sand)}
+tbody td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:middle}
+tbody tr:last-child td{border-bottom:0}
+tbody tr:hover{background:var(--sand)}
+.kwq{font-weight:500;color:var(--ink)}
+.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.pageslug{font-family:var(--mono);font-size:12px;color:var(--gold-deep)}
+.diff{display:inline-block;font-size:11px;font-weight:600;letter-spacing:.02em;padding:3px 10px;border-radius:999px;white-space:nowrap}
+.diff.lo{background:#EEF3EF;color:#2f5d40;border:1px solid #d6e5da}
+.diff.me{background:#F6EEDD;color:#7a5310;border:1px solid #ecdcbf}
+.diff.hi{background:#F6E7E3;color:#8a2d20;border:1px solid #eccfc8}
+.diff.na{background:var(--sand-2);color:var(--muted);border:1px solid var(--line)}
+.intent{font-weight:600;color:var(--ink-2)}
+.intent.t1{color:var(--gold-deep)}
+.rowgroup td{background:var(--sand-2);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);padding:9px 14px}
+.note{background:var(--gold-soft);border:1px solid #ecdcbf;border-radius:6px;padding:16px 20px;font-size:13.5px;color:var(--ink-2);line-height:1.6;margin-top:18px}
+.note b{color:var(--gold-deep);font-weight:600}
+
+footer{background:var(--ink);color:rgba(255,255,255,.7);padding:30px 0;font-size:12.5px;margin-top:38px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;align-items:center}
+footer b{color:#fff;font-weight:500;letter-spacing:.14em}
+footer .x{color:#D8BC8B}
+
+@media(max-width:680px){
+  .wrap{padding:0 20px}.top-inner{padding:13px 20px}
+  .ptree{margin-left:6px;padding-left:16px}
+  .pnode::before{width:12px;left:-16px}
+  .ppill{padding:12px 18px;gap:9px}.ppill .pp{display:none}
+  .pnest{margin-left:12px;padding-left:14px}
+  .analysis,table{text-align:left}
+}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="top-inner">
+    <div class="cobrand"><b>HUSBAND&nbsp;RETAIL</b><span class="x">×</span><span class="dm">Digital Movement</span></div>
+    <span class="tag">Site map &amp; keywords</span>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div class="eyebrow">The site we'll build</div>
+    <h1>The full page tree — and the keyword research behind it.</h1>
+    <p>Open any branch to see the pages and their slugs. Below the tree, the keyword research results show exactly why each page was chosen.</p>
+  </div>
+</section>
+
+<!-- ===== PILL TREE ===== -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The page tree</span>
+      <h2>29 pages, six branches.</h2>
+    </div>
+    <div class="tree-bar">
+      <div class="meta"><b>29</b> pages · <b>6</b> sections · click a branch to open it</div>
+      <button class="btn-expand" id="expandTree">⤓ Expand all</button>
+    </div>
+
+    <div class="proot"><span class="rd"></span><span class="rh">husband-retail.com</span><span class="rs">Home — the hub every page links to</span></div>
+
+    <div class="ptree" id="tree">
+
+      <details class="pnode">
+        <summary class="ppill"><span class="pn">01</span><span class="pt">Home</span><span class="pp">/</span><span class="pc">1 page</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage"><span class="slug">husband-retail.com</span><span class="pk"><span class="a">brand:</span> husband retail</span><span class="pdot br"></span></div>
+        </div>
+      </details>
+
+      <details class="pnode" open>
+        <summary class="ppill"><span class="pn">02</span><span class="pt">Service pages</span><span class="pp">/…</span><span class="pc">8 pages</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage"><span class="slug"><span class="dom">/</span>development-advisory</span><span class="pk"><span class="a">kw:</span> retail development advisory</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>placemaking</span><span class="pk"><span class="a">kw:</span> retail placemaking consultant</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>feasibility</span><span class="pk"><span class="a">kw:</span> retail feasibility study</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>repositioning</span><span class="pk"><span class="a">kw:</span> shopping mall repositioning consultant</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>planning</span><span class="pk"><span class="a">kw:</span> retail planning consultant</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>leasing</span><span class="pk"><span class="a">kw:</span> shopping mall leasing consultancy</span><span class="pdot me"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>luxury-retail</span><span class="pk"><span class="a">kw:</span> luxury retail consultant</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>investment</span><span class="pk"><span class="a">kw:</span> retail real estate consultant</span><span class="pdot hi"></span></div>
+        </div>
+      </details>
+
+      <details class="pnode">
+        <summary class="ppill"><span class="pn">03</span><span class="pt">Market pages</span><span class="pp">/markets/…</span><span class="pc">3 pages</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage"><span class="slug"><span class="dom">/</span>markets/gulf</span><span class="pk"><span class="a">kw:</span> mall consultant saudi · retail consultant dubai</span><span class="pdot lo"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>markets/asia</span><span class="pk"><span class="a">kw:</span> retail consultant asia / hong kong</span><span class="pdot me"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>markets/india</span><span class="pk"><span class="a">kw:</span> retail consultant india</span><span class="pdot lo"></span></div>
+        </div>
+      </details>
+
+      <details class="pnode">
+        <summary class="ppill"><span class="pn">04</span><span class="pt">Projects — the proof</span><span class="pp">/projects/…</span><span class="pc">10 pages</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage hub"><span class="slug"><span class="dom">/</span>projects</span><span class="pk">portfolio hub · parent of 9 case studies</span></div>
+          <div class="pnest">
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>landmark-hong-kong</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>elements-hong-kong</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>galaxy-macau</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>seoul-ifc-mall</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>dubai-design-district</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>lusail-boulevard</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>shanghai-disney-village</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>mahanakhon-bangkok</span></div>
+            <div class="ppage"><span class="slug"><span class="dom">/projects/</span>dlf-emporio-delhi</span></div>
+          </div>
+        </div>
+      </details>
+
+      <details class="pnode">
+        <summary class="ppill"><span class="pn">05</span><span class="pt">Insights — found by AI</span><span class="pp">/insights/…</span><span class="pc">4 pages</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage"><span class="slug"><span class="dom">/insights/</span>attracting-luxury-brands</span><span class="pk"><span class="a">topic:</span> how to attract luxury brands</span><span class="pdot ai"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/insights/</span>luxury-tenant-mix</span><span class="pk"><span class="a">topic:</span> luxury tenant mix strategy</span><span class="pdot ai"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/insights/</span>asian-luxury-consumer</span><span class="pk"><span class="a">topic:</span> the Asian luxury consumer</span><span class="pdot ai"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/insights/</span>gulf-retail-vision-2030</span><span class="pk"><span class="a">topic:</span> Saudi Vision 2030 retail</span><span class="pdot ai"></span></div>
+        </div>
+      </details>
+
+      <details class="pnode">
+        <summary class="ppill"><span class="pn">06</span><span class="pt">Identity</span><span class="pp">/…</span><span class="pc">3 pages</span><span class="chev">▾</span></summary>
+        <div class="pkids">
+          <div class="ppage"><span class="slug"><span class="dom">/</span>paul</span><span class="pk"><span class="a">kw:</span> paul husband</span><span class="pdot br"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>company</span><span class="pk"><span class="a">kw:</span> husband retail (firm)</span><span class="pdot br"></span></div>
+          <div class="ppage"><span class="slug"><span class="dom">/</span>contact</span><span class="pk">conversion endpoint</span><span class="pdot br"></span></div>
+        </div>
+      </details>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== KEYWORD RESEARCH RESULTS ===== -->
+<section class="band">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Keyword research results</span>
+      <h2>Why we chose these pages.</h2>
+      <p>Every keyword we researched, with its real Semrush volume, difficulty and buyer intent — and the page it maps to. Sorted by opportunity: highest-intent first.</p>
+    </div>
+
+    <div class="analysis">
+      <div class="k">The headline</div>
+      <p>Almost nobody searches for these services — even the broadest term, "retail consultant", gets just <b>20 searches a month in Hong Kong, Singapore, Dubai and Saudi</b>. That's normal for an ultra-premium niche, and it's why we don't chase traffic. But <b>difficulty is low</b>, so when a buyer does search, these pages rank fast — and they also exist to <b>get cited by AI</b> and <b>convert the 149 sites that already link to Husband</b>. Volume isn't the point; being the page that's there when it matters is.</p>
+    </div>
+
+    <div class="tablewrap">
+      <table>
+        <thead><tr><th>Keyword researched</th><th class="num">Searches/mo</th><th>Difficulty</th><th>Buyer intent</th><th>→ Page we build</th></tr></thead>
+        <tbody>
+          <tr class="rowgroup"><td colspan="5">Service &amp; market terms — build these for the rare, high-value search</td></tr>
+          <tr><td class="kwq">retail development advisory</td><td class="num">≈0</td><td><span class="diff lo">Low</span></td><td class="intent t1">Very high</td><td class="pageslug">/development-advisory</td></tr>
+          <tr><td class="kwq">retail placemaking consultant</td><td class="num">50</td><td><span class="diff lo">Low</span></td><td class="intent t1">High</td><td class="pageslug">/placemaking</td></tr>
+          <tr><td class="kwq">retail feasibility study</td><td class="num">20</td><td><span class="diff lo">Low</span></td><td class="intent t1">High</td><td class="pageslug">/feasibility</td></tr>
+          <tr><td class="kwq">shopping mall repositioning consultant</td><td class="num">≈0</td><td><span class="diff lo">Low</span></td><td class="intent">High</td><td class="pageslug">/repositioning</td></tr>
+          <tr><td class="kwq">mall consultant saudi · retail consultant dubai</td><td class="num">~20</td><td><span class="diff lo">Low</span></td><td class="intent">High</td><td class="pageslug">/markets/gulf</td></tr>
+          <tr><td class="kwq">retail planning consultant</td><td class="num">20</td><td><span class="diff lo">Low</span></td><td class="intent">Medium</td><td class="pageslug">/planning</td></tr>
+          <tr><td class="kwq">retail consultant india</td><td class="num">170</td><td><span class="diff lo">Low</span></td><td class="intent">Medium</td><td class="pageslug">/markets/india</td></tr>
+          <tr><td class="kwq">luxury retail consultant</td><td class="num">30</td><td><span class="diff lo">Low</span></td><td class="intent">Medium</td><td class="pageslug">/luxury-retail</td></tr>
+          <tr><td class="kwq">retail consultant asia / hong kong</td><td class="num">20</td><td><span class="diff me">Medium</span></td><td class="intent">Medium</td><td class="pageslug">/markets/asia</td></tr>
+          <tr><td class="kwq">shopping mall leasing consultancy</td><td class="num">≈0</td><td><span class="diff me">Medium</span></td><td class="intent">Medium</td><td class="pageslug">/leasing</td></tr>
+          <tr><td class="kwq">retail real estate consultant</td><td class="num">≈0</td><td><span class="diff hi">High</span></td><td class="intent">Medium</td><td class="pageslug">/investment</td></tr>
+          <tr class="rowgroup"><td colspan="5">Topics — no buying volume, but what gets Husband cited by AI</td></tr>
+          <tr><td class="kwq">how to attract luxury brands to a destination</td><td class="num">—</td><td><span class="diff na">Topic</span></td><td class="intent">Research</td><td class="pageslug">/insights/attracting-luxury-brands</td></tr>
+          <tr><td class="kwq">luxury tenant mix strategy</td><td class="num">—</td><td><span class="diff na">Topic</span></td><td class="intent">Research</td><td class="pageslug">/insights/luxury-tenant-mix</td></tr>
+          <tr><td class="kwq">the Asian luxury consumer</td><td class="num">—</td><td><span class="diff na">Topic</span></td><td class="intent">Research</td><td class="pageslug">/insights/asian-luxury-consumer</td></tr>
+          <tr><td class="kwq">Saudi Vision 2030 retail</td><td class="num">—</td><td><span class="diff na">Topic</span></td><td class="intent">Research</td><td class="pageslug">/insights/gulf-retail-vision-2030</td></tr>
+          <tr class="rowgroup"><td colspan="5">Branded — capture the people who already know the name</td></tr>
+          <tr><td class="kwq">paul husband</td><td class="num">branded</td><td><span class="diff lo">Low</span></td><td class="intent t1">Very high</td><td class="pageslug">/paul</td></tr>
+          <tr><td class="kwq">husband retail</td><td class="num">branded</td><td><span class="diff lo">Low</span></td><td class="intent t1">Very high</td><td class="pageslug">/company · home</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="note"><b>How to read it:</b> the volumes are deliberately tiny — that's the finding, not a flaw. We pick pages on <b>intent and difficulty</b>, not traffic: low-difficulty terms Husband can actually win, plus the topic pages that make AI name him and the branded pages that catch the referrals he already earns. <span style="color:var(--muted)">Data: Semrush + live Google SERP, 20 June 2026.</span></div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div><b>HUSBAND&nbsp;RETAIL</b> <span class="x">×</span> Digital Movement — Site map &amp; keyword research · 29 pages</div>
+    <div>Semrush + Google · 20 Jun 2026</div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var btn=document.getElementById('expandTree'), tree=document.getElementById('tree');
+  if(!btn||!tree) return;
+  var nodes=tree.querySelectorAll('.pnode'), open=false;
+  btn.addEventListener('click',function(){ open=!open; nodes.forEach(function(n){n.open=open;}); btn.textContent=open?'⤒ Collapse all':'⤓ Expand all'; });
+})();
+</script>
+</body>
+</html>
