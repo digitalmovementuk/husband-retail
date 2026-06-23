@@ -1,0 +1,1028 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1">
+<title>The Grand Salon — Serakai × Husband Retail</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='10' fill='%23126DFF'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --blue:#126DFF; --blue-bright:#4D8BFF;
+  --ink:#212121; --paper:#FFFFFF; --mute:#6A6A6A;
+  --line:#E6E6E6; --line-dark:#3A3A3A;
+  --font:"Aeonik","Inter","Helvetica Neue",Arial,sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{font-family:var(--font);color:var(--ink);background:var(--paper);
+  letter-spacing:.01em;-webkit-font-smoothing:antialiased;overflow:hidden}
+
+.deck{display:flex;flex-direction:row;height:100svh;height:100vh;width:100%;
+  overflow-x:auto;overflow-y:hidden;scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling:touch;scroll-behavior:smooth;scrollbar-width:none}
+.deck::-webkit-scrollbar{display:none}
+.slide{flex:0 0 100%;width:100%;height:100svh;height:100vh;scroll-snap-align:start;
+  scroll-snap-stop:always;position:relative;display:flex;flex-direction:column;
+  justify-content:center;padding:clamp(48px,6vw,112px);overflow:hidden}
+.slide .inner{width:100%;max-width:1320px;margin:0 auto}
+
+.slide .inner>*{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.slide.in .inner>*{opacity:1;transform:none}
+.slide.in .inner>*:nth-child(2){transition-delay:.08s}
+.slide.in .inner>*:nth-child(3){transition-delay:.16s}
+.slide.in .inner>*:nth-child(4){transition-delay:.24s}
+.slide.in .inner>*:nth-child(5){transition-delay:.32s}
+.slide.in .inner>*:nth-child(6){transition-delay:.40s}
+
+.slide.dark{background:var(--ink);color:var(--paper)}
+.slide.dark .eyebrow{color:var(--blue-bright)}
+.slide.dark .rule{background:var(--line-dark)}
+
+.eyebrow{font-size:clamp(12px,1.05vw,15px);letter-spacing:.26em;text-transform:uppercase;
+  color:var(--blue);font-weight:500;margin-bottom:clamp(22px,2.4vw,34px);display:flex;align-items:center;gap:14px}
+.eyebrow::before{content:"";width:30px;height:1px;background:currentColor;opacity:.7}
+h1{font-weight:300;font-size:clamp(2.9rem,6.4vw,6rem);line-height:1.0;letter-spacing:-.022em}
+h2{font-weight:300;font-size:clamp(2rem,4.1vw,3.6rem);line-height:1.08;letter-spacing:-.018em}
+.lead{font-weight:300;font-size:clamp(1.3rem,2.1vw,2rem);line-height:1.36;color:var(--ink);max-width:42ch;margin-top:clamp(22px,2.4vw,32px)}
+.slide.dark .lead{color:#EDEDED}
+.body{font-size:clamp(1.1rem,1.32vw,1.4rem);line-height:1.6;color:var(--mute);max-width:64ch;margin-top:clamp(20px,2vw,28px);font-weight:400}
+.slide.dark .body{color:#C7C7C7}
+b,strong{font-weight:600;color:inherit}
+.blue{color:var(--blue)} .slide.dark .blue{color:var(--blue-bright)}
+.rule{width:100%;height:1px;background:var(--line);margin:clamp(26px,3vw,38px) 0}
+
+.quote{font-weight:300;font-size:clamp(2.4rem,6vw,5.4rem);line-height:1.08;letter-spacing:-.022em;max-width:17ch}
+.quote .blue{color:var(--blue-bright)}
+.attrib{margin-top:clamp(24px,2.6vw,34px);font-size:clamp(1.05rem,1.3vw,1.35rem);letter-spacing:.04em;color:#B9B9B9}
+
+.stats{display:flex;flex-wrap:wrap;gap:clamp(30px,4.5vw,72px);margin-top:clamp(34px,4vw,52px)}
+.stat .n{font-weight:300;font-size:clamp(2.6rem,5vw,4.4rem);line-height:1;letter-spacing:-.022em}
+.stat .n .u{color:var(--blue);font-size:.46em;vertical-align:.18em;margin-left:2px}
+.slide.dark .stat .n .u{color:var(--blue-bright)}
+.stat .k{margin-top:12px;font-size:clamp(12px,.92vw,13.5px);letter-spacing:.14em;text-transform:uppercase;color:var(--mute);max-width:24ch}
+.slide.dark .stat .k{color:#A9A9A9}
+
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:clamp(30px,5vw,76px);margin-top:clamp(30px,3.4vw,42px)}
+.col h3{font-size:clamp(12px,.95vw,14px);letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:16px}
+.slide.dark .col h3{color:var(--blue-bright)}
+.col p{font-size:clamp(1.05rem,1.4vw,1.34rem);line-height:1.7;color:var(--ink);font-weight:400}
+.slide.dark .col p{color:#DcDcDc}
+
+.moves{display:grid;grid-template-columns:1fr 1fr;gap:clamp(20px,2.4vw,30px) clamp(38px,4.5vw,64px);margin-top:clamp(28px,3.2vw,40px)}
+.move{display:flex;gap:20px;align-items:flex-start}
+.move .mn{font-weight:300;font-size:clamp(1.5rem,1.9vw,2rem);color:var(--blue);line-height:1;min-width:40px}
+.slide.dark .move .mn{color:var(--blue-bright)}
+.move .mt{font-weight:600;font-size:clamp(1.08rem,1.35vw,1.3rem);margin-bottom:7px}
+.move .md{font-size:clamp(1rem,1.1vw,1.12rem);line-height:1.5;color:var(--mute)}
+.slide.dark .move .md{color:#BcBcBc}
+
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:clamp(28px,3.2vw,40px)}
+.tile{position:relative;aspect-ratio:4/3;overflow:hidden;border-radius:5px;background:#eee;cursor:pointer}
+.tile img{width:100%;height:100%;object-fit:cover;display:block;filter:grayscale(.18) contrast(1.02);transition:transform .6s var(--ease),filter .5s var(--ease)}
+.tile:hover img{transform:scale(1.06);filter:grayscale(0) contrast(1.04)}
+.tile.maison{background:#17181c}
+
+/* contents / agenda */
+.agenda{display:grid;gap:0;margin-top:clamp(22px,2.8vw,38px)}
+.ag{display:flex;align-items:baseline;gap:clamp(18px,3vw,40px);width:100%;text-align:left;background:none;border:0;border-top:1px solid var(--line);padding:clamp(17px,2.1vw,26px) 8px;cursor:pointer;font-family:var(--font);transition:padding .25s var(--ease),background .25s}
+.ag:last-child{border-bottom:1px solid var(--line)}
+.ag:hover{padding-left:18px;background:#FAFAFA}
+.ag .agn{color:var(--blue);font-size:clamp(1rem,1.2vw,1.2rem);font-weight:600;min-width:44px}
+.ag .agt{font-size:clamp(1.3rem,2.1vw,2rem);font-weight:400;letter-spacing:-.01em}
+.ag .agd{color:var(--mute);font-size:clamp(.95rem,1.1vw,1.14rem);margin-left:auto;text-align:right;max-width:36ch}
+@media(max-width:900px){.ag{flex-wrap:wrap;gap:5px 16px}.ag .agd{margin-left:0;text-align:left;width:100%}}
+.tile .cap{position:absolute;left:0;right:0;bottom:0;padding:22px 16px 14px;background:linear-gradient(transparent,rgba(0,0,0,.8));color:#fff;font-size:clamp(13px,1vw,15px);letter-spacing:.02em;font-weight:600}
+.tile .cap .loc{display:block;font-size:clamp(10px,.78vw,11px);letter-spacing:.14em;text-transform:uppercase;color:#cfe0ff;margin-top:3px;font-weight:400}
+
+.ptypes{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(26px,3vw,40px) clamp(38px,4.5vw,60px);margin-top:clamp(28px,3.2vw,42px)}
+.ptype h4{font-size:clamp(12px,.95vw,14px);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin-bottom:10px}
+.ptype p{font-size:clamp(1.05rem,1.25vw,1.25rem);line-height:1.5;color:var(--ink);font-weight:500}
+.ptype .sub{display:block;font-size:clamp(.85rem,.95vw,.98rem);color:var(--mute);margin-top:5px;font-weight:400}
+
+/* interactive timeline */
+.tlx{margin-top:clamp(28px,3.2vw,42px)}
+.tlx-track{position:relative;height:64px;display:flex;align-items:center}
+.tlx-line{position:absolute;left:0;top:50%;height:2px;width:100%;background:var(--line);overflow:hidden}
+.tlx-line::after{content:"";position:absolute;inset:0;background:var(--blue);transform:scaleX(0);transform-origin:left;transition:transform 1.1s var(--ease)}
+.slide.in .tlx-line::after{transform:scaleX(1)}
+.tlx-nodes{position:relative;display:flex;justify-content:space-between;width:100%}
+.node{display:flex;flex-direction:column;align-items:center;gap:10px;cursor:pointer;background:none;border:0;font-family:var(--font);opacity:0;transform:translateY(10px);transition:opacity .5s var(--ease),transform .5s var(--ease)}
+.slide.in .node{opacity:1;transform:none}
+.slide.in .node:nth-child(1){transition-delay:.45s}.slide.in .node:nth-child(2){transition-delay:.55s}
+.slide.in .node:nth-child(3){transition-delay:.65s}.slide.in .node:nth-child(4){transition-delay:.75s}
+.slide.in .node:nth-child(5){transition-delay:.85s}.slide.in .node:nth-child(6){transition-delay:.95s}
+.slide.in .node:nth-child(7){transition-delay:1.05s}.slide.in .node:nth-child(8){transition-delay:1.15s}
+.node .dot{width:13px;height:13px;border-radius:50%;background:#fff;border:2px solid var(--blue);transition:all .3s var(--ease)}
+.node .ny{font-size:clamp(12px,1vw,14px);color:var(--mute);font-weight:500;white-space:nowrap}
+.node.active .dot{background:var(--blue);transform:scale(1.5);box-shadow:0 0 0 6px rgba(18,109,255,.14)}
+.node.active .ny{color:var(--blue);font-weight:600}
+.tlx-detail{margin-top:clamp(24px,3vw,38px);display:grid;grid-template-columns:300px 1fr;gap:clamp(28px,3.5vw,52px);align-items:center;min-height:190px}
+.tlx-pic{aspect-ratio:4/3;border-radius:6px;overflow:hidden;background:#F3F3F1;display:flex;align-items:center;justify-content:center}
+.tlx-pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(.1) contrast(1.03)}
+.tlx-pic .ph{font-weight:300;font-size:clamp(2.4rem,4vw,3.4rem);color:var(--blue);opacity:.5}
+.tlx-meta .ty{font-size:clamp(12px,1vw,13px);letter-spacing:.16em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.tlx-meta .tt{font-weight:300;font-size:clamp(1.7rem,2.8vw,2.6rem);line-height:1.05;margin:10px 0 6px;letter-spacing:-.015em}
+.tlx-meta .tloc{font-size:clamp(.9rem,1vw,1.05rem);letter-spacing:.06em;text-transform:uppercase;color:var(--mute);margin-bottom:14px}
+.tlx-meta .td{font-size:clamp(1.05rem,1.3vw,1.3rem);line-height:1.55;color:var(--ink)}
+
+/* tabs (key ideas) */
+.tabs{display:flex;gap:14px;margin-top:clamp(26px,3vw,40px)}
+.tab{font-family:var(--font);font-size:clamp(13px,1.1vw,15px);letter-spacing:.06em;text-transform:uppercase;font-weight:600;
+  padding:15px 30px;border-radius:999px;border:1.5px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease)}
+.tab.active{background:var(--blue);border-color:var(--blue);color:#fff}
+@keyframes tabpulse{0%,100%{box-shadow:0 0 0 0 rgba(18,109,255,0)}50%{box-shadow:0 0 0 7px rgba(18,109,255,.10)}}
+.tab:not(.active){animation:tabpulse 2.4s ease-in-out infinite}
+.tabpanel{display:none;margin-top:clamp(24px,2.8vw,38px)}
+.tabpanel.active{display:block}
+.ideas{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.4vw,30px) clamp(28px,3.5vw,48px)}
+.idea h4{font-size:clamp(1.1rem,1.45vw,1.4rem);font-weight:600;margin-bottom:8px;letter-spacing:-.01em}
+.idea h4 .d{color:var(--blue);margin-right:9px;font-weight:400}
+.idea p{font-size:clamp(1rem,1.15vw,1.16rem);line-height:1.5;color:var(--mute)}
+
+.phases{display:grid;grid-template-columns:repeat(5,1fr);gap:16px;margin-top:clamp(34px,4vw,48px)}
+.phase{padding:clamp(22px,2.4vw,30px) clamp(18px,2vw,24px);border:1px solid var(--line);border-radius:8px;transition:all .3s var(--ease)}
+.phase:hover{border-color:var(--blue);transform:translateY(-4px)}
+.phase .pn{font-size:clamp(11px,1vw,13px);letter-spacing:.16em;color:var(--blue);font-weight:600}
+.phase .pt{margin-top:14px;font-size:clamp(1rem,1.15vw,1.18rem);font-weight:500;line-height:1.25}
+
+.refs{display:flex;gap:12px;flex-wrap:wrap;margin-top:clamp(28px,3vw,38px)}
+.ref{font-size:clamp(12px,1vw,14px);letter-spacing:.08em;text-transform:uppercase;color:var(--ink);border:1px solid var(--line);border-radius:999px;padding:10px 18px;font-weight:500;transition:all .3s var(--ease)}
+.ref:hover{border-color:var(--blue);color:var(--blue)}
+.slide.dark .ref{color:#EDEDED;border-color:var(--line-dark)}
+
+.slide.media{padding:0;justify-content:flex-end}
+.slide.media video,.slide.media .bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.slide.media .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(15,18,24,.9) 0%,rgba(15,18,24,.6) 48%,rgba(15,18,24,.28) 100%)}
+.slide.media .inner{position:relative;z-index:2;margin:0;max-width:1320px;padding:clamp(48px,6vw,112px);width:100%}
+
+.split{display:grid;grid-template-columns:0.82fr 1.18fr;gap:clamp(40px,5vw,76px);align-items:center}
+.split .pic{aspect-ratio:4/5;overflow:hidden;border-radius:8px;background:#eee}
+.split .pic img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.04)}
+.person{margin-bottom:clamp(18px,2vw,26px)}
+.person .pname{font-size:clamp(1.5rem,2.2vw,2rem);font-weight:400}
+.person .prole{font-size:clamp(12px,1vw,13.5px);letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600;margin:7px 0 12px}
+.person .pbio{font-size:clamp(1.02rem,1.2vw,1.18rem);line-height:1.6;color:var(--mute)}
+
+.pillar{display:grid;grid-template-columns:1fr 1fr;gap:clamp(34px,5vw,72px);margin-top:clamp(28px,3vw,40px)}
+.pillar .side h3{font-size:clamp(12px,1vw,14px);letter-spacing:.16em;text-transform:uppercase;font-weight:600;margin-bottom:16px}
+.pillar .serakai h3{color:var(--ink)} .slide.dark .pillar .serakai h3{color:#fff}
+.pillar .husband h3{color:var(--blue)} .slide.dark .pillar .husband h3{color:var(--blue-bright)}
+.pillar .side p{font-size:clamp(1.08rem,1.4vw,1.35rem);line-height:1.6;color:var(--mute)}
+.pillar .husband{border-left:2px solid var(--blue);padding-left:clamp(22px,2.4vw,34px)}
+.slide.dark .pillar .husband{border-color:var(--blue-bright)}
+.pillar .side .lbl{font-size:clamp(.78rem,.85vw,.9rem);letter-spacing:.14em;text-transform:uppercase;color:#A9A9A9;margin-bottom:6px}
+
+.repmetrics{display:flex;flex-wrap:wrap;gap:clamp(28px,4vw,64px);margin-top:clamp(28px,3vw,40px)}
+.metriccards{display:grid;grid-template-columns:repeat(3,1fr);gap:clamp(16px,2vw,26px);margin-top:clamp(28px,3.2vw,42px)}
+.mcard{border:1px solid var(--line-dark);border-radius:16px;padding:clamp(28px,3vw,42px) clamp(24px,2.6vw,34px);background:rgba(255,255,255,.02);display:flex;flex-direction:column}
+.mcard .mc-n{font-weight:300;font-size:clamp(3rem,5.6vw,5.2rem);line-height:.95;letter-spacing:-.03em;color:#fff}
+.mcard .mc-n .u{color:var(--blue-bright);font-size:.44em;vertical-align:.22em;margin-left:3px}
+.mcard .mc-k{margin-top:clamp(16px,1.8vw,22px);font-size:clamp(1.02rem,1.25vw,1.28rem);line-height:1.42;color:#C7C7C7;font-weight:400}
+@media(max-width:900px){.metriccards{grid-template-columns:1fr;gap:14px}.mcard{padding:24px}}
+.chapters{display:flex;gap:10px;flex-wrap:wrap;margin-top:clamp(24px,2.6vw,34px)}
+.chip2{font-size:clamp(12px,1vw,13.5px);letter-spacing:.06em;color:#C7C7C7;border:1px solid var(--line-dark);border-radius:999px;padding:9px 16px;font-weight:500}
+.chip2 b{color:var(--blue-bright);font-weight:600;margin-right:7px}
+
+/* fixed chrome */
+.topbar{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:22px clamp(28px,4vw,50px);pointer-events:none}
+.topbar .lock img{height:26px;width:auto;display:block}
+.topright{display:flex;align-items:center;gap:clamp(16px,2vw,26px);pointer-events:auto}
+.topbar .by{font-size:clamp(11px,.9vw,13px);letter-spacing:.12em;text-transform:uppercase;color:var(--mute);font-weight:500}
+.topbar .by b{color:var(--ink);font-weight:600}
+.topbar.on-dark .by{color:#AdAdAd} .topbar.on-dark .by b{color:#fff}
+.burger{width:30px;height:20px;display:flex;flex-direction:column;justify-content:space-between;background:none;border:0;cursor:pointer;padding:0}
+.burger span{height:2px;width:100%;background:var(--ink);border-radius:2px;transition:background .3s}
+.topbar.on-dark .burger span{background:#fff}
+
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px clamp(28px,4vw,50px)}
+.dots{display:flex;gap:7px;align-items:center;flex-wrap:wrap;pointer-events:auto;max-width:62%}
+.dot{width:8px;height:8px;border-radius:50%;background:#CdCdCd;border:0;padding:0;cursor:pointer;transition:all .3s var(--ease)}
+.dot.active{background:var(--blue);width:24px;border-radius:4px}
+.nav.on-dark .dot{background:#5A5A5A} .nav.on-dark .dot.active{background:var(--blue-bright)}
+.arrows{display:flex;gap:12px;pointer-events:auto;align-items:center}
+.arr{width:48px;height:48px;border-radius:50%;border:1px solid var(--line);background:var(--paper);display:flex;align-items:center;justify-content:center;cursor:pointer;color:var(--ink);transition:all .25s var(--ease)}
+.arr:hover{border-color:var(--blue);color:var(--blue);transform:scale(1.06)}
+.arr svg{width:20px;height:20px}
+.counter{font-size:clamp(12px,1vw,13.5px);letter-spacing:.12em;color:var(--mute);font-weight:500;min-width:64px;text-align:right}
+.nav.on-dark .arr{background:transparent;border-color:var(--line-dark);color:#fff}
+.nav.on-dark .arr:hover{border-color:var(--blue-bright);color:var(--blue-bright)}
+.nav.on-dark .counter{color:#A9A9A9}
+
+/* full-screen menu */
+.menu{position:fixed;inset:0;z-index:60;background:var(--paper);transform:translateY(-100%);opacity:0;
+  transition:transform .5s var(--ease),opacity .35s var(--ease);display:flex;flex-direction:column;pointer-events:none}
+.menu.open{transform:none;opacity:1;pointer-events:auto}
+.menu-head{display:flex;justify-content:space-between;align-items:center;padding:26px clamp(28px,4vw,50px);border-bottom:1px solid var(--line);flex:0 0 auto}
+.menu-title{font-size:clamp(12px,1.05vw,15px);letter-spacing:.18em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.menu-x{font-size:38px;line-height:1;background:none;border:0;color:var(--ink);cursor:pointer;width:50px;height:50px;display:flex;align-items:center;justify-content:center}
+.menu-x:hover{color:var(--blue)}
+.menu-list{overflow-y:auto;-webkit-overflow-scrolling:touch;padding:clamp(14px,1.6vw,24px) clamp(20px,4vw,50px) 70px;display:grid;gap:0}
+.menu-item{display:flex;align-items:baseline;gap:22px;padding:17px 12px;background:none;border:0;border-bottom:1px solid #F1F1F1;cursor:pointer;text-align:left;font-family:var(--font);transition:background .2s,padding .2s}
+.menu-item:hover{padding-left:24px;background:#FAFAFA}
+.menu-item .mi-n{color:var(--blue);font-size:14px;font-weight:600;letter-spacing:.08em;min-width:36px}
+.menu-item .mi-l{font-size:clamp(1.1rem,1.6vw,1.45rem);color:var(--ink);font-weight:400}
+.menu-item.active .mi-l{color:var(--blue);font-weight:600}
+
+/* hero (slide 1) — Husband homepage video hero */
+.herovids{position:absolute;inset:0;z-index:0;background:#0A0C10}
+.hv{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .7s ease}
+.hv.active{opacity:1}
+.slide.hero{padding:0;justify-content:flex-end}
+.slide.hero .scrim{position:absolute;inset:0;z-index:1;background:linear-gradient(0deg,rgba(8,10,14,.9) 0%,rgba(8,10,14,.16) 52%,rgba(8,10,14,.42) 100%)}
+.slide.hero .inner{position:relative;z-index:2;margin:0;max-width:1320px;width:100%;padding:clamp(48px,6vw,112px);padding-bottom:clamp(76px,11vh,150px)}
+.slide.hero h1{font-size:clamp(3rem,7vw,6.6rem)}
+.cropvid{transform:scale(1.34)}
+
+/* storytelling slide */
+.storyflow{margin-top:clamp(22px,2.6vw,34px);max-width:76ch}
+.storyp{font-size:clamp(1.15rem,1.5vw,1.52rem);line-height:1.55;color:var(--ink);font-weight:300}
+.storyp b{font-weight:600}
+.pull{margin:clamp(22px,2.6vw,34px) 0;padding-left:clamp(20px,2vw,30px);border-left:3px solid var(--blue);
+  font-size:clamp(1.35rem,2.1vw,2rem);line-height:1.22;font-weight:300;letter-spacing:-.012em;color:var(--ink)}
+.pull cite{display:block;margin-top:15px;font-size:clamp(.95rem,1.1vw,1.12rem);font-style:normal;letter-spacing:.06em;color:var(--blue);font-weight:500}
+
+/* global map */
+.mapwrap{position:relative;height:min(56vh,52vw);aspect-ratio:1010/666;width:auto;max-width:98%;margin:clamp(14px,2vw,26px) auto 0}
+.mapimg{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;opacity:.16}
+.mdot{position:absolute;width:18px;height:18px;transform:translate(-50%,-50%);border:0;background:none;cursor:pointer;z-index:3}
+.mdot .pin{position:absolute;inset:4px;border-radius:50%;background:var(--blue);box-shadow:0 1px 4px rgba(0,0,0,.25)}
+.mdot .pulse{position:absolute;inset:4px;border-radius:50%;background:var(--blue);opacity:.55;animation:mpulse 2.2s ease-out infinite}
+@keyframes mpulse{0%{transform:scale(1);opacity:.55}70%{transform:scale(3);opacity:0}100%{opacity:0}}
+.mdot:hover .pin,.mdot.active .pin{inset:2px;box-shadow:0 0 0 4px rgba(18,109,255,.22)}
+.mappop{position:absolute;z-index:6;width:248px;background:#fff;border:1px solid var(--line);border-radius:14px;
+  box-shadow:0 18px 54px rgba(0,0,0,.20);overflow:hidden;opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
+.mappop.show{opacity:1;pointer-events:auto}
+.mappop img{width:100%;height:128px;object-fit:cover;display:block}
+.mappop .pbody{padding:14px 16px 16px}
+.mappop .pyr{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);font-weight:600}
+.mappop .pnm{font-size:1.18rem;font-weight:500;margin:4px 0 7px;letter-spacing:-.01em}
+.mappop .pch{font-size:.96rem;line-height:1.45;color:var(--mute)}
+
+@media (max-width:900px){
+  .cols,.moves,.split,.pillar{grid-template-columns:1fr;gap:24px}
+  .mapwrap{height:auto;width:100%;aspect-ratio:1010/666}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .ptypes,.ideas{grid-template-columns:1fr 1fr}
+  .phases{grid-template-columns:1fr 1fr}
+  .tlx-detail{grid-template-columns:1fr}
+  .slide{padding:64px 24px 96px;justify-content:center}
+  .split .pic{max-width:58%}
+  .topbar .by{display:none}.dots{max-width:42%}
+}
+@media (max-width:560px){ .ideas{grid-template-columns:1fr} }
+</style>
+</head>
+<body>
+
+<div class="topbar" id="topbar">
+  <span class="lock"><img src="assets/serakai-logo.svg" alt="Serakai"></span>
+  <span class="topright">
+    <span class="by">A concept by <b>Husband&nbsp;Retail</b></span>
+    <button class="burger" id="burger" aria-label="Open contents menu"><span></span><span></span><span></span></button>
+  </span>
+</div>
+
+<div class="deck" id="deck">
+
+  <!-- 1 HERO (Husband homepage video) -->
+  <section class="slide hero dark" data-label="Husband Retail">
+    <div class="herovids">
+      <video class="hv active" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/hero-landmark.mp4" type="video/mp4"></video>
+      <video class="hv" autoplay muted loop playsinline><source src="assets/Galaxy.mp4" type="video/mp4"></video>
+      <video class="hv" autoplay muted loop playsinline><source src="assets/hero-2.mp4" type="video/mp4"></video>
+    </div>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow" style="color:var(--blue-bright)">Husband Retail · est. 1998</div>
+      <h1 style="color:#fff">Iconic retail<br>destinations.</h1>
+      <p class="lead" style="color:#EAEFF7;max-width:46ch">Premier development and leasing consultancy behind many of Asia’s most iconic, luxury retail destinations.</p>
+    </div>
+  </section>
+
+  <!-- 2 SERAKAI (homepage video) -->
+  <section class="slide media dark" data-label="Serakai">
+    <video class="bg cropvid" autoplay muted loop playsinline><source src="assets/Serakai%20Homepage.mp4" type="video/mp4"></video>
+    <div class="scrim" style="background:linear-gradient(90deg,rgba(14,16,20,.95) 0%,rgba(14,16,20,.86) 50%,rgba(14,16,20,.76) 100%)"></div>
+    <div class="inner">
+      <div class="eyebrow" style="color:var(--blue-bright)">For Serakai</div>
+      <h1 style="color:#fff">The art of<br>placemaking.</h1>
+      <p class="lead" style="color:#EAEFF7;max-width:46ch">A forward-thinking investor in the built environment — anchored by art and culture.</p>
+    </div>
+  </section>
+
+  <!-- 3 COVER -->
+  <section class="slide" data-label="Cover">
+    <div class="inner">
+      <div class="eyebrow">Serakai &nbsp;×&nbsp; Husband Retail</div>
+      <h1>The Art of Placemaking,<br><span class="blue">realised.</span></h1>
+      <p class="lead">A Hong Kong retail destination anchored by art and culture — and the partner who can build it.</p>
+      <div class="rule" style="max-width:130px"></div>
+      <p class="body" style="margin-top:6px">Presented by Paul Husband · Husband Retail · Hong Kong, 2026</p>
+    </div>
+  </section>
+
+  <!-- CONTENTS -->
+  <section class="slide" data-label="Contents">
+    <div class="inner">
+      <div class="eyebrow">Topics</div>
+      <h2>What we’ll cover.</h2>
+      <div class="agenda">
+        <button class="ag" data-go="The thesis"><span class="agn">01</span><span class="agt">The thesis</span><span class="agd">Why art &amp; culture are upstream from retail</span></button>
+        <button class="ag" data-go="Market leadership"><span class="agn">02</span><span class="agt">30 years of Husband Retail</span><span class="agd">The brand, the track record, the portfolio</span></button>
+        <button class="ag" data-go="Serakai today"><span class="agn">03</span><span class="agt">Serakai × Husband Retail</span><span class="agd">Where the two brands synergise</span></button>
+        <button class="ag" data-go="The Grand Salon"><span class="agn">04</span><span class="agt">Concept study — The Grand Salon</span><span class="agd">A Hong Kong cultural-retail destination</span></button>
+        <button class="ag" data-go="The intelligence layer"><span class="agn">05</span><span class="agt">AI &amp; retail</span><span class="agd">The intelligence layer beneath the experience</span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- 2 -->
+  <section class="slide dark" data-label="The thesis">
+    <div class="inner">
+      <div class="eyebrow">The thesis</div>
+      <p class="quote">“Art and culture are <span class="blue">upstream</span> from retail.”</p>
+      <p class="attrib">— Benjamin Cha, Serakai</p>
+      <p class="body">You have already named the next era of retail. This is that conviction, built — and Husband Retail is the operator who can build it.</p>
+    </div>
+  </section>
+
+  <!-- 3 -->
+  <section class="slide" data-label="Why now &amp; Hong Kong">
+    <div class="inner">
+      <div class="eyebrow">Why now — and why Hong Kong</div>
+      <h2>The mass-market mall is over.<br>The culture-anchored destination is the opening.</h2>
+      <div class="stats">
+        <div class="stat"><div class="n"><span class="count" data-count="60" data-prefix="~" data-suffix="%">~60%</span></div><div class="k">Fall in Hong Kong prime-street retail values from their last-decade peak — the reset that opens a new model</div></div>
+        <div class="stat"><div class="n"><span class="count" data-count="242">242</span></div><div class="k">Galleries at Art Basel Hong Kong — culture out-pulls mass-market retail</div></div>
+        <div class="stat"><div class="n"><span class="count" data-count="1443" data-prefix="€" data-suffix="B">€1,443B</span></div><div class="k">Global luxury market, 2025E (Bain) — the prize the destination competes for</div></div>
+      </div>
+      <p class="body">Placemaking anchored by art and culture is no longer the soft option. In this market, it is the value strategy.</p>
+    </div>
+  </section>
+
+  <!-- 4 -->
+  <section class="slide" data-label="Who Husband Retail is">
+    <div class="inner">
+      <div class="eyebrow">The partner</div>
+      <h2>The team behind Asia’s iconic retail destinations.</h2>
+      <p class="body">Husband Retail is a boutique retail real-estate consultancy, founded in Hong Kong in 1998. We plan, lease, position and asset-manage luxury retail destinations for the developers and investors who own them — the same dynamic retail, mixed-use and cultural landmarks Serakai sets out to shape.</p>
+      <div class="stats">
+        <div class="stat"><div class="n">1998</div><div class="k">Founded in Hong Kong</div></div>
+        <div class="stat"><div class="n"><span class="count" data-count="100" data-suffix="+">100+</span></div><div class="k">Retail destinations advised</div></div>
+        <div class="stat"><div class="n">3</div><div class="k">Continents — Asia, Middle East, Europe</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 5 -->
+  <section class="slide" data-label="Our story">
+    <div class="inner">
+      <div class="eyebrow">Our story · in a nutshell</div>
+      <h2>It started with Pacific Place.</h2>
+      <div class="storyflow">
+        <p class="storyp">In 1988, Paul Husband led the marketing of <b>Pacific Place</b> in Hong Kong — the first large-scale retail centre in Asia conceived, before it opened, to be a <b>brand and a destination</b>, not a utility shopping centre. The idea was radical then: a place to shop could carry meaning.</p>
+        <blockquote class="pull">“Pacific Place was the first large-scale retail centre in Asia to intend to be a destination brand — as opposed to what I call a utility shopping centre.”<cite>— Paul Husband</cite></blockquote>
+        <p class="storyp">That conviction became <b>Husband Retail in 1998</b>. Across three decades it has shaped the destinations that define their cities. As Asia grew into the world’s most advanced retail market, the firm turned from a door-opener into the keeper of its playbook — now exporting it worldwide, and bringing AI to the visitor journey.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide media" data-label="Market leadership">
+    <img class="bg" src="assets/hero-05.jpg" alt="">
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow" style="color:var(--blue-bright)">Market leadership</div>
+      <h2 style="color:#fff;max-width:22ch">The reference firm for luxury retail destinations in Asia.</h2>
+      <p class="body" style="color:#D8DEE9;max-width:60ch">For over three decades, Husband Retail has been the specialist owners call when a destination has to lead its market. Paul Husband created Pacific Place — Asia’s first destination-brand retail centre — and wrote the field’s defining book, <i>The Cult of the Luxury Brand</i>. The firm has shaped the category ever since.</p>
+    </div>
+  </section>
+
+  <!-- 6 -->
+  <section class="slide" data-label="Track record">
+    <div class="inner">
+      <div class="eyebrow">Track record</div>
+      <h2><span class="count" data-count="100" data-suffix="+">100+</span> destinations advised. <span class="count" data-count="60" data-suffix="+">60+</span> planned and leased.</h2>
+      <div class="grid">
+        <div class="tile"><img src="assets/proj-67.jpg" alt="The Landmark, Hong Kong"><div class="cap">The Landmark<span class="loc">Hong Kong · Hongkong Land</span></div></div>
+        <div class="tile"><img src="assets/proj-68.jpg" alt="Elements, Hong Kong"><div class="cap">Elements<span class="loc">Hong Kong · MTR</span></div></div>
+        <div class="tile"><img src="assets/proj-69.jpg" alt="Galaxy, Macau"><div class="cap">Galaxy<span class="loc">Macau</span></div></div>
+        <div class="tile"><img src="assets/proj-73.jpg" alt="MahaNakhon, Bangkok"><div class="cap">MahaNakhon<span class="loc">Bangkok · Pace</span></div></div>
+        <div class="tile"><img src="assets/proj-71.jpg" alt="Covent Garden, London"><div class="cap">Covent Garden<span class="loc">London · Capco</span></div></div>
+        <div class="tile"><img src="assets/proj-72.jpg" alt="Seoul IFC, Seoul"><div class="cap">Seoul IFC<span class="loc">Seoul · AIG</span></div></div>
+        <div class="tile"><img src="assets/proj-70.jpg" alt="Park Life, Beijing"><div class="cap">Park Life<span class="loc">Beijing</span></div></div>
+        <div class="tile"><img src="assets/proj-239.jpg" alt="Dubai Design District, Dubai"><div class="cap">Dubai Design District<span class="loc">Dubai</span></div></div>
+      </div>
+      <p class="body">Among them, DLF Emporio in New Delhi — India’s first international-standard luxury retail centre.</p>
+    </div>
+  </section>
+
+  <!-- 7 -->
+  <section class="slide" data-label="Portfolio depth">
+    <div class="inner">
+      <div class="eyebrow">Portfolio depth</div>
+      <h2>Every format of luxury retail — across three continents.</h2>
+      <div class="ptypes">
+        <div class="ptype"><h4>Luxury malls</h4><p>The Landmark, DLF Emporio, Seoul IFC<span class="sub">The benchmark luxury centres of their cities</span></p></div>
+        <div class="ptype"><h4>Integrated resorts</h4><p>Galaxy Macau, The Venetian Macau<span class="sub">Retail at the scale of the world’s great resorts</span></p></div>
+        <div class="ptype"><h4>Premium outlets</h4><p>Value Retail — Suzhou &amp; Shanghai Villages<span class="sub">China’s premium-outlet pioneers</span></p></div>
+        <div class="ptype"><h4>Mixed-use &amp; supertall</h4><p>MahaNakhon, Elements, Merdeka 118<span class="sub">Retail inside landmark towers</span></p></div>
+        <div class="ptype"><h4>Heritage &amp; street estates</h4><p>Covent Garden, London<span class="sub">Place, public realm and culture as the draw</span></p></div>
+        <div class="ptype"><h4>Emerging markets</h4><p>Yangon, Lusail, Dubai d3<span class="sub">First-to-market luxury in new cities</span></p></div>
+      </div>
+      <p class="body">Hong Kong · Macau · Mainland China · Korea · Thailand · Malaysia · India · Myanmar · UAE · Qatar · United Kingdom.</p>
+    </div>
+  </section>
+
+  <!-- 8 INTERACTIVE TIMELINE -->
+  <section class="slide" data-label="Three decades of destinations">
+    <div class="inner">
+      <div class="eyebrow">Three decades — and current</div>
+      <h2>A continuous record of realised destinations.</h2>
+      <div class="tlx">
+        <div class="tlx-track">
+          <div class="tlx-line"></div>
+          <div class="tlx-nodes" id="tlxNodes">
+            <button class="node active" data-year="2006" data-title="The Landmark" data-loc="Hong Kong · Hongkong Land" data-desc="Central’s luxury flagship — pioneering giant, multi-storey luxury facades." data-img="assets/proj-67.jpg"><span class="dot"></span><span class="ny">2006</span></button>
+            <button class="node" data-year="2006" data-title="Park Life" data-loc="Beijing" data-desc="Wrap-around flagship stores at the Beijing Park Hyatt." data-img="assets/proj-70.jpg"><span class="dot"></span><span class="ny">2006</span></button>
+            <button class="node" data-year="2007" data-title="Elements" data-loc="Hong Kong · MTR" data-desc="Large-format mixed-use retail above the MTR interchange." data-img="assets/proj-68.jpg"><span class="dot"></span><span class="ny">2007</span></button>
+            <button class="node" data-year="2007" data-title="Covent Garden" data-loc="London · Capco" data-desc="Repositioning London’s historic estate as a luxury destination." data-img="assets/proj-71.jpg"><span class="dot"></span><span class="ny">2007</span></button>
+            <button class="node" data-year="2012" data-title="Galaxy Macau" data-loc="Macau · Galaxy" data-desc="Integrated-resort retail at world scale." data-img="assets/proj-69.jpg"><span class="dot"></span><span class="ny">2012</span></button>
+            <button class="node" data-year="2012" data-title="Seoul IFC" data-loc="Seoul · AIG" data-desc="Korea’s first world-standard luxury mall, in Yeouido." data-img="assets/proj-72.jpg"><span class="dot"></span><span class="ny">2012</span></button>
+            <button class="node" data-year="2014" data-title="MahaNakhon" data-loc="Bangkok · Pace" data-desc="Lifestyle retail at Thailand’s tallest tower." data-img="assets/proj-73.jpg"><span class="dot"></span><span class="ny">2014</span></button>
+            <button class="node" data-year="2015" data-title="Dubai Design District" data-loc="Dubai" data-desc="Retail &amp; dining for the Gulf’s design quarter." data-img="assets/proj-239.jpg"><span class="dot"></span><span class="ny">2015</span></button>
+          </div>
+        </div>
+        <div class="tlx-detail">
+          <div class="tlx-pic" id="tlxPic"><img src="assets/proj-67.jpg" alt=""></div>
+          <div class="tlx-meta">
+            <div class="ty" id="tlxYear">2006</div>
+            <div class="tt" id="tlxTitle">The Landmark</div>
+            <div class="tloc" id="tlxLoc">Hong Kong · Hongkong Land</div>
+            <div class="td" id="tlxDesc">Central’s luxury flagship — pioneering giant, multi-storey luxury facades.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL MAP -->
+  <section class="slide" data-label="Global reach">
+    <div class="inner" style="max-width:1320px">
+      <div class="eyebrow">Global reach</div>
+      <h2>Realised across Asia, the Middle East and Europe.</h2>
+      <div class="mapwrap" id="mapwrap">
+        <img class="mapimg" src="assets/world.svg" alt="World map of Husband Retail destinations">
+        <div class="mappop" id="mappop"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- OWNERS -->
+  <section class="slide" data-label="Owners &amp; partners">
+    <div class="inner">
+      <div class="eyebrow">Trusted by the owners</div>
+      <h2>The names behind the places.</h2>
+      <div class="cols" style="grid-template-columns:1fr">
+        <div class="col">
+          <h3>Developers, investors &amp; founders</h3>
+          <p style="max-width:none">Hongkong Land · MTR Corporation · DLF · Galaxy · Capital &amp; Counties · AIG Global Real Estate · Permodalan Nasional Berhad · New World Development · Value Retail · Qatari Diar · <b>Serge Pun</b> &amp; Associates (Yoma) · KKR · Brookfield · Morgan Stanley</p>
+        </div>
+      </div>
+      <p class="body">We sit where Serakai sits — between institutional capital and the brands that define a place.</p>
+    </div>
+  </section>
+
+  <!-- MAISONS (image tiles) -->
+  <section class="slide" data-label="The maisons">
+    <div class="inner">
+      <div class="eyebrow">And the maisons</div>
+      <h2>The brands we lease and represent.</h2>
+      <div class="grid">
+        <div class="tile maison"><img src="assets/maison/louis-vuitton.jpg" alt="Louis Vuitton flagship" onerror="this.remove()"><div class="cap">Louis Vuitton</div></div>
+        <div class="tile maison"><img src="assets/maison/dior.jpg" alt="Dior flagship" onerror="this.remove()"><div class="cap">Dior</div></div>
+        <div class="tile maison"><img src="assets/maison/chanel.jpg" alt="Chanel flagship" onerror="this.remove()"><div class="cap">Chanel</div></div>
+        <div class="tile maison"><img src="assets/maison/hermes.jpg" alt="Hermès flagship" onerror="this.remove()"><div class="cap">Hermès</div></div>
+        <div class="tile maison"><img src="assets/maison/bvlgari.jpg" alt="Bvlgari flagship" onerror="this.remove()"><div class="cap">Bvlgari</div></div>
+        <div class="tile maison"><img src="assets/maison/cartier.jpg" alt="Cartier flagship" onerror="this.remove()"><div class="cap">Cartier</div></div>
+        <div class="tile maison"><img src="assets/maison/burberry.jpg" alt="Burberry flagship" onerror="this.remove()"><div class="cap">Burberry</div></div>
+        <div class="tile maison"><img src="assets/maison/ralph-lauren.jpg" alt="Ralph Lauren flagship" onerror="this.remove()"><div class="cap">Ralph Lauren</div></div>
+      </div>
+      <p class="body">A selection of the maisons we have leased and represented across Asia.</p>
+      <p style="font-size:11px;color:#B5B5B5;letter-spacing:.02em;margin-top:10px">Chanel image: ashton / Wikimedia Commons (CC BY 2.0). Other storefronts via Unsplash.</p>
+    </div>
+  </section>
+
+  <!-- 10 -->
+  <section class="slide dark" data-label="What sets Husband apart">
+    <div class="inner">
+      <div class="eyebrow">What sets Husband apart</div>
+      <h2 style="max-width:24ch">A position that is hard to assemble — and harder to copy.</h2>
+      <div class="moves">
+        <div class="move"><div class="mn">01</div><div><div class="mt">End-to-end, one partner</div><div class="md">Concept, leasing, positioning and asset management across the whole life of the asset.</div></div></div>
+        <div class="move"><div class="mn">02</div><div><div class="mt">Owner-side independence</div><div class="md">We work for the developer and investor — not as a tenant broker or a generalist giant.</div></div></div>
+        <div class="move"><div class="mn">03</div><div><div class="mt">Skin in the game</div><div class="md">We only handle leasing for developments we have shaped.</div></div></div>
+        <div class="move"><div class="mn">04</div><div><div class="mt">Pattern recognition</div><div class="md">100+ destinations mean we know why one operator succeeds and another fails.</div></div></div>
+        <div class="move"><div class="mn">05</div><div><div class="mt">Access on both sides</div><div class="md">Relationships with institutional capital and with the luxury maisons.</div></div></div>
+        <div class="move"><div class="mn">06</div><div><div class="mt">Now, AI-fluent</div><div class="md">An estate operating layer most owners do not yet have.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11 FOUNDER -->
+  <section class="slide" data-label="The founder">
+    <div class="inner">
+      <div class="split">
+        <div class="pic"><img src="assets/paul-husband.jpg" alt="Paul Husband"></div>
+        <div>
+          <div class="eyebrow">The founder</div>
+          <div class="person">
+            <div class="pname">Paul Husband</div>
+            <div class="prole">Founder &amp; Managing Partner</div>
+            <div class="pbio">30+ years in Asian retail real estate. A decade leading marketing at Swire Properties (Pacific Place) before founding the firm in 1998. Author of <i>The Cult of the Luxury Brand</i> (2006); instructor for the International Council of Shopping Centres across Asia-Pacific.</div>
+          </div>
+          <p class="lead" style="font-size:clamp(1.25rem,1.8vw,1.7rem);max-width:30ch">“One of the world’s leading experts on luxury and retail in Asia.”</p>
+          <p class="body" style="margin-top:14px">Design, leasing, positioning and asset management — under one roof, with a team that has shaped Asia’s landmark destinations.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 12 REPORT -->
+  <section class="slide dark" data-label="Global Retail Report">
+    <div class="inner">
+      <div class="eyebrow">Proprietary intelligence</div>
+      <h2>We publish the market’s field guide.</h2>
+      <p class="body" style="max-width:62ch;color:#C7C7C7">The Husband Retail <i>Global Retail Report</i> (January 2026) reads the luxury market for owners and investors — the macro outlook, the experiences redefining the store, the concepts setting the pace, and the deals reshaping the market.</p>
+      <div class="metriccards">
+        <div class="mcard"><div class="mc-n"><span class="count" data-count="1443" data-prefix="€" data-suffix="B">€1,443B</span></div><div class="mc-k">Global luxury market, 2025E — Bain &amp; Company</div></div>
+        <div class="mcard"><div class="mc-n"><span class="count" data-count="17">17</span></div><div class="mc-k">Concept stores analysed across three regions</div></div>
+        <div class="mcard"><div class="mc-n"><span class="count" data-count="7">7</span></div><div class="mc-k">Experience themes — from a sense of place to AI dreamscapes</div></div>
+      </div>
+      <div class="chapters">
+        <span class="chip2"><b>01</b>Luxury Macro</span>
+        <span class="chip2"><b>02</b>The Future of Experience</span>
+        <span class="chip2"><b>03</b>Multi-Brand Concepts</span>
+        <span class="chip2"><b>04</b>Art Installations</span>
+        <span class="chip2"><b>05</b>Market Updates</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 13 -->
+  <section class="slide" data-label="Serakai today">
+    <div class="inner">
+      <div class="eyebrow">Serakai today</div>
+      <h2>The art of placemaking — anchored by art and culture.</h2>
+      <p class="body" style="max-width:68ch">A forward-thinking investor in the built environment, creating successful places in Tokyo, Hong Kong, Bangkok and beyond. A cultural think tank and R&amp;D hub in Serakai Studio. And a new type of place — <b>the contemporary salon</b> — prototyped at GOLD, in Wong Chuk Hang.</p>
+      <div class="refs">
+        <span class="ref">GOLD · Wong Chuk Hang</span>
+        <span class="ref">The contemporary salon</span>
+        <span class="ref">CONG · journal of ideas, art &amp; urban imagination</span>
+        <span class="ref">Happenings</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 14 PILLAR I -->
+  <section class="slide" data-label="Pillar I · The built environment">
+    <div class="inner">
+      <div class="eyebrow">Serakai pillar 01 · the built environment</div>
+      <h2>Creating successful places.</h2>
+      <div class="pillar">
+        <div class="side serakai"><div class="lbl">Serakai</div><h3>A forward-thinking investor in the built environment</h3><p>Creating successful places embedded in neighbourhoods — Tokyo, Hong Kong, Bangkok and beyond.</p></div>
+        <div class="side husband"><div class="lbl">Husband Retail completes it</div><h3>The operator that delivers the place</h3><p>Concept, retail mix, leasing and positioning — turning a vision for a place into a fully realised, market-leading destination.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 15 PILLAR II -->
+  <section class="slide" data-label="Pillar II · Investment">
+    <div class="inner">
+      <div class="eyebrow">Serakai pillar 02 · investment &amp; capital</div>
+      <h2>Property investment, development &amp; management.</h2>
+      <div class="pillar">
+        <div class="side serakai"><div class="lbl">Serakai</div><h3>Investor and developer of the asset</h3><p>Blending property investment, real estate development and investment management to create vibrant spaces.</p></div>
+        <div class="side husband"><div class="lbl">Husband Retail completes it</div><h3>The asset-level engine of returns</h3><p>Leasing power, tenant mix and asset management that turn the investment into income — and a destination that holds its value.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 16 PILLAR III -->
+  <section class="slide" data-label="Pillar III · Art &amp; culture">
+    <div class="inner">
+      <div class="eyebrow">Serakai pillar 03 · art &amp; culture</div>
+      <h2>Visual culture as the anchor.</h2>
+      <div class="pillar">
+        <div class="side serakai"><div class="lbl">Serakai</div><h3>The cultural think tank — Serakai Studio</h3><p>GOLD, CONG and the contemporary salon — visual arts, fashion, music, design and technology, advancing the cultural discourse in Asia.</p></div>
+        <div class="side husband"><div class="lbl">Husband Retail completes it</div><h3>Culture made commercial — without losing the culture</h3><p>We translate cultural ambition into a retail destination that performs: curation that draws the maisons, footfall that funds the programme.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 17 -->
+  <section class="slide" data-label="The opportunity">
+    <div class="inner">
+      <div class="eyebrow">The opportunity</div>
+      <h2>GOLD is the prototype.<br>The destination is the next move.</h2>
+      <p class="body" style="max-width:62ch">Serakai has the cultural intelligence, the conviction and the salon. What turns the contemporary salon into a leased, market-leading destination is a retail engine — concept, retail mix, leasing, asset management.</p>
+      <p class="lead" style="margin-top:24px">That engine is <span class="blue">Husband&nbsp;Retail</span>.</p>
+    </div>
+  </section>
+
+  <!-- 18A GRAND SALON — FILM (full-bleed version-A video, sound on) -->
+  <section class="slide media dark" data-label="The Grand Salon · film">
+    <video id="grandSalonFilm" class="bg" autoplay loop muted playsinline preload="auto" poster="assets/grand-salon-poster.jpg">
+      <source src="assets/grand-salon.mp4" type="video/mp4">
+    </video>
+  </section>
+
+  <!-- 18 CONCEPT -->
+  <section class="slide media dark" data-label="The Grand Salon">
+    <video class="bg" autoplay muted loop playsinline poster="assets/grand-salon-poster.jpg">
+      <source src="assets/grand-salon.mp4" type="video/mp4">
+    </video>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow" style="color:var(--blue-bright)">The concept · working title</div>
+      <h1 style="color:#fff">The Grand Salon</h1>
+      <p class="lead" style="color:#EAEFF7;max-width:48ch">The contemporary salon, realised at destination scale — a Hong Kong place where art and culture are the anchor, and retail, dining and programming orbit them.</p>
+    </div>
+  </section>
+
+  <!-- 19 DESIGN MOVES -->
+  <section class="slide dark" data-label="Four design moves">
+    <div class="inner">
+      <div class="eyebrow">The Grand Salon · four moves</div>
+      <h2 style="max-width:24ch">A destination designed around culture — not around the shop.</h2>
+      <div class="moves">
+        <div class="move"><div class="mn">01</div><div><div class="mt">A cultural anchor, not a food court</div><div class="md">A museum-grade cultural core, with luxury retail and dining curated around it.</div></div></div>
+        <div class="move"><div class="mn">02</div><div><div class="mt">A designed journey</div><div class="md">A deliberate route through the place, in the spirit of the world’s great public promenades.</div></div></div>
+        <div class="move"><div class="mn">03</div><div><div class="mt">A living programme</div><div class="md">Concerts, performances and exhibitions at city scale — Happenings, made permanent.</div></div></div>
+        <div class="move"><div class="mn">04</div><div><div class="mt">Past and present, synthesised</div><div class="md">Heritage and the contemporary in one continuous experience — a place with cultural memory.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 20 KEY IDEAS (tabbed) -->
+  <section class="slide" data-label="Key ideas — arts, culture &amp; AI">
+    <div class="inner">
+      <div class="eyebrow">The Grand Salon · key ideas</div>
+      <h2>Two forces, one destination.</h2>
+      <div class="tabs" role="tablist">
+        <button class="tab active" data-tab="culture" role="tab">Arts &amp; culture</button>
+        <button class="tab" data-tab="ai" role="tab">AI</button>
+      </div>
+      <div class="tabpanel active" data-panel="culture">
+        <div class="ideas">
+          <div class="idea"><h4><span class="d">01</span>Social sustainability</h4><p>A place that strengthens the social fabric of the city, not just its retail mix.</p></div>
+          <div class="idea"><h4><span class="d">02</span>Cultural intelligence</h4><p>Culture as the layer that reads taste and shapes the offer — art upstream of retail.</p></div>
+          <div class="idea"><h4><span class="d">03</span>Living &amp; belonging</h4><p>A destination people return to for meaning and belonging — not only to buy.</p></div>
+          <div class="idea"><h4><span class="d">04</span>Synthesis of heritage &amp; future</h4><p>Heritage and the contemporary held in one continuous experience.</p></div>
+          <div class="idea"><h4><span class="d">05</span>Future 2.0</h4><p>Beyond the experience-mall: cultural immersion as the product itself.</p></div>
+        </div>
+      </div>
+      <div class="tabpanel" data-panel="ai">
+        <div class="ideas">
+          <div class="idea"><h4><span class="d">01</span>AI concierge</h4><p>An intelligent guide across the whole visit — pre-, in-place and post-visit.</p></div>
+          <div class="idea"><h4><span class="d">02</span>AR &amp; public realm</h4><p>Layered digital art and wayfinding across the public spaces.</p></div>
+          <div class="idea"><h4><span class="d">03</span>Footfall &amp; dwell intelligence</h4><p>Live heatmaps and route analytics that continuously tune the place.</p></div>
+          <div class="idea"><h4><span class="d">04</span>Tenant &amp; media analytics</h4><p>Leasing and media decisions driven by real visitor data.</p></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 21 INTELLIGENCE LAYER -->
+  <section class="slide" data-label="The intelligence layer">
+    <div class="inner">
+      <div class="eyebrow">The intelligence layer</div>
+      <h2>AI beneath the culture — not gadgetry.</h2>
+      <p class="body" style="max-width:64ch">CONG asks “What is intelligence?” Here is one answer, in built form. Husband Retail’s AI framework — delivered this year for Shaftesbury Capital, owner of Covent Garden — runs as the destination’s operating layer, lifting both the guest experience and the asset’s economics.</p>
+      <div class="cols">
+        <div class="col"><h3>Guest</h3><p style="color:var(--mute)">AI concierge &amp; digital-journey orchestration · AR in the public realm</p></div>
+        <div class="col"><h3>Estate</h3><p style="color:var(--mute)">Footfall intelligence &amp; dwell heatmaps · tenant &amp; leasing analytics · media monetisation</p></div>
+      </div>
+      <p class="body">Led by the culture-first benchmarks — Gentle Monster’s gallery-stores, Gucci Chengdu’s AI “living fresco,” Loewe’s city-wide treasure hunt.</p>
+    </div>
+  </section>
+
+  <!-- 22 FOR SERAKAI -->
+  <section class="slide" data-label="What it does for Serakai">
+    <div class="inner">
+      <div class="eyebrow">What it does for Serakai</div>
+      <h2>From salon and journal to a destination brand.</h2>
+      <p class="body" style="max-width:62ch">The Grand Salon puts the Serakai name on a category-defining Hong Kong landmark — then becomes the template for Tokyo and Bangkok. The art of placemaking, advancing the cultural discourse in Asia and the social sustainability of the city — at scale.</p>
+      <div class="refs">
+        <span class="ref">Hong Kong — the flagship</span>
+        <span class="ref">Tokyo — next</span>
+        <span class="ref">Bangkok — and beyond</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- 23 HUSBAND 2035 -->
+  <section class="slide dark" data-label="Husband Retail 2035">
+    <div class="inner">
+      <div class="eyebrow">The strategy · Husband Retail 2035</div>
+      <h2 style="max-width:22ch">From Asia’s No.1 specialist to a global top-three consultancy.</h2>
+      <div class="cols" style="grid-template-columns:repeat(3,1fr);gap:clamp(26px,3vw,44px)">
+        <div class="col"><h3>Today</h3><p style="color:#C7C7C7;font-size:clamp(1.05rem,1.25vw,1.2rem)">Asia’s leading specialist in luxury retail destinations.</p></div>
+        <div class="col"><h3>2035</h3><p style="color:#C7C7C7;font-size:clamp(1.05rem,1.25vw,1.2rem)">One of the world’s top-three retail-space consultancies — Asia, the Middle East, Europe and the Americas.</p></div>
+        <div class="col"><h3>The edge</h3><p style="color:#C7C7C7;font-size:clamp(1.05rem,1.25vw,1.2rem)">The pioneer of AI in retail visitor journeys — exporting Asia’s playbook worldwide.</p></div>
+      </div>
+      <p class="body">Equity today buys into a firm at the inflection point of that growth.</p>
+    </div>
+  </section>
+
+  <!-- 24 AI PIONEER -->
+  <section class="slide" data-label="The AI pioneer">
+    <div class="inner">
+      <div class="eyebrow">The pioneering position</div>
+      <h2>The pioneer of AI in retail visitor journeys.</h2>
+      <p class="body" style="max-width:64ch">Retail destinations are laggards in AI while the luxury brands race ahead. Husband Retail closes that gap — designing the AI-enabled visitor journey as a core discipline, not a bolt-on. The Shaftesbury Capital report is the first of many.</p>
+      <div class="moves" style="grid-template-columns:repeat(3,1fr);gap:clamp(20px,2.4vw,30px) clamp(30px,3.5vw,48px)">
+        <div class="move"><div class="mn">→</div><div><div class="mt">Design the journey</div><div class="md">AI-orchestrated pre-visit, in-place and post-visit experience.</div></div></div>
+        <div class="move"><div class="mn">→</div><div><div class="mt">Run the estate</div><div class="md">Footfall, dwell, leasing and media as one intelligence layer.</div></div></div>
+        <div class="move"><div class="mn">→</div><div><div class="mt">Set the standard</div><div class="md">A repeatable AI-for-destinations method, owned by Husband.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 25 INVESTMENT CASE -->
+  <section class="slide dark" data-label="The investment case">
+    <div class="inner">
+      <div class="eyebrow">The investment case</div>
+      <h2 style="max-width:22ch">What an equity partner is buying into.</h2>
+      <div class="moves">
+        <div class="move"><div class="mn">01</div><div><div class="mt">A defensible franchise</div><div class="md">A 28-year boutique with a specialist niche and blue-chip, repeat relationships — hard to assemble.</div></div></div>
+        <div class="move"><div class="mn">02</div><div><div class="mt">Structural tailwinds</div><div class="md">Experiential, culture-led retail; Asia the premier market; an AI layer only now emerging.</div></div></div>
+        <div class="move"><div class="mn">03</div><div><div class="mt">A model that compounds</div><div class="md">Asset management &amp; investment advisory turn one-off advisory into long-term, asset-level economics.</div></div></div>
+        <div class="move"><div class="mn">04</div><div><div class="mt">Authority that compounds</div><div class="md">30 years of relationships and a category-defining reputation — the firm’s core, durable asset.</div></div></div>
+        <div class="move"><div class="mn">05</div><div><div class="mt">Strategic alignment for you</div><div class="md">Your pipeline — Tokyo, Hong Kong, Bangkok — is the firm’s pipeline. You own the engine that builds your destinations.</div></div></div>
+        <div class="move"><div class="mn">06</div><div><div class="mt">A growth inflection</div><div class="md">A firm moving from Asia’s No.1 to global top-three — equity at the turn.</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 26 PARTNERSHIP -->
+  <section class="slide" data-label="The partnership">
+    <div class="inner">
+      <div class="eyebrow">The partnership</div>
+      <h2>A partner, not a vendor.</h2>
+      <p class="body" style="max-width:60ch">Paul curates the retail concept; you structure and lead — the division of labour you already trust. An equity partnership in Husband Retail aligns us fully.</p>
+      <p class="lead">And our discipline keeps it honest: <span class="blue">we only handle leasing for developments we have shaped.</span></p>
+    </div>
+  </section>
+
+  <!-- 27 PATH -->
+  <section class="slide" data-label="The path">
+    <div class="inner">
+      <div class="eyebrow">The path</div>
+      <h2>From concept to a fully leased destination — and the asset that sustains it.</h2>
+      <div class="phases">
+        <div class="phase"><div class="pn">01</div><div class="pt">Concept &amp; feasibility</div></div>
+        <div class="phase"><div class="pn">02</div><div class="pt">Design development</div></div>
+        <div class="phase"><div class="pn">03</div><div class="pt">Leasing &amp; brand curation</div></div>
+        <div class="phase"><div class="pn">04</div><div class="pt">Open</div></div>
+        <div class="phase"><div class="pn">05</div><div class="pt">Asset management</div></div>
+      </div>
+      <p class="body">Husband Retail runs the implementation, end to end.</p>
+    </div>
+  </section>
+
+  <!-- 28 CLOSE -->
+  <section class="slide dark" data-label="Close">
+    <div class="inner">
+      <div class="eyebrow">The next iconic destination</div>
+      <h1 style="max-width:16ch">Let’s make the art of placemaking the <span class="blue">art of retail.</span></h1>
+      <p class="lead" style="max-width:46ch">Anchored by art and culture. Built, leased and sustained by Husband Retail.</p>
+      <div class="rule" style="max-width:130px;background:var(--line-dark)"></div>
+      <p class="body">Paul Husband · Husband Retail · Hong Kong · husband-retail.com</p>
+    </div>
+  </section>
+
+</div>
+
+<div class="menu" id="menu" aria-hidden="true">
+  <div class="menu-head">
+    <span class="menu-title">The Grand Salon · contents</span>
+    <button class="menu-x" id="menuX" aria-label="Close menu">&times;</button>
+  </div>
+  <nav class="menu-list" id="menuList"></nav>
+</div>
+
+<div class="nav" id="nav">
+  <div class="dots" id="dots"></div>
+  <div class="arrows">
+    <button class="arr" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
+    <span class="counter" id="counter">01 / 34</span>
+    <button class="arr" id="next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<script>
+(function(){
+  var deck=document.getElementById('deck');
+  var slides=[].slice.call(document.querySelectorAll('.slide'));
+  var dotsWrap=document.getElementById('dots');
+  var counter=document.getElementById('counter');
+  var topbar=document.getElementById('topbar');
+  var nav=document.getElementById('nav');
+  var n=slides.length, cur=0;
+  var pad=function(x){return (x<9?'0':'')+(x+1);};
+
+  slides.forEach(function(s,i){
+    var b=document.createElement('button'); b.className='dot'+(i===0?' active':'');
+    b.setAttribute('aria-label','Slide '+(i+1)); b.onclick=function(){goTo(i);};
+    dotsWrap.appendChild(b);
+  });
+  var dots=[].slice.call(dotsWrap.querySelectorAll('.dot'));
+
+  /* menu */
+  var menu=document.getElementById('menu'), menuList=document.getElementById('menuList');
+  slides.forEach(function(s,i){
+    var it=document.createElement('button'); it.className='menu-item';
+    it.innerHTML='<span class="mi-n">'+pad(i)+'</span><span class="mi-l">'+(s.dataset.label||('Slide '+(i+1)))+'</span>';
+    it.onclick=function(){ closeMenu(); goTo(i); };
+    menuList.appendChild(it);
+  });
+  var menuItems=[].slice.call(menuList.querySelectorAll('.menu-item'));
+  function openMenu(){menu.classList.add('open');menu.setAttribute('aria-hidden','false');}
+  function closeMenu(){menu.classList.remove('open');menu.setAttribute('aria-hidden','true');}
+  document.getElementById('burger').onclick=openMenu;
+  document.getElementById('menuX').onclick=closeMenu;
+
+  function setChrome(i){
+    var dark=slides[i].classList.contains('dark')||slides[i].classList.contains('media');
+    topbar.classList.toggle('on-dark',dark); nav.classList.toggle('on-dark',dark);
+  }
+  function setActive(i){
+    if(i!==cur){cur=i;
+      dots.forEach(function(d,j){d.classList.toggle('active',j===i);});
+      menuItems.forEach(function(m,j){m.classList.toggle('active',j===i);});
+      counter.textContent=pad(i)+' / '+pad(n-1); setChrome(i);}
+  }
+  function goTo(i){i=Math.max(0,Math.min(n-1,i));
+    slides[i].scrollIntoView({behavior:'smooth',inline:'start',block:'nearest'});}
+
+  function animateCount(el){
+    if(el.dataset.done){return;} el.dataset.done='1';
+    var target=parseFloat(el.dataset.count)||0, pre=el.dataset.prefix||'', suf=el.dataset.suffix||'';
+    var dur=1100, t0=null;
+    function fmt(v){var r=Math.round(v); return pre+(r>=1000?r.toLocaleString('en-US'):r)+suf;}
+    function step(ts){if(!t0)t0=ts; var p=Math.min(1,(ts-t0)/dur); var e=1-Math.pow(1-p,3);
+      el.textContent=fmt(target*e); if(p<1){requestAnimationFrame(step);} else {el.textContent=fmt(target);}}
+    requestAnimationFrame(step);
+  }
+
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting && e.intersectionRatio>=0.5){
+        var i=slides.indexOf(e.target); e.target.classList.add('in'); setActive(i);
+        e.target.querySelectorAll('.count').forEach(animateCount);
+      }
+    });
+  },{root:deck,threshold:[0.5,0.75]});
+  slides.forEach(function(s){io.observe(s);});
+  slides[0].classList.add('in'); setChrome(0); counter.textContent='01 / '+pad(n-1);
+  if(menuItems[0]){menuItems[0].classList.add('active');}
+
+  var raf=false;
+  deck.addEventListener('scroll',function(){
+    if(raf){return;} raf=true;
+    requestAnimationFrame(function(){ raf=false;
+      setActive(Math.max(0,Math.min(n-1,Math.round(deck.scrollLeft/deck.clientWidth))));
+    });
+  },{passive:true});
+
+  /* timeline */
+  var nodes=[].slice.call(document.querySelectorAll('#tlxNodes .node'));
+  var pic=document.getElementById('tlxPic'), ty=document.getElementById('tlxYear'),
+      tt=document.getElementById('tlxTitle'), tloc=document.getElementById('tlxLoc'), td=document.getElementById('tlxDesc');
+  function selNode(node){
+    nodes.forEach(function(x){x.classList.remove('active');}); node.classList.add('active');
+    ty.textContent=node.dataset.year; tt.innerHTML=node.dataset.title; tloc.textContent=node.dataset.loc; td.textContent=node.dataset.desc;
+    pic.innerHTML = node.dataset.img ? '<img src="'+node.dataset.img+'" alt="">' : '<span class="ph">'+node.dataset.year+'</span>';
+  }
+  nodes.forEach(function(node){node.addEventListener('click',function(){selNode(node);});});
+
+  /* tabs */
+  var tabBtns=[].slice.call(document.querySelectorAll('.tab'));
+  var panels=[].slice.call(document.querySelectorAll('.tabpanel'));
+  tabBtns.forEach(function(b){b.addEventListener('click',function(){
+    var t=b.dataset.tab;
+    tabBtns.forEach(function(x){x.classList.toggle('active',x===b);});
+    panels.forEach(function(p){p.classList.toggle('active',p.dataset.panel===t);});
+  });});
+
+  document.getElementById('prev').onclick=function(){goTo(cur-1);};
+  document.getElementById('next').onclick=function(){goTo(cur+1);};
+  window.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){closeMenu();return;}
+    if(menu.classList.contains('open')){return;}
+    if(e.key==='ArrowRight'||e.key==='PageDown'||e.key===' '){e.preventDefault();goTo(cur+1);}
+    else if(e.key==='ArrowLeft'||e.key==='PageUp'){e.preventDefault();goTo(cur-1);}
+    else if(e.key==='Home'){e.preventDefault();goTo(0);} else if(e.key==='End'){e.preventDefault();goTo(n-1);}
+  });
+  deck.addEventListener('click',function(e){
+    if(e.target.closest('a,button,.tile,video,.node,.tlx,.tabs,.mapwrap')){return;}
+    var x=e.clientX, w=window.innerWidth;
+    if(x> w*0.66){goTo(cur+1);} else if(x< w*0.34){goTo(cur-1);}
+  });
+
+  /* contents / agenda jump links */
+  [].slice.call(document.querySelectorAll('.ag')).forEach(function(a){
+    a.addEventListener('click',function(){
+      var lbl=a.dataset.go;
+      for(var i=0;i<slides.length;i++){ if(slides[i].dataset.label===lbl){ goTo(i); break; } }
+    });
+  });
+
+  /* hero video cross-fade (slide 1) */
+  var hv=[].slice.call(document.querySelectorAll('.hv'));
+  if(hv.length>1){ var hi=0; setInterval(function(){ hv[hi].classList.remove('active'); hi=(hi+1)%hv.length; hv[hi].classList.add('active'); },1500); }
+
+  /* global map dots + popups */
+  var MAP=[
+    {x:48.5,y:28.0,nm:'Covent Garden',loc:'London',yr:'2007',ch:'Repositioning a historic London estate as a luxury destination.',img:'assets/proj-71.jpg'},
+    {x:61.0,y:54.0,nm:'Dubai Design District',loc:'Dubai',yr:'2015',ch:'Retail & dining for the Gulf’s design quarter.',img:'assets/proj-239.jpg'},
+    {x:74.0,y:67.0,nm:'MahaNakhon',loc:'Bangkok',yr:'2014',ch:'Lifestyle retail at Thailand’s tallest tower.',img:'assets/proj-73.jpg'},
+    {x:77.5,y:40.5,nm:'Park Life',loc:'Beijing',yr:'2006',ch:'Wrap-around flagship stores at the Park Hyatt.',img:'assets/proj-70.jpg'},
+    {x:77.0,y:59.0,nm:'Galaxy Macau',loc:'Macau',yr:'2012',ch:'Integrated-resort retail at world scale.',img:'assets/proj-69.jpg'},
+    {x:78.2,y:58.5,nm:'The Landmark',loc:'Hong Kong',yr:'2006',ch:'Central’s luxury flagship — giant multi-storey facades.',img:'assets/proj-67.jpg'},
+    {x:79.5,y:57.2,nm:'Elements',loc:'Hong Kong',yr:'2007',ch:'Large-format mixed-use retail above the MTR.',img:'assets/proj-68.jpg'},
+    {x:82.0,y:40.0,nm:'Seoul IFC',loc:'Seoul',yr:'2012',ch:'Korea’s first world-standard luxury mall.',img:'assets/proj-72.jpg'}
+  ];
+  var mapwrap=document.getElementById('mapwrap'), mappop=document.getElementById('mappop');
+  if(mapwrap && mappop){
+    MAP.forEach(function(d){
+      var b=document.createElement('button'); b.className='mdot'; b.style.left=d.x+'%'; b.style.top=d.y+'%';
+      b.setAttribute('aria-label',d.nm+', '+d.loc);
+      b.innerHTML='<span class="pulse"></span><span class="pin"></span>';
+      b.addEventListener('click',function(e){ e.stopPropagation(); showPop(d,b); });
+      mapwrap.appendChild(b);
+    });
+    function showPop(d,b){
+      [].slice.call(mapwrap.querySelectorAll('.mdot')).forEach(function(x){x.classList.remove('active');}); b.classList.add('active');
+      mappop.innerHTML=(d.img?'<img src="'+d.img+'" alt="">':'')+'<div class="pbody"><div class="pyr">'+d.yr+' · '+d.loc+'</div><div class="pnm">'+d.nm+'</div><div class="pch">'+d.ch+'</div></div>';
+      var leftSide=d.x>52, ty=(d.y>62?'-100%':(d.y<24?'0%':'-50%'));
+      mappop.style.left=d.x+'%'; mappop.style.top=d.y+'%';
+      mappop.style.transform='translate('+(leftSide?'calc(-100% - 18px)':'18px')+','+ty+')';
+      mappop.classList.add('show');
+    }
+    mapwrap.addEventListener('click',function(){ mappop.classList.remove('show'); [].slice.call(mapwrap.querySelectorAll('.mdot')).forEach(function(x){x.classList.remove('active');}); });
+  }
+})();
+</script>
+<script>
+/* Grand Salon film slide — full-bleed video with SOUND.
+   Browsers block autoplay-with-audio until a user gesture; the deck is swipe/tap
+   navigated, so by the time this slide is reached a gesture has occurred. We start
+   the video muted (so it always autoplays), "bless" it on the first user gesture so
+   iOS/Safari will permit later programmatic unmuting, then unmute it whenever the
+   film slide is the one on screen and re-mute it when it scrolls away. */
+(function(){
+  var film=document.getElementById('grandSalonFilm');
+  if(!film){return;}
+  var deck=document.getElementById('deck');
+  var allSlides=[].slice.call(document.querySelectorAll('.slide'));
+  var filmSlide=film.closest('.slide');
+  function isOnScreen(){
+    return Math.round(deck.scrollLeft/deck.clientWidth)===allSlides.indexOf(filmSlide);
+  }
+  function soundOn(){ try{ film.muted=false; film.volume=1.0; var p=film.play(); if(p&&p.catch){p.catch(function(){});} }catch(e){} }
+  function soundOff(){ try{ film.muted=true; }catch(e){} }
+
+  /* unmute when the film fills the deck viewport, mute when it leaves */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){
+      if(e.isIntersecting && e.intersectionRatio>=0.6){ soundOn(); } else { soundOff(); }
+    });
+  },{root:deck,threshold:[0,0.6,0.9]});
+  io.observe(film);
+
+  /* first user gesture: bless the element for audio, then keep it silent unless visible */
+  var blessed=false;
+  function bless(){
+    if(blessed){return;} blessed=true;
+    try{ film.muted=false; film.volume=1.0; var p=film.play(); if(p&&p.catch){p.catch(function(){});} }catch(e){}
+    if(!isOnScreen()){ soundOff(); }
+  }
+  ['pointerdown','touchstart','mousedown','keydown','click'].forEach(function(ev){
+    window.addEventListener(ev,bless,{capture:true});
+  });
+
+  /* re-evaluate on every scroll settle */
+  var raf=false;
+  deck.addEventListener('scroll',function(){
+    if(raf){return;} raf=true;
+    requestAnimationFrame(function(){ raf=false; if(isOnScreen()){ soundOn(); } else { soundOff(); } });
+  },{passive:true});
+})();
+</script>
+</body>
+</html>
