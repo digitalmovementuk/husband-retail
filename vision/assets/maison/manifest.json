@@ -1,0 +1,74 @@
+[
+  {
+    "brand": "Louis Vuitton",
+    "file": "louis-vuitton.jpg",
+    "source_url": "https://unsplash.com/photos/a-woman-walks-past-a-louis-vuitton-store-nvuLoNqpG_E",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "mos design",
+    "note": "Louis Vuitton flagship facade, Ginza Tokyo. Wordmark clearly visible. Landscape 1366x1024."
+  },
+  {
+    "brand": "Dior",
+    "file": "dior.jpg",
+    "source_url": "https://unsplash.com/photos/die-fassade-eines-dior-stores-ist-nachts-beleuchtet-ExTBBNj1NMY",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Aaqid Masoodi",
+    "note": "Dior boutique facade illuminated at night with festive lighting. DIOR wordmark clearly visible. Landscape 1366x910."
+  },
+  {
+    "brand": "Chanel",
+    "file": "chanel.jpg",
+    "source_url": "https://commons.wikimedia.org/wiki/File:Chanel_boutique,_Rue_Cambon,_Paris_2009.jpg",
+    "source_site": "Wikimedia Commons",
+    "license": "CC BY 2.0 (Creative Commons Attribution 2.0 Generic) - free for commercial use with attribution",
+    "photographer_or_author": "ashton",
+    "note": "Iconic Chanel Rue Cambon flagship, Paris. Multiple CHANEL signs visible (monochrome styling). Landscape 1478x981."
+  },
+  {
+    "brand": "Hermes",
+    "file": "hermes.jpg",
+    "source_url": "https://unsplash.com/photos/hermes-ladenfassade-mit-hohen-gebauden-und-baumen-DB4wF3ban_g",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Veer Shah",
+    "note": "Hermes store facade with gold HERMES wordmark, framed by skyscrapers and trees. Landscape 1440x810."
+  },
+  {
+    "brand": "Bvlgari",
+    "file": "bvlgari.jpg",
+    "source_url": "https://unsplash.com/photos/bvlgari-gebaude-und-taxis-die-nachts-von-goldenen-lichtern-beleuchtet-werden-CcCpBXpIE-Q",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Andy Thanh Hai",
+    "note": "Bvlgari flagship at night, gold BVLGARI wordmark and dramatic golden chandelier light installation (Hong Kong). Landscape 1472x981."
+  },
+  {
+    "brand": "Cartier",
+    "file": "cartier.jpg",
+    "source_url": "https://unsplash.com/photos/cartier-laden-mit-roten-markisen-und-menschen-die-spazieren-gehen-dFbGfVqqZSo",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Nimisha Mekala",
+    "note": "Cartier New Bond Street flagship, London. Signature red awnings, red flag and repeated gold Cartier signage. Portrait 1600x2844 (best clean-licence Cartier flagship available; landscape Cartier flagships were not available under a clean licence)."
+  },
+  {
+    "brand": "Burberry",
+    "file": "burberry.jpg",
+    "source_url": "https://unsplash.com/photos/ein-schwarzes-auto-parkt-vor-einem-burberry-gebaude-aGbeGQ-LTdM",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Samuel Regan-Asante",
+    "note": "Burberry storefront at night, illuminated BURBERRY wordmark on glass facade with a black London cab in front. Landscape 1472x981."
+  },
+  {
+    "brand": "Ralph Lauren",
+    "file": "ralph-lauren.jpg",
+    "source_url": "https://unsplash.com/photos/polo-ralph-lauren-laden-erleuchtet-mit-festlichen-lichtern-z-n26KxbzTw",
+    "source_site": "Unsplash",
+    "license": "Unsplash License (free for commercial use, no attribution required)",
+    "photographer_or_author": "Lei Hwang",
+    "note": "Polo Ralph Lauren flagship at night, illuminated POLO RALPH LAUREN signage and lit Polo pony logo, festive tree lights. Landscape 1480x981."
+  }
+]
