@@ -386,9 +386,9 @@ b,strong{font-weight:600;color:inherit}
 .icard .icd{margin-top:9px;font-size:clamp(.88rem,1vw,1.04rem);line-height:1.46;color:var(--mute)}.dark .icard .icd,.navy .icard .icd{color:#A9A498}
 .icard .icgo{margin-top:13px;font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-deep);font-weight:700;display:inline-flex;align-items:center;gap:6px}.dark .icard .icgo,.navy .icard .icgo{color:var(--gold-bright)}
 .icard .icgo .ar{transition:transform .25s var(--ease)}.icard:hover .icgo .ar{transform:translateX(4px)}
-.icards.onglass .icard{background:rgba(16,18,22,.56);border-color:rgba(255,255,255,.18);-webkit-backdrop-filter:blur(9px);backdrop-filter:blur(9px)}
-.icards.onglass .icard .ict{color:#fff}.icards.onglass .icard .icd{color:#D8D3C8}
-.icards.onglass .icard:hover{border-color:var(--gold-bright);background:rgba(16,18,22,.66)}
+.icards.onglass .icard{background:rgba(11,13,19,.74);border-color:rgba(255,255,255,.2);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+.icards.onglass .icard .ict{color:#fff}.icards.onglass .icard .icd{color:#E4E0D7}
+.icards.onglass .icard:hover{border-color:var(--gold-bright);background:rgba(11,13,19,.82)}
 @media(max-width:900px){.icards.c3{grid-template-columns:1fr}}
 
 /* thesis callout */
@@ -429,7 +429,7 @@ b,strong{font-weight:600;color:inherit}
 .coverframe{position:relative;display:block;width:100%;padding:0;border-radius:14px;overflow:hidden;box-shadow:0 34px 80px rgba(0,0,0,.55);border:1px solid var(--line-dark);aspect-ratio:16/11;cursor:pointer;background:#10131a}
 .coverframe img{width:100%;height:100%;object-fit:cover;object-position:top;transition:transform .6s var(--ease)}
 .coverframe:hover img{transform:scale(1.05)}
-.coveropen{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;background:rgba(16,18,22,.74);border:1px solid var(--gold);color:#fff;border-radius:999px;padding:11px 20px;font-size:clamp(.85rem,1vw,.96rem);font-weight:600;letter-spacing:.01em;white-space:nowrap;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);transition:background .25s var(--ease),color .25s var(--ease)}
+.coveropen{position:absolute;left:50%;bottom:16px;transform:translateX(-50%);z-index:3;display:inline-flex;align-items:center;gap:8px;background:rgba(16,18,22,.74);border:1px solid var(--gold);color:#fff;border-radius:999px;padding:11px 20px;font-size:clamp(.85rem,1vw,.96rem);font-weight:600;letter-spacing:.01em;white-space:nowrap;-webkit-backdrop-filter:blur(5px);backdrop-filter:blur(5px);transition:background .25s var(--ease),color .25s var(--ease)}
 .coverframe:hover .coveropen{background:var(--gold);color:#16140F}
 .coveropen .ar{transition:transform .25s var(--ease)}.coverframe:hover .coveropen .ar{transform:translate(3px,-3px)}
 /* report iframe modal */
@@ -588,6 +588,7 @@ b,strong{font-weight:600;color:inherit}
 .slide.repex button.rximg{cursor:pointer}
 .slide.repex .rximg img{position:static;max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;border-radius:8px;box-shadow:0 16px 44px rgba(0,0,0,.5);transition:transform .5s var(--ease)}
 .slide.repex button.rximg:hover img{transform:scale(1.03)}
+.slide.repex .rximg::before{content:"";position:absolute;top:0;left:0;right:0;height:92px;background:linear-gradient(180deg,rgba(8,11,20,.85),rgba(8,11,20,0));z-index:1;pointer-events:none}
 .slide.repex .rximg::after{content:"";position:absolute;inset:0;box-shadow:inset -1px 0 0 var(--line-dark);pointer-events:none}
 .slide.repex.flip .rximg::after{box-shadow:inset 1px 0 0 var(--line-dark)}
 .rxbadge{position:absolute;z-index:2;left:20px;bottom:20px;display:inline-flex;align-items:center;gap:7px;background:rgba(16,18,22,.74);border:1px solid rgba(201,168,106,.5);color:#EDE9E0;border-radius:999px;padding:8px 15px;font-size:.78rem;font-weight:600;-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
@@ -601,7 +602,7 @@ b,strong{font-weight:600;color:inherit}
 @media(max-width:900px){.slide.repex,.slide.repex.flip{flex-direction:column}.slide.repex .rximg{flex:none;max-width:100%;height:40vh}.slide.repex .rxtext{padding:32px 24px 30px}}
 
 /* Husband Retail ecosystem diagram (8 nodes, reproduced in our colours) */
-.eco.eco8{position:relative;width:100%;max-width:820px;margin:clamp(6px,1.2vw,14px) auto 0;aspect-ratio:1300/770}
+.eco.eco8{position:relative;width:100%;max-width:772px;margin:clamp(4px,1vw,12px) auto 0;aspect-ratio:1300/770}
 .eco8 svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .eco8 .hub,.eco8 .en{position:absolute;transform:translate(-50%,-50%);text-align:center;line-height:1.16}
 .eco8 .hub{left:50%;top:50%;width:20%;aspect-ratio:1/1;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:radial-gradient(circle at 50% 38%,#1b2236,#0F1422);border:3px solid var(--gold);box-shadow:0 0 38px rgba(201,168,106,.3),inset 0 0 30px rgba(0,0,0,.45);z-index:3}
@@ -620,12 +621,59 @@ b,strong{font-weight:600;color:inherit}
   .eco8 .hub,.eco8 .en{position:static;transform:none;width:auto;opacity:1;aspect-ratio:auto;border-radius:12px}
   .eco8 .hub{grid-column:1/-1;padding:16px}
 }
+
+/* Paul's logo in the persistent topbar (every slide) */
+.brand{display:inline-flex;align-items:center;gap:11px;pointer-events:none}
+.brandlogo{height:30px;width:auto;display:block;filter:drop-shadow(0 1px 4px rgba(0,0,0,.35))}
+.topbar.on-dark .brandlogo{filter:drop-shadow(0 1px 6px rgba(0,0,0,.6))}
+.herologo{height:clamp(54px,7vw,82px);width:auto;display:block;margin-bottom:clamp(16px,2vw,26px);filter:drop-shadow(0 6px 18px rgba(0,0,0,.55))}
+/* verbatim point list (Paul's key points, no invented sub-copy) */
+.plist{margin-top:clamp(18px,2.3vw,30px);display:grid;gap:clamp(12px,1.5vw,18px);max-width:60ch}
+.plist.two{grid-template-columns:1fr 1fr;gap:clamp(12px,1.6vw,20px) clamp(26px,3vw,44px);max-width:none}
+.pli{display:flex;gap:13px;align-items:flex-start;font-size:clamp(1rem,1.2vw,1.18rem);line-height:1.4;color:#EDE9E0;font-weight:500}
+.pli::before{content:"";flex:0 0 auto;width:8px;height:8px;background:var(--gold-bright);border-radius:1px;margin-top:.55em}
+.pli b{color:#fff;font-weight:700}
+.pli .sub{display:block;color:#A9A498;font-weight:400;font-size:.92em;margin-top:3px}
+/* Serakai mark + Paul x Ben lockup */
+.serakaimark{height:clamp(30px,3.4vw,44px);width:auto;margin-bottom:clamp(14px,1.8vw,22px);opacity:.96}
+.lockup{display:flex;align-items:center;gap:clamp(16px,2.4vw,30px);margin-top:clamp(20px,2.6vw,32px)}
+.lockup img{height:clamp(40px,4.4vw,56px);width:auto;display:block}
+.lockup .x{font-size:clamp(1.2rem,1.8vw,1.7rem);color:var(--gold-bright);font-weight:300}
+
+/* split slide: two image+copy panels side by side (Conference | Council) */
+.slide.split{padding:0;flex-direction:row}
+.slide.split .spane{flex:1 1 50%;position:relative;display:flex;flex-direction:column;justify-content:flex-end;padding:clamp(34px,4vw,64px) clamp(26px,3.2vw,52px) clamp(40px,5vw,70px);overflow:hidden;min-width:0}
+.slide.split .spane>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0}
+.slide.split .spane::after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(15,20,34,.28),rgba(13,17,29,.6) 56%,rgba(10,14,24,.92))}
+.slide.split .spane.brd::before{content:"";position:absolute;top:0;right:-.5px;bottom:0;width:1px;background:rgba(201,168,106,.5);z-index:3}
+.slide.split .sp{position:relative;z-index:2}
+.slide.split .splabel{font-size:clamp(11px,.9vw,13px);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-bright);font-weight:600;margin-bottom:10px}
+.slide.split h3{font-weight:300;color:#fff;font-size:clamp(1.4rem,2.1vw,2.05rem);line-height:1.08;letter-spacing:-.012em;margin:0 0 clamp(9px,1.1vw,15px);max-width:18ch}
+.slide.split .sp p{color:#E4E0D7;font-size:clamp(.95rem,1.05vw,1.1rem);line-height:1.5;margin:0;max-width:44ch}
+@media(max-width:820px){.slide.split{flex-direction:column}.slide.split .spane{min-height:46vh}.slide.split .spane.brd::before{display:none}}
+
+/* ===== nav clearance: copy + elements never overlap the fixed bottom dots/arrows/counter (desktop · iPad · iPhone) ===== */
+.slide{padding-bottom:clamp(122px,11vh,140px)}
+.slide.media .inner,.slide.hero .inner{padding-top:clamp(70px,7vh,90px);padding-bottom:clamp(126px,12vh,142px)}
+.slide.report,.slide.about,.slide.repex,.slide.split{padding-bottom:0}
+.slide.about .abtext,.slide.report .rtext,.slide.repex .rxtext,.slide.split .spane{padding-bottom:clamp(122px,11vh,140px)}
+
+/* compact glass cards + tighter rhythm so card-heavy media slides fit above the nav on iPad */
+.icards.onglass{gap:clamp(10px,1.1vw,14px);margin-top:clamp(14px,1.7vw,22px)}
+.icards.onglass .icard{padding:clamp(12px,1.35vw,17px)}
+.icards.onglass .icard .ict{font-size:clamp(1rem,1.2vw,1.2rem);margin-top:7px}
+.icards.onglass .icard .icd{font-size:clamp(.9rem,1vw,1.04rem);margin-top:4px}
+.slide.media h2{margin-bottom:2px}
+/* trim ecosystem diagram a touch so the long circular-economy title + callout clear the nav */
+.eco.eco8{max-width:744px}
+@media(max-height:860px){.eco.eco8{max-width:600px;margin-top:4px}}
+@media(max-height:780px){.eco.eco8{max-width:520px}}
 </style>
 </head>
 <body>
 
 <div class="topbar" id="topbar">
-  <span class="wordmark">Husband Retail<span class="est">est. 1998</span></span>
+  <span class="brand"><img class="brandlogo" src="assets/hr-logo.png" alt="Husband Retail logo"><span class="wordmark">Husband Retail<span class="est">est. 1998</span></span></span>
   <span class="topright"><span class="tag">Vision for the Future</span>
     <button class="burger" id="burger" aria-label="Open contents menu"><span></span><span></span><span></span></button></span>
 </div>
@@ -633,7 +681,7 @@ b,strong{font-weight:600;color:inherit}
 <div class="deck" id="deck">
 
   <!-- 1 HERO -->
-                <section class="slide hero dark" data-label="Husband Retail">
+                    <section class="slide hero dark" data-label="Husband Retail">
     <div class="herovids">
       <video class="hv active" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/hero-landmark.mp4" type="video/mp4"></video>
       <video class="hv" autoplay muted loop playsinline><source src="assets/Galaxy.mp4" type="video/mp4"></video>
@@ -641,44 +689,30 @@ b,strong{font-weight:600;color:inherit}
     </div>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">Husband Retail Consulting · est. 1998</div>
-      <h1 style="color:#fff">Iconic retail<br>destinations.</h1>
-      <p class="lead" style="color:#EDE9E0;max-width:46ch">The premier development and leasing consultancy behind many of Asia’s most iconic, luxury retail destinations.</p>
+      <img class="herologo" src="assets/hr-logo.png" alt="Husband Retail Consulting">
+      <div class="eyebrow">Husband Retail Consulting &middot; est. 1998</div>
+      <h1 style="color:#fff;max-width:15ch">Leading a new <span class="gold">retail era.</span></h1>
     </div>
   </section>
 
-  <section class="slide media dark" data-label="The future of Husband Retail" style="background:radial-gradient(120% 120% at 80% 10%,#1b2236 0%,#141A2A 45%,#0F1422 100%)">
+  <section class="slide media dark" data-label="An exciting new track" style="background:radial-gradient(120% 120% at 80% 10%,#1b2236 0%,#141A2A 45%,#0F1422 100%)">
     <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/grand-salon.mp4" type="video/mp4"></video>
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">Husband Retail Consulting &middot; 2026</div>
-      <h1 style="color:#fff;max-width:16ch">The Future of <span class="gold">Husband Retail.</span></h1>
-      <p class="lead" style="color:var(--gold-bright);font-weight:400;max-width:36ch;margin-top:clamp(14px,1.6vw,20px)">Market intelligence. AI. A new platform for Asian retail.</p>
-      <div class="rule" style="max-width:130px"></div>
-      <p class="body" style="color:#D8D3C8;max-width:48ch">Where the firm is going next.</p>
-    </div>
-  </section>
-
-  <section class="slide about sand" data-label="Where we are going">
-    <div class="abimg">
-      <img src="assets/paul-husband.jpg" alt="Paul Husband, Founder of Husband Retail">
-      <div class="pcap"><span class="pn">Paul Husband</span><span class="pr">Founder &amp; Principal · <i>Author, “The Cult of the Luxury Brand”</i></span></div>
-    </div>
-    <div class="abtext">
       <div class="eyebrow">An exciting new track</div>
-      <h2 style="max-width:22ch">Advisory and leasing stay the core. New, highly synergistic opportunities have arisen.</h2>
-      <p class="body" style="max-width:52ch">Some are so globally omnipresent that retail centre owners can no longer ignore them. AI is the most important, touching customer-facing and back of house alike.</p>
-      <div class="icards c3">
-        <button class="icard" data-goto-label="The quarterly market report"><div class="icn">01 · Market intelligence</div><div class="ict">The quarterly market report</div><div class="icd">How we read the market, and our BD tool.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
-        <button class="icard" data-goto-label="AI · the opportunity"><div class="icn">02 · AI in retail</div><div class="ict">Front and back of house</div><div class="icd">The sector is behind its tenants.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
-        <button class="icard" data-goto-label="The Conference"><div class="icn">03 · The platform</div><div class="ict">Conference &amp; council</div><div class="icd">The body Asia’s retail industry lacks.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
+      <h2 style="color:#fff;max-width:24ch">Advisory and leasing stay the core. New, highly synergistic opportunities have arisen.</h2>
+      <p class="lead" style="color:#EDE9E0;max-width:50ch">AI is the most important and the most omnipresent, across customer-facing and back of house.</p>
+      <div class="icards c3 onglass" style="margin-top:clamp(18px,2.2vw,28px)">
+        <button class="icard" data-goto-label="The Market Intelligence Report"><div class="icn">01 &middot; Market intelligence</div><div class="ict">The Market Intelligence Report</div><div class="icd">How we read the market, and our business development tool.</div><span class="icgo">Explore <span class="ar">&rarr;</span></span></button>
+        <button class="icard" data-goto-label="AI &middot; the opportunity"><div class="icn">02 &middot; AI in retail</div><div class="ict">Customer-facing and back of house</div><div class="icd">The sector is far behind its tenants.</div><span class="icgo">Explore <span class="ar">&rarr;</span></span></button>
+        <button class="icard" data-goto-label="Conference &amp; Council"><div class="icn">03 &middot; The platform</div><div class="ict">Conference &amp; council</div><div class="icd">The body Asia&rsquo;s retail industry lacks.</div><span class="icgo">Explore <span class="ar">&rarr;</span></span></button>
       </div>
     </div>
   </section>
 
-  <section class="slide navy" data-label="The HR ecosystem">
+  <section class="slide navy" data-label="The HR world">
     <div class="inner">
-      <div class="eyebrow">The platform &middot; the ecosystem</div>
+      <div class="eyebrow">The whole picture</div>
       <h2 style="max-width:24ch">The Husband Retail ecosystem.</h2>
       <p class="body" style="margin-top:6px;color:#A9A498">30 years &middot; 150+ retail centres across Asia.</p>
       <div class="eco eco8">
@@ -703,21 +737,37 @@ b,strong{font-weight:600;color:inherit}
     </div>
   </section>
 
-  <section class="slide navy" data-label="The quarterly market report">
+  <section class="slide media dark" data-label="Core areas">
+    <img class="bg" src="assets/hero-04.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">Husband Retail</div>
+      <h2 style="color:#fff;max-width:22ch">Core areas that capture our future growth trajectory.</h2>
+      <div class="plist">
+        <div class="pli"><b>Core advisers &amp; brokerage business</b></div>
+        <div class="pli"><b>Knowledge &amp; network</b></div>
+        <div class="pli"><b>Global best-in-class practitioners to the Asian market</b></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide navy" data-label="The Market Intelligence Report">
     <div class="inner">
       <div class="eyebrow">The quarterly report</div>
-      <h2 style="max-width:18ch">Full retail intelligence.</h2>
+      <h2 style="max-width:18ch">The Market Intelligence Report.</h2>
       <div class="pubgrid">
         <div class="pubmain">
-          <div class="icards">
-            <div class="icard"><div class="icn">01</div><div class="ict">One coherent view</div><div class="icd">Five clusters: Luxury Macro, Future of Experience, Multi-Brand Concepts, Art Installations, Market Updates.</div></div>
-            <div class="icard"><div class="icn">02</div><div class="ict">Strategic insights</div><div class="icd">Where global retail is heading.</div></div>
-            <div class="icard"><div class="icn">03</div><div class="ict">Unique scope</div><div class="icd">Combining market-expert knowledge, C-level insights and cross-market analysis.</div></div>
+          <div class="plist" style="margin-top:clamp(12px,1.6vw,20px);gap:clamp(9px,1.2vw,14px)">
+            <div class="pli"><b>Consumer trends &amp; changing behaviour</b></div>
+            <div class="pli"><b>Shifting global retail, F&amp;B, entertainment and art &amp; culture</b><span class="sub">For the retail destination and public realm space.</span></div>
+            <div class="pli"><b>Global, niche &amp; domestic brands entering the Asian market</b><span class="sub">Or expanding within the regional market.</span></div>
+            <div class="pli"><b>Retail industry news, brand executive movements &amp; new store openings</b></div>
+            <div class="pli"><b>Special reports</b><span class="sub">Beach clubs &middot; Immersive entertainment &middot; Wellness appetite &amp; embracing arts &amp; culture.</span></div>
           </div>
         </div>
         <div class="pubside">
           <button class="coverframe" data-open-report aria-haspopup="dialog" aria-label="Open the full report">
-            <img src="assets/v2/report-cover.jpg" alt="Quarterly report cover" onerror="this.parentNode.style.background=\'linear-gradient(135deg,#1b2236,#0F1422)\'">
+            <img src="assets/v2/report-cover.jpg" alt="Market Intelligence Report cover" onerror="this.parentNode.style.background='linear-gradient(135deg,#1b2236,#0F1422)'">
             <span class="coveropen">Open the full report <span class="ar">&#8599;</span></span>
           </button>
         </div>
@@ -728,9 +778,12 @@ b,strong{font-weight:600;color:inherit}
   <section class="slide repex navy" data-label="Report · chapters">
     <button class="rximg" data-open-report aria-haspopup="dialog" aria-label="Open the full report"><img src="assets/report-shots/01.jpg" alt="Report chapters overview" loading="lazy" onerror="this.style.opacity=0"><span class="rxbadge">Open the full report <span class="ar">&#8599;</span></span></button>
     <div class="rxtext">
-      <div class="eyebrow">The quarterly report · what it comprises</div>
+      <div class="eyebrow">The quarterly report &middot; what it comprises</div>
       <h2 style="color:#fff;max-width:18ch">One report. Five chapters, every quarter.</h2>
-      <div class="rxkeys"><div class="rxkey"><div class="rkt">The full agenda</div><div class="rkd">Luxury Macro, Future of Experience, Multi-Brand Concepts, Art Installations, Market Updates.</div></div><div class="rxkey"><div class="rkt">One coherent view</div><div class="rkd">Where global retail is heading, in a single read.</div></div><div class="rxkey"><div class="rkt">Built for owners</div><div class="rkd">Written for the people who plan, lease and own destinations.</div></div></div>
+      <div class="rxkeys">
+        <div class="rxkey"><div class="rkt">Comprehensive insights and depth</div><div class="rkd">Luxury Macro, Future of Experience, Multi-Brand Concepts, Art Installations, Market Updates.</div></div>
+        <div class="rxkey"><div class="rkt">Future projections for strategic decision-making</div><div class="rkd">Where global retail is heading.</div></div>
+      </div>
     </div>
   </section>
 
@@ -765,7 +818,7 @@ b,strong{font-weight:600;color:inherit}
     <button class="rximg" data-open-report aria-haspopup="dialog" aria-label="Open the full report"><img src="assets/report-shots/05.jpg" alt="The future of experience page" loading="lazy" onerror="this.style.opacity=0"><span class="rxbadge">Open the full report <span class="ar">&#8599;</span></span></button>
     <div class="rxtext">
       <div class="eyebrow">The quarterly report · the future of experience</div>
-      <h2 style="color:#fff;max-width:18ch">Seven themes redefining the store.</h2>
+      <h2 style="color:#fff;max-width:18ch">Seven themes reshaping the store.</h2>
       <div class="rxkeys"><div class="rxkey"><div class="rkt">Retail as collaboration</div><div class="rkd">Architects working with artists on the space.</div></div><div class="rxkey"><div class="rkt">A sense of place</div><div class="rkd">Culture and social theatre inside the store.</div></div><div class="rxkey"><div class="rkt">What pulls people in</div><div class="rkd">The experience ideas worth borrowing.</div></div></div>
     </div>
   </section>
@@ -813,36 +866,105 @@ b,strong{font-weight:600;color:inherit}
     </div>
   </section>
 
-  <section class="slide media dark" data-label="The Conference">
-    <img class="bg" src="assets/v2/arrc-congress.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
-    <div class="scrim"></div>
-    <div class="inner">
-      <div class="eyebrow">The platform · the conference</div>
-      <h2 style="color:#fff;max-width:20ch">The Asia Retail Centre Conference.</h2>
-      <p class="body" style="color:#D8D3C8;max-width:58ch">The annual flagship for Asia’s retail centre industry. A planned 500 delegates, and projected profitable from Year 1.</p>
-      <div class="dlist" style="max-width:56ch">
-        <div class="di"><span style="color:#D8D3C8">Drives further subscriptions to the quarterly market report.</span></div>
-        <div class="di"><span style="color:#D8D3C8">A recurring engine of new advisory and brokerage clients for the core business.</span></div>
+  <section class="slide split dark" data-label="Conference & Council">
+    <div class="spane brd">
+      <img src="assets/v2/arrc-congress.jpg" alt="Asia Retail Centre Conference" onerror="this.style.display='none';this.parentElement.style.background='#141A2A'">
+      <div class="sp">
+        <div class="splabel">The Conference</div>
+        <h3>The Asia Retail Centre Conference</h3>
+        <p>Known as the Bali Retail Centre Conference. Bali, May 2027.</p>
       </div>
-      <div class="prog">
-        <span class="pchip"><b>Keynotes</b></span><span class="pchip"><b>Awards</b></span><span class="pchip"><b>Deal-making</b></span><span class="pchip"><b>Council assembly</b></span><span class="pchip">All in <b>one week</b></span>
+    </div>
+    <div class="spane">
+      <img src="assets/v2/council-boardroom.jpg" alt="Asia Retail Council" onerror="this.style.display='none';this.parentElement.style.background='#0F1422'">
+      <div class="sp">
+        <div class="splabel">The Council</div>
+        <h3>The Asia Retail Council</h3>
+        <p>Regional pan-industry Asian retail centre leadership, think tank and representation. The organisation to governments, related industries, the retail and brand universe, and retail destination visitors, patrons and customers.</p>
       </div>
     </div>
   </section>
 
-  <section class="slide media dark" data-label="The Council">
-    <img class="bg" src="assets/v2/council-boardroom.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
+  <section class="slide navy" data-label="Circular economy ecosystem">
+    <div class="inner">
+      <div class="eyebrow">The platform &middot; the ecosystem</div>
+      <h2 style="max-width:30ch">A Circular Economy Ecosystem driving multiple Husband Retail business lines.</h2>
+      <p class="body" style="margin-top:6px;color:#A9A498">30 years &middot; 150+ retail centres across Asia.</p>
+      <div class="eco eco8">
+        <svg viewBox="0 0 1300 770" aria-label="The Husband Retail ecosystem: eight services and assets orbiting the core business">
+          <ellipse cx="650" cy="385" rx="600" ry="358" fill="none" stroke="#A98A57" stroke-opacity=".2" stroke-width="1.5" stroke-dasharray="4 9"/>
+          <ellipse cx="650" cy="385" rx="466" ry="276" fill="none" stroke="#A98A57" stroke-opacity=".28" stroke-width="1.5" stroke-dasharray="4 9"/>
+          <g stroke="#A98A57" stroke-opacity=".5" stroke-width="1.6">
+            <line x1="650" y1="385" x2="650" y2="85"/><line x1="650" y1="385" x2="1053" y2="193"/><line x1="650" y1="385" x2="1157" y2="400"/><line x1="650" y1="385" x2="1027" y2="624"/><line x1="650" y1="385" x2="624" y2="701"/><line x1="650" y1="385" x2="260" y2="624"/><line x1="650" y1="385" x2="143" y2="370"/><line x1="650" y1="385" x2="273" y2="177"/>
+          </g>
+        </svg>
+        <div class="hub"><span class="hl">Husband Retail</span><span class="hs">Asia retail specialists</span></div>
+        <div class="en nN">City Events Circuit<span class="es">HK &middot; SG &middot; BKK &middot; JKT &middot; MNL</span></div>
+        <div class="en nNE core">Planning &amp; Leasing<span class="es">Core consulting practice</span></div>
+        <div class="en nE">Bali Retail Conference<span class="es">Annual event &middot; May 2027</span></div>
+        <div class="en nSE">Asia Retail Centre Council<span class="es">ARCC &middot; Singapore</span></div>
+        <div class="en nS">Market Intelligence Report<span class="es">Quarterly intelligence</span></div>
+        <div class="en nSW">AI for Retail Asset Owners<span class="es">Proprietary technology</span></div>
+        <div class="en nW">Sculptivate<span class="es">VIC premium experience</span></div>
+        <div class="en nNW">Events &amp; Decorative<span class="es">Brand experience design</span></div>
+      </div>
+      <div class="callout" style="margin-top:clamp(8px,1.2vw,16px)">A circular economy. Every part feeds new advisory and brokerage clients back into the core business.</div>
+    </div>
+  </section>
+
+  <section class="slide media dark" data-label="Key strengths">
+    <img class="bg" src="assets/v2/hk-harbour.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
     <div class="scrim"></div>
     <div class="inner">
-      <div class="eyebrow">The platform · the council</div>
-      <h2 style="color:#fff;max-width:17ch">The Asia Retail Council.</h2>
-      <p class="lead" style="color:#fff;max-width:46ch">The retail centre industry’s thought leader and principal representative body.</p>
-      <div class="icards c3 onglass">
-        <div class="icard"><div class="icn">Members</div><div class="ict">Owners &amp; maisons</div><div class="icd">Developers, landlords, REITs and investors, plus the luxury maisons that anchor every destination.</div></div>
-        <div class="icard"><div class="icn">Mandate</div><div class="ict">Benchmarks, standards &amp; awards</div><div class="icd">Sets the benchmarks and awards, and addresses the challenges and opportunities across the sector.</div></div>
-        <div class="icard"><div class="icn">Governance</div><div class="ict">20–30 luminaries</div><div class="icd">Data, network and recognition no single owner or firm can assemble alone.</div></div>
+      <div class="eyebrow">Husband Retail</div>
+      <h2 style="color:#fff;max-width:14ch">Key strengths.</h2>
+      <div class="icards c3 onglass" style="margin-top:clamp(16px,2vw,26px)">
+        <div class="icard"><div class="icn">01</div><div class="ict">Asia retail centre leadership</div></div>
+        <div class="icard"><div class="icn">02</div><div class="ict">Talent: personal &amp; company brand</div></div>
+        <div class="icard"><div class="icn">03</div><div class="ict">Unrivalled network</div><div class="icd">Landlords and retail brand decision makers.</div></div>
+        <div class="icard"><div class="icn">04</div><div class="ict">Existing &amp; exploratory organisation</div><div class="icd">Purposed for exploration and execution of leading retail asset initiatives.</div></div>
+        <div class="icard"><div class="icn">05</div><div class="ict">Consumer &amp; asset managers</div><div class="icd">Facing across all touch points.</div></div>
+        <div class="icard"><div class="icn">06</div><div class="ict">Track record</div></div>
       </div>
     </div>
+  </section>
+
+  <section class="slide media dark" data-label="Serakai">
+    <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/serakai-home.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="inner">
+      <img class="serakaimark" src="assets/serakai-logo.svg" alt="Serakai" onerror="this.style.display='none'">
+      <h2 style="color:#fff;max-width:18ch">Serakai.</h2>
+      <div class="icards c3 onglass" style="margin-top:clamp(14px,1.8vw,24px)">
+        <div class="icard"><div class="icn">01</div><div class="ict">Curation of the arts</div></div>
+        <div class="icard"><div class="icn">02</div><div class="ict">Widely admired portfolio</div><div class="icd">Expansive regional and global portfolio.</div></div>
+        <div class="icard"><div class="icn">03</div><div class="ict">Forging new ways to engage across Asia</div><div class="icd">Expanding interest in the public, art &amp; cultural realm.</div></div>
+        <div class="icard"><div class="icn">04</div><div class="ict">Leading corporate, public &amp; private galas</div><div class="icd">Across all real estate asset classes.</div></div>
+        <div class="icard"><div class="icn">05</div><div class="ict">Excellence in real estate</div></div>
+        <div class="icard"><div class="icn">06</div><div class="ict">Deep understanding of the Asia real / retail asset class</div><div class="icd">Strength in human capital and financial resources.</div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide about dark" data-label="Paul & Ben">
+    <div class="abimg">
+      <img src="assets/paul-husband.jpg" alt="Paul Husband, Founder of Husband Retail">
+      <div class="pcap"><span class="pn">Paul Husband</span><span class="pr">Founder &amp; Principal &middot; Husband Retail Consulting</span></div>
+    </div>
+    <div class="abtext">
+      <div class="eyebrow">Paul &amp; Ben</div>
+      <h1 style="color:#fff;max-width:18ch">Asia-wide retail asset leadership and application.</h1>
+      <p class="lead" style="max-width:40ch">Husband Retail and <span class="gold">Serakai</span>, together across the region.</p>
+      <div class="lockup">
+        <img src="assets/hr-logo.png" alt="Husband Retail">
+        <span class="x">&times;</span>
+        <img src="assets/serakai-logo.svg" alt="Serakai" onerror="this.style.display='none'">
+      </div>
+    </div>
+  </section>
+
+  <section class="slide divider dark" data-label="Backup">
+    <div class="inner"><div class="dvnum" style="font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0">Backup</div><h2 style="font-size:clamp(1.6rem,3vw,2.4rem)">Detail on demand</h2><p class="body" style="margin-left:auto;margin-right:auto;max-width:40ch">The slides Paul can pull up if Ben asks for more.</p></div>
   </section>
 
   <section class="slide sand" data-label="The council network">
@@ -868,74 +990,6 @@ b,strong{font-weight:600;color:inherit}
         <div class="mktcard"><div class="mktname">Indonesia</div><div class="mktcore">Jakarta</div><div class="mktrole">Sub-council</div></div>
         <div class="mktcard"><div class="mktname">The Gulf</div><div class="mktcore">Dubai · Riyadh</div><div class="mktrole">Sub-council</div></div>
       </div>
-    </div>
-  </section>
-
-  <section class="slide navy" data-label="The HR world">
-    <div class="inner">
-      <div class="eyebrow">The platform &middot; the full picture</div>
-      <h2 style="max-width:24ch">The Husband Retail ecosystem.</h2>
-      <p class="body" style="margin-top:6px;color:#A9A498">30 years &middot; 150+ retail centres across Asia.</p>
-      <div class="eco eco8">
-        <svg viewBox="0 0 1300 770" aria-label="The Husband Retail ecosystem: eight services and assets orbiting the core business">
-          <ellipse cx="650" cy="385" rx="600" ry="358" fill="none" stroke="#A98A57" stroke-opacity=".2" stroke-width="1.5" stroke-dasharray="4 9"/>
-          <ellipse cx="650" cy="385" rx="466" ry="276" fill="none" stroke="#A98A57" stroke-opacity=".28" stroke-width="1.5" stroke-dasharray="4 9"/>
-          <g stroke="#A98A57" stroke-opacity=".5" stroke-width="1.6">
-            <line x1="650" y1="385" x2="650" y2="85"/><line x1="650" y1="385" x2="1053" y2="193"/><line x1="650" y1="385" x2="1157" y2="400"/><line x1="650" y1="385" x2="1027" y2="624"/><line x1="650" y1="385" x2="624" y2="701"/><line x1="650" y1="385" x2="260" y2="624"/><line x1="650" y1="385" x2="143" y2="370"/><line x1="650" y1="385" x2="273" y2="177"/>
-          </g>
-        </svg>
-        <div class="hub"><span class="hl">Husband Retail</span><span class="hs">Asia retail specialists</span></div>
-        <div class="en nN">City Events Circuit<span class="es">HK &middot; SG &middot; BKK &middot; JKT &middot; MNL</span></div>
-        <div class="en nNE core">Planning &amp; Leasing<span class="es">Core consulting practice</span></div>
-        <div class="en nE">Bali Retail Conference<span class="es">Annual event &middot; May 2027</span></div>
-        <div class="en nSE">Asia Retail Centre Council<span class="es">ARCC &middot; Singapore</span></div>
-        <div class="en nS">Market Intelligence Report<span class="es">Quarterly intelligence</span></div>
-        <div class="en nSW">AI for Retail Asset Owners<span class="es">Proprietary technology</span></div>
-        <div class="en nW">Sculptivate<span class="es">VIC premium experience</span></div>
-        <div class="en nNW">Events &amp; Decorative<span class="es">Brand experience design</span></div>
-      </div>
-      <div class="callout" style="margin-top:clamp(8px,1.2vw,16px)">A circular economy. Every part feeds new advisory and brokerage clients back into the core business.</div>
-    </div>
-  </section>
-
-  <section class="slide about dark" data-label="Thank you">
-    <div class="abimg">
-      <img src="assets/paul-husband.jpg" alt="Paul Husband, Founder of Husband Retail">
-      <div class="pcap"><span class="pn">Paul Husband</span><span class="pr">Founder &amp; Principal · Husband Retail Consulting</span></div>
-    </div>
-    <div class="abtext">
-      <div class="eyebrow">Husband Retail · Vision for the Future</div>
-      <h1 style="color:#fff">Thank you.</h1>
-      <p class="lead" style="max-width:34ch">Let’s explore <span class="gold">what’s next</span>.</p>
-      <div class="rule" style="max-width:120px"></div>
-      <p class="body">Hong Kong · husband-retail.com</p>
-    </div>
-  </section>
-
-  <section class="slide divider dark" data-label="Backup">
-    <div class="inner"><div class="dvnum" style="font-size:clamp(1.6rem,3vw,2.4rem);letter-spacing:0">Backup</div><h2 style="font-size:clamp(1.6rem,3vw,2.4rem)">Detail on demand</h2><p class="body" style="margin-left:auto;margin-right:auto;max-width:40ch">The slides Paul can pull up if Ben asks for more.</p></div>
-  </section>
-
-  <section class="slide media dark" data-label="Husband Retail Vision" style="background:radial-gradient(120% 120% at 80% 10%,#1b2236 0%,#141A2A 45%,#0F1422 100%)">
-    <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/grand-salon.mp4" type="video/mp4"></video>
-    <div class="scrim"></div>
-    <div class="inner">
-      <div class="eyebrow">Husband Retail Consulting · 2026</div>
-      <h1 style="color:#fff;max-width:16ch">An exciting <span class="gold">new track.</span></h1>
-      <p class="lead" style="color:var(--gold-bright);font-weight:400;max-width:36ch;margin-top:clamp(14px,1.6vw,20px)">Advisory and leasing at the core. New, synergistic opportunities ahead.</p>
-      <div class="rule" style="max-width:130px"></div>
-      
-    </div>
-  </section>
-
-  <section class="slide media dark" data-label="The opening">
-    <img class="bg" src="assets/v2/hk-harbour.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
-    <div class="scrim"></div>
-    <div class="inner">
-      <div class="eyebrow">The platform</div>
-      <h2 style="color:#fff;max-width:22ch">Asia’s retail centre industry has no body of its own.</h2>
-      <p class="body" style="color:#D8D3C8;max-width:56ch">Asia is now the world’s premier retail-centre market, far larger than Europe. Husband Retail and Paul Husband are uniquely positioned to give it one.</p>
-      <p class="lead" style="color:#fff;max-width:44ch">The Asia Retail Centre Conference. <span class="gold">The Asia Retail Council.</span></p>
     </div>
   </section>
 
@@ -965,7 +1019,7 @@ b,strong{font-weight:600;color:inherit}
         <button class="case ic" data-exp><span class="cimg"><img src="assets/brands/brookfield.jpg" alt="Brookfield Place" loading="lazy" onerror="this.parentNode.style.display='none'"></span><span class="ci">+</span><div class="cbody"><div class="cn">Brookfield</div><div class="cl">Experience &amp; media</div><div class="cd">Fit:Match 3D body-scan, AR ad inventory across 100 malls, and compute leased to AI developers.</div><div class="cx"><span class="cxl">Why it matters</span>The asset earns from media (and even leased compute) well beyond rent.</div></div></button>
         <button class="case ic" data-exp><span class="cimg"><img src="assets/brands/siam-paragon.jpg" alt="Siam Paragon, Bangkok" loading="lazy" onerror="this.parentNode.style.display='none'"></span><span class="ci">+</span><div class="cbody"><div class="cn">Siam Paragon</div><div class="cl">Bangkok</div><div class="cd">AI foot-traffic heatmaps lifting sales up to 20% in optimised zones.</div><div class="cx"><span class="cxl">Why it matters</span>A measurable lift, proof the operating layer pays for itself.</div></div></button>
         <button class="case ic" data-exp><span class="cimg"><img src="assets/brands/lotte.jpg" alt="Lotte World Mall, Seoul" loading="lazy" onerror="this.parentNode.style.display='none'"></span><span class="ci">+</span><div class="cbody"><div class="cn">Lotte World Mall</div><div class="cl">Seoul</div><div class="cd">Conversational AI that guides visitors through a vast centre.</div><div class="cx"><span class="cxl">Why it matters</span>A vast centre made navigable, so dwell time and spend rise.</div></div></button>
-        <button class="case ic" data-exp><span class="cimg"><img src="assets/proj-67.jpg" alt="The Landmark, Hong Kong" loading="lazy" onerror="this.parentNode.style.display='none'"></span><span class="ci">+</span><div class="cbody"><div class="cn">The Landmark</div><div class="cl">Hong Kong · HR project</div><div class="cd">Concierge robots reading foot-traffic in real time, in a destination we shaped.</div><div class="cx"><span class="cxl">Why it matters</span>The frontier is already live in a destination Husband Retail shaped.</div></div></button>
+        <button class="case ic" data-exp><span class="cimg"><img src="assets/proj-67.jpg" alt="The Landmark, Hong Kong" loading="lazy" onerror="this.parentNode.style.display='none'"></span><span class="ci">+</span><div class="cbody"><div class="cn">The Landmark</div><div class="cl">Hong Kong · HR project</div><div class="cd">Concierge robots reading foot-traffic in real time, in a destination we shaped.</div><div class="cx"><span class="cxl">Why it matters</span>This is already live in a destination Husband Retail shaped.</div></div></button>
       </div>
       <div class="hint"><i></i> Tap any example for why it matters</div>
     </div>
@@ -974,7 +1028,7 @@ b,strong{font-weight:600;color:inherit}
   <section class="slide navy" data-label="AI · the framework">
     <div class="inner">
       <div class="eyebrow">AI · an example roadmap</div>
-      <h2 style="max-width:22ch">From scattered pilots to one operating layer.</h2>
+      <h2 style="max-width:22ch">One AI operating layer across the estate.</h2>
       <p class="lead" style="max-width:48ch">An example AI implementation roadmap for a major retail landlord, the one we delivered this year for Covent Garden’s owner.</p>
 
       <div class="tabs" data-tabs>
@@ -1113,6 +1167,60 @@ b,strong{font-weight:600;color:inherit}
     </div>
   </section>
 
+  <section class="slide about sand" data-label="Where we are going">
+    <div class="abimg">
+      <img src="assets/paul-husband.jpg" alt="Paul Husband, Founder of Husband Retail">
+      <div class="pcap"><span class="pn">Paul Husband</span><span class="pr">Founder &amp; Principal · <i>Author, “The Cult of the Luxury Brand”</i></span></div>
+    </div>
+    <div class="abtext">
+      <div class="eyebrow">An exciting new track</div>
+      <h2 style="max-width:22ch">Advisory and leasing stay the core. New, highly synergistic opportunities have arisen.</h2>
+      <p class="body" style="max-width:52ch">Some are so globally omnipresent that retail centre owners can no longer ignore them. AI is the most important, touching customer-facing and back of house alike.</p>
+      <div class="icards c3">
+        <button class="icard" data-goto-label="The quarterly market report"><div class="icn">01 · Market intelligence</div><div class="ict">The quarterly market report</div><div class="icd">How we read the market, and our BD tool.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
+        <button class="icard" data-goto-label="AI · the opportunity"><div class="icn">02 · AI in retail</div><div class="ict">Front and back of house</div><div class="icd">The sector is behind its tenants.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
+        <button class="icard" data-goto-label="The Conference"><div class="icn">03 · The platform</div><div class="ict">Conference &amp; council</div><div class="icd">The body Asia’s retail industry lacks.</div><span class="icgo">Explore <span class="ar">→</span></span></button>
+      </div>
+    </div>
+  </section>
+
+  <section class="slide media dark" data-label="Husband Retail Vision" style="background:radial-gradient(120% 120% at 80% 10%,#1b2236 0%,#141A2A 45%,#0F1422 100%)">
+    <video class="bg" autoplay muted loop playsinline poster="assets/hero-poster.jpg"><source src="assets/grand-salon.mp4" type="video/mp4"></video>
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">Husband Retail Consulting · 2026</div>
+      <h1 style="color:#fff;max-width:16ch">An exciting <span class="gold">new track.</span></h1>
+      <p class="lead" style="color:var(--gold-bright);font-weight:400;max-width:36ch;margin-top:clamp(14px,1.6vw,20px)">Advisory and leasing at the core. New, synergistic opportunities ahead.</p>
+      <div class="rule" style="max-width:130px"></div>
+      
+    </div>
+  </section>
+
+  <section class="slide media dark" data-label="The opening">
+    <img class="bg" src="assets/v2/hk-harbour.jpg" alt="" onerror="this.style.display='none';this.parentElement.style.background='radial-gradient(120% 120% at 80% 10%,#1b2236,#0F1422)'">
+    <div class="scrim"></div>
+    <div class="inner">
+      <div class="eyebrow">The platform</div>
+      <h2 style="color:#fff;max-width:22ch">Asia’s retail centre industry has no body of its own.</h2>
+      <p class="body" style="color:#D8D3C8;max-width:56ch">Asia is now the world’s premier retail-centre market, far larger than Europe. Husband Retail and Paul Husband are uniquely positioned to give it one.</p>
+      <p class="lead" style="color:#fff;max-width:44ch">The Asia Retail Centre Conference. <span class="gold">The Asia Retail Council.</span></p>
+    </div>
+  </section>
+
+  <section class="slide about dark" data-label="Thank you">
+    <div class="abimg">
+      <img src="assets/paul-husband.jpg" alt="Paul Husband, Founder of Husband Retail">
+      <div class="pcap"><span class="pn">Paul Husband</span><span class="pr">Founder &amp; Principal · Husband Retail Consulting</span></div>
+    </div>
+    <div class="abtext">
+      <div class="eyebrow">Husband Retail · Vision for the Future</div>
+      <h1 style="color:#fff">Thank you.</h1>
+      <p class="lead" style="max-width:34ch">Let’s explore <span class="gold">what’s next</span>.</p>
+      <div class="rule" style="max-width:120px"></div>
+      <p class="body">Hong Kong · husband-retail.com</p>
+    </div>
+  </section>
+
 </div>
 
 <div class="menu" id="menu" aria-hidden="true">
@@ -1154,7 +1262,7 @@ b,strong{font-weight:600;color:inherit}
   <div class="dots" id="dots"></div>
   <div class="arrows">
     <button class="arr" id="prev" aria-label="Previous"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M15 18l-6-6 6-6"/></svg></button>
-    <span class="counter" id="counter">01 / 30</span>
+    <span class="counter" id="counter">01 / 33</span>
     <button class="arr" id="next" aria-label="Next"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M9 6l6 6-6 6"/></svg></button>
   </div>
 </div>
