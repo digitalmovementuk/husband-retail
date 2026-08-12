@@ -1,0 +1,2988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+<title>Project+</title>
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/svg+xml" href="assets/dm-mark.svg">
+<link rel="icon" href="assets/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="Project+">
+<meta name="theme-color" content="#000000" />
+<meta name="description" content="Sign in to see your programme." />
+<style>
+/* ==========================================================================
+   HUSBAND RETAIL — PROGRAMME APP
+   Built for one thing: Paul opens this on his phone and knows where the
+   programme stands in about five seconds. iPhone first, big type, one idea
+   per line. Detail is one tap away, never on the surface.
+   ========================================================================== */
+:root{
+  --bg:#000000;
+  --card:#18181B;
+  --card-2:#26262B;
+  --sep:rgba(255,255,255,.10);
+  --sep-2:rgba(255,255,255,.16);
+  /* every text colour below clears 4.5:1 on its own background — this gets
+     read on a phone, outdoors, at arm's length */
+  --tx:#FFFFFF;
+  --tx-2:#AEAEB4;
+  --tx-3:#8C8C93;
+
+  --green:#3BE055;
+  --blue:#57ADFF;
+  /* light blue means one thing on the Timeline: a deliverable */
+  --sky:#8FC9FF;
+  --amber:#FFB930;
+  --red:#FF6B61;
+  --grey:#6E6E75;
+
+  /* projected outcomes get their own colour on purpose. Nothing else in the
+     app is violet, so a bright box can only mean one thing: this is what the
+     work is supposed to produce, not work we have done. */
+  --win:#CB8CFF;
+  --win-2:#FF7FE3;
+  --win-tx:#EFE0FF;
+  --win-tx-2:#CDACE8;
+  --win-bg:linear-gradient(140deg,rgba(203,140,255,.22) 0%,rgba(203,140,255,.10) 100%);
+  --win-ring:rgba(203,140,255,.46);
+  /* his own tracker is the only teal thing in the app */
+  --teal:#3AD6C5; --teal-tx:#B8EDE6;
+  /* orange is reserved for time — the month rail, and nothing else */
+  --orange:#FF9230;
+
+  --r:20px;
+  --r-s:14px;
+  --ease:cubic-bezier(.32,.72,0,1);
+  --barh:52px;
+  --chips-h:64px;
+  --chiph:0px;
+  --tabh:58px;
+  --font:-apple-system,BlinkMacSystemFont,"SF Pro Display","SF Pro Text","Segoe UI",Roboto,system-ui,sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;background:#000}
+body{
+  font-family:var(--font);background:var(--bg);color:var(--tx);
+  font-size:18px;line-height:1.5;-webkit-font-smoothing:antialiased;
+  -webkit-tap-highlight-color:transparent;
+  /* clip, NOT hidden: overflow-x:hidden makes the body its own scroll
+     container on iOS, which is what makes fixed bars drift mid-scroll and the
+     page feel like it is fighting the finger. */
+  overflow-x:clip;
+  overscroll-behavior-y:none;
+}
+button{font-family:inherit;font-size:inherit;color:inherit;background:none;border:none;cursor:pointer}
+[hidden]{display:none!important}
+::-webkit-scrollbar{display:none}
+
+/* the whole app sits in a phone-width column, centred if the screen is wider */
+.app{max-width:460px;margin:0 auto;position:relative}
+
+/* ------------------------------------------------------------- nav bar --- */
+.bar{
+  position:fixed;top:0;left:0;right:0;z-index:60;
+  padding-top:env(safe-area-inset-top, 0px);
+  background:#000;
+  border-bottom:1px solid transparent;
+  transition:border-color .3s var(--ease),background .3s var(--ease);
+}
+.bar.on{border-bottom-color:var(--sep)}
+.bar-in{
+  max-width:460px;margin:0 auto;height:var(--barh);position:relative;
+  display:flex;align-items:center;justify-content:space-between;padding:0 20px;
+}
+.bar-t{
+  position:absolute;left:0;right:0;text-align:center;
+  font-size:16px;font-weight:600;letter-spacing:-.2px;
+  opacity:0;transform:translateY(7px);
+  transition:opacity .25s var(--ease),transform .25s var(--ease);
+}
+.bar.on .bar-t{opacity:1;transform:none}
+.bar-c{
+  font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--tx-3);
+  transition:opacity .25s var(--ease);
+}
+/* the wordmark steps aside as the screen title takes the centre */
+.bar.on .bar-c{opacity:0}
+.bar-l{height:11px;width:auto;opacity:.62}
+
+/* -------------------------------------------------------------- screens -- */
+main{
+  padding:calc(var(--barh) + env(safe-area-inset-top, 0px)) 22px
+          calc(var(--tabh) + env(safe-area-inset-bottom, 0px) + 46px);
+}
+.scr{display:none}
+.scr.on{display:block;animation:in .38s var(--ease) both}
+@keyframes in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+/* --------------------------------------------------------- large titles -- */
+.lt{font-size:37px;font-weight:800;letter-spacing:-1.2px;line-height:1.2;padding:26px 0 0}
+.lt-s{font-size:15.5px;color:var(--tx-2);margin-top:11px;letter-spacing:-.1px;line-height:1.45}
+.grp{
+  font-size:13.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--tx-3);margin:40px 0 13px 2px;
+}
+
+/* ---------------------------------------------------------------- cards -- */
+.card{background:var(--card);border-radius:var(--r);padding:22px}
+.card + .card{margin-top:12px}
+
+/* hero — the one thing he reads first */
+.hero{margin-top:26px;padding:28px 24px 30px;position:relative;overflow:hidden}
+.hero .k{font-size:13.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--tx-3)}
+.hero .v{font-size:40px;font-weight:800;letter-spacing:-1.4px;line-height:1.2;margin:15px 0 14px}
+.hero .n{font-size:15.5px;color:var(--tx-2);line-height:1.5}
+.hero.warn{background:linear-gradient(180deg,#261D09 0%,#1B1609 100%);box-shadow:inset 0 0 0 1px rgba(255,185,48,.26)}
+.hero.warn .k{color:var(--amber)}
+
+/* two tiles side by side */
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.tile{
+  background:var(--card);border-radius:var(--r);padding:20px 20px 22px;
+  text-align:left;display:flex;flex-direction:column;min-height:150px;
+  transition:transform .16s var(--ease),background .2s var(--ease);
+}
+.tile:active{transform:scale(.97);background:var(--card-2)}
+.tile .k{font-size:13.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--tx-3);line-height:1.3}
+.tile .v{font-size:46px;font-weight:800;letter-spacing:-2px;line-height:1;margin-top:auto}
+.tile .v small{font-size:19px;font-weight:600;letter-spacing:-.4px}
+.tile .n{font-size:15px;color:var(--tx-2);margin-top:9px;line-height:1.35}
+.tile.alert .v{color:var(--amber)}
+.tile.good .v{color:var(--green)}
+
+/* ring */
+.ring{display:flex;align-items:center;gap:16px;margin-top:auto}
+.ring svg{width:58px;height:58px;flex:0 0 auto;transform:rotate(-90deg)}
+.ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring .t{stroke:rgba(255,255,255,.1)}
+.ring .f{stroke:var(--green);transition:stroke-dashoffset 1.2s var(--ease) .2s}
+.ring b{font-size:34px;font-weight:800;letter-spacing:-1.4px}
+
+/* progress bar */
+.pbar{display:block;height:7px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;margin-top:14px}
+.pbar i{display:block;height:100%;width:0;border-radius:4px;background:var(--green);transition:width 1.1s var(--ease) .15s}
+
+/* ----------------------------------------------------------------- rows -- */
+.rows{background:var(--card);border-radius:var(--r);overflow:hidden}
+.row{
+  width:100%;display:flex;align-items:center;gap:16px;text-align:left;
+  padding:18px 20px;min-height:72px;position:relative;
+  transition:background .16s var(--ease);
+}
+.row:active{background:var(--card-2)}
+.row + .row:before{
+  content:"";position:absolute;top:0;left:52px;right:0;height:1px;background:var(--sep);
+}
+.row.nodiv + .row:before,.row + .row.nodiv:before{left:20px}
+.row .dot{flex:0 0 auto;width:12px;height:12px;border-radius:50%;background:var(--grey);margin-left:2px}
+.row .dot.done{background:var(--green)}
+.row .dot.active{background:var(--blue);box-shadow:0 0 0 4px rgba(10,132,255,.18)}
+.row .dot.wait{background:var(--amber);box-shadow:0 0 0 4px rgba(255,176,32,.16)}
+.row .dot.block{background:var(--red);box-shadow:0 0 0 4px rgba(255,69,58,.16)}
+.row .mid{flex:1;min-width:0;display:block}
+.row .t{display:block;font-size:18px;font-weight:500;letter-spacing:-.3px;line-height:1.32}
+.row .s{display:block;font-size:15px;color:var(--tx-3);margin-top:6px;line-height:1.35}
+.row .r{flex:0 0 auto;display:block;text-align:right;font-size:15px;font-weight:600;color:var(--tx-3);letter-spacing:-.1px}
+.row .chev{flex:0 0 auto;width:8px;height:8px;border:solid var(--tx-3);border-width:2px 2px 0 0;transform:rotate(45deg);margin-left:2px}
+.row.big .t{font-size:18px;font-weight:600;letter-spacing:-.4px}
+
+/* status word on the right of a row */
+.st{font-size:13.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+.st.done{color:var(--green)} .st.active{color:var(--blue)}
+.st.wait{color:var(--amber)} .st.block{color:var(--red)} .st.todo{color:var(--tx-3)}
+
+/* pill */
+.pill{
+  display:inline-block;font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+  padding:4px 9px;border-radius:7px;background:rgba(255,255,255,.08);color:var(--tx-2);
+}
+.pill.red{background:rgba(255,69,58,.16);color:var(--red)}
+.pill.amber{background:rgba(255,176,32,.16);color:var(--amber)}
+.pill.blue{background:rgba(10,132,255,.18);color:#5AB0FF}
+.pill.green{background:rgba(50,215,75,.16);color:var(--green)}
+
+/* ------------------------------------------------------- project filter -- */
+/* the filter stays under the top bar as he scrolls, so he can always see
+   which project he is looking at and change it without scrolling back up */
+.chips{
+  position:sticky;top:calc(var(--barh) + env(safe-area-inset-top, 0px));z-index:40;
+  display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x proximity;
+  margin:24px -22px 0;padding:13px 22px 14px;
+  background:#000;
+  height:var(--chips-h);align-items:center;
+  border-bottom:1px solid var(--sep);
+}
+.chip{
+  flex:0 0 auto;scroll-snap-align:center;
+  display:inline-flex;align-items:center;min-height:48px;
+  padding:0 20px;border-radius:100px;background:var(--card);
+  font-size:15px;font-weight:500;letter-spacing:-.2px;color:var(--tx);white-space:nowrap;
+  transition:background .2s var(--ease),color .2s var(--ease),transform .14s var(--ease);
+}
+.chip:active{transform:scale(.94)}
+.chip.on{background:var(--tx);color:#000;font-weight:600}
+.chip b{font-weight:inherit;opacity:.55;margin-left:7px}
+.chip.on b{opacity:.45}
+
+/* ---------------------------------------------------------- timeline ----
+   No phases. A month rail in orange, the high-level work in white under it,
+   every deliverable in light blue. Three levels, three colours, three gap
+   sizes — the SPACING is what makes it navigable, not boxes. Nothing in this
+   list has a shadow, a transition or a background: a list this long has to be
+   cheap to paint or the scroll stutters. */
+.tl-m{
+  position:sticky;z-index:35;
+  top:calc(var(--barh) + env(safe-area-inset-top, 0px) + var(--chiph, 0px));
+  margin:46px -22px 0;padding:13px 22px 11px;background:#000;
+  display:flex;align-items:baseline;gap:12px;
+  font-size:13px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;
+  color:var(--orange);border-bottom:1px solid rgba(255,146,48,.24);
+}
+.tl-m.f{margin-top:20px}
+.tl-m b{margin-left:auto;font-size:14px;font-weight:600;letter-spacing:.01em;
+  text-transform:none;color:#E0913F}
+/* Off-screen months are skipped entirely — but only once their real height is
+   known. A guessed height changes the length of the page as he scrolls, which
+   is the very thing this is meant to stop, so tlMeasure() switches it on after
+   measuring rather than up front. */
+.tl-t{display:flex;align-items:baseline;gap:12px;margin:32px 2px 4px;
+  font-size:20px;font-weight:700;letter-spacing:-.45px;line-height:1.25;color:#FFFFFF}
+.tl-g > .tl-t:first-child{margin-top:22px}
+.tl-t b{margin-left:auto;font-size:14px;font-weight:600;color:var(--tx-3);
+  font-variant-numeric:tabular-nums}
+/* one hairline binds a deliverable to the work above it — cheaper to paint
+   than a card, a border and a background, and quieter to read */
+.tl-l{margin-left:3px;padding-left:15px;border-left:1px solid rgba(143,201,255,.22)}
+.tl-d{display:flex;width:100%;gap:14px;align-items:flex-start;text-align:left;
+  padding:12px 2px;min-height:48px}
+.tl-d:active{opacity:.55}
+.tl-x{flex:1 1 auto;font-size:16.5px;line-height:1.4;letter-spacing:-.1px;color:var(--sky)}
+.tl-d .st{flex:0 0 auto;margin-top:3px}
+.tl-o{margin-top:14px}
+/* the sticky month sits under the filter strip only while the strip is there */
+#scr-plan{--chiph:var(--chips-h)}
+#scr-plan.nochips{--chiph:0px}
+/* the tracker carries the same month bands, so it needs the same sticky offset */
+#scr-track{--chiph:var(--chips-h)}
+/* its rows are cards, not one-line deliverables, so the lane drops the rule
+   and gives them room to breathe instead */
+.tl-l.tk-lane{border-left:0;padding-left:0;margin-left:0;
+  display:flex;flex-direction:column;gap:12px;margin-top:12px}
+.note{font-size:15px;color:var(--tx-3);line-height:1.55;margin:26px 2px 0}
+
+/* ---------------------------------------------- projected outcome boxes -- */
+.out{
+  display:block;width:100%;text-align:left;position:relative;
+  margin-top:10px;padding:21px 22px 23px;border-radius:var(--r);
+  background:var(--win-bg);
+  box-shadow:inset 0 0 0 1.5px var(--win-ring),0 10px 34px -18px rgba(203,140,255,.75);
+  transition:transform .16s var(--ease),box-shadow .25s var(--ease);
+}
+.out:active{transform:scale(.985);box-shadow:inset 0 0 0 1.5px var(--win),0 10px 34px -16px rgba(203,140,255,.9)}
+.out .k{
+  display:flex;align-items:center;gap:9px;
+  font-size:13.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--win);
+}
+.out .k i{
+  flex:0 0 auto;width:9px;height:9px;background:var(--win);transform:rotate(45deg);
+  border-radius:2px;box-shadow:0 0 14px var(--win);
+}
+.out .t{display:block;font-size:20.5px;font-weight:700;letter-spacing:-.55px;line-height:1.22;margin-top:14px;color:#fff}
+.out .d{display:block;font-size:15px;color:var(--win-tx);line-height:1.5;margin-top:11px}
+.out .f{
+  display:flex;align-items:center;gap:9px;margin-top:16px;
+  font-size:15px;font-weight:600;color:var(--win-tx-2);letter-spacing:-.1px;
+}
+.out .f .chev{border-color:var(--win);width:7px;height:7px;border-width:2px 2px 0 0;transform:rotate(45deg)}
+.out.unver .k{color:var(--amber)}
+.out.unver .k i{background:var(--amber);box-shadow:0 0 14px var(--amber)}
+
+/* the tick box that strips the timeline back to outcomes only */
+.tick{
+  display:flex;align-items:center;gap:16px;width:100%;text-align:left;
+  margin-top:18px;padding:18px 20px;border-radius:var(--r);background:var(--card);
+  transition:background .2s var(--ease),box-shadow .3s var(--ease),transform .14s var(--ease);
+}
+.tick:active{transform:scale(.99)}
+.tick.on{background:var(--win-bg);box-shadow:inset 0 0 0 1.5px var(--win-ring)}
+.tick .bx{
+  flex:0 0 auto;position:relative;width:27px;height:27px;border-radius:9px;
+  border:2px solid var(--tx-3);
+  transition:background .2s var(--ease),border-color .2s var(--ease);
+}
+.tick.on .bx{background:var(--win);border-color:var(--win)}
+.tick .bx:after{
+  content:"";position:absolute;left:8px;top:3.5px;width:6px;height:12px;
+  border:solid #250B36;border-width:0 2.6px 2.6px 0;transform:rotate(42deg) scale(.4);
+  opacity:0;transition:opacity .18s var(--ease),transform .24s var(--ease);
+}
+.tick.on .bx:after{opacity:1;transform:rotate(42deg) scale(1)}
+.tick .mid{flex:1;min-width:0}
+.tick .t{display:block;font-size:16.5px;font-weight:600;letter-spacing:-.3px;line-height:1.3}
+.tick .s{display:block;font-size:15px;color:var(--tx-3);margin-top:5px;line-height:1.35}
+.tick.on .s{color:var(--win-tx-2)}
+.tick .n{
+  flex:0 0 auto;font-size:15px;font-weight:700;color:var(--tx-3);
+}
+.tick.on .n{color:var(--win)}
+
+/* ==================================================== dashboard (cockpit) ==
+   One screen, read standing up, in ten seconds. Everything stacks vertically,
+   everything is big, and the colour of the top box IS the answer — green only
+   when there is genuinely nothing for him to do. */
+.dash{display:flex;flex-direction:column;gap:22px;margin-top:8px}
+.dash-k{
+  font-size:13.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tx-3);margin:0 2px 16px;
+}
+
+/* the verdict. This is the whole screen in one box. */
+.vd{
+  border-radius:26px;padding:34px 26px 36px;text-align:left;width:100%;display:block;
+  transition:transform .16s var(--ease);
+}
+.vd:active{transform:scale(.985)}
+.vd .k{display:block;font-size:13px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;opacity:.72}
+.vd .v{display:block;font-size:50px;font-weight:800;letter-spacing:-2.2px;line-height:1.2;margin:20px 0 18px}
+.vd .n{display:block;font-size:18px;line-height:1.48;opacity:.9;max-width:30ch}
+.vd .f{display:flex;align-items:center;gap:9px;margin-top:24px;font-size:15px;font-weight:700;opacity:.85}
+.vd .f .chev{width:8px;height:8px;border-style:solid;border-width:2px 2px 0 0;transform:rotate(45deg)}
+.vd.ok{background:linear-gradient(155deg,#1F8F3C 0%,#0E6B2C 100%);color:#EAFFEF;
+  box-shadow:0 22px 60px -30px rgba(59,224,85,.85),inset 0 0 0 1.5px rgba(120,255,150,.3)}
+.vd.ok .f .chev{border-color:#EAFFEF}
+.vd.you{background:linear-gradient(155deg,#3A2A08 0%,#241B08 100%);color:#FFE7BC;
+  box-shadow:inset 0 0 0 1.5px rgba(255,185,48,.36)}
+.vd.you .k,.vd.you .v{color:var(--amber)}
+.vd.you .f .chev{border-color:var(--amber)}
+.vd.stop{background:linear-gradient(155deg,#3B1512 0%,#26100E 100%);color:#FFD8D4;
+  box-shadow:inset 0 0 0 1.5px rgba(255,107,97,.4)}
+.vd.stop .k,.vd.stop .v{color:var(--red)}
+.vd.stop .f .chev{border-color:var(--red)}
+
+/* one action, one project, three steps — all the same card grammar */
+.big{
+  display:block;width:100%;text-align:left;background:var(--card);
+  border-radius:22px;padding:26px 24px 28px;
+  transition:transform .16s var(--ease),background .2s var(--ease);
+}
+.big:active{transform:scale(.985);background:var(--card-2)}
+.big .k{display:block;font-size:13.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--tx-3)}
+.big .v{display:block;font-size:30px;font-weight:800;letter-spacing:-1.1px;line-height:1.2;margin-top:16px}
+.big .v.sm{font-size:25px;letter-spacing:-.85px}
+.big .n{display:block;font-size:15.5px;color:var(--tx-2);line-height:1.5;margin-top:14px}
+.big .f{display:flex;align-items:center;gap:9px;margin-top:22px;font-size:15px;font-weight:700;color:var(--blue)}
+.big .f .chev{width:8px;height:8px;border:solid var(--blue);border-width:2px 2px 0 0;transform:rotate(45deg)}
+.big.act{box-shadow:inset 0 0 0 1.5px rgba(87,173,255,.42)}
+.big.act .k{color:var(--blue)}
+
+/* the three steps, numbered, big enough to read at arm's length */
+.step{
+  display:flex;align-items:flex-start;gap:20px;width:100%;text-align:left;
+  background:var(--card);border-radius:22px;padding:24px 22px;margin-bottom:12px;
+  transition:transform .16s var(--ease),background .2s var(--ease);
+}
+.step:active{transform:scale(.985);background:var(--card-2)}
+.step .no{
+  flex:0 0 auto;width:40px;height:40px;border-radius:14px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:800;color:var(--tx-2);letter-spacing:-.5px;
+}
+.step .mid{flex:1;min-width:0}
+.step .t{display:block;font-size:19px;font-weight:600;letter-spacing:-.45px;line-height:1.28}
+.step .s{display:block;font-size:15px;color:var(--tx-3);margin-top:9px;line-height:1.4}
+.step.you .no{background:rgba(255,185,48,.18);color:var(--amber)}
+
+/* what changed since he last looked */
+.chg{
+  border-radius:22px;padding:24px 22px 26px;
+  background:linear-gradient(150deg,rgba(87,173,255,.16) 0%,rgba(87,173,255,.05) 100%);
+  box-shadow:inset 0 0 0 1.5px rgba(87,173,255,.3);
+}
+.chg .k{font-size:13.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--blue)}
+.chg ul{margin-top:16px;list-style:none}
+.chg li{font-size:17px;line-height:1.45;color:var(--tx);padding-left:20px;position:relative;margin-top:12px}
+.chg li:before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:50%;background:var(--blue)}
+.chg .n{font-size:15px;color:var(--tx-2);margin-top:18px;line-height:1.45}
+
+/* a decision he can actually answer */
+.dq{
+  display:block;width:100%;text-align:left;border-radius:22px;padding:24px 22px 26px;
+  background:linear-gradient(150deg,rgba(255,185,48,.15) 0%,rgba(255,185,48,.04) 100%);
+  box-shadow:inset 0 0 0 1.5px rgba(255,185,48,.32);margin-bottom:12px;
+  transition:transform .16s var(--ease);
+}
+.dq:active{transform:scale(.985)}
+.dq .k{display:block;font-size:13.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:var(--amber)}
+.dq .t{display:block;font-size:20px;font-weight:700;letter-spacing:-.5px;line-height:1.25;margin-top:14px}
+.dq .f{display:flex;align-items:center;gap:9px;margin-top:18px;font-size:15px;font-weight:700;color:var(--amber)}
+.dq .f .chev{width:8px;height:8px;border:solid var(--amber);border-width:2px 2px 0 0;transform:rotate(45deg)}
+.dq.answered{background:rgba(59,224,85,.09);box-shadow:inset 0 0 0 1.5px rgba(59,224,85,.3)}
+.dq.answered .k,.dq.answered .f{color:var(--green)}
+.dq.answered .f .chev{border-color:var(--green)}
+
+/* his drafted answer, in the sheet */
+.ans button{
+  display:block;width:100%;text-align:left;padding:20px 18px;border-radius:var(--r-s);
+  background:var(--card);margin-bottom:10px;font-size:17px;font-weight:500;letter-spacing:-.3px;
+  line-height:1.35;transition:transform .14s var(--ease),box-shadow .2s var(--ease);
+}
+.ans button:active{transform:scale(.985)}
+.ans button.sel{box-shadow:inset 0 0 0 1.5px var(--amber);background:rgba(255,185,48,.12)}
+
+
+/* =================================================== his own task tracker ==
+   The other screens report what WE say. This one is his: he sets the status,
+   it saves on his phone, and it never overwrites what we publish. The whole
+   screen is tinted teal so the difference is visible before it is read. */
+.tk-note{
+  margin-top:18px;padding:16px 18px;border-radius:var(--r-s);
+  background:rgba(58,214,197,.10);box-shadow:inset 0 0 0 1px rgba(58,214,197,.22);
+  font-size:16px;line-height:1.5;color:var(--teal-tx);
+}
+.tk-hero{
+  margin-top:14px;padding:24px 22px 26px;border-radius:var(--r);
+  background:linear-gradient(150deg,rgba(58,214,197,.20) 0%,rgba(58,214,197,.06) 100%);
+  box-shadow:inset 0 0 0 1.5px rgba(58,214,197,.34);
+}
+.tk-hero .k{font-size:13.5px;font-weight:700;letter-spacing:.11em;text-transform:uppercase;color:var(--teal)}
+.tk-hero .ring{margin-top:18px}
+.tk-hero .ring .f{stroke:var(--teal)}
+.tk-hero .ring b{font-size:40px}
+.tk-hero .n{font-size:15px;color:var(--teal-tx);margin-top:16px;line-height:1.45}
+.tk-saved{font-size:15px;color:var(--tx-3);margin-top:14px;line-height:1.4}
+
+/* The collapsible "Phase N" header that used to live here is gone. The tracker
+   is grouped by month now, by the same code the Timeline uses, so the two can
+   never disagree about what a thing is or when it happens. */
+
+/* A tracker row is a Timeline row that can be ticked. It used to be a boxed
+   card carrying its own project name and a "What this is" button — but the
+   project name is now the heading directly above it, and tapping the title
+   already opens the detail, so both were repeating themselves 80 times over.
+   As cards the screen ran to about 17,000px; as rows it is a third of that. */
+.tkc{
+  display:flex;flex-wrap:wrap;align-items:flex-start;gap:10px 14px;
+  width:100%;padding:9px 2px;position:relative;
+}
+.tkc.mine{padding-left:13px}
+.tkc.mine::before{
+  content:"";position:absolute;left:0;top:11px;bottom:11px;width:2.5px;
+  border-radius:2px;background:var(--teal);
+}
+.tkc[data-s="done"]{opacity:.6}
+.tkc[data-s="done"] .tkc-t{text-decoration:line-through;text-decoration-color:var(--tx-3)}
+.tkc-t{
+  flex:1 1 150px;min-height:48px;display:flex;align-items:center;
+  text-align:left;border:0;background:none;padding:0;cursor:pointer;
+  font:400 16.5px/1.4 var(--font);letter-spacing:-.1px;color:var(--sky);
+}
+.tkc-t:active{opacity:.55}
+.tkc-s{
+  flex:1 0 100%;font-size:13.5px;color:var(--teal-tx);line-height:1.35;
+  margin-top:-4px;font-style:italic;
+}
+.tkc-s:empty{display:none}
+.stc{
+  flex:0 0 auto;
+  display:inline-flex;align-items:center;gap:9px;min-height:48px;
+  padding:0 15px;border-radius:100px;background:rgba(255,255,255,.07);
+  font-size:14.5px;font-weight:600;letter-spacing:-.2px;color:var(--tx);
+  transition:background .18s var(--ease),transform .14s var(--ease);
+}
+.stc:active{transform:scale(.95)}
+.stc .dot{width:11px;height:11px;border-radius:50%;background:var(--grey);flex:0 0 auto}
+.stc[data-s="done"]{background:rgba(59,224,85,.16);color:var(--green)}
+.stc[data-s="done"] .dot{background:var(--green)}
+.stc[data-s="active"]{background:rgba(87,173,255,.16);color:var(--blue)}
+.stc[data-s="active"] .dot{background:var(--blue)}
+.stc[data-s="waiting"]{background:rgba(255,185,48,.16);color:var(--amber)}
+.stc[data-s="waiting"] .dot{background:var(--amber)}
+.stc[data-s="blocked"]{background:rgba(255,107,97,.16);color:var(--red)}
+.stc[data-s="blocked"] .dot{background:var(--red)}
+.tkc.bump{animation:bump .34s var(--ease)}
+@keyframes bump{0%{transform:scale(1)}42%{transform:scale(1.022)}100%{transform:scale(1)}}
+
+/* the status chooser, as a set of big rows in the sheet */
+.pk{margin-top:20px}
+.pk button{
+  display:flex;align-items:center;gap:15px;width:100%;text-align:left;
+  padding:19px 18px;border-radius:var(--r-s);background:var(--card);margin-bottom:9px;
+  font-size:17.5px;font-weight:500;letter-spacing:-.3px;
+  transition:background .16s var(--ease),transform .14s var(--ease);
+}
+.pk button:active{transform:scale(.985)}
+.pk button .dot{width:14px;height:14px;border-radius:50%;background:var(--grey);flex:0 0 auto}
+.pk button[data-s="done"] .dot{background:var(--green)}
+.pk button[data-s="active"] .dot{background:var(--blue)}
+.pk button[data-s="waiting"] .dot{background:var(--amber)}
+.pk button[data-s="blocked"] .dot{background:var(--red)}
+.pk button .ok{margin-left:auto;color:var(--teal);font-size:15px;font-weight:700}
+.pk button.sel{box-shadow:inset 0 0 0 1.5px rgba(58,214,197,.5)}
+.ours{font-size:15px;color:var(--tx-3);margin:6px 2px 0;line-height:1.5}
+.ours b{color:var(--tx-2);font-weight:600}
+
+/* export / reset */
+.tk-tools{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:26px}
+.tk-tools button{
+  padding:19px 16px;border-radius:var(--r);background:var(--card);
+  font-size:16px;font-weight:600;letter-spacing:-.3px;color:var(--tx);
+  transition:transform .14s var(--ease),background .18s var(--ease);
+}
+.tk-tools button:active{transform:scale(.97);background:var(--card-2)}
+.tk-tools button.go{background:rgba(58,214,197,.16);color:var(--teal)}
+.sh-out{
+  width:100%;margin-top:18px;min-height:230px;resize:none;
+  background:#000;border-radius:var(--r-s);border:1px solid var(--sep);
+  /* 16px is not a taste. Anything under it makes iOS Safari zoom the page the
+     moment the field is focused, and he then has to pinch back out to see the
+     Send button. */
+  padding:16px;color:var(--tx-2);font-size:16px;line-height:1.5;
+  font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+/* The message box holds prose, not an answer to be copied out, so it drops the
+   monospace and reads at full strength. */
+.sh-out.msg-tx{font-family:var(--font);color:var(--tx);font-size:17px;min-height:180px}
+.sh-go{
+  display:block;width:100%;margin-top:14px;padding:19px;border-radius:var(--r);
+  background:var(--teal);color:#04302B;font-size:17px;font-weight:700;letter-spacing:-.3px;
+}
+.spark{position:fixed;z-index:120;width:8px;height:8px;border-radius:2px;pointer-events:none}
+
+/* ------------------------------------------------------------ empty ------ */
+.empty{background:var(--card);border-radius:var(--r);padding:34px 24px;text-align:center;color:var(--tx-2);font-size:15.5px}
+.empty button{margin-top:14px;color:var(--blue);font-weight:600}
+
+/* --------------------------------------------------------- message us --- */
+/* A message reaches us from anywhere in the app. The circle is white so the
+   Slack mark keeps its own four colours — those colours are the logo, not app
+   status, and the white disc is what keeps them from reading as one. It rides
+   above the tab bar and gets out of the way whenever a sheet or a picture is
+   open. */
+.msg-b{
+  position:fixed;z-index:66;width:56px;height:56px;border-radius:50%;
+  right:max(14px, calc(50vw - 216px));
+  bottom:calc(var(--tabh) + env(safe-area-inset-bottom, 0px) + 18px);
+  display:flex;align-items:center;justify-content:center;
+  background:#FFFFFF;color:#0A0A0C;border:0;cursor:pointer;
+  box-shadow:0 6px 22px -8px rgba(0,0,0,.9);
+}
+.msg-b:active{opacity:.7}
+.msg-b svg{width:27px;height:27px;display:block}
+body.sheeting .msg-b,body.gviewing .msg-b{display:none}
+.msg-s{display:block;width:100%;margin-top:14px;min-height:56px;border:0;border-radius:16px;
+  background:#FFFFFF;color:#0A0A0C;font:700 17px/1 var(--font);letter-spacing:-.2px;cursor:pointer}
+.msg-s:active{opacity:.72}
+.msg-s[disabled]{opacity:.45;cursor:default}
+.msg-e{margin-top:12px;font-size:15px;line-height:1.45;color:var(--amber)}
+.msg-ok{font-size:17px;line-height:1.5;color:var(--green)}
+
+/* ------------------------------------------------------------- tab bar --- */
+.tabs{
+  position:fixed;bottom:0;left:0;right:0;z-index:70;
+  background:#000;
+  border-top:1px solid var(--sep);
+  padding-bottom:env(safe-area-inset-bottom, 0px);
+}
+.tabs-in{max-width:460px;margin:0 auto;display:flex}
+.tabs button{
+  flex:1;height:var(--tabh);position:relative;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;
+  font-size:10.5px;font-weight:600;letter-spacing:.01em;color:var(--tx-3);
+  transition:color .22s var(--ease),transform .14s var(--ease);
+}
+.tabs button:active{transform:scale(.9)}
+/* Where you are, in the app's own blue. Project+ is black and this blue; the
+   selected tab is the one place a person looks to answer "where am I", so it
+   gets the brand colour rather than a second shade of white. */
+.tabs button.on{color:var(--blue)}
+.tabs svg{width:24px;height:24px;fill:none;stroke:currentColor;stroke-width:1.7;stroke-linecap:round;stroke-linejoin:round}
+.tabs .bdg{
+  position:absolute;top:6px;left:50%;margin-left:6px;min-width:17px;height:17px;padding:0 5px;
+  border-radius:9px;background:var(--red);color:#fff;font-size:10.5px;font-weight:700;
+  line-height:17px;text-align:center;letter-spacing:0;
+}
+.tabs .bdg.tk-bdg{background:var(--teal);color:#04302B}
+
+/* --------------------------------------------------------------- sheet --- */
+.scrim{
+  position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.6);
+  opacity:0;pointer-events:none;transition:opacity .32s var(--ease);
+}
+body.sheeting .scrim{opacity:1;pointer-events:auto}
+.sheet{
+  position:fixed;left:0;right:0;bottom:0;z-index:90;
+  max-width:460px;margin:0 auto;max-height:88vh;
+  display:flex;flex-direction:column;
+  background:#1C1C20;border-radius:18px 18px 0 0;
+  transform:translateY(102%);transition:transform .44s var(--ease);
+  overscroll-behavior:contain;
+}
+body.sheeting .sheet{transform:none}
+.grip{flex:0 0 auto;width:38px;height:5px;border-radius:3px;background:rgba(255,255,255,.22);margin:9px auto 2px}
+.sheet-in{
+  overflow-y:auto;-webkit-overflow-scrolling:touch;
+  padding:14px 24px calc(30px + env(safe-area-inset-bottom, 0px));
+}
+.sh-k{font-size:13.5px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.sh-t{font-size:26px;font-weight:800;letter-spacing:-.8px;line-height:1.2;margin-bottom:14px}
+.sh-d{font-size:17px;color:var(--tx-2);line-height:1.55}
+.sh-n{
+  font-size:15px;line-height:1.5;color:#FFD79A;margin-top:16px;
+  background:rgba(255,185,48,.11);border-radius:var(--r-s);padding:14px 16px;
+}
+.sh-w{
+  font-size:16px;line-height:1.5;color:var(--win-tx);margin-top:16px;
+  background:rgba(203,140,255,.13);border-radius:var(--r-s);padding:14px 16px;
+  box-shadow:inset 0 0 0 1px rgba(203,140,255,.24);
+}
+.sh-meta{margin-top:22px;border-top:1px solid var(--sep)}
+.sh-meta div{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--sep)}
+.sh-meta dt{flex:0 0 112px;font-size:15px;color:var(--tx-3);font-weight:500}
+.sh-meta dd{flex:1;font-size:15px;line-height:1.4}
+.sh-list{margin-top:20px}
+.sh-list .row{padding:14px 0;min-height:0;background:none}
+.sh-list .row + .row:before{left:0}
+.sh-ul{list-style:none;margin-top:6px}
+.sh-ul li{font-size:15.5px;line-height:1.45;padding:12px 0 12px 20px;position:relative;border-bottom:1px solid var(--sep)}
+.sh-ul li:last-child{border-bottom:none}
+.sh-ul li:before{content:"";position:absolute;left:2px;top:19px;width:6px;height:6px;border-radius:50%;background:var(--tx-3)}
+.sh-ul li b{display:block;font-weight:600;margin-bottom:3px}
+.sh-ul li span{color:var(--tx-2);font-size:16px}
+.sh-x{
+  width:100%;margin-top:24px;padding:16px;border-radius:14px;
+  background:var(--card-2);font-size:16px;font-weight:600;letter-spacing:-.2px;
+  transition:transform .14s var(--ease);
+}
+.sh-x:active{transform:scale(.98)}
+
+/* ------------------------------------------------------------- footer ---- */
+.foot{margin:34px 2px 0;font-size:15px;color:var(--tx-3);line-height:1.65}
+.foot img{height:13px;width:auto;opacity:.55;display:block;margin-bottom:14px}
+
+@media (prefers-reduced-motion: reduce){
+  *,*:before,*:after{animation-duration:.001ms!important;transition-duration:.001ms!important}
+}
+/* a desktop visitor gets the phone app, centred, on a plain dark field */
+@media (min-width:520px){
+  body{background:#09090B}
+  .app{box-shadow:0 0 0 1px rgba(255,255,255,.06)}
+}
+
+/* ---- the year on one chart ------------------------------------------- */
+/* The thumbnail is a preview, not a reading surface. Everything that has to
+   be read at phone size is real text around it; the picture itself is a
+   stripped-back render whose labels are set large enough to survive the
+   shrink. Tapping it opens the full chart. */
+.gc{background:var(--card);border-radius:var(--r);padding:22px 20px 20px;overflow:hidden}
+.gc-k{font-size:13.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--orange)}
+.gc-t{margin-top:9px;font-size:26px;line-height:1.2;font-weight:700;letter-spacing:-.6px;color:var(--tx)}
+.gc-s{margin-top:8px;font-size:16px;line-height:1.5;color:var(--tx-2)}
+ /* a preview of a document, cropped and faded rather than shrunk whole: at
+    full height it pushed the Timeline's phases below the fold. The crop keeps
+    the title and the first two blocks; the button underneath does the rest. */
+.gc-i{position:relative;display:block;width:calc(100% + 40px);margin:18px -20px 0;
+  padding:0;border:0;aspect-ratio:1/1.25;max-height:430px;overflow:hidden;
+  background:#FAF8F3;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.gc-i img{display:block;width:100%;height:auto}
+.gc-i::after{content:"";position:absolute;left:0;right:0;bottom:0;height:132px;
+  background:linear-gradient(180deg,rgba(250,248,243,0) 0%,
+    rgba(250,248,243,.90) 58%,#FAF8F3 100%);pointer-events:none}
+.gc-i:active{opacity:.72}
+.gc-a{display:flex;gap:10px;margin-top:16px}
+.gc-b{flex:1 1 0;display:inline-flex;align-items:center;justify-content:center;
+  min-height:52px;padding:0 12px;border:0;border-radius:14px;
+  background:var(--card-2);color:var(--tx);
+  font:600 16px/1.2 var(--font);letter-spacing:-.2px;text-align:center;
+  text-decoration:none;cursor:pointer}
+.gc-b:active{opacity:.7}
+.gc-b.p{background:var(--orange);color:#180A00}
+
+/* the full chart, over everything, at its own size */
+.gv{position:fixed;inset:0;z-index:80;background:#000;display:none}
+body.gviewing .gv{display:block}
+body.gviewing{overflow:hidden}
+.gv-s{position:absolute;inset:0;overflow:auto;-webkit-overflow-scrolling:touch;
+  display:flex;align-items:center;justify-content:flex-start}
+.gv-s img{display:block;width:var(--gvw,1240px);max-width:none;height:auto;flex:0 0 auto}
+.gv-s.fit img{width:100%}
+.gv-x{position:absolute;right:14px;z-index:2;
+  top:calc(14px + env(safe-area-inset-top,0px));
+  min-height:48px;min-width:48px;padding:0 20px;border:0;border-radius:100px;
+  background:#1E1E22;
+  color:var(--tx);font:600 16px/1 var(--font);cursor:pointer}
+.gv-h{position:absolute;left:16px;right:16px;z-index:2;
+  bottom:calc(14px + env(safe-area-inset-bottom,0px));
+  text-align:center;font-size:15px;color:var(--tx-3);pointer-events:none}
+
+/* ------------------------------------------------------------- the deck -- */
+/* six finished pages, one under the other. They run full-bleed so they read
+   as plates rather than thumbnails, and each one keeps its own background —
+   these are documents sitting on the app, not part of it. */
+.dk{margin:26px -20px 0}
+.dk-p{margin-top:34px}
+.dk-p:first-child{margin-top:22px}
+.dk-n{display:flex;align-items:baseline;gap:10px;padding:0 20px 12px}
+.dk-n b{flex:0 0 auto;font-size:13.5px;font-weight:800;letter-spacing:.12em;color:var(--orange)}
+.dk-n span{font-size:16.5px;font-weight:600;line-height:1.3;color:var(--tx-2);letter-spacing:-.1px}
+.dk-i{display:block;width:100%;padding:0;border:0;background:#0B0B0D;
+  cursor:pointer;-webkit-tap-highlight-color:transparent}
+.dk-i img{display:block;width:100%;height:auto}
+.dk-i:active{opacity:.72}
+
+/* ============================================== THE COCKPIT (Dashboard) == */
+/* Four blocks, in this order and no other: how the programme is doing, what
+   starts first, what is next, and the roadmap. It is meant to be read at a
+   glance from across a desk, so the first two blocks are solid colour rather
+   than text — the colour IS the message and the words only name it. */
+.ec-k{font-size:12.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--tx-3);margin:34px 0 13px}
+
+/* the status readout: one filled block, one word. Worked out from the data
+   every time the screen is built, and the whole block is the way through to
+   whatever needs doing about it. */
+.ec-st{display:flex;flex-direction:column;align-items:center;justify-content:center;
+  width:100%;min-height:138px;text-align:center;border:0;padding:26px 22px;
+  border-radius:var(--r);background:var(--sc);color:#0A1206;position:relative;
+  overflow:hidden;cursor:pointer;-webkit-tap-highlight-color:transparent}
+.ec-st.green{--sc:var(--green)}
+.ec-st.amber{--sc:var(--amber)}
+.ec-st.red{--sc:var(--red)}
+.ec-st:active{filter:brightness(.92)}
+.ec-st .w{display:block;font-size:34px;font-weight:800;letter-spacing:-.9px;
+  line-height:1.1;text-transform:uppercase}
+.ec-st .n{display:block;margin-top:10px;font-size:14px;line-height:1.4;opacity:.7}
+/* the tap affordance is a shape, not another line of words */
+.ec-st .c{position:absolute;top:15px;right:17px;width:11px;height:11px;opacity:.5;
+  border-right:2.5px solid currentColor;border-top:2.5px solid currentColor;
+  transform:rotate(45deg)}
+
+/* what starts first. `flex:1 1 150px` is what makes the last row fill the
+   width instead of leaving one block orphaned on its own line. */
+.ec-bx{display:flex;flex-wrap:wrap;gap:10px}
+.ec-bx button{flex:1 1 150px;display:flex;align-items:flex-end;min-height:92px;
+  text-align:left;border:0;padding:15px 16px;border-radius:16px;
+  background:var(--green);color:#0A1206;cursor:pointer;
+  font:800 19px/1.2 var(--font);letter-spacing:-.35px;
+  -webkit-tap-highlight-color:transparent}
+.ec-bx button:active{filter:brightness(.92)}
+
+/* next milestones: a bordered card per project, the project ruled off at the
+   top, the week window on the right of each line */
+.ec-ms{background:var(--card);border:1px solid var(--sep-2);border-radius:var(--r);
+  overflow:hidden}
+.ec-ms + .ec-ms{margin-top:10px}
+.ec-msh{margin:17px 18px 3px;padding-bottom:10px;border-bottom:1.5px solid var(--sep-2);
+  font-size:17px;font-weight:700;letter-spacing:-.2px;color:var(--tx)}
+.ec-mi{display:flex;width:100%;gap:14px;align-items:flex-start;text-align:left;border:0;
+  background:none;padding:13px 18px;min-height:48px;cursor:pointer;
+  -webkit-tap-highlight-color:transparent}
+.ec-mi + .ec-mi{border-top:1px solid var(--sep)}
+.ec-mi:active{background:var(--card-2)}
+.ec-mi .t{flex:1 1 auto;font-size:15.5px;line-height:1.35;color:var(--tx)}
+.ec-mi .y{display:block;margin-top:3px;font-size:13px;color:var(--amber)}
+/* orange is time everywhere else in this app, and a week number is time */
+.ec-mi .w{flex:0 0 auto;font-size:13.5px;font-weight:600;font-style:italic;
+  color:var(--orange);font-variant-numeric:tabular-nums;padding-top:2px}
+.ec-mn{margin-top:10px;font-size:13px;line-height:1.4;color:var(--tx-3)}
+/* the roadmap on this screen is the document itself: no kicker, no heading,
+   no paragraph — the picture carries its own title. */
+.gc.bare{margin-top:14px;padding-top:20px}
+.gc.bare .gc-i{margin-top:0}
+
+/* ======================================================= SIGN IN (Project+)
+   The screen in front of everything else. It is deliberately the plainest
+   thing in the app: one column, one decision at a time, nothing to read that
+   is not either a label or a way in. A person arriving here is not browsing,
+   they are trying to get to their programme.
+
+   While this is up, the app underneath is not merely covered — it is empty.
+   The programme has not been fetched yet, so there is nothing behind this to
+   see through, screenshot, or find in the page source. */
+body.pp-locked .app{display:none}
+body.pp-locked{overflow:hidden}
+
+.gate{position:fixed;inset:0;z-index:120;background:var(--bg);
+  display:flex;align-items:flex-start;justify-content:center;overflow-y:auto;
+  padding:calc(env(safe-area-inset-top) + 8vh) 20px calc(env(safe-area-inset-bottom) + 40px)}
+.gate[hidden]{display:none}
+.gate-in{width:100%;max-width:360px}
+
+.gate-mark{font-size:34px;line-height:1.1;font-weight:700;letter-spacing:-.02em;color:var(--tx)}
+.gate-mark span{color:var(--blue)}
+.gate-sub{margin-top:8px;font-size:17px;line-height:1.55;color:var(--tx-2)}
+
+.gate-body{margin-top:28px}
+
+/* Google's own button. It has to look like Google's button — people are
+   looking for the shape they already know, not for our version of it. */
+.gate-g{min-height:44px}
+.gate-g > div{margin:0 auto}
+.gate-gnote{margin-top:10px;font-size:13.5px;line-height:1.5;color:var(--tx-3)}
+
+.gate-or{display:flex;align-items:center;gap:14px;margin:22px 0 4px;
+  font-size:13.5px;color:var(--tx-3)}
+.gate-or::before,.gate-or::after{content:"";flex:1 1 auto;height:1px;background:var(--sep)}
+
+.gate-f{margin-top:18px}
+.gate-l{display:block;margin-bottom:7px;font-size:15px;font-weight:400;color:var(--tx-2)}
+.gate-i{width:100%;height:52px;padding:0 14px;font-family:var(--font);font-size:17px;
+  color:var(--tx);background:var(--card);border:1px solid var(--sep-2);border-radius:12px;
+  -webkit-appearance:none;appearance:none}
+.gate-i:focus{outline:none;border-color:var(--blue);box-shadow:0 0 0 3px rgba(87,173,255,.25)}
+.gate-i.bad{border-color:var(--red)}
+.gate-pw{position:relative}
+.gate-pw .gate-i{padding-right:74px}
+.gate-see{position:absolute;right:4px;top:4px;height:44px;padding:0 12px;
+  font-size:15px;color:var(--tx-2)}
+.gate-hint{margin-top:7px;font-size:13.5px;line-height:1.45;color:var(--tx-3)}
+
+.gate-go{width:100%;height:56px;margin-top:22px;border-radius:14px;
+  font-size:17px;font-weight:600;color:#00131f;background:var(--blue)}
+.gate-go:disabled{opacity:.55}
+.gate-go.quiet{margin-top:12px;height:52px;font-weight:500;color:var(--tx);
+  background:var(--card);border:1px solid var(--sep-2)}
+
+/* The project somebody has just found. A confirmation, not a menu — there is
+   only ever one, and the only thing to do with it is join. The mark is shown at
+   40px against a native 60, so it is scaled down rather than up and stays sharp. */
+.gate-card{display:flex;align-items:center;gap:14px;margin-top:22px;padding:14px 16px;
+  background:var(--card);border:1px solid var(--sep-2);border-radius:14px}
+.gate-card img{flex:0 0 auto;width:auto;height:40px}
+.gate-card-t{min-width:0}
+.gate-card-b{display:block;font-size:16.5px;font-weight:600;line-height:1.3;color:var(--tx);
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.gate-card-p{display:block;margin-top:2px;font-size:15px;line-height:1.35;color:var(--tx-2)}
+.gate-none{margin-top:16px;font-size:15px;line-height:1.5;color:var(--tx-3)}
+
+.gate-alt{margin-top:20px;text-align:center;font-size:15.5px;line-height:1.6;color:var(--tx-2)}
+.gate-alt button{color:var(--blue);font-size:inherit;text-decoration:underline;
+  text-underline-offset:3px;text-decoration-thickness:1px;padding:6px 4px}
+
+/* An error has to be readable as an error without relying on the colour, so it
+   carries a word as well as a red edge. */
+.gate-err{margin-top:18px;padding:13px 14px;border-radius:12px;font-size:15.5px;line-height:1.5;
+  color:#FFD9D5;background:rgba(255,107,97,.13);border:1px solid rgba(255,107,97,.42)}
+.gate-err b{display:block;font-weight:600;color:var(--red);margin-bottom:2px}
+.gate-ok{margin-top:18px;padding:13px 14px;border-radius:12px;font-size:15.5px;line-height:1.5;
+  color:#CFF3D6;background:rgba(59,224,85,.12);border:1px solid rgba(59,224,85,.38)}
+.gate-ok b{display:block;font-weight:600;color:var(--green);margin-bottom:2px}
+
+.gate-wait{margin-top:26px;font-size:16px;color:var(--tx-3)}
+
+/* Whose app this is, said once and said properly. This is the negative
+   artwork — the real asset drawn for a black surface, white wordmark, mark
+   keeping its gradient. The shortcut we used before was the ordinary logo with
+   a CSS invert on top, which flattens that gradient into a solid block: a logo
+   nobody at Digital Movement ever drew.
+
+   ALIGNMENT. The logo, the words and every field below share one left edge.
+   The drawing carries a little empty space of its own on the left, so it is
+   pulled back by exactly that much — otherwise it sits a few pixels in from
+   everything under it, which reads as a mistake even when nobody can say why. */
+.gate-top{margin:0 0 32px}
+.gate-by{font-size:13.5px;line-height:1.4;letter-spacing:.01em;color:var(--tx-3);margin-bottom:10px}
+.gate-logo{display:block;width:280px;max-width:82%;height:auto;margin:0}
+
+/* The way out, at the bottom of "You" — where a person looks for it, and far
+   enough from everything else that it is never the button you meant. */
+.pp-out{margin:26px 4px 8px;padding-top:20px;border-top:1px solid var(--sep)}
+.pp-out .who{font-size:15px;line-height:1.5;color:var(--tx-3)}
+.pp-out button{margin-top:12px;height:48px;padding:0 20px;border-radius:12px;
+  font-size:16px;color:var(--tx);background:var(--card);border:1px solid var(--sep-2)}
+</style>
+</head>
+<body class="pp-locked">
+
+<div class="gate" id="gate" role="dialog" aria-modal="true" aria-label="Sign in to Project+">
+  <div class="gate-in">
+    <div class="gate-top">
+      <p class="gate-by">powered by</p>
+      <img class="gate-logo" src="assets/dm-logo-negative-tight.svg" alt="Digital Movement">
+    </div>
+    <h1 class="gate-mark">Project<span>+</span></h1>
+    <p class="gate-sub" id="gateSub">Sign in to see your programme.</p>
+    <div class="gate-body" id="gateBody">
+      <p class="gate-wait">One moment…</p>
+    </div>
+  </div>
+</div>
+
+<div class="app">
+  <header class="bar" id="bar">
+    <div class="bar-in">
+      <span class="bar-c">Husband Retail</span>
+      <span class="bar-t" id="barTitle">Now</span>
+      <img class="bar-l" src="assets/dm-logo-negative.svg" alt="Digital Movement">
+    </div>
+  </header>
+
+  <main>
+    <div class="gv" id="gv" role="dialog" aria-modal="true" aria-label="Full size picture"><div class="gv-s fit" id="gvS"><img id="gvI" alt=""></div><button type="button" class="gv-x" id="gvX">Close</button><div class="gv-h" id="gvH">Tap the chart to see it full size</div></div>
+  <section class="scr on" id="scr-dash"></section>
+    <section class="scr" id="scr-overview"></section>
+    <section class="scr" id="scr-plan"></section>
+    <section class="scr" id="scr-track"></section>
+    <section class="scr" id="scr-work"></section>
+    <section class="scr" id="scr-you"></section>
+  </main>
+
+  <button type="button" class="msg-b" id="msgB" aria-label="Send us a message">
+    <svg viewBox="0 0 122.8 122.8" aria-hidden="true">
+      <path d="M25.8 77.6c0 7.1-5.8 12.9-12.9 12.9S0 84.7 0 77.6s5.8-12.9 12.9-12.9h12.9v12.9zM32.3 77.6c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9v32.3c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V77.6z" fill="#E01E5A"/>
+      <path d="M45.2 25.8c-7.1 0-12.9-5.8-12.9-12.9S38.1 0 45.2 0s12.9 5.8 12.9 12.9v12.9H45.2zM45.2 32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H12.9C5.8 58.1 0 52.3 0 45.2s5.8-12.9 12.9-12.9h32.3z" fill="#36C5F0"/>
+      <path d="M97 45.2c0-7.1 5.8-12.9 12.9-12.9s12.9 5.8 12.9 12.9-5.8 12.9-12.9 12.9H97V45.2zM90.5 45.2c0 7.1-5.8 12.9-12.9 12.9s-12.9-5.8-12.9-12.9V12.9C64.7 5.8 70.5 0 77.6 0s12.9 5.8 12.9 12.9v32.3z" fill="#2EB67D"/>
+      <path d="M77.6 97c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9-12.9-5.8-12.9-12.9V97h12.9zM77.6 90.5c-7.1 0-12.9-5.8-12.9-12.9s5.8-12.9 12.9-12.9h32.3c7.1 0 12.9 5.8 12.9 12.9s-5.8 12.9-12.9 12.9H77.6z" fill="#ECB22E"/>
+    </svg>
+  </button>
+
+  <nav class="tabs" id="tabs" aria-label="Screens">
+    <div class="tabs-in">
+      <button type="button" data-s="dash">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.4 15.2a8.6 8.6 0 1 1 17.2 0"/><path d="M12 15.2l4.1-4.6"/><circle cx="12" cy="15.4" r="1.5" fill="currentColor" stroke="none"/><path d="M3.4 15.2h1.9M18.7 15.2h1.9M5.6 8.9l1.4 1.3M18.4 8.9L17 10.2"/></svg>
+        <span>Dashboard</span><i class="bdg" id="dashBadge" hidden></i>
+      </button>
+      <button type="button" data-s="overview">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="4.5" width="17" height="15" rx="3"/><circle cx="8.9" cy="9.7" r="1.5"/><path d="M4 16.9l4.4-4.1 2.9 2.7 3.4-3.8 5.3 5.2"/></svg>
+        <span>Overview</span>
+      </button>
+      <button type="button" data-s="plan">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="5.5" width="17" height="15" rx="3"/><path d="M3.5 10h17M8.5 3v4M15.5 3v4"/></svg>
+        <span>Timeline</span>
+      </button>
+      <button type="button" data-s="track">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3.5 6.6l2 2 3.2-3.4M3.5 13l2 2 3.2-3.4M3.5 19.4l2 2 3.2-3.4M12.4 7.3h8.1M12.4 13.7h8.1M12.4 20.1h8.1"/></svg>
+        <span>Tracker</span><i class="bdg tk-bdg" id="trackBadge" hidden></i>
+      </button>
+      <button type="button" data-s="work">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3.5" y="3.5" width="7" height="7" rx="2"/><rect x="13.5" y="3.5" width="7" height="7" rx="2"/><rect x="3.5" y="13.5" width="7" height="7" rx="2"/><rect x="13.5" y="13.5" width="7" height="7" rx="2"/></svg>
+        <span>Projects</span>
+      </button>
+      <button type="button" data-s="you">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.7"/><path d="M4.6 20.2c1-4 4-6 7.4-6s6.4 2 7.4 6"/></svg>
+        <span>You</span><i class="bdg" id="youBadge" hidden></i>
+      </button>
+    </div>
+  </nav>
+</div>
+
+<div class="scrim" id="scrim"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true" aria-label="Detail">
+  <span class="grip" aria-hidden="true"></span>
+  <div class="sheet-in" id="sheetIn"></div>
+</div>
+
+<script>
+/* The programme used to sit in data.js next to this file. It does not any more.
+   That file was in a public repository, so "the app" and "the world" could read
+   exactly the same thing. Everything below now waits: the sign-in screen runs
+   first, fetches the programme from our own server, puts it on window.TRACKER,
+   and only then calls this. */
+window.__pplusBoot = function(){
+  "use strict";
+
+  var T = TRACKER, M = T.meta;
+  var ms = T.milestones;
+  var reduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  /* ------------------------------------------------------------- helpers */
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+  function el(tag, cls, html){
+    var n = document.createElement(tag);
+    if (cls) n.className = cls;
+    if (html !== undefined) n.innerHTML = html;
+    return n;
+  }
+
+  var STATUS = {
+    done:   { label:"Done",     cls:"done"   },
+    active: { label:"Under way",cls:"active" },
+    waiting:{ label:"You",      cls:"wait"   },
+    blocked:{ label:"Blocked",  cls:"block"  },
+    todo:   { label:"To do",    cls:"todo"   }
+  };
+  function st(k){ return STATUS[k] || STATUS.todo; }
+
+  var MONTHS = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+  function parse(d){ var a = d.split("-"); return new Date(+a[0], +a[1]-1, +a[2]); }
+  function fmt(d){ return d.getDate() + " " + MONTHS[d.getMonth()] + " " + d.getFullYear(); }
+  function addDays(d, n){ var x = new Date(d.getTime()); x.setDate(x.getDate()+n); return x; }
+
+  /* ------------------------------------------------- dates come from one date */
+  var start = parse(M.termStart);
+  var today = new Date(); today.setHours(0,0,0,0);
+  var started = today >= start;
+  var firm = !!M.termStartFirm;
+
+  T.phases.forEach(function(p){
+    p.startDate = addDays(start, (p.from - 1) * 7);
+    p.endDate   = addDays(start, p.to * 7 - 1);
+    p.weeks     = "Weeks " + p.from + "–" + p.to;
+    p.range     = fmt(p.startDate) + " – " + fmt(p.endDate);
+  });
+
+  /* The month rail. Phases are gone from the Timeline, so the reader navigates
+     by calendar instead — and two groups must never claim the same month or the
+     rail stops being a rail. Each one starts at the first month the group before
+     it did not already take. Worked out once, at boot, so no filter can move it. */
+  (function rail(){
+    var used = -1;
+    var nm = function(i){ return MONTHS[i % 12] + " " + Math.floor(i / 12); };
+    T.phases.forEach(function(p){
+      var ai = p.startDate.getFullYear() * 12 + p.startDate.getMonth();
+      var bi = p.endDate.getFullYear()   * 12 + p.endDate.getMonth();
+      if (ai <= used) ai = used + 1;
+      if (ai > bi) ai = bi;
+      used = bi;
+      p.rail = ai === bi ? nm(ai)
+             : Math.floor(ai / 12) === Math.floor(bi / 12)
+                 ? MONTHS[ai % 12] + " – " + nm(bi)
+                 : nm(ai) + " – " + nm(bi);
+    });
+  })();
+
+  /* The agreement fixes phases, not individual dates. A month heading is the
+     calendar window its phase runs in — never an invented date for one item. */
+  function monthSpan(p){
+    var a = p.startDate, b = p.endDate;
+    var am = MONTHS[a.getMonth()], bm = MONTHS[b.getMonth()];
+    var ay = a.getFullYear(), by = b.getFullYear();
+    if (am === bm && ay === by) return am + " " + ay;
+    if (ay === by) return am + " – " + bm + " " + ay;
+    return am + " " + ay + " – " + bm + " " + by;
+  }
+
+  var phaseNow = null, phaseIdx = -1;
+  if (started){
+    for (var i = 0; i < T.phases.length; i++){
+      if (today >= T.phases[i].startDate && today <= T.phases[i].endDate){
+        phaseNow = T.phases[i]; phaseIdx = i; break;
+      }
+    }
+    if (!phaseNow && today > T.phases[T.phases.length-1].endDate) phaseIdx = T.phases.length;
+  }
+  function monthOfTerm(){
+    if (!started) return 0;
+    var m = (today.getFullYear() - start.getFullYear()) * 12 + (today.getMonth() - start.getMonth());
+    if (today.getDate() < start.getDate()) m -= 1;
+    return Math.min(M.termMonths, m + 1);
+  }
+
+  function pillarOf(k){ return T.pillars.filter(function(p){ return p.key === k; })[0]; }
+  function phaseOf(id){ return T.phases.filter(function(p){ return p.id === id; })[0]; }
+
+  /* ------------------------------------------------------------- counters */
+  var count = { done:0, active:0, waiting:0, blocked:0, todo:0 };
+  ms.forEach(function(m){ count[m.s] = (count[m.s]||0) + 1; });
+  var pct = ms.length ? Math.round(count.done / ms.length * 100) : 0;
+
+  var openDec = T.decisions.filter(function(d){ return d.s !== "done"; });
+  var blockers = openDec.filter(function(d){ return d.blocker; });
+  var openDecNums = {};
+  openDec.forEach(function(d){ openDecNums[d.n] = true; });
+  var extraWaiting = ms.filter(function(m){
+    return (m.s === "waiting" || m.s === "blocked") && !(m.dec && openDecNums[m.dec]);
+  });
+  var outstanding = openDec.length + extraWaiting.length;
+
+  /* ================================================================ SHEET */
+  var scrim = $("scrim"), sheet = $("sheet"), sheetIn = $("sheetIn");
+
+  function closeSheet(){
+    document.body.classList.remove("sheeting");
+    sheet.style.transform = "";
+  }
+  function openSheet(html){
+    sheetIn.innerHTML = html + '<button type="button" class="sh-x">Close</button>';
+    sheetIn.scrollTop = 0;
+    sheetIn.querySelector(".sh-x").addEventListener("click", closeSheet);
+    document.body.classList.add("sheeting");
+  }
+  scrim.addEventListener("click", closeSheet);
+  document.addEventListener("keydown", function(e){ if (e.key === "Escape") closeSheet(); });
+
+  /* drag the sheet down to dismiss it */
+  (function(){
+    var y0 = null, dy = 0, t0 = 0;
+    sheet.addEventListener("touchstart", function(e){
+      if (sheetIn.scrollTop > 0) return;
+      y0 = e.touches[0].clientY; t0 = Date.now(); dy = 0;
+      sheet.style.transition = "none";
+    }, { passive:true });
+    sheet.addEventListener("touchmove", function(e){
+      if (y0 === null) return;
+      dy = e.touches[0].clientY - y0;
+      if (dy > 0) sheet.style.transform = "translateY(" + dy + "px)";
+    }, { passive:true });
+    sheet.addEventListener("touchend", function(){
+      if (y0 === null) return;
+      sheet.style.transition = "";
+      sheet.style.transform = "";
+      if (dy > 90 || (dy > 30 && dy / Math.max(1, Date.now() - t0) > .5)) closeSheet();
+      y0 = null;
+    });
+  })();
+
+  function metaRow(k, v){ return "<div><dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd></div>"; }
+
+  function milestoneSheet(m){
+    var s = st(m.s), ph = phaseOf(m.ph), pil = pillarOf(m.p);
+    var own = m.o === "HR" ? "Husband Retail" : (m.o === "DM" ? "Digital Movement" : "Both of us");
+    openSheet(
+      '<div class="sh-k st ' + s.cls + '">' + esc(s.label === "You" ? "Waiting on you" : s.label) + '</div>' +
+      '<h2 class="sh-t">' + esc(m.t) + '</h2>' +
+      '<p class="sh-d">' + esc(m.d) + '</p>' +
+      (m.note ? '<div class="sh-n">' + esc(m.note) + '</div>' : '') +
+      '<dl class="sh-meta">' +
+        metaRow("Project", pil.id + " " + pil.name) +
+        metaRow("Phase", "Phase " + ph.n + " · " + ph.name) +
+        metaRow("When", monthSpan(ph) + (firm ? "" : " · provisional")) +
+        metaRow("Who does it", own) +
+        metaRow("In the agreement", m.ref) +
+      '</dl>');
+  }
+
+  function decisionSheet(d){
+    var holds = ms.filter(function(m){ return m.dec === d.n; })
+                  .map(function(m){ return pillarOf(m.p); })
+                  .filter(function(p, i, a){ return p && a.indexOf(p) === i; })
+                  .map(function(p){ return p.id + " " + p.name; });
+    var settled = d.s === "done";
+    openSheet(
+      '<div class="sh-k ' + (settled ? "st done" : d.blocker ? "st block" : "st wait") + '">' +
+        (settled ? "Decided" : d.blocker ? "Blocks Phase 1" : "Needed " +
+          (/^Phase/.test(d.by) ? "in " + d.by : d.by)) + '</div>' +
+      '<h2 class="sh-t">' + esc(d.q) + '</h2>' +
+      '<p class="sh-d">' +
+        (settled
+          ? (d.answer ? "Answer on record: " + esc(d.answer) : "Settled.")
+          : d.blocker
+            ? "Phase 1 cannot close until this is answered."
+            : "We need this by " + esc(/^Phase/.test(d.by) ? d.by.toLowerCase() : d.by) + ".") +
+      '</p>' +
+      (holds.length ? '<div class="sh-n">Holds up ' + esc(holds.join(" and ")) + '.</div>' : '') +
+      '<dl class="sh-meta">' + metaRow("Decision", d.n) +
+        metaRow("Needed", d.blocker ? "Before Phase 1 can close" : d.by) + '</dl>');
+  }
+
+  function projectSheet(p){
+    var list = ms.filter(function(m){ return m.p === p.key; });
+    var done = list.filter(function(m){ return m.s === "done"; }).length;
+    var rows = list.map(function(m){
+      var s = st(m.s);
+      return '<button type="button" class="row" data-m="' + ms.indexOf(m) + '">' +
+        '<span class="dot ' + s.cls + '"></span>' +
+        '<span class="mid"><span class="t">' + esc(m.t) + '</span></span>' +
+        '<span class="st ' + s.cls + '">' + esc(s.label) + '</span></button>';
+    }).join("");
+    openSheet(
+      '<div class="sh-k" style="color:var(--tx-3)">Project ' + esc(p.id) + '</div>' +
+      '<h2 class="sh-t">' + esc(p.name) + '</h2>' +
+      '<p class="sh-d">' + esc(p.does) + '</p>' +
+      '<div class="ph-c"><div class="pbar"><i style="width:' +
+        (list.length ? Math.round(done/list.length*100) : 0) + '%"></i></div>' +
+        '<span>' + done + ' of ' + list.length + '</span></div>' +
+      '<div class="sh-list">' + rows + '</div>');
+  }
+
+  function textSheet(kicker, title, body){
+    openSheet('<div class="sh-k" style="color:var(--tx-3)">' + esc(kicker) + '</div>' +
+              '<h2 class="sh-t">' + esc(title) + '</h2>' + body);
+  }
+
+  /* a tap anywhere on a milestone row opens that milestone */
+  document.addEventListener("click", function(e){
+    var r = e.target.closest ? e.target.closest("[data-m]") : null;
+    if (r) milestoneSheet(ms[+r.dataset.m]);
+  });
+
+  /* =============================================================== ROWS == */
+  /* "To do" is the default state of almost everything, so printing it 80 times
+     is noise. The grey dot says it. Only exceptions get a word. */
+  function msRow(m, showProject){
+    var s = st(m.s), pil = pillarOf(m.p);
+    var b = el("button","row");
+    b.type = "button";
+    b.dataset.m = ms.indexOf(m);
+    b.innerHTML =
+      '<span class="dot ' + s.cls + '"></span>' +
+      '<span class="mid"><span class="t">' + esc(m.t) + '</span>' +
+        (showProject ? '<span class="s">' + esc(pil.name) + '</span>' : '') +
+      '</span>' +
+      (m.s === "todo" ? '<span class="chev"></span>'
+                      : '<span class="st ' + s.cls + '">' + esc(s.label) + '</span>');
+    return b;
+  }
+
+  /* ============================================================ NOW ====== */
+  /* ==================================================== DASHBOARD (cockpit)
+     Four blocks and no more: how the programme is doing, what starts first,
+     what is next, and the roadmap. It is read at a glance from across a desk,
+     so the first two blocks are solid colour rather than text — the colour is
+     the message and the words only name it. Everything on it is worked out
+     from data.js when the screen is built; nothing here is typed in by hand. */
+
+
+  /* ----------------------------------------------------------- the verdict */
+  function verdict(){
+    var stopped = ms.filter(function(m){ return m.s === "blocked"; });
+    if (stopped.length)
+      return { cls:"stop", k:"Attention", v:"Something<br>is stuck",
+        n: stopped.length + (stopped.length === 1 ? " thing is" : " things are") +
+           " blocked and cannot move until it is cleared.",
+        f:"See what is blocked", go:"you" };
+    if (!M.contractSigned)
+      return { cls:"you", k:"Not started", v:"Waiting on<br>your signature",
+        n:"Nothing has started. Every date here is calculated from a provisional kick-off of " +
+          fmt(start) + " and moves the day you sign.",
+        f:"What happens first", go:"plan" };
+    if (outstanding)
+      return { cls:"you", k:"Needs you", v:outstanding + " thing" + (outstanding === 1 ? "" : "s") + "<br>need you",
+        n: (blockers.length ? blockers.length + " of them hold up Phase 1. " : "") +
+           "Everything else is ours and running.",
+        f:"See what they are", go:"you" };
+    if (phaseIdx >= T.phases.length)
+      return { cls:"ok", k:"Term complete", v:"Twelve months<br>delivered",
+        n:"The initial term ended " + fmt(T.phases[T.phases.length-1].endDate) + ".",
+        f:"See the year", go:"plan" };
+    return { cls:"ok", k:"On track", v:"All good.<br>Nothing for you",
+      n:"Every open item is ours. Nothing is waiting on you and nothing is blocked.",
+      f:"See what we are on", go:"plan" };
+  }
+
+  /* the single most important thing HE has to do, or nothing */
+  function yourMove(){
+    if (!M.contractSigned)
+      return { k:"Your move", v:"Sign the agreement",
+        n:"Twelve months, " + esc(M.fee) + ". Nothing starts until it is countersigned, and every date moves with it.",
+        f:"Read the terms",
+        go:function(){
+          textSheet("The agreement", "What you are signing",
+            '<p class="sh-d">' + esc(M.programme) + " — " + esc(M.termMonths) +
+            " months at " + esc(M.fee) + ", " + esc(M.total) + " in total.</p>" +
+            '<dl class="sh-meta">' +
+              metaRow("Issued", fmt(parse(M.contractIssued))) +
+              metaRow("Signed", "Not yet") +
+              metaRow("Kick-off", fmt(start) + (firm ? "" : " · provisional")) +
+              metaRow("Term", M.termMonths + " months") + '</dl>'); } };
+    if (blockers.length)
+      return { k:"Your move", v:"Answer " + blockers.length + " question" + (blockers.length === 1 ? "" : "s"),
+        n:"Phase 1 cannot close until these are settled. You can answer them here.",
+        f:"Answer them now", go:function(){ go("dash"); var d = $("scr-dash").querySelector(".dq");
+          if (d && d.scrollIntoView) d.scrollIntoView({ block:"center", behavior: reduced ? "auto" : "smooth" }); } };
+    if (outstanding)
+      return { k:"Your move", v:outstanding + " thing" + (outstanding === 1 ? "" : "s") + " waiting",
+        n:"None of them hold up the current phase, but all are needed.",
+        f:"See the list", go:function(){ go("you"); } };
+    return null;
+  }
+
+  /* ====================================================== THE DASHBOARD ==
+     The cockpit. Four blocks, in this order and no other:
+       1  Project status        one word, computed, never typed by hand
+       2  Currently working on  what is actually running
+       3  Next milestones       what happens next, in week numbers
+       4  The roadmap           drawn in HTML, not embedded as a picture
+
+     There is not one image on this screen. The roadmap is built from the same
+     `roadmap` block in data.js that draws the printable chart, so the two can
+     never say different things. */
+
+  /* Week numbers, because that is how the plan is read. Programme week 1 begins
+     on meta.termStart, and 1 Sep 2026 happens to be calendar week 36 — which is
+     where the w36 in the plan comes from. Nothing here is typed in by hand. */
+  function isoWeek(d){
+    var t = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+    t.setDate(t.getDate() + 3 - ((t.getDay() + 6) % 7));
+    var w1 = new Date(t.getFullYear(), 0, 4);
+    return 1 + Math.round(((t - w1) / 864e5 - 3 + ((w1.getDay() + 6) % 7)) / 7);
+  }
+  /* The agreement fixes phases, not individual dates, so a milestone shows the
+     window its phase runs in. A single invented week would read as a booked
+     date for something nobody has booked. */
+  function weekSpan(p){
+    var a = isoWeek(p.startDate), b = isoWeek(p.endDate);
+    return a === b ? "w" + a : "w" + a + "–" + b;
+  }
+
+  /* The status word is worked out from the data every time this screen is
+     built. It is deliberately about SCHEDULE and nothing else: a question
+     sitting with Husband Retail is not a slipped programme, and colouring it
+     red would cry wolf. Anything unresolved is named in the line underneath. */
+  function status(){
+    var blocked = ms.filter(function(m){ return m.s === "blocked"; }).length;
+    var stuck   = openDec.filter(function(d){ return d.blocker && !myAnswer(d); }).length;
+    var late    = phaseIdx >= T.phases.length && ms.filter(function(m){ return m.s !== "done"; }).length;
+
+    if (blocked)
+      return { cls:"red", w:"Blocked", go:"work",
+        n: blocked + (blocked === 1 ? " thing is" : " things are") + " stopped" };
+
+    if (late)
+      return { cls:"amber", w:"Overrunning", go:"work",
+        n: late + " deliverable" + (late === 1 ? "" : "s") + " not signed off" };
+
+    if (started && stuck)
+      return { cls:"amber", w:"Needs attention", go:"you",
+        n: stuck + " question" + (stuck === 1 ? "" : "s") + " holding up Phase 1" };
+
+    return { cls:"green", w:"As planned", go: stuck ? "you" : "work",
+      n: started
+           ? "Month " + monthOfTerm() + " of " + M.termMonths
+           : "Starts " + fmt(start) + (firm ? "" : " · provisional until signed") };
+  }
+
+  /* "Currently working on" has to mean exactly that. Before the programme
+     starts nothing is under way, and the app must not dress up what is coming
+     as what is happening — so the heading itself changes. */
+  function workingOn(){
+    var live = ms.filter(function(m){ return m.s === "active"; });
+    var ph   = phaseNow || T.phases[Math.max(0, phaseIdx)] || T.phases[0];
+    var set  = live.length ? live : ms.filter(function(m){ return m.ph === ph.id && m.s !== "done"; });
+    var tally = {};
+    set.forEach(function(m){ tally[m.p] = (tally[m.p] || 0) + 1; });
+    return {
+      live:  !!live.length,
+      head:  live.length ? "Currently working on" : "Starting first",
+      note:  live.length
+               ? set.length + (set.length === 1 ? " thing is" : " things are") + " under way."
+               : "Nothing is under way yet. This is Phase " + ph.n + ", " + esc(ph.name).toLowerCase() +
+                 ", " + weekSpan(ph) + ".",
+      phase: ph,
+      keys:  Object.keys(tally).sort(function(a, b){ return tally[b] - tally[a]; }),
+      tally: tally
+    };
+  }
+
+  function buildDash(){
+    var box = $("scr-dash");
+    box.innerHTML = "";
+    box.appendChild(el("h1","lt","Dashboard"));
+
+    /* 1 ─ project status: one filled block, one word */
+    box.appendChild(el("div","ec-k","Project status"));
+    var st = status();
+    var sb = el("button","ec-st " + st.cls,
+      '<span class="w">' + esc(st.w) + '</span>' +
+      '<span class="n">' + esc(st.n) + '</span><span class="c"></span>');
+    sb.type = "button";
+    sb.addEventListener("click", function(){ go(st.go); });
+    box.appendChild(sb);
+
+    /* 2 ─ what is running, as blocks */
+    var wo = workingOn();
+    box.appendChild(el("div","ec-k", wo.head));
+    var bx = el("div","ec-bx");
+    wo.keys.slice(0, 2).forEach(function(k){
+      var pr = pillarOf(k);
+      var b  = el("button", "", esc(pr.short));
+      b.type = "button";
+      b.addEventListener("click", function(){ projectSheet(pr); });
+      bx.appendChild(b);
+    });
+    box.appendChild(bx);
+
+    /* 3 ─ next milestones */
+    box.appendChild(el("div","ec-k","Next milestones"));
+    var shown = 0;
+    wo.keys.slice(0, 2).forEach(function(k){
+      var list = ms.filter(function(m){
+        return m.p === k && m.ph === wo.phase.id && m.s !== "done"; }).slice(0, 3);
+      if (!list.length) return;
+      shown += list.length;
+      var card = el("div","ec-ms",
+        '<div class="ec-msh">' + esc(pillarOf(k).name) + '</div>');
+      list.forEach(function(m){
+        var yours = m.o === "HR" || m.s === "waiting";
+        var b = el("button","ec-mi",
+          '<span class="t">' + esc(m.t) +
+            (yours ? '<span class="y">Waiting on you</span>' : '') + '</span>' +
+          '<span class="w">' + esc(weekSpan(phaseOf(m.ph))) + '</span>');
+        b.type = "button";
+        b.addEventListener("click", function(){ milestoneSheet(m); });
+        card.appendChild(b);
+      });
+      box.appendChild(card);
+    });
+    /* the one line of prose on this screen. Without it a week number reads as a
+       booked date, and no individual date has been booked. */
+    if (shown)
+      box.appendChild(el("p","ec-mn",
+        "Weeks are the window the phase runs in, not a booked date."));
+
+    /* 4 ─ the roadmap, as the document it is */
+    box.appendChild(ganttCard(true));
+
+    box.appendChild(el("div","foot",
+      '<img src="assets/dm-logo-negative.svg" alt="Digital Movement">' +
+      "Every line in this app comes from the service agreement issued " +
+      fmt(parse(M.contractIssued)) + ". Nothing is marked done until it has been signed off.<br>" +
+      "Last updated " + fmt(parse(M.lastUpdated)) + " by " + esc(M.updatedBy) + "."));
+
+    var dq = openDec.filter(function(d){ return !myAnswer(d); }).length;
+    $("dashBadge").textContent = dq;
+    $("dashBadge").hidden = !dq;
+  }
+
+  /* ------------------------------------------- answering a decision in-app -
+     He picks, it saves on his phone, and the wording is written for him to
+     copy into a reply. It does NOT reach us on its own — nothing here is sent
+     anywhere — so the sheet says that in as many words. */
+  var AKEY = "hr-answers-v1";
+  var answers = {};
+  try{ answers = JSON.parse(window.localStorage.getItem(AKEY) || "{}"); }catch(e){ answers = {}; }
+  function myAnswer(d){ return answers[d.n] || ""; }
+  function saveAnswer(d, text){
+    if (text) answers[d.n] = text; else delete answers[d.n];
+    try{ window.localStorage.setItem(AKEY, JSON.stringify(answers)); }catch(e){}
+  }
+
+  function answerSheet(d){
+    var picked = myAnswer(d);
+    var opts = (d.options && d.options.length) ? d.options : null;
+    var html =
+      '<div class="sh-k st ' + (d.blocker ? "block" : "wait") + '">Decision ' + esc(d.n) +
+        (d.blocker ? " · holds up Phase 1" : "") + '</div>' +
+      '<h2 class="sh-t">' + esc(d.q) + '</h2>' +
+      '<p class="sh-d">Needed ' + esc(d.blocker ? "before Phase 1 can close" : d.by) + '.</p>';
+
+    if (opts){
+      html += '<div class="ans">' + opts.map(function(o){
+        return '<button type="button" data-a="' + esc(o) + '"' +
+          (o === picked ? ' class="sel"' : '') + '>' + esc(o) + '</button>'; }).join("") + '</div>';
+    } else {
+      html += '<div class="ans"><textarea class="sh-out" id="ansTx" ' +
+        'placeholder="Type your answer"></textarea></div>';
+    }
+    html += '<button type="button" class="sh-go" id="ansGo">' +
+      (picked ? "Copy your answer" : "Save and copy") + '</button>' +
+      '<p class="ours">This is saved on your phone only. It does not reach us on its own — ' +
+      'paste it into your reply so we can act on it.</p>' +
+      (picked ? '<p class="ours"><b>You said:</b> ' + esc(picked) + '</p>' : '');
+    openSheet(html);
+
+    var chosen = picked;
+    Array.prototype.forEach.call(sheetIn.querySelectorAll(".ans button[data-a]"), function(b){
+      b.addEventListener("click", function(){
+        Array.prototype.forEach.call(sheetIn.querySelectorAll(".ans button[data-a]"), function(x){
+          x.classList.remove("sel"); });
+        b.classList.add("sel");
+        chosen = b.dataset.a;
+      });
+    });
+
+    $("ansGo").addEventListener("click", function(){
+      var tx = $("ansTx");
+      if (tx) chosen = tx.value.trim();
+      if (!chosen) return;
+      saveAnswer(d, chosen);
+      var line = "Decision " + d.n + " — " + d.q + "\n" + chosen +
+                 "\n\n(Husband Retail, " + fmt(today) + ")";
+      var b = $("ansGo");
+      var done = function(){ b.textContent = "Copied — now paste it to us"; buzz(12);
+        setTimeout(function(){ closeSheet(); buildDash(); }, 900); };
+      if (navigator.clipboard && navigator.clipboard.writeText)
+        navigator.clipboard.writeText(line).then(done, done);
+      else done();
+    });
+  }
+
+  /* =================================================== THE ROADMAP CARD == */
+  /* One builder, used by both the Dashboard and the Timeline, so the two can
+     never drift apart. Two renders of the same roadmap exist:
+       roadmap.svg       the roadmap alone — the thumbnail and the viewer
+       roadmap-full.svg  the same, plus the indicative values — download only
+     The values are what each project would cost commissioned on its own. They
+     are not what Husband Retail pays, so they stay off every screen.
+     Both are drawn from data.js by build-roadmap.js. Rerun it after any edit. */
+  /* AB is where the confidential pictures come from. Signed in, it points at
+     our server and carries the session, so the roadmap is no more public than
+     the words are. Left as it is, it points at the folder beside this file —
+     which is how the app still opens when you are working on it locally. */
+  var AB = (window.PPLUS && window.PPLUS.assetBase) || "assets/";
+  var ROADMAP = { view:AB + "roadmap.svg", dl:AB + "roadmap-full.svg",
+                  w:1240, h:2046,
+                  name:"Husband-Retail-Project-Roadmap-2026-2027" };
+
+  /* the card's own words. The picture already carries the document's title, so
+     these say what the card is FOR, not what it is called. */
+  var CARD = {
+    kicker: "The plan",
+    title:  "What happens, and when",
+    sub:    "Each bar is one part of the work and the months it runs, " +
+            "September 2026 to December 2027. Dates are provisional until " +
+            "the agreement is signed."
+  };
+
+  function ganttCard(bare){
+    var c = el("div", bare ? "gc bare" : "gc",
+      (bare ? '' :
+        '<div class="gc-k">' + esc(CARD.kicker) + '</div>' +
+        '<h2 class="gc-t">' + esc(CARD.title) + '</h2>' +
+        '<p class="gc-s">' + esc(CARD.sub) + '</p>') +
+      '<button type="button" class="gc-i">' +
+        /* not lazy: the Timeline's copy is built while that screen is hidden, so
+           a lazy image would arrive as a blank rectangle the first time he opens
+           the tab, and this is the first thing on that screen. */
+        '<img src="' + ROADMAP.view + '" width="' + ROADMAP.w + '" height="' + ROADMAP.h + '" ' +
+        'alt="Project roadmap: seven workstreams from September 2026 to December 2027, ' +
+        'each shown as a bar across the months it runs">' +
+      '</button>' +
+      '<div class="gc-a">' +
+        '<button type="button" class="gc-b p" data-g="v">Open full size</button>' +
+        '<button type="button" class="gc-b" data-g="d">Download</button>' +
+      '</div>');
+    c.querySelector(".gc-i").addEventListener("click", openGantt);
+    c.querySelector('[data-g="v"]').addEventListener("click", openGantt);
+    c.querySelector('[data-g="d"]').addEventListener("click", function(){
+      ganttDownload(this);
+    });
+    return c;
+  }
+
+  /* One viewer for every full-size picture in the app — the roadmap card and
+     all six pages of the Overview. It opens fitted to the screen; a tap
+     switches to the picture's own size so he can move around inside it, which
+     is the only way the small print in these pages is readable on a phone.
+     The picture's own width is handed in, because they are not all the same. */
+  var VW_FIT = "Tap the picture to see it full size",
+      VW_BIG = "Drag to move around · tap to fit the screen";
+
+  function openViewer(src, alt, w){
+    var i = $("gvI"), box = $("gvS");
+    if (i.getAttribute("src") !== src) i.src = src;
+    i.alt = alt;
+    box.style.setProperty("--gvw", w + "px");
+    box.classList.add("fit");
+    box.scrollLeft = 0; box.scrollTop = 0;
+    $("gvH").textContent = VW_FIT;
+    document.body.classList.add("gviewing");
+    buzz(8);
+  }
+  function closeViewer(){ document.body.classList.remove("gviewing"); }
+  function openGantt(){
+    openViewer(ROADMAP.view, "Project Roadmap 2026 to 2027, full size", ROADMAP.w);
+  }
+
+  (function(){
+    $("gvX").addEventListener("click", closeViewer);
+    /* fit to the screen first, so he sees the whole page; tap for actual size
+       and drag around. Two states, the way a photo behaves. */
+    $("gvI").addEventListener("click", function(){
+      var box = $("gvS"), fit = box.classList.toggle("fit");
+      $("gvH").textContent = fit ? VW_FIT : VW_BIG;
+      if (!fit){ box.scrollLeft = 0; box.scrollTop = 0; }
+    });
+    document.addEventListener("keydown", function(e){
+      if (e.key === "Escape" && document.body.classList.contains("gviewing")) closeViewer();
+    });
+  })();
+
+  /* The download is a PNG at twice the chart's own size, because an SVG opens
+     rather than saves on an iPhone. If the browser will not rasterise it, the
+     SVG itself is handed over instead — it loses nothing but the file type. */
+  function ganttDownload(btn){
+    var was = btn.textContent;
+    btn.disabled = true; btn.textContent = "Preparing…";
+    var restore = function(){ btn.disabled = false; btn.textContent = was; };
+    var save = function(href, name){
+      var a = document.createElement("a");
+      a.href = href; a.download = name; a.rel = "noopener";
+      document.body.appendChild(a); a.click(); a.remove(); buzz(12);
+    };
+    var plain = function(){ save(ROADMAP.dl, ROADMAP.name + ".svg"); restore(); };
+
+    var img = new Image();
+    img.onload = function(){
+      try{
+        var w = img.naturalWidth || ROADMAP.w, h = img.naturalHeight || ROADMAP.h, k = 2;
+        var cv = document.createElement("canvas");
+        cv.width = w * k; cv.height = h * k;
+        var cx = cv.getContext("2d");
+        cx.fillStyle = "#FAF8F3"; cx.fillRect(0, 0, cv.width, cv.height);
+        cx.drawImage(img, 0, 0, cv.width, cv.height);
+        cv.toBlob(function(b){
+          if (!b) return plain();
+          var u = URL.createObjectURL(b);
+          save(u, ROADMAP.name + ".png");
+          setTimeout(function(){ URL.revokeObjectURL(u); }, 8000);
+          restore();
+        }, "image/png");
+      }catch(e){ plain(); }
+    };
+    img.onerror = plain;
+    img.src = ROADMAP.dl;
+  }
+
+  /* ============================================================ OVERVIEW == */
+  /* Six finished pages, in the order they were drawn. Every page prints its
+     own title inside the artwork, so the line above it says what the page is
+     FOR instead of repeating the title.
+
+     Pages 4 and 5 are the same six steps twice, illustrated and then plain.
+     That is how the deck was handed over; if one of them goes, delete the row.
+
+     The last page is the roadmap, and it is the SAME file the Dashboard and
+     the Timeline show. There is only ever one roadmap in this app, and its
+     size is read from ROADMAP so it cannot fall out of step with the picture. */
+  var DECK = {
+    h1:  "The programme in six pages",
+    sub: "Scroll from the cover to the roadmap, and tap any page to open it full size.",
+    pages: [
+      { f:AB + "deck/01-cover.webp", w:941, h:1672,
+        t:"Sets the scene",
+        a:"Cover: Husband Retail, the integrated digital sales engine, project portfolio and roadmap 2026 to 2027" },
+      { f:AB + "deck/02-portfolio.webp", w:941, h:1672,
+        t:"What's in the programme",
+        a:"Project portfolio: the five projects split into inbound and outbound, each with its deliverables" },
+      { f:AB + "deck/03-funnel.webp", w:941, h:1672,
+        t:"How the engine fits together",
+        a:"Sales funnel: four sources of demand feeding the website, and below it qualified leads, strategic conversations and new mandates" },
+      { f:AB + "deck/04-engine.webp", w:941, h:1672,
+        t:"From build to win",
+        a:"Six numbered steps, from building the website through to winning new mandates, drawn as an illustration" },
+      { f:AB + "deck/05-engine-flat.webp", w:941, h:1672,
+        t:"The same steps, drawn plain",
+        a:"The same six steps, from building the website through to winning new mandates, drawn as a plain diagram" },
+      { f:ROADMAP.view, w:ROADMAP.w, h:ROADMAP.h,
+        t:"When each project runs",
+        a:"Project roadmap: seven workstreams from September 2026 to December 2027, each shown as a bar across the months it runs" }
+    ]
+  };
+
+  function buildOverview(){
+    var box = $("scr-overview");
+    box.innerHTML = "";
+    box.appendChild(el("h1","lt", DECK.h1));
+    box.appendChild(el("p","lt-s", DECK.sub));
+
+    var deck = el("div","dk");
+    DECK.pages.forEach(function(p, n){
+      var no = ("0" + (n + 1)).slice(-2);
+      /* only the first page loads up front. The rest arrive as he scrolls to
+         them, which keeps opening the tab cheap on a phone; every one reserves
+         its own box first, so nothing jumps as they land. */
+      var row = el("div","dk-p",
+        '<div class="dk-n"><b>' + no + '</b><span>' + esc(p.t) + '</span></div>' +
+        '<button type="button" class="dk-i">' +
+          '<img src="' + p.f + '" width="' + p.w + '" height="' + p.h + '" ' +
+          (n ? 'loading="lazy" ' : '') + 'alt="' + esc(p.a) + '">' +
+        '</button>');
+      row.querySelector(".dk-i").addEventListener("click", function(){
+        openViewer(p.f, p.a + ", full size", p.w);
+      });
+      deck.appendChild(row);
+    });
+    box.appendChild(deck);
+  }
+
+  /* =========================================================== TIMELINE == */
+  var pillar = "all";
+  var outsOnly = false;
+  /* every tab opens fully collapsed — the overview first, detail on request */
+
+  var OUTS = T.outcomes || [];
+  var OUT_NOTE = T.outcomesNote ||
+    "Projected, not promised. The agreement does not guarantee a commercial result.";
+
+  function outsIn(phaseId){
+    return OUTS.filter(function(o){ return o.phase === phaseId; });
+  }
+
+  /* A projected outcome is not a deliverable and must never be mistaken for one.
+     It gets its own colour, its own word — "projected" — and the disclaimer
+     travels with it into the detail sheet. */
+  function outcomeBox(o){
+    var b = el("button","out" + (o.verified === false ? " unver" : ""));
+    b.type = "button";
+    b.innerHTML =
+      '<span class="k"><i></i>Projected · ' + esc(o.when) + '</span>' +
+      '<span class="t">' + esc(o.title) + '</span>' +
+      '<span class="d">' + esc(o.detail) + '</span>' +
+      '<span class="f">' + (o.verified === false ? "Not verified · what this rests on" : "What this rests on") +
+        '<span class="chev"></span></span>';
+    b.addEventListener("click", function(){ outcomeSheet(o); });
+    return b;
+  }
+
+  function outcomeSheet(o){
+    var ph = phaseOf(o.phase);
+    openSheet(
+      '<div class="sh-k" style="color:var(--win)">Projected outcome · ' + esc(o.when) + '</div>' +
+      '<h2 class="sh-t">' + esc(o.title) + '</h2>' +
+      '<p class="sh-d">' + esc(o.detail) + '</p>' +
+      '<div class="sh-w">' + esc(OUT_NOTE) + '</div>' +
+      '<dl class="sh-meta">' +
+        metaRow("Why we think so", o.basis) +
+        (o.risk ? metaRow("What could stop it", o.risk) : "") +
+        (ph ? metaRow("Phase", "Phase " + ph.n + " · " + ph.name) : "") +
+        (ph ? metaRow("When", monthSpan(ph) + (firm ? "" : " · provisional")) : "") +
+        metaRow("Traces to", o.ref) +
+        (o.verified === false
+          ? metaRow("Evidence", "Not verified against a document yet")
+          : "") +
+      '</dl>');
+  }
+
+  /* ======================================================== THE GROUPING ==
+     The Timeline and the Tracker are two views of one programme. They used to
+     each decide for themselves what went where — the Timeline by month, the
+     Tracker by phase — which meant a change to one silently disagreed with the
+     other. Both now call this and nothing else, so they cannot drift: same
+     items, same months, same order, same project headings. */
+  function monthGroups(filterKey){
+    var out = [];
+    T.phases.forEach(function(p){
+      var rows = ms.filter(function(m){
+        return m.ph === p.id && (filterKey === "all" || m.p === filterKey); });
+      if (!rows.length) return;
+      var projects = [];
+      T.pillars.forEach(function(pl){
+        var r = rows.filter(function(m){ return m.p === pl.key; });
+        if (r.length) projects.push({ pillar: pl, rows: r });
+      });
+      out.push({ phase: p, rail: p.rail, rows: rows, projects: projects });
+    });
+    return out;
+  }
+
+  function buildPlan(){
+    var box = $("scr-plan");
+    box.innerHTML = "";
+    box.classList.toggle("nochips", outsOnly);
+    box.appendChild(el("h1","lt","Timeline"));
+    box.appendChild(el("p","lt-s", outsOnly
+      ? (T.outcomesIntro || "What the programme is expected to produce, and roughly when.")
+      : "Every deliverable in the order it happens. Tap one to see what it means."));
+
+    /* the whole year in one picture first, the list after it */
+    if (!outsOnly) box.appendChild(ganttCard());
+
+    /* the tick box: strip everything back to what the work should produce */
+    if (OUTS.length){
+      var tick = el("button","tick" + (outsOnly ? " on" : ""),
+        '<span class="bx" aria-hidden="true"></span>' +
+        '<span class="mid"><span class="t">Projected outcomes only</span>' +
+          '<span class="s">' + (outsOnly
+            ? "Deliverables hidden. Tap again for the full timeline."
+            : "Hide the delivery detail and show what it should produce") + '</span></span>' +
+        '<span class="n">' + OUTS.length + '</span>');
+      tick.type = "button";
+      tick.setAttribute("role","checkbox");
+      tick.setAttribute("aria-checked", outsOnly ? "true" : "false");
+      tick.addEventListener("click", function(){
+        outsOnly = !outsOnly;
+        buildPlan();
+        window.scrollTo({ top:0, behavior: reduced ? "auto" : "smooth" });
+      });
+      box.appendChild(tick);
+    }
+
+    /* filtering by project only makes sense when deliverables are on screen */
+    if (!outsOnly){
+      var chips = el("div","chips");
+      var mk = function(key, label, n){
+        var c = el("button","chip" + (pillar === key ? " on" : ""), esc(label) + "<b>" + n + "</b>");
+        c.type = "button";
+        c.addEventListener("click", function(){
+          pillar = key; buildPlan();
+          var box2 = $("scr-plan"), on = box2.querySelector(".chip.on");
+          if (on && on.scrollIntoView) on.scrollIntoView({ block:"nearest", inline:"center",
+            behavior: reduced ? "auto" : "smooth" });
+        });
+        chips.appendChild(c);
+      };
+      mk("all", "Everything", ms.length);
+      T.pillars.forEach(function(p){
+        mk(p.key, p.name, ms.filter(function(m){ return m.p === p.key; }).length);
+      });
+      box.appendChild(chips);
+    }
+
+    /* One group per window of the year. The month is the only heading — the
+       work under it is white, every deliverable under that is light blue, and
+       the three gap sizes are what make it navigable without a single box. */
+    var any = 0;
+    var groups = outsOnly ? T.phases.map(function(p){
+      return { phase: p, rail: p.rail, outs: outsIn(p.id) }; }) : monthGroups(pillar);
+
+    groups.forEach(function(gr){
+      var p = gr.phase;
+      var outs = outsOnly ? gr.outs : null;
+      if (outsOnly && !outs.length) return;
+      any++;
+
+      var n = outsOnly ? outs.length : gr.rows.length;
+      box.appendChild(el("div","tl-m" + (any === 1 ? " f" : ""),
+        '<span>' + esc(gr.rail) + '</span><b>' + n + " " +
+        (outsOnly ? (n === 1 ? "outcome" : "outcomes")
+                  : (n === 1 ? "deliverable" : "deliverables")) + '</b>'));
+
+      var g = el("section", outsOnly ? "tl-g tl-o" : "tl-g");
+
+      if (outsOnly){
+        outs.forEach(function(o){ g.appendChild(outcomeBox(o)); });
+      } else {
+        gr.projects.forEach(function(pr){
+          var pl = pr.pillar, rows = pr.rows;
+          g.appendChild(el("div","tl-t", esc(pl.name) + "<b>" + rows.length + "</b>"));
+          var lane = el("div","tl-l");
+          rows.forEach(function(m){
+            var s = st(m.s);
+            var b = el("button","tl-d",
+              '<span class="tl-x">' + esc(m.t) + '</span>' +
+              (m.s === "todo" ? "" : '<span class="st ' + s.cls + '">' + esc(s.label) + '</span>'));
+            b.type = "button";
+            b.addEventListener("click", function(){ milestoneSheet(m); });
+            lane.appendChild(b);
+          });
+          g.appendChild(lane);
+        });
+      }
+      box.appendChild(g);
+    });
+
+    if (!any){
+      var e = el("div","empty", outsOnly
+        ? "No projected outcomes recorded yet."
+        : "Nothing in this project yet.<br><button type='button'>Show everything</button>");
+      var btn = e.querySelector("button");
+      if (btn) btn.addEventListener("click", function(){ pillar = "all"; buildPlan(); });
+      e.style.marginTop = "26px";
+      box.appendChild(e);
+    }
+
+    requestAnimationFrame(function(){ tlMeasure("scr-plan"); });
+
+    box.appendChild(el("p","note", outsOnly
+      ? OUT_NOTE + " Each box says what it rests on and what would stop it. " +
+        "Timing is calculated from the windows in the agreement" +
+        (firm ? "." : ", from a provisional kick-off of " + fmt(start) + ".")
+      : "Months are the window the work runs in, not booked dates. The order matters more " +
+        "than the dates: sequencing is confirmed at the start and depends on team capacity, " +
+        "content availability and technical scope." + (firm ? "" :
+        " Everything is calculated from a provisional kick-off of " + fmt(start) + ".")));
+  }
+
+  /* =========================================================== PROJECTS == */
+  function buildWork(){
+    var box = $("scr-work");
+    box.innerHTML = "";
+    box.appendChild(el("h1","lt","Projects"));
+    box.appendChild(el("p","lt-s",T.pillars.length + " projects, " + ms.length + " deliverables between them."));
+
+    var rows = el("div","rows");
+    rows.style.marginTop = "22px";
+    T.pillars.forEach(function(p){
+      var list = ms.filter(function(m){ return m.p === p.key; });
+      var done = list.filter(function(m){ return m.s === "done"; }).length;
+      var waiting = list.filter(function(m){ return m.s === "waiting" || m.s === "blocked"; }).length;
+      var r = el("button","row big nodiv");
+      r.type = "button";
+      r.innerHTML =
+        '<span class="mid">' +
+          '<span class="t">' + esc(p.name) + '</span>' +
+          '<span class="s">' + esc(p.sub) + '</span>' +
+          '<span class="pbar" style="margin-top:11px"><i data-w="' +
+            (list.length ? Math.round(done/list.length*100) : 0) + '"></i></span>' +
+        '</span>' +
+        '<span class="r">' + done + '/' + list.length +
+          (waiting ? '<br><span class="pill amber" style="margin-top:6px">' + waiting + ' you</span>' : '') +
+        '</span>' +
+        '<span class="chev"></span>';
+      r.addEventListener("click", function(){ projectSheet(p); });
+      rows.appendChild(r);
+    });
+    box.appendChild(rows);
+    fillBars(box);
+  }
+
+  /* ================================================================ YOU == */
+  function buildYou(){
+    var box = $("scr-you");
+    box.innerHTML = "";
+    box.appendChild(el("h1","lt", outstanding ? "Waiting<br>on you" : "Nothing<br>on you"));
+    box.appendChild(el("p","lt-s", outstanding
+      ? outstanding + " open " + (outstanding === 1 ? "item" : "items") +
+        (blockers.length ? " · " + blockers.length + " hold up Phase 1" : "")
+      : "Everything in flight is ours to deliver."));
+
+    if (!outstanding){
+      var ok = el("div","card");
+      ok.style.marginTop = "22px";
+      ok.innerHTML = '<div class="hero"><div class="k" style="color:var(--green)">All clear</div>' +
+        '<div class="v">Nothing<br>outstanding</div></div>';
+      box.appendChild(ok);
+      return;
+    }
+
+    if (blockers.length){
+      box.appendChild(el("div","grp","Blocks Phase 1"));
+      var b1 = el("div","rows");
+      blockers.forEach(function(d){ b1.appendChild(decRow(d, true)); });
+      box.appendChild(b1);
+    }
+
+    var rest = openDec.filter(function(d){ return !d.blocker; });
+    if (rest.length){
+      box.appendChild(el("div","grp","Decisions we need"));
+      var b2 = el("div","rows");
+      rest.forEach(function(d){ b2.appendChild(decRow(d, false)); });
+      box.appendChild(b2);
+    }
+
+    if (extraWaiting.length){
+      box.appendChild(el("div","grp","Also waiting on you"));
+      var b3 = el("div","rows");
+      extraWaiting.forEach(function(m){ b3.appendChild(msRow(m, true)); });
+      box.appendChild(b3);
+    }
+
+    var settled = T.decisions.filter(function(d){ return d.s === "done"; });
+    if (settled.length){
+      box.appendChild(el("div","grp","Already decided"));
+      var b4 = el("div","rows");
+      settled.forEach(function(d){ b4.appendChild(decRow(d, false)); });
+      box.appendChild(b4);
+    }
+
+    box.appendChild(el("p","note",
+      "These are the only things holding anything up. Everything else is ours to do."));
+  }
+
+  function decRow(d, isBlocker){
+    var settled = d.s === "done";
+    var r = el("button","row");
+    r.type = "button";
+    r.innerHTML =
+      '<span class="dot ' + (settled ? "done" : isBlocker ? "block" : "wait") + '"></span>' +
+      '<span class="mid"><span class="t">' + esc(d.q) + '</span>' +
+        '<span class="s">' + (settled && d.answer ? esc(d.answer) : "Decision " + esc(d.n)) + '</span></span>' +
+      '<span class="st ' + (settled ? "done" : isBlocker ? "block" : "wait") + '">' +
+        (settled ? "Done" : isBlocker ? "Blocks" : esc(d.by.replace(/^Phase /, "P"))) + '</span>';
+    r.addEventListener("click", function(){ decisionSheet(d); });
+    return r;
+  }
+
+  /* ======================================================= HIS OWN TRACKER =
+     Everything above reports what Digital Movement says. This screen is Paul's
+     own copy: he sets the status, it saves in this browser on this phone, and
+     it never touches what we publish. Two rules keep it honest — our status is
+     always shown next to his, and one tap puts a line back to ours. */
+  var TKEY = "hr-tracker-v1";
+  var mine = {}, tkFilter = "all";
+
+  var tkSavedAt = "";
+  function tkLoad(){
+    try{
+      var raw = JSON.parse(window.localStorage.getItem(TKEY) || "{}");
+      mine = raw && raw.mine ? raw.mine : {};
+      if (raw && raw.at && Object.keys(mine).length)
+        tkSavedAt = "Saved on this phone · " + new Date(raw.at).toLocaleString("en-GB",
+          { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" });
+    }catch(e){ mine = {}; }
+  }
+  function tkSave(){
+    try{
+      window.localStorage.setItem(TKEY, JSON.stringify({ mine:mine, at:new Date().toISOString() }));
+      tkSavedAt = "Saved on this phone · " + new Date().toLocaleString("en-GB",
+        { day:"numeric", month:"short", hour:"2-digit", minute:"2-digit" });
+    }catch(e){
+      tkSavedAt = "This browser will not let the page save. Export before you close it.";
+    }
+    var n = $("tkSaved"); if (n) n.textContent = tkSavedAt;
+  }
+  function mid(m){ return m.ph + "|" + m.p + "|" + m.o + "|" + m.t; }
+  function tkState(m){ var k = mine[mid(m)]; return STATUS[k] ? k : m.s; }
+  function tkOwn(m){ var k = mine[mid(m)]; return !!(STATUS[k] && k !== m.s); }
+  function buzz(n){ try{ if (navigator.vibrate) navigator.vibrate(n); }catch(e){} }
+
+  var TK_ORDER = ["todo","active","waiting","blocked","done"];
+  var TK_LABEL = { todo:"Not started", active:"Under way",
+                   waiting:"Waiting on you", blocked:"Blocked", done:"Done" };
+
+  function tkSet(m, k){
+    var id = mid(m);
+    if (k === m.s) delete mine[id]; else mine[id] = k;   /* back to ours = no override */
+    tkSave();
+
+    var card = $("scr-track").querySelector('.tkc[data-id="' + cssEsc(id) + '"]');
+    if (card){
+      card.dataset.s = k;
+      card.classList.toggle("mine", tkOwn(m));
+      var chip = card.querySelector(".stc");
+      chip.dataset.s = k;
+      chip.innerHTML = '<span class="dot"></span>' + esc(TK_LABEL[k]);
+      card.querySelector(".tkc-s").textContent =
+        tkOwn(m) ? "we say " + oursWord(m) : "";
+      card.classList.remove("bump"); void card.offsetWidth; card.classList.add("bump");
+    }
+    tkHead();
+    buzz(k === "done" ? 14 : 8);
+    if (k === "done" && card) burstIf(m, card);
+  }
+  function cssEsc(s){ return s.replace(/["\\]/g, "\\$&"); }
+
+  /* a whole phase finishing is worth marking, once */
+  function burstIf(m, node){
+    if (reduced) return;
+    var sib = ms.filter(function(x){ return x.ph === m.ph; });
+    if (!sib.length || !sib.every(function(x){ return tkState(x) === "done"; })) return;
+    var r = node.getBoundingClientRect(), cx = r.left + r.width/2, cy = r.top + r.height/2;
+    for (var i = 0; i < 16; i++){
+      (function(i){
+        var s = el("i","spark");
+        s.style.background = i % 3 ? "#3AD6C5" : "#CB8CFF";
+        s.style.left = cx + "px"; s.style.top = cy + "px";
+        document.body.appendChild(s);
+        var a = (i/16) * Math.PI * 2, d = 70 + Math.random() * 60;
+        s.animate([{ transform:"translate(-50%,-50%) scale(1)", opacity:1 },
+                   { transform:"translate(" + (Math.cos(a)*d - 50) + "%," +
+                     (Math.sin(a)*d - 50) + "%) scale(.3)", opacity:0 }],
+                  { duration:660 + Math.random()*240, easing:"cubic-bezier(.2,.7,.3,1)" })
+          .onfinish = function(){ s.remove(); };
+      })(i);
+    }
+  }
+
+  function tkList(){
+    return ms.filter(function(m){ return tkFilter === "all" || m.p === tkFilter; });
+  }
+
+  /* the hero counts, redrawn without rebuilding the list under his thumb */
+  function tkHead(){
+    var list = tkList();
+    var done = list.filter(function(m){ return tkState(m) === "done"; }).length;
+    var p = list.length ? Math.round(done/list.length*100) : 0;
+    var n = $("tkPct"); if (n) n.textContent = p + "%";
+    var c = $("tkCount");
+    if (c) c.innerHTML = "<b>" + done + " of " + list.length + "</b> ticked off" +
+      (tkFilter === "all" ? " across the whole programme."
+                          : " in " + esc(pillarOf(tkFilter).name) + ".");
+    var f = $("tkRing");
+    if (f){
+      var circ = 2 * Math.PI * 25;
+      f.style.strokeDashoffset = (circ * (1 - p/100)).toFixed(1);
+    }
+    monthGroups(tkFilter).forEach(function(gr){
+      var b = $("tkm-" + gr.phase.id);
+      if (b) b.textContent = gr.rows.filter(function(m){ return tkState(m) === "done"; }).length +
+        " of " + gr.rows.length + " ticked";
+      gr.projects.forEach(function(pr){
+        var e = $("tkp-" + gr.phase.id + "-" + pr.pillar.key);
+        if (e) e.textContent = pr.rows.filter(function(m){ return tkState(m) === "done"; }).length +
+          "/" + pr.rows.length;
+      });
+    });
+
+    var own = ms.filter(tkOwn).length;
+    $("trackBadge").textContent = own;
+    $("trackBadge").hidden = !own;
+  }
+
+  function tkCard(m){
+    var k = tkState(m);
+    var c = el("div","tkc" + (tkOwn(m) ? " mine" : ""));
+    c.dataset.s = k;
+    c.dataset.id = mid(m);
+    c.innerHTML =
+      '<button type="button" class="tkc-t">' + esc(m.t) + '</button>' +
+      '<button type="button" class="stc" data-s="' + k + '">' +
+        '<span class="dot"></span>' + esc(TK_LABEL[k]) + '</button>' +
+      /* only says anything when his mark and ours disagree — that difference is
+         the one thing this screen must never hide */
+      '<span class="tkc-s">' + (tkOwn(m) ? 'we say ' + esc(oursWord(m)) : '') + '</span>';
+    c.querySelector(".stc").addEventListener("click", function(){ pickSheet(m); });
+    c.querySelector(".tkc-t").addEventListener("click", function(){ milestoneSheet(m); });
+    return c;
+  }
+
+  function oursWord(m){ return (TK_LABEL[m.s] || "not started").toLowerCase(); }
+
+  function pickSheet(m){
+    var here = tkState(m);
+    var html =
+      '<div class="sh-k" style="color:var(--teal)">Your tracker</div>' +
+      '<h2 class="sh-t">' + esc(m.t) + '</h2>' +
+      '<p class="sh-d">Where do you think this stands?</p>' +
+      '<div class="pk">';
+    TK_ORDER.forEach(function(k){
+      html += '<button type="button" data-k="' + k + '" data-s="' + k + '"' +
+        (k === here ? ' class="sel"' : '') + '>' +
+        '<span class="dot"></span>' + esc(TK_LABEL[k]) +
+        (k === here ? '<span class="ok">Now</span>' : '') + '</button>';
+    });
+    html += '</div><p class="ours">We have this down as <b>' + esc(oursWord(m)) +
+      '</b>. Setting it back to that removes your mark. What you choose here stays on this phone.</p>';
+    openSheet(html);
+    Array.prototype.forEach.call(sheetIn.querySelectorAll(".pk button"), function(b){
+      b.addEventListener("click", function(){ tkSet(m, b.dataset.k); closeSheet(); });
+    });
+  }
+
+  function tkReport(){
+    var out = ["HUSBAND RETAIL — YOUR TRACKER",
+               new Date().toLocaleString("en-GB"),
+               "Your marks, not Digital Movement's published status.", ""];
+    T.phases.forEach(function(p){
+      var rows = ms.filter(function(m){ return m.ph === p.id; });
+      if (!rows.length) return;
+      out.push("PHASE " + p.n + " — " + p.name.toUpperCase() +
+        "  (" + monthSpan(p) + (firm ? "" : ", provisional") + ")");
+      rows.forEach(function(m){
+        var k = tkState(m), pad = TK_LABEL[k];
+        while (pad.length < 16) pad += " ";
+        out.push("  [" + pad + "] " + m.t + (tkOwn(m) ? "   <- your mark" : ""));
+      });
+      out.push("");
+    });
+    var done = ms.filter(function(m){ return tkState(m) === "done"; }).length;
+    out.push(done + " of " + ms.length + " ticked off.",
+             ms.filter(tkOwn).length + " differ from what we publish.", "",
+             "Every line traces to the service agreement issued " + fmt(parse(M.contractIssued)) + ".");
+    return out.join("\n");
+  }
+
+  function exportSheet(){
+    openSheet(
+      '<div class="sh-k" style="color:var(--teal)">Your tracker</div>' +
+      '<h2 class="sh-t">Send it on</h2>' +
+      '<p class="sh-d">A plain-text copy of every line and where you have it. ' +
+      'Paste it into an email or a message.</p>' +
+      '<textarea class="sh-out" id="tkOut" readonly></textarea>' +
+      '<button type="button" class="sh-go" id="tkCopy">Copy it</button>');
+    $("tkOut").value = tkReport();
+    $("tkCopy").addEventListener("click", function(){
+      var ta = $("tkOut"), b = $("tkCopy");
+      var done = function(){ b.textContent = "Copied"; setTimeout(function(){ b.textContent = "Copy it"; }, 1500); };
+      if (navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(ta.value).then(done, function(){ legacy(); });
+      } else legacy();
+      function legacy(){
+        ta.removeAttribute("readonly"); ta.select();
+        try{ document.execCommand("copy"); }catch(e){}
+        ta.setAttribute("readonly",""); done();
+      }
+    });
+  }
+
+  function buildTrack(){
+    var box = $("scr-track");
+    box.innerHTML = "";
+    box.appendChild(el("h1","lt","Your tracker"));
+    box.appendChild(el("p","lt-s",
+      "Every line of the programme, and where you have it. Tick things off as you see them land."));
+    box.appendChild(el("p","tk-note",
+      "This screen is yours. What you set here is saved in this browser on this phone, " +
+      "and it does not change what we report on the other screens. " +
+      "Where your mark differs from ours, both are shown."));
+
+    var circ = 2 * Math.PI * 25;
+    var hero = el("div","tk-hero",
+      '<div class="k">Your count</div>' +
+      '<div class="ring"><svg viewBox="0 0 58 58" aria-hidden="true">' +
+        '<circle class="t" cx="29" cy="29" r="25"/>' +
+        '<circle class="f" id="tkRing" cx="29" cy="29" r="25" stroke-dasharray="' + circ.toFixed(1) +
+        '" stroke-dashoffset="' + circ.toFixed(1) + '"/></svg><b id="tkPct">0%</b></div>' +
+      '<div class="n" id="tkCount"></div>');
+    box.appendChild(hero);
+
+    var saved = el("p","tk-saved", esc(tkSavedAt || "Nothing marked yet."));
+    saved.id = "tkSaved";
+    box.appendChild(saved);
+
+    var chips = el("div","chips");
+    var mk = function(key, label, n){
+      var c = el("button","chip" + (tkFilter === key ? " on" : ""), esc(label) + "<b>" + n + "</b>");
+      c.type = "button";
+      c.addEventListener("click", function(){
+        tkFilter = key; buildTrack();
+        var on = $("scr-track").querySelector(".chip.on");
+        if (on && on.scrollIntoView) on.scrollIntoView({ block:"nearest", inline:"center",
+          behavior: reduced ? "auto" : "smooth" });
+      });
+      chips.appendChild(c);
+    };
+    mk("all", "Everything", ms.length);
+    T.pillars.forEach(function(p){
+      mk(p.key, p.name, ms.filter(function(m){ return m.p === p.key; }).length);
+    });
+    box.appendChild(chips);
+
+    /* Same shape as the Timeline, down to the month bands and the project
+       headings, because it is the same list of work. The only difference is
+       that each row here is something he can tick. */
+    var any = 0;
+    monthGroups(tkFilter).forEach(function(gr){
+      any++;
+      var done = gr.rows.filter(function(m){ return tkState(m) === "done"; }).length;
+      box.appendChild(el("div","tl-m" + (any === 1 ? " f" : ""),
+        '<span>' + esc(gr.rail) + '</span>' +
+        '<b id="tkm-' + gr.phase.id + '">' + done + " of " + gr.rows.length + ' ticked</b>'));
+
+      var g = el("section","tl-g");
+      gr.projects.forEach(function(pr){
+        var pl = pr.pillar, rows = pr.rows;
+        var d = rows.filter(function(m){ return tkState(m) === "done"; }).length;
+        g.appendChild(el("div","tl-t", esc(pl.name) +
+          '<b id="tkp-' + gr.phase.id + '-' + pl.key + '">' + d + "/" + rows.length + '</b>'));
+        var lane = el("div","tl-l tk-lane");
+        rows.forEach(function(m){ lane.appendChild(tkCard(m)); });
+        g.appendChild(lane);
+      });
+      box.appendChild(g);
+    });
+
+    var tools = el("div","tk-tools");
+    var ex = el("button","go","Export"); ex.type = "button";
+    ex.addEventListener("click", exportSheet);
+    var rs = el("button", null, "Reset to ours"); rs.type = "button";
+    rs.addEventListener("click", function(){
+      if (!ms.filter(tkOwn).length) return;
+      if (!window.confirm("Clear your marks and go back to the status Digital Movement publishes?")) return;
+      mine = {}; tkSave(); buildTrack(); buzz(12);
+    });
+    tools.appendChild(ex); tools.appendChild(rs);
+    box.appendChild(tools);
+
+    box.appendChild(el("p","note",
+      "Nothing here is sent to us. If you want us to change something, tell us and we will " +
+      "update the published status — that is the one everybody works from."));
+
+    tkHead();
+    requestAnimationFrame(function(){ tlMeasure("scr-track"); });
+  }
+
+  /* --------------------------------------------------- progress bar fills */
+  function fillBars(scope){
+    requestAnimationFrame(function(){
+      Array.prototype.forEach.call(scope.querySelectorAll(".pbar i[data-w]"), function(b){
+        b.style.width = b.dataset.w + "%";
+      });
+    });
+  }
+
+  /* ============================================================ SCREENS == */
+  var TITLES = { dash:"Dashboard", overview:"Overview", plan:"Timeline",
+                 track:"Your tracker", work:"Projects", you:"Waiting on you" };
+  var ALIAS = { now:"dash" };   /* older shared links still land somewhere sane */
+  var screen = "dash", mem = {};
+  var tabBtns = Array.prototype.slice.call($("tabs").querySelectorAll("button"));
+
+  /* Skipping the layout of an off-screen month is only safe once its real
+     height is recorded — otherwise the page changes length under his thumb.
+     So it is measured the first time the screen is actually on, then never
+     again, and the browser is told to remember it from there. */
+  function tlMeasure(id){
+    var gs = $(id || "scr-plan").querySelectorAll(".tl-g");
+    if (!gs.length || !gs[0].offsetHeight) return;
+    Array.prototype.forEach.call(gs, function(g){
+      if (g.dataset.h) return;
+      /* ceil, not round: an intrinsic size a fraction UNDER the real one makes
+         the page grow as each month renders. Over is invisible. */
+      var h = Math.ceil(g.getBoundingClientRect().height);
+      if (!h) return;
+      g.dataset.h = h;
+      g.style.setProperty("contain-intrinsic-size", "auto " + h + "px");
+      g.style.setProperty("content-visibility", "auto");
+    });
+  }
+
+  /* ========================================================= MESSAGE US ==
+     He can reach us from any screen without leaving the app. The message goes
+     to our own endpoint, which puts it in front of a human — it is not stored
+     on his phone and there is no reply channel in here, so the sheet says
+     exactly that rather than implying a chat. */
+  var MSG_URL = "https://leads.digitalmovement.uk/hr-message.php";
+
+  function msgSheet(){
+    openSheet(
+      '<div class="sh-k" style="color:var(--tx-3)">Message us</div>' +
+      '<h2 class="sh-t">Ask us anything</h2>' +
+      '<p class="sh-d">A question, a change, something that looks wrong. It goes ' +
+        'straight to the team working on your programme.</p>' +
+      '<div class="ans"><textarea class="sh-out msg-tx" id="msgTx" ' +
+        'placeholder="Type your message"></textarea></div>' +
+      /* the honeypot: a real person never sees this, a bot fills it in */
+      '<input type="text" name="company" id="msgHp" tabindex="-1" autocomplete="off" ' +
+        'aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px">' +
+      '<button type="button" class="msg-s" id="msgGo">Send</button>' +
+      '<div class="msg-e" id="msgErr" hidden></div>' +
+      '<div class="sh-w">We reply by email. There is no inbox in this app, so ' +
+        'nothing you send here shows up on this screen again.</div>');
+
+    var t0 = Date.now();
+    var tx = $("msgTx"), go2 = $("msgGo"), err = $("msgErr");
+    setTimeout(function(){ tx.focus(); }, 260);
+
+    go2.addEventListener("click", function(){
+      var text = (tx.value || "").trim();
+      err.hidden = true;
+      if (text.length < 2){ err.textContent = "Type a message first."; err.hidden = false; return; }
+      go2.disabled = true; go2.textContent = "Sending…";
+
+      fetch(MSG_URL, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          message: text,
+          /* more than one client signs into this app now, so the message has to
+             say who is writing rather than assuming */
+          from:    (window.PPLUS && window.PPLUS.who) || "",
+          screen:  TITLES[screen] || screen,
+          hp:      $("msgHp").value,
+          ms:      Date.now() - t0,
+          consent: true
+        })
+      })
+      .then(function(r){ return r.json().catch(function(){ return { ok: r.ok }; }); })
+      .then(function(j){
+        if (!j || !j.ok) throw new Error((j && j.error) || "not delivered");
+        buzz(14);
+        openSheet(
+          '<div class="sh-k" style="color:var(--green)">Sent</div>' +
+          '<h2 class="sh-t">It is with us</h2>' +
+          '<p class="msg-ok">We have your message. We will come back to you ' +
+            'by email.</p>');
+      })
+      .catch(function(e){
+        go2.disabled = false; go2.textContent = "Send";
+        err.innerHTML = "That did not send. Email us at " +
+          '<a href="mailto:hello@digitalmovement.uk?subject=Husband%20Retail%20programme" ' +
+          'style="color:var(--amber)">hello@digitalmovement.uk</a> and we will pick it up.';
+        err.hidden = false;
+      });
+    });
+  }
+  $("msgB").addEventListener("click", msgSheet);
+
+  function go(k){
+    if (!TITLES[k]) return;
+    mem[screen] = window.pageYOffset || 0;
+    document.getElementById("scr-" + screen).classList.remove("on");
+    screen = k;
+    var node = document.getElementById("scr-" + screen);
+    node.classList.add("on");
+    $("barTitle").textContent = TITLES[k];
+    tabBtns.forEach(function(b){
+      var on = b.dataset.s === k;
+      b.classList.toggle("on", on);
+      b.setAttribute("aria-current", on ? "page" : "false");
+    });
+    closeSheet();
+    window.scrollTo(0, mem[k] || 0);
+    fillBars(node);
+    if (k === "plan" || k === "track")
+      requestAnimationFrame(function(){ tlMeasure("scr-" + k); });
+    onScroll();
+    if (location.hash !== "#" + k) history.replaceState(null, "", "#" + k);
+  }
+  tabBtns.forEach(function(b){
+    b.addEventListener("click", function(){
+      /* tapping the tab you are already on jumps back to the top, the way
+         every other app on the phone behaves */
+      if (b.dataset.s === screen){
+        window.scrollTo({ top:0, behavior: reduced ? "auto" : "smooth" });
+        return;
+      }
+      go(b.dataset.s);
+    });
+  });
+
+  /* a shared link like …/tracker/#you opens on that screen, even if the app
+     is already open — the browser does not reload for a hash change */
+  window.addEventListener("hashchange", function(){
+    var k = location.hash.replace(/^#/, "");
+    if (ALIAS[k]) k = ALIAS[k];
+    if (TITLES[k] && k !== screen) go(k);
+  });
+
+  /* the bar title appears once the large title has scrolled away */
+  var bar = $("bar");
+  /* Scroll has to be free. Everything this used to measure on every event —
+     the filter strip's height, which month had reached the top — is now a CSS
+     constant or handled by position:sticky, so the only job left is the
+     hairline under the top bar, and even that waits for a frame. Reading
+     layout and writing a custom property on every scroll event was what made
+     this stutter on a phone. */
+  var ticking = false, barOn = false;
+  function onScroll(){
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(function(){
+      ticking = false;
+      var on = (window.pageYOffset || 0) > 42;
+      if (on !== barOn){ barOn = on; bar.classList.toggle("on", on); }
+    });
+  }
+  window.addEventListener("scroll", onScroll, { passive:true });
+
+  /* ============================================================== BOOT === */
+  $("youBadge").textContent = outstanding;
+  $("youBadge").hidden = !outstanding;
+
+  tkLoad();
+
+  buildDash();
+  buildOverview();
+  buildPlan();
+  buildTrack();
+  buildWork();
+  buildYou();
+
+  var h = location.hash.replace(/^#/, "");
+  if (ALIAS[h]) h = ALIAS[h];
+  go(TITLES[h] ? h : "dash");
+
+  /* the "since you last looked" list is built from the snapshot taken on his
+     PREVIOUS visit, so it is only stamped once this visit has been rendered */
+  fillBars(document);
+  onScroll();
+
+  /* The sign-in screen owns the account, so it adds the way out — after the
+     screens exist, because it hangs off the bottom of "You". */
+  if (window.PPLUS && window.PPLUS.addSignOut) { window.PPLUS.addSignOut(); }
+
+};
+</script>
+
+<!-- Google's sign-in library. It is the one thing on this page fetched from
+     somewhere else, and it is here because a "Continue with Google" button that
+     is not Google's own button is a button people do not trust. Nothing is sent
+     to Google unless the button is pressed, and this app is behind a sign-in and
+     marked noindex, so it is not a page that needs to be third-party clean
+     before a visitor has agreed to anything. -->
+<script src="https://accounts.google.com/gsi/client" async defer></script>
+<script>
+/* ============================================================== PROJECT+ ===
+   The sign-in screen, and the only thing that can start the app.
+
+   HOW IT HANGS TOGETHER
+   1. This runs. The app underneath is hidden and, more to the point, empty.
+   2. It works out who you are — a link from an email, a session saved on this
+      phone, Google, or an email and a password.
+   3. With that proof it asks our server for the programme.
+   4. Only when the programme has arrived does it call window.__pplusBoot(),
+      which is the whole app.
+
+   So there is no moment where the app exists and the sign-in has not happened.
+   It is not a curtain in front of the content; the content is not here yet. */
+(function(){
+  "use strict";
+
+  var AUTH  = "https://leads.digitalmovement.uk/pplus-auth.php";
+  var DATA  = "https://leads.digitalmovement.uk/pplus-data.php";
+  var ASSET = "https://leads.digitalmovement.uk/pplus-asset.php";
+
+  /* Public on purpose. It names the app to Google; it is not a key, and Google
+     also checks the web address the request came from. */
+  var GOOGLE_CLIENT_ID = "1026787930268-mdjj3bvarruaadbhnk5gne4m840a7cmv.apps.googleusercontent.com";
+
+  var KEY = "pplus-session";                       /* the signed proof */
+  var WHO = "pplus-who";                           /* whose proof it is */
+  var APPKEYS = ["hr-tracker-v1", "hr-answers-v1"];/* one person's own ticks and notes */
+
+  var gate = document.getElementById("gate");
+  var body = document.getElementById("gateBody");
+  var sub  = document.getElementById("gateSub");
+
+  window.PPLUS = window.PPLUS || {};
+
+  function $(id){ return document.getElementById(id); }
+  function esc(s){ return String(s == null ? "" : s).replace(/[&<>"]/g, function(c){
+    return {"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]; }); }
+
+  /* ------------------------------------------------------------- the proof */
+
+  function token(){ try { return localStorage.getItem(KEY) || ""; } catch(e){ return ""; } }
+
+  function setToken(t, email){
+    try {
+      /* Two people, one iPad. The second one must not open the app and find the
+         first one's ticks and answers sitting there under their own name. */
+      var last = localStorage.getItem(WHO);
+      if (email && last && last !== email){
+        APPKEYS.forEach(function(k){ localStorage.removeItem(k); });
+      }
+      if (t){ localStorage.setItem(KEY, t); if (email) localStorage.setItem(WHO, email); }
+      else  { localStorage.removeItem(KEY); }
+    } catch(e){}
+  }
+
+  function clearAll(){
+    try {
+      localStorage.removeItem(KEY); localStorage.removeItem(WHO);
+      APPKEYS.forEach(function(k){ localStorage.removeItem(k); });
+    } catch(e){}
+  }
+
+  /* ------------------------------------------------------------- the wire */
+
+  function post(url, payload, cb){
+    var h = { "Content-Type": "application/json" };
+    var t = token(); if (t){ h.Authorization = "Bearer " + t; }
+    fetch(url, { method:"POST", headers:h, body:JSON.stringify(payload) })
+      .then(function(r){
+        return r.text().then(function(txt){
+          var j; try { j = JSON.parse(txt); } catch(e){ j = null; }
+          /* A server that answers with something other than an answer is a
+             server problem, and should say so rather than blaming the person. */
+          if (!j){ return { ok:false, error:"The server gave an answer we could not read. Please tell us.", code:"badjson" }; }
+          j.__status = r.status; return j;
+        });
+      })
+      .then(cb)
+      .catch(function(){
+        cb({ ok:false, error:"We could not reach the server. Check your connection and try again.", code:"net" });
+      });
+  }
+
+  function api(action, payload, cb){
+    payload = payload || {}; payload.action = action;
+    post(AUTH, payload, cb);
+  }
+
+  /* --------------------------------------------------------- small pieces */
+
+  function waiting(msg){ body.innerHTML = '<p class="gate-wait">' + esc(msg) + '</p>'; }
+
+  function msgBox(){
+    var m = $("ppMsg");
+    if (!m){ body.insertAdjacentHTML("beforeend", '<div id="ppMsg"></div>'); m = $("ppMsg"); }
+    return m;
+  }
+  function showErr(msg){
+    msgBox().innerHTML = '<div class="gate-err"><b>That did not work</b>' + esc(msg) + '</div>';
+  }
+  function showOk(title, msg){
+    msgBox().innerHTML = '<div class="gate-ok"><b>' + esc(title) + '</b>' + esc(msg) + '</div>';
+  }
+  function busy(b, t){ if (b){ b.disabled = true; b.textContent = t; } }
+  function done(b, t){ if (b){ b.disabled = false; b.textContent = t; } }
+
+  function seeToggle(){
+    var s = $("ppSee"); if (!s) return;
+    s.addEventListener("click", function(){
+      var i = $("ppPw"), hidden = i.type === "password";
+      i.type = hidden ? "text" : "password";
+      s.textContent = hidden ? "Hide" : "Show";
+    });
+  }
+
+  var EMAIL_FIELD =
+    '<div class="gate-f">' +
+      '<label class="gate-l" for="ppEmail">Email address</label>' +
+      '<input class="gate-i" id="ppEmail" type="email" name="email" autocomplete="username" ' +
+        'inputmode="email" autocapitalize="off" autocorrect="off" spellcheck="false" required>' +
+    '</div>';
+
+  function pwField(label, mode, hint){
+    return '<div class="gate-f">' +
+      '<label class="gate-l" for="ppPw">' + esc(label) + '</label>' +
+      '<div class="gate-pw">' +
+        '<input class="gate-i" id="ppPw" type="password" name="password" autocomplete="' + mode + '" required>' +
+        '<button type="button" class="gate-see" id="ppSee">Show</button>' +
+      '</div>' +
+      (hint ? '<p class="gate-hint">' + esc(hint) + '</p>' : '') +
+    '</div>';
+  }
+
+  /* --------------------------------------------------------------- Google */
+
+  var gStarted = false;
+
+  /* The library is loaded with async, so it may not be here yet. Wait for it
+     quietly: if it never arrives, the email and password route is untouched and
+     the screen still works. */
+  function withGoogle(fn){
+    var n = 0;
+    (function tick(){
+      if (window.google && google.accounts && google.accounts.id) return fn();
+      if (++n > 60) return;
+      setTimeout(tick, 150);
+    })();
+  }
+
+  function googleButton(el){
+    if (!el) return;
+    withGoogle(function(){
+      if (!gStarted){
+        google.accounts.id.initialize({
+          client_id: GOOGLE_CLIENT_ID,
+          callback: onGoogle,
+          ux_mode: "popup",
+          auto_select: false
+        });
+        gStarted = true;
+      }
+      google.accounts.id.renderButton(el, {
+        theme: "filled_white", size: "large", shape: "pill",
+        text: "continue_with", logo_alignment: "center",
+        width: Math.max(240, Math.min(360, el.clientWidth || 320))
+      });
+    });
+  }
+
+  function onGoogle(res){
+    if (!res || !res.credential){ showErr("Google did not finish signing you in. Please try again."); return; }
+    waiting("Signing you in…");
+    api("google", { credential: res.credential }, handleAuth);
+  }
+
+  /* --------------------------------------------------------------- screens */
+
+  function renderSignIn(note){
+    sub.textContent = "Sign in to see your programme.";
+    body.innerHTML =
+      '<div class="gate-g" id="gBtn"></div>' +
+      '<p class="gate-gnote">One tap, if your email address is a Google account.</p>' +
+      '<div class="gate-or">or</div>' +
+      '<form id="ppF" novalidate>' + EMAIL_FIELD + pwField("Password", "current-password", "") +
+        '<button type="submit" class="gate-go" id="ppGo">Sign in</button>' +
+      '</form>' +
+      '<div id="ppMsg"></div>' +
+      '<p class="gate-alt">New here? <button type="button" id="ppToReg">Create an account</button><br>' +
+        '<button type="button" id="ppToForgot">Forgotten your password?</button></p>';
+
+    googleButton($("gBtn"));
+    seeToggle();
+    if (note) showErr(note);
+
+    $("ppToReg").addEventListener("click", function(){ renderRegister(); });
+    $("ppToForgot").addEventListener("click", function(){ renderForgot(); });
+
+    $("ppF").addEventListener("submit", function(e){
+      e.preventDefault();
+      var em = ($("ppEmail").value || "").trim(), pw = $("ppPw").value || "";
+      if (!em || !pw){ showErr("Please put in your email address and password."); return; }
+      busy($("ppGo"), "Signing in…");
+      api("login", { email: em, password: pw }, function(j){
+        done($("ppGo"), "Sign in");
+        if (j && j.ok === true) return handleAuth(j);
+        if (j && j.code === "unverified") return renderSent(em);
+        showErr((j && j.error) || "That did not work. Please try again.");
+      });
+    });
+  }
+
+  function renderRegister(){
+    sub.textContent = "Create your account.";
+    body.innerHTML =
+      '<div class="gate-g" id="gBtn"></div>' +
+      '<p class="gate-gnote">Google makes the account for you — there is nothing else to fill in.</p>' +
+      '<div class="gate-or">or</div>' +
+      '<form id="ppF" novalidate>' +
+        '<div class="gate-f">' +
+          '<label class="gate-l" for="ppName">Your name</label>' +
+          '<input class="gate-i" id="ppName" type="text" name="name" autocomplete="name" required>' +
+        '</div>' +
+        EMAIL_FIELD +
+        pwField("Choose a password", "new-password", "At least 10 characters. A short sentence you will remember beats a clever word.") +
+        /* invisible to a person, irresistible to a robot */
+        '<input type="text" id="ppHp" name="company" tabindex="-1" autocomplete="off" aria-hidden="true" ' +
+          'style="position:absolute;left:-9999px;width:1px;height:1px">' +
+        '<button type="submit" class="gate-go" id="ppGo">Create account</button>' +
+      '</form>' +
+      '<div id="ppMsg"></div>' +
+      '<p class="gate-alt">Already have an account? <button type="button" id="ppToIn">Sign in</button></p>';
+
+    googleButton($("gBtn"));
+    seeToggle();
+    $("ppToIn").addEventListener("click", function(){ renderSignIn(); });
+
+    $("ppF").addEventListener("submit", function(e){
+      e.preventDefault();
+      var nm = ($("ppName").value || "").trim();
+      var em = ($("ppEmail").value || "").trim();
+      var pw = $("ppPw").value || "";
+      if (!nm){ showErr("Please put your name in."); return; }
+      if (!em){ showErr("Please put your email address in."); return; }
+      if (pw.length < 10){ showErr("Please use a password of at least 10 characters."); return; }
+      busy($("ppGo"), "Creating…");
+      api("register", { name:nm, email:em, password:pw, hp:$("ppHp").value }, function(j){
+        done($("ppGo"), "Create account");
+        if (j && j.ok === true && j.token) return handleAuth(j);   /* already proven, e.g. via Google */
+        if (j && j.ok === true) return renderSent(em);
+        showErr((j && j.error) || "That did not work. Please try again.");
+      });
+    });
+  }
+
+  function renderSent(email){
+    sub.textContent = "Check your email.";
+    body.innerHTML =
+      '<div id="ppMsg"></div>' +
+      '<button type="button" class="gate-go quiet" id="ppResend">Send the link again</button>' +
+      '<p class="gate-alt"><button type="button" id="ppToIn">Back to sign in</button></p>';
+    showOk("One more step",
+      "We have sent a link to " + email + ". Open it on this phone and you are in. " +
+      "If it is not there in a minute, look in your junk folder.");
+
+    $("ppToIn").addEventListener("click", function(){ renderSignIn(); });
+    $("ppResend").addEventListener("click", function(){
+      busy($("ppResend"), "Sending…");
+      api("resend", { email: email }, function(){
+        done($("ppResend"), "Send the link again");
+        showOk("Sent", "Another link is on its way to " + email + ".");
+      });
+    });
+  }
+
+  function renderForgot(){
+    sub.textContent = "We will send you a link to set a new one.";
+    body.innerHTML =
+      '<form id="ppF" novalidate>' + EMAIL_FIELD +
+        '<button type="submit" class="gate-go" id="ppGo">Send me a link</button>' +
+      '</form>' +
+      '<div id="ppMsg"></div>' +
+      '<p class="gate-alt"><button type="button" id="ppToIn">Back to sign in</button></p>';
+
+    $("ppToIn").addEventListener("click", function(){ renderSignIn(); });
+    $("ppF").addEventListener("submit", function(e){
+      e.preventDefault();
+      var em = ($("ppEmail").value || "").trim();
+      if (!em){ showErr("Please put your email address in."); return; }
+      busy($("ppGo"), "Sending…");
+      api("forgot", { email: em }, function(){
+        done($("ppGo"), "Send me a link");
+        /* Always the same answer, whether or not that address has an account —
+           otherwise this screen becomes a way of finding out who is a client. */
+        showOk("On its way",
+          "If " + em + " has an account, a link is in the inbox now. It works for the next two days.");
+      });
+    });
+  }
+
+  function renderReset(tok){
+    sub.textContent = "Set a new password.";
+    body.innerHTML =
+      '<form id="ppF" novalidate>' +
+        pwField("New password", "new-password", "At least 10 characters.") +
+        '<button type="submit" class="gate-go" id="ppGo">Save and sign in</button>' +
+      '</form>' +
+      '<div id="ppMsg"></div>' +
+      '<p class="gate-alt"><button type="button" id="ppToIn">Back to sign in</button></p>';
+
+    seeToggle();
+    $("ppToIn").addEventListener("click", function(){ renderSignIn(); });
+    $("ppF").addEventListener("submit", function(e){
+      e.preventDefault();
+      var pw = $("ppPw").value || "";
+      if (pw.length < 10){ showErr("Please use a password of at least 10 characters."); return; }
+      busy($("ppGo"), "Saving…");
+      api("reset", { token: tok, password: pw }, function(j){
+        done($("ppGo"), "Save and sign in");
+        if (j && j.ok === true) return handleAuth(j);
+        showErr((j && j.error) || "That link did not work. Ask for a new one.");
+      });
+    });
+  }
+
+  /* Signed in, no project yet. This is not a failure and must not read like one:
+     they have done everything right, and there is exactly one thing left to do.
+
+     The box searches while they type, but it never suggests and never completes.
+     A name is either the name of their project or it is not there — and "not
+     there" covers both "no such project" and "not yours", because a box that
+     told those apart would be a way of finding out who our clients are. */
+  function renderJoin(){
+    sub.textContent = "Find your project.";
+    body.innerHTML =
+      '<form id="ppFindF" novalidate>' +
+        '<div class="gate-f">' +
+          '<label class="gate-l" for="ppQ">Project name</label>' +
+          '<input class="gate-i" id="ppQ" type="text" name="project" autocomplete="off" ' +
+            'autocapitalize="words" autocorrect="off" spellcheck="false" enterkeyhint="search">' +
+          '<p class="gate-hint">Type it the way it is written on your paperwork. Capital letters do not matter.</p>' +
+        '</div>' +
+      '</form>' +
+      '<div id="ppHit" aria-live="polite"></div>' +
+      '<div id="ppMsg"></div>' +
+      '<p class="gate-alt"><button type="button" id="ppAsk">Cannot find it? Ask us to open it</button><br>' +
+        '<button type="button" id="ppOut2">Sign out</button></p>';
+
+    var q = $("ppQ"), hit = $("ppHit"), timer = null, found = null;
+
+    function clearHit(){ hit.innerHTML = ""; found = null; }
+
+    function show(card){
+      found = card;
+      var src = (card.mark && /^data:image\//.test(card.mark)) ? card.mark : "";
+      hit.innerHTML =
+        '<div class="gate-card">' +
+          (src ? '<img src="' + esc(src) + '" alt="">' : '') +
+          '<div class="gate-card-t">' +
+            '<span class="gate-card-b">' + esc(card.brand) + '</span>' +
+            '<span class="gate-card-p">' + esc(card.project) + '</span>' +
+          '</div>' +
+        '</div>' +
+        '<button type="button" class="gate-go" id="ppJoin">Join</button>';
+      $("ppJoin").addEventListener("click", join);
+    }
+
+    /* Only say "no such project" once they have stopped — while somebody is
+       still typing, half a name is not a mistake. */
+    function miss(v){
+      hit.innerHTML = '<p class="gate-none">There is no project called ' +
+        '“' + esc(v) + '” on this account. Check the spelling, or ask us to open it for you.</p>';
+    }
+
+    function look(sayIfMissing){
+      var v = (q.value || "").trim();
+      if (v.length < 3){ clearHit(); return; }
+      api("find", { q: v }, function(r){
+        /* They carried on typing while we were asking — that answer is stale. */
+        if ((q.value || "").trim() !== v) return;
+        if (r && r.ok === true && r.found === true) return show(r);
+        clearHit();
+        if (sayIfMissing) miss(v);
+      });
+    }
+
+    function join(){
+      if (!found) return;
+      var b = $("ppJoin");
+      busy(b, "Opening…");
+      api("join", { prog: found.prog }, function(r){
+        done(b, "Join");
+        if (r && r.ok === true && r.pending !== true) return handleAuth(r);
+        showErr((r && r.error) || "We could not open that project. Please tell us.");
+      });
+    }
+
+    q.addEventListener("input", function(){
+      clearHit();
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function(){ look(false); }, 400);
+    });
+    q.addEventListener("blur", function(){ if (!found) look(true); });
+    $("ppFindF").addEventListener("submit", function(e){
+      e.preventDefault();
+      if (timer) clearTimeout(timer);
+      q.blur();
+      look(true);
+    });
+
+    $("ppOut2").addEventListener("click", signOut);
+    $("ppAsk").addEventListener("click", function(){
+      $("ppAsk").disabled = true;
+      api("ask", {}, function(){
+        showOk("We have your message",
+          "Somebody will open your project and you will get an email. There is nothing else for you to do.");
+      });
+    });
+  }
+
+  /* ---------------------------------------------------------- the way in */
+
+  function handleAuth(j){
+    if (!j || j.ok !== true){
+      renderSignIn((j && j.error) || "Something went wrong. Please try again.");
+      return;
+    }
+    setToken(j.token, j.email);
+    window.PPLUS.who   = j.name || j.email || "";
+    window.PPLUS.email = j.email || "";
+    if (j.pending === true){ renderJoin(); return; }
+    loadData();
+  }
+
+  function loadData(){
+    waiting("Opening your programme…");
+    fetch(DATA, { headers: { Authorization: "Bearer " + token() } })
+      .then(function(r){ return r.text().then(function(t){
+        var j; try { j = JSON.parse(t); } catch(e){ j = null; }
+        if (!j){ j = { ok:false, error:"The server gave an answer we could not read." }; }
+        j.__status = r.status; return j; }); })
+      .then(function(j){
+        if (j.ok === true && j.data){
+          window.TRACKER = j.data;
+          /* Pictures come through the same door as the words. An <img> cannot
+             send a header, so the pass travels in the address instead. */
+          window.PPLUS.assetBase = ASSET + "?t=" + encodeURIComponent(token()) + "&f=";
+          window.PPLUS.progName  = j.name || "";
+          if (j.you){ window.PPLUS.who = j.you.name || window.PPLUS.who; window.PPLUS.email = j.you.email || window.PPLUS.email; }
+          start();
+          return;
+        }
+        if (j.pending === true) return renderJoin();
+        if (j.__status === 401){ setToken("", ""); return renderSignIn("Please sign in again."); }
+        renderSignIn(j.error || "We could not open your programme.");
+      })
+      .catch(function(){
+        renderSignIn("We could not reach the server. Check your connection and try again.");
+      });
+  }
+
+  function start(){
+    /* The bar used to have one client's name typed into it. Now it says whose
+       programme is actually open. */
+    var c = document.querySelector(".bar-c");
+    if (c && window.PPLUS.progName) c.textContent = window.PPLUS.progName;
+
+    gate.hidden = true;
+    document.body.classList.remove("pp-locked");
+    try {
+      window.__pplusBoot();
+    } catch(err){
+      document.body.classList.add("pp-locked");
+      gate.hidden = false;
+      renderSignIn("Your programme arrived but the app could not open it. Please tell us — that one is ours, not yours.");
+    }
+  }
+
+  function signOut(){
+    clearAll();
+    if (window.google && google.accounts && google.accounts.id){
+      try { google.accounts.id.disableAutoSelect(); } catch(e){}
+    }
+    /* A clean reload rather than tearing the app down by hand: nothing of the
+       last person is left on the screen or in memory. */
+    location.replace(location.pathname);
+  }
+
+  /* Added to the bottom of "You" once the app has drawn itself. */
+  window.PPLUS.addSignOut = function(){
+    var you = document.getElementById("scr-you");
+    if (!you || document.getElementById("ppOut")) return;
+    var d = document.createElement("div");
+    d.className = "pp-out"; d.id = "ppOut";
+    d.innerHTML = '<div class="who">Signed in as ' + esc(window.PPLUS.email || window.PPLUS.who) + '</div>' +
+                  '<button type="button" id="ppOutB">Sign out</button>';
+    you.appendChild(d);
+    document.getElementById("ppOutB").addEventListener("click", signOut);
+  };
+
+  /* ----------------------------------------------------------- what to do */
+
+  var qs = new URLSearchParams(location.search);
+  var pv = qs.get("pv"), pr = qs.get("pr");
+
+  if (pv){
+    /* Take the link out of the address bar straight away, so it cannot be
+       shared, bookmarked or read over a shoulder after it has been used. */
+    history.replaceState(null, "", location.pathname + location.hash);
+    waiting("Confirming your email…");
+    api("verify", { token: pv }, handleAuth);
+  } else if (pr){
+    history.replaceState(null, "", location.pathname + location.hash);
+    renderReset(pr);
+  } else if (token()){
+    waiting("Signing you in…");
+    api("me", {}, function(j){
+      if (j && j.ok === true) return handleAuth(j);
+      setToken("", "");
+      renderSignIn();
+    });
+  } else {
+    renderSignIn();
+  }
+})();
+</script>
+</body>
+</html>
