@@ -1,0 +1,542 @@
+/* Digital Movement — Web Project Operating Process
+   Shared stylesheet for every HTML twin in this folder.
+   Mid-fidelity by house rule: readable, printable, not production-polished.
+   Edit here only. Never inline styles into a page. */
+
+:root {
+  --navy:        #1b2a4a;
+  --navy-deep:   #14203a;
+  --gold:        #b08d3f;
+  --gold-soft:   #f2ead6;
+  --ink:         #23262b;
+  --ink-soft:    #565b63;
+  --ink-faint:   #8a9099;
+  --rule:        #e2e4e8;
+  --paper:       #ffffff;
+  --paper-tint:  #f7f7f5;
+  --ok:          #2f7d4f;
+  --warn:        #a8571c;
+  --client-bg:   #eef6f0;
+  --client-line: #cfe3d6;
+  --measure:     72ch;
+  --pad:         clamp(1.25rem, 4vw, 3rem);
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  padding: 0 var(--pad) 6rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Helvetica, Arial, sans-serif;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--ink);
+  background: var(--paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+main, .wrap { max-width: 980px; margin: 0 auto; }
+
+/* ---------- Masthead ---------- */
+
+.masthead {
+  margin: 0 calc(var(--pad) * -1) 3rem;
+  padding: 2.25rem var(--pad) 2rem;
+  background: var(--navy);
+  color: #fff;
+}
+.masthead .wrap { max-width: 980px; margin: 0 auto; }
+.masthead .eyebrow {
+  font-size: .72rem;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin: 0 0 .5rem;
+  font-weight: 600;
+}
+.masthead h1 {
+  margin: 0;
+  font-size: clamp(1.5rem, 3.4vw, 2.1rem);
+  line-height: 1.2;
+  letter-spacing: -.01em;
+  color: #fff;
+}
+.masthead .sub { margin: .6rem 0 0; color: #c3cad6; max-width: var(--measure); }
+.masthead a { color: var(--gold-soft); }
+
+.fidelity-tag {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: .2rem .6rem;
+  border: 1px solid var(--gold);
+  border-radius: 2px;
+  font-size: .68rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+/* ---------- Market tabs ---------- */
+
+/* One document, several markets. The bar sticks to the top because each panel
+   runs to thousands of words and you lose the switch otherwise. */
+.tabbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  /* Never wrap. Nine tabs wrapped to four rows on a phone and ate a fifth of the
+     screen — permanently, because the bar is sticky. One scrolling row instead,
+     which also keeps the bar exactly 52px tall at every width so the sticky
+     table headers below can rely on that offset. */
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
+  gap: .25rem;
+  margin: 0 calc(var(--pad) * -1) 2rem;
+  padding: 0 var(--pad);
+  background: var(--paper);
+  border-bottom: 2px solid var(--navy);
+}
+.tabbar::-webkit-scrollbar { display: none; }
+.tab {
+  appearance: none;
+  flex: 0 0 auto;
+  white-space: nowrap;
+  margin: 0;
+  padding: .7rem 1.15rem;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  background: none;
+  font: inherit;
+  font-size: .92rem;
+  font-weight: 600;
+  letter-spacing: .01em;
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.tab:hover { color: var(--navy); }
+.tab:focus-visible { outline: 2px solid var(--gold); outline-offset: -2px; }
+.tab.on {
+  color: var(--navy);
+  border-bottom-color: var(--gold);
+}
+
+/* The first h2 in a panel sits directly under the bar, which already draws a
+   navy rule. Its own border-top would make that a double line. */
+.tabpanel > h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+
+/* Wide tables break out of the text column, so the sticky bar has to break out
+   with them — otherwise a filter row scrolls up and out the sides of it. Same
+   span as .table-filters.wide, deliberately. */
+@media (min-width: 1100px) {
+  .tabbar {
+    width: min(1680px, calc(100vw - 3rem));
+    margin-left: calc((min(1680px, 100vw - 3rem) - 100%) / -2);
+    margin-right: 0;
+    padding: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  .tabbar { gap: 0; }
+  .tab { padding: .6rem .8rem; font-size: .86rem; }
+}
+
+/* ---------- Type ---------- */
+
+h1, h2, h3, h4 { color: var(--navy); line-height: 1.25; letter-spacing: -.005em; }
+h2 {
+  margin: 3rem 0 1rem;
+  padding-top: 1.25rem;
+  border-top: 2px solid var(--navy);
+  font-size: 1.4rem;
+}
+h3 { margin: 2rem 0 .6rem; font-size: 1.12rem; }
+h4 { margin: 1.5rem 0 .4rem; font-size: .98rem; color: var(--ink); }
+p, li { max-width: var(--measure); }
+p { margin: 0 0 1rem; }
+ul, ol { margin: 0 0 1rem; padding-left: 1.3rem; }
+li { margin: .3rem 0; }
+strong { color: var(--navy); font-weight: 650; }
+a { color: var(--navy); text-underline-offset: .18em; }
+hr { border: 0; border-top: 1px solid var(--rule); margin: 2.5rem 0; }
+
+/* ---------- Fill-in cues ---------- */
+
+em { color: var(--ink-soft); }
+
+code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: .88em;
+  background: var(--paper-tint);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: .08em .34em;
+}
+pre {
+  background: var(--navy-deep);
+  color: #e6eaf2;
+  padding: 1.1rem 1.25rem;
+  border-radius: 3px;
+  overflow-x: auto;
+  font-size: .84rem;
+  line-height: 1.6;
+}
+pre code { background: none; border: 0; color: inherit; padding: 0; }
+
+blockquote {
+  margin: 1.5rem 0;
+  padding: .9rem 1.1rem;
+  background: var(--gold-soft);
+  border-left: 3px solid var(--gold);
+  color: #4a4231;
+}
+blockquote p { margin: 0; max-width: none; }
+
+/* ---------- Client feedback box ---------- */
+
+.clientnote {
+  margin: 1.75rem 0;
+  padding: 1.15rem 1.3rem;
+  background: var(--client-bg);
+  border: 1px solid var(--client-line);
+  border-left: 4px solid var(--ok);
+}
+.clientnote > :first-child { margin-top: 0; }
+.clientnote > :last-child  { margin-bottom: 0; }
+.clientnote h4 { margin: 0 0 .7rem; color: var(--ok); font-size: 1.02rem; }
+.clientnote p, .clientnote li { max-width: none; }
+.clientnote p  { margin: .65rem 0; }
+.clientnote ul { margin: .65rem 0; }
+
+/* ---------- Tables ---------- */
+
+.table-scroll { overflow-x: auto; margin: 1.25rem 0 1.75rem; }
+table {
+  border-collapse: collapse;
+  width: 100%;
+  min-width: 520px;
+  font-size: .92rem;
+}
+th, td {
+  text-align: left;
+  vertical-align: top;
+  padding: .55rem .7rem;
+  border-bottom: 1px solid var(--rule);
+}
+th {
+  background: var(--paper-tint);
+  color: var(--navy);
+  font-weight: 650;
+  border-bottom: 2px solid var(--navy);
+  white-space: nowrap;
+}
+tbody tr:hover { background: #fbfbfa; }
+td p, th p { max-width: none; margin: 0; }
+
+/* ---------- Wide data tables ---------- */
+/* A table of five or more columns breaks out of the 980px reading column and
+   uses the width of the window instead. The reading measure is right for prose
+   and wrong for a page tree: a tree you have to scroll sideways cannot be read
+   at all. Capped at the viewport, so the page itself never scrolls sideways. */
+@media (min-width: 1100px) {
+  .table-scroll.wide {
+    width: min(1680px, calc(100vw - 3rem));
+    margin-left: calc((min(1680px, 100vw - 3rem) - 100%) / -2);
+    overflow-x: visible;      /* lets the header row stick to the page scroll */
+  }
+  .table-scroll.wide table { min-width: 0; font-size: .82rem; }
+  .table-scroll.wide th, .table-scroll.wide td { padding: .5rem .6rem; }
+  /* Leave room for the sort arrow so it never sits on the last word. */
+  .table-scroll.wide th.sort { padding-right: 1.35rem; }
+  /* Headers wrap instead of forcing a column open. */
+  .table-scroll.wide th { white-space: normal; position: sticky; top: 0; z-index: 2; }
+  /* In a tabbed document the bar is already sticky at top:0, so a header row
+     stopping at 0 slides underneath it and you lose the column names halfway
+     down a 28-row table. Only tabbed documents get the offset — the sibling
+     selector means a single-market page keeps top:0. */
+  .tabbar ~ .tabpanel .table-scroll.wide th { top: 52px; }
+}
+
+/* ---------- Sortable columns ---------- */
+th.sort {
+  cursor: pointer;
+  user-select: none;
+  -webkit-user-select: none;
+  position: relative;
+  padding-right: 1.4rem;
+}
+th.sort::after {
+  content: "↕";
+  position: absolute;
+  right: .45rem;
+  top: .5rem;
+  font-size: .78em;
+  opacity: .32;
+}
+th.sort:hover { background: #eceff4; }
+th.sort[aria-sort="ascending"]::after  { content: "↑"; opacity: 1; }
+th.sort[aria-sort="descending"]::after { content: "↓"; opacity: 1; }
+th.sort[aria-sort]:not([aria-sort="none"]) { background: #e7ebf2; }
+.sort-hint {
+  margin: .2rem 0 0;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  max-width: none;
+}
+
+/* ---------- Column filters ---------- */
+/* One control per column, sitting above the table. Columns with a short list
+   of values get a dropdown of those values; a column with too many to list
+   gets a type-to-filter box. Filters combine: every one you set narrows the
+   rows further. */
+.table-filters {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  gap: .5rem .7rem;
+  margin: 1.5rem 0 .4rem;
+  padding: .7rem .8rem;
+  background: var(--paper-tint);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  max-width: none;
+}
+.table-filters .tf {
+  display: flex;
+  flex-direction: column;
+  gap: .15rem;
+  font-size: .68rem;
+  font-weight: 650;
+  letter-spacing: .04em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+.table-filters select,
+.table-filters input {
+  font: inherit;
+  font-size: .8rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: .3rem .35rem;
+  max-width: 15rem;
+}
+.table-filters select:focus,
+.table-filters input:focus { outline: 2px solid var(--gold); outline-offset: 1px; }
+.tf-clear {
+  font: inherit;
+  font-size: .78rem;
+  color: var(--navy);
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-radius: 2px;
+  padding: .34rem .7rem;
+  cursor: pointer;
+}
+.tf-clear:hover { background: #eceff4; }
+.filter-count {
+  margin: 0 0 .5rem;
+  font-size: .78rem;
+  color: var(--ink-soft);
+  max-width: none;
+}
+.filter-count.filtered { color: var(--navy); font-weight: 650; }
+
+/* The filter bar lines up with the table it belongs to. */
+@media (min-width: 1100px) {
+  .table-filters.wide,
+  .filter-count.wide {
+    width: min(1680px, calc(100vw - 3rem));
+    margin-left: calc((min(1680px, 100vw - 3rem) - 100%) / -2);
+  }
+  .filter-count.wide { margin-bottom: .5rem; }
+}
+
+/* Two-column metadata block at the head of each template — a headerless
+   key/value table, not a data table. */
+table.meta { min-width: 0; max-width: 640px; border-top: 2px solid var(--navy); }
+table.meta td:first-child { width: 38%; color: var(--navy); font-weight: 650; }
+
+/* ---------- Checklists ---------- */
+
+.task-list-item { list-style: none; margin-left: -1.3rem; }
+.task-list-item input { margin-right: .55rem; }
+
+/* ---------- Figure ---------- */
+
+figure { margin: 2rem 0; }
+figure img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+}
+figcaption { margin-top: .6rem; font-size: .85rem; color: var(--ink-soft); }
+
+/* ---------- Cards ---------- */
+
+.cards { display: flex; flex-wrap: wrap; gap: 1rem; margin: 1.5rem 0 2rem; padding: 0; list-style: none; }
+.cards li {
+  flex: 1 1 260px;
+  margin: 0;
+  padding: 1.1rem 1.2rem;
+  background: var(--paper-tint);
+  border: 1px solid var(--rule);
+  border-radius: 3px;
+  max-width: none;
+}
+.cards li .n {
+  display: block;
+  font-size: .7rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--gold);
+  font-weight: 650;
+  margin-bottom: .3rem;
+}
+.cards li a { font-weight: 650; text-decoration: none; }
+.cards li a:hover { text-decoration: underline; }
+.cards li p { font-size: .88rem; color: var(--ink-soft); margin: .35rem 0 0; }
+
+/* ---------- Footer ---------- */
+
+.doc-footer {
+  margin-top: 4rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  font-size: .82rem;
+  color: var(--ink-faint);
+}
+
+/* ---------- Print ---------- */
+
+@media print {
+  body { font-size: 11pt; padding: 0; }
+  .masthead { background: none; color: var(--navy); border-bottom: 2px solid var(--navy); margin: 0 0 1.5rem; padding: 0 0 1rem; }
+  .masthead h1, .masthead .sub { color: var(--navy); }
+  h2 { page-break-after: avoid; }
+  table, figure, blockquote { page-break-inside: avoid; }
+  a { text-decoration: none; color: var(--ink); }
+}
+
+/* ---------- Dark ---------- */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e7e9ec; --ink-soft: #a8aeb8; --ink-faint: #7d848e;
+    --paper: #14161a; --paper-tint: #1c1f25; --rule: #2c313a;
+    --navy: #9fb4d8; --navy-deep: #0e1015; --gold: #d8b563; --gold-soft: #2a2418;
+    --client-bg: #16221b; --client-line: #2f4a39; --ok: #6bbf8e;
+  }
+  .masthead { background: #0e1015; }
+  h1, h2, h3 { color: #cfdcf2; }
+  blockquote { color: #ddd3bb; }
+  pre { background: #0b0d11; }
+}
+
+/* ---------- Mobile ---------- */
+
+@media (max-width: 640px) {
+  body { font-size: 16px; line-height: 1.6; }
+  .masthead { padding-top: 1.75rem; padding-bottom: 1.5rem; }
+  h2 { font-size: 1.22rem; margin-top: 2.25rem; }
+  h3 { font-size: 1.05rem; }
+  table { font-size: .86rem; }
+  .cards li { flex: 1 1 100%; }
+}
+
+/* ==========================================================================
+   Presentation marker
+   A yellow highlighter for screen-sharing a document. The marks are browser-
+   local and are drawn over the text, never into the Markdown behind it.
+   ========================================================================== */
+
+/* Nothing here may change the text's metrics. No padding, no radius, no border,
+   no shadow, no font change — the yellow is painted behind the glyphs and the
+   line breaks exactly where it did before. Marking must never reflow the page. */
+mark.hlt {
+  background: #ffe94d;
+  color: #23262b;                 /* forced dark ink so yellow stays readable in dark mode */
+  padding: 0;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+  font: inherit;
+  letter-spacing: inherit;
+  -webkit-box-decoration-break: clone;
+          box-decoration-break: clone;
+}
+mark.hlt.hlt-flash { animation: hlt-flash .9s ease; }
+@keyframes hlt-flash {
+  0%, 100% { background: #ffe94d; }
+  35%      { background: #ffab2e; }
+}
+
+body.hl-armed { cursor: crosshair; }
+body.hl-armed mark.hlt { cursor: pointer; }
+
+.hl-bar {
+  position: fixed; right: 18px; bottom: 18px; z-index: 60;
+  display: flex; align-items: center; gap: 4px;
+  padding: 5px 6px;
+  background: var(--paper, #fff);
+  border: 1px solid var(--rule, #e2e4e8);
+  border-radius: 999px;
+  box-shadow: 0 6px 22px rgba(0,0,0,.16);
+  font: 600 13px/1 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  color: var(--ink, #23262b);
+}
+.hl-bar button {
+  font: inherit; color: inherit; cursor: pointer;
+  background: transparent; border: 0; border-radius: 999px;
+  padding: 7px 10px; line-height: 1;
+}
+.hl-bar button:hover { background: var(--paper-tint, #f7f7f5); }
+.hl-bar .hl-toggle { padding-left: 12px; }
+.hl-bar .hl-toggle.on { background: #ffe94d; color: #23262b; }
+.hl-bar .hl-count {
+  min-width: 1.9em; text-align: center; padding: 0 2px;
+  color: var(--ink-faint, #8a9099); font-variant-numeric: tabular-nums;
+}
+.hl-bar .hl-sep { width: 1px; align-self: stretch; margin: 4px 2px; background: var(--rule, #e2e4e8); }
+.hl-bar .hl-nav, .hl-bar .hl-clear, .hl-bar .hl-undo {
+  padding: 7px 9px; color: var(--ink-soft, #565b63);
+}
+.hl-bar .hl-undo { font-size: 15px; line-height: 1; }
+.hl-bar[data-empty="1"] .hl-nav,
+.hl-bar[data-empty="1"] .hl-clear { opacity: .35; pointer-events: none; }
+/* The undo button follows the undo history, not the mark count — after
+   clearing everything the count is nought but undo must still be live. */
+.hl-bar .hl-undo:disabled { opacity: .35; pointer-events: none; }
+
+.hl-toast {
+  position: fixed; right: 18px; bottom: 70px; z-index: 60;
+  max-width: 22rem; padding: 10px 14px;
+  background: var(--navy, #1b2a4a); color: #fff;
+  border-radius: 8px; box-shadow: 0 6px 22px rgba(0,0,0,.2);
+  font: 500 13px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+
+@media print {
+  .hl-bar, .hl-toast { display: none !important; }
+  mark.hlt {
+    background: #ffe94d !important;
+    color: #000 !important;
+    -webkit-print-color-adjust: exact;
+            print-color-adjust: exact;
+  }
+}
