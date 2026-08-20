@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Husband Retail — social share card source (1200×630)</title>
+<!--
+  Source file for assets/og-share.jpg (the WhatsApp / LinkedIn / iMessage link preview card).
+  Regenerate:
+    "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless \
+      --screenshot=assets/og-share.png --window-size=1200,630 --hide-scrollbars \
+      --force-device-scale-factor=1 assets/og-card.source.html
+  then convert to JPEG and keep the file under 300 KB (WhatsApp drops to a small
+  preview above roughly that size).
+-->
+<style>
+  @page { size: 1200px 630px; margin: 0 }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html,body{width:1200px;height:630px;overflow:hidden}
+  body{
+    font-family:"Futura","Jost","Century Gothic","Helvetica Neue",Arial,sans-serif;
+    background:#101216;color:#fff;
+  }
+  .card{position:relative;width:1200px;height:630px;overflow:hidden}
+
+  /* photograph — the hero poster, framed on the mall interior */
+  .shot{
+    position:absolute;inset:0;
+    background:url("hero-poster.jpg") center 42% / cover no-repeat;
+    transform:scale(1.04);
+  }
+  /* legibility scrim: dark from the left, deepening to the bottom */
+  .scrim{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(100deg, rgba(11,12,15,.94) 0%, rgba(11,12,15,.86) 34%, rgba(11,12,15,.45) 62%, rgba(11,12,15,.30) 100%),
+      linear-gradient(0deg, rgba(11,12,15,.72) 0%, rgba(11,12,15,0) 45%);
+  }
+  /* thin gold edge, top and bottom */
+  .rule-top{position:absolute;top:0;left:0;right:0;height:5px;background:linear-gradient(90deg,#A98A57 0%,#D8BE8B 48%,#8C6F3F 100%)}
+
+  .inner{position:absolute;inset:0;padding:64px 72px;display:flex;flex-direction:column;justify-content:space-between}
+
+  /* wordmark */
+  .mark{display:flex;align-items:baseline;gap:20px}
+  .mark .name{
+    font-size:34px;font-weight:500;letter-spacing:.30em;text-transform:uppercase;
+    line-height:1;white-space:nowrap;
+  }
+  .mark .est{
+    font-size:17px;font-weight:400;letter-spacing:.22em;text-transform:lowercase;
+    color:#D8BE8B;white-space:nowrap;
+  }
+  .mark .est::before{
+    content:"";display:inline-block;width:38px;height:1px;background:#A98A57;
+    vertical-align:middle;margin-right:18px;
+  }
+
+  .body{max-width:780px}
+  .eyebrow{
+    font-size:19px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;
+    color:#D8BE8B;display:flex;align-items:center;gap:16px;margin-bottom:26px;
+  }
+  .eyebrow::before{content:"";width:34px;height:1px;background:#A98A57;flex:none}
+  h1{
+    font-size:82px;font-weight:300;letter-spacing:-.028em;line-height:1.0;
+    text-shadow:0 2px 26px rgba(0,0,0,.55);
+  }
+  .sub{
+    margin-top:26px;font-size:27px;font-weight:400;line-height:1.42;color:#E8E5DE;
+    max-width:720px;text-shadow:0 1px 16px rgba(0,0,0,.5);
+  }
+
+  .foot{display:flex;align-items:center;justify-content:space-between;gap:40px}
+  .locs{
+    font-size:17px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;
+    color:#BFBAB0;display:flex;align-items:center;gap:14px;white-space:nowrap;
+  }
+  .locs i{font-style:normal;color:#A98A57;font-size:12px}
+  .by{
+    font-size:15px;letter-spacing:.13em;text-transform:uppercase;color:#8E8A82;
+    white-space:nowrap;text-align:right;
+  }
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="shot"></div>
+  <div class="scrim"></div>
+  <div class="rule-top"></div>
+
+  <div class="inner">
+    <div class="mark">
+      <span class="name">Husband Retail</span>
+      <span class="est">est. 1998</span>
+    </div>
+
+    <div class="body">
+      <div class="eyebrow" id="eyebrow">Retail Real Estate Consultancy</div>
+      <h1 id="head">Iconic retail<br>destinations.</h1>
+      <p class="sub" id="sub">Development, leasing, positioning and investment advisory behind many of Asia and the Middle East's landmark retail destinations.</p>
+    </div>
+
+    <div class="foot">
+      <div class="locs">Hong&nbsp;Kong <i>✦</i> Macau <i>✦</i> Seoul <i>✦</i> Dubai <i>✦</i> London</div>
+      <div class="by" id="by">Homepage preview · Digital Movement</div>
+    </div>
+  </div>
+</div>
+
+<script>
+/* One source, several cards. Override any line with a query parameter:
+   og-card.source.html?e=For+review&h=Everything,+in+one+place.&s=…&b=…
+   Use | in the headline for a line break. */
+(function(){
+  var q = new URLSearchParams(location.search);
+  function set(id, key, br){
+    var v = q.get(key); if(v === null) return;
+    var el = document.getElementById(id);
+    if(br) el.innerHTML = v.split('|').map(function(p){
+      return p.replace(/[&<>]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;'}[c]; });
+    }).join('<br>');
+    else el.textContent = v;
+  }
+  set('eyebrow','e'); set('head','h',true); set('sub','s'); set('by','b');
+})();
+</script>
+</body>
+</html>
