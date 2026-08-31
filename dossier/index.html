@@ -56,13 +56,12 @@
 </tr></thead>
 <tbody>
 <tr><td><strong>Paul Husband</strong></td><td>Founder and Managing Partner</td></tr>
-<tr><td><strong>David</strong></td><td>Taiwan — formerly managing director of retail at Taipei 101</td></tr>
-<tr><td><strong>Simon</strong></td><td>Japan</td></tr>
-<tr><td><strong>Marino</strong></td><td>Japan, on the ground</td></tr>
-<tr><td><strong>Vicky</strong></td><td>Hong Kong office</td></tr>
-<tr><td><strong>Janet</strong></td><td>Hong Kong office</td></tr>
-<tr><td><strong>Isabel</strong></td><td>Hong Kong office</td></tr>
+<tr><td><strong>Carmen Law</strong></td><td>Hong Kong office — organising the kick-off</td></tr>
+<tr><td><strong>David Tao</strong></td><td>Taiwan — formerly managing director of retail at Taipei 101</td></tr>
+<tr><td><strong>Janet Kusuma</strong></td><td>Hong Kong office</td></tr>
+<tr><td><strong>Vicky Li</strong></td><td>Hong Kong office</td></tr>
 </tbody></table></div>
+<p><em>These are the five people on the kick-off invitation of 1 September. If anyone else should be on this list, tell us on the call and we will add them.</em></p>
 <h2 id="what-we-sell">What we sell</h2>
 <h3 id="the-four-practice-areas">The four practice areas</h3>
 <p><strong>Four disciplines, one partnership — from the first feasibility study to a fully leased, market-leading destination and the assets that sustain it.</strong></p>
@@ -492,6 +491,905 @@
       }
     }
   }
+})();
+</script><script>
+/* Presentation marker — a yellow highlighter for screen-sharing this document.
+   Arm it, drag across a passage, and it stays marked while you talk.
+
+   Marks are stored in this browser only, keyed to this page, and are written
+   the instant they are made — closing the tab loses nothing. When the document
+   is rebuilt, each mark is re-found by the words it was sitting on rather than
+   by its old character offsets; only a mark whose words have gone is dropped,
+   because a mark on the wrong sentence is worse than no mark at all. Nothing is
+   written back into the source document. */
+(function () {
+  var main = document.querySelector("main");
+  if (!main) return;
+
+  /* One document, one key. A page served as .../dossier/ and as
+     .../dossier/index.html is the same page to the reader, so it must be the
+     same page to the store — otherwise marks vanish on the next visit. */
+  var KEY = "dm-marks:" + location.pathname.replace(/index\.html?$/i, "").replace(/\/+$/, "");
+  var armed = false, lastMark = 0, cursor = -1;
+
+  /* ---- stable addressing -------------------------------------------------
+     Every leaf block that can hold text gets an index. A mark is saved as
+     {b: blockIndex, s: startChar, e: endChar} against that block's plain text,
+     which is unaffected by the <mark> wrappers we insert, so the offsets stay
+     valid however many marks are already on the page. */
+  var blocks = [];
+  main.querySelectorAll("p,li,td,th,h1,h2,h3,h4,h5,h6,blockquote,pre,dt,dd,figcaption")
+    .forEach(function (el) {
+      if (el.querySelector("p,li,td,th,blockquote,pre")) return;   /* containers, not leaves */
+      el.setAttribute("data-hb", blocks.length);
+      blocks.push(el);
+    });
+  if (!blocks.length) return;
+
+  function fingerprint() { return blocks.length + ":" + main.textContent.length; }
+
+  function textNodes(el) {
+    var w = document.createTreeWalker(el, NodeFilter.SHOW_TEXT, null), out = [], n;
+    while ((n = w.nextNode())) out.push(n);
+    return out;
+  }
+
+  function markRange(block, s, e) {
+    if (!(e > s)) return;
+    var pos = 0;
+    textNodes(block).forEach(function (node) {
+      var len = node.length, a = pos, b = pos + len;
+      pos = b;
+      var from = Math.max(s, a), to = Math.min(e, b);
+      if (to <= from) return;
+      if (node.parentNode && node.parentNode.classList &&
+          node.parentNode.classList.contains("hlt")) return;      /* already marked */
+      var t = node;
+      if (to - a < len) t.splitText(to - a);
+      if (from > a) t = t.splitText(from - a);
+      var m = document.createElement("mark");
+      m.className = "hlt";
+      t.parentNode.insertBefore(m, t);
+      m.appendChild(t);
+    });
+  }
+
+  function offsetsOf(mark) {
+    var block = mark.closest("[data-hb]");
+    if (!block) return null;
+    var pos = 0, s = -1, e = -1;
+    textNodes(block).forEach(function (n) {
+      if (mark.contains(n)) { if (s < 0) s = pos; e = pos + n.length; }
+      pos += n.length;
+    });
+    return s < 0 ? null : { b: +block.getAttribute("data-hb"), s: s, e: e,
+                            q: block.textContent.slice(s, e) };
+  }
+
+  function allMarks() {
+    return Array.prototype.slice.call(main.querySelectorAll("mark.hlt"));
+  }
+
+  /* Marks made by one drag across several paragraphs are one passage to the
+     reader, so the counter and the jump arrows group them by block. */
+  function passages() {
+    var out = [], seen = null;
+    allMarks().forEach(function (m) {
+      var b = m.closest("[data-hb]");
+      if (b !== seen) { out.push(m); seen = b; }
+    });
+    return out;
+  }
+
+  function save() {
+    var recs = [];
+    allMarks().forEach(function (m) { var r = offsetsOf(m); if (r) recs.push(r); });
+    try { localStorage.setItem(KEY, JSON.stringify({ fp: fingerprint(), m: recs })); }
+    catch (err) { toast("This browser will not store the marks, so they will go on reload."); }
+    paint();
+  }
+
+  function restore() {
+    var raw = null;
+    try { raw = localStorage.getItem(KEY); } catch (err) { return; }
+    if (!raw) return;
+    var data = null;
+    try { data = JSON.parse(raw); } catch (err) { return; }
+    if (!data || !data.m) return;
+    if (data.fp === fingerprint()) {
+      data.m.forEach(function (r) { if (blocks[r.b]) markRange(blocks[r.b], r.s, r.e); });
+      return;
+    }
+    /* The document was rebuilt. Put every mark back on the words it was made on,
+       wherever those words now sit; drop only the ones whose words have gone. */
+    var kept = 0, lost = 0;
+    data.m.forEach(function (r) {
+      if (r.q && blocks[r.b] && blocks[r.b].textContent.slice(r.s, r.e) === r.q) {
+        markRange(blocks[r.b], r.s, r.e); kept++; return;
+      }
+      if (r.q) {
+        for (var i = 0; i < blocks.length; i++) {
+          var at = blocks[i].textContent.indexOf(r.q);
+          if (at >= 0) { markRange(blocks[i], at, at + r.q.length); kept++; return; }
+        }
+      }
+      lost++;
+    });
+    save();
+    if (lost) {
+      toast("The document was rebuilt. " + kept + " mark" + (kept === 1 ? "" : "s") +
+            " moved with the text; " + lost + " could not be placed and " +
+            (lost === 1 ? "was" : "were") + " dropped.");
+    }
+  }
+
+  /* ---- undo ---------------------------------------------------------------
+     Cmd+Z / Ctrl+Z steps back through marking, exactly as it would in a text
+     editor. Each entry is a full snapshot of the marks rather than a diff, so
+     an undo can never leave the page in a half-applied state. */
+  var undoStack = [], redoStack = [], DEPTH = 80;
+
+  function snapshot() {
+    var out = [];
+    allMarks().forEach(function (m) { var r = offsetsOf(m); if (r) out.push(r); });
+    return out;
+  }
+
+  function stripMarks() {
+    allMarks().forEach(function (m) {
+      var p = m.parentNode;
+      while (m.firstChild) p.insertBefore(m.firstChild, m);
+      p.removeChild(m);
+      p.normalize();                                   /* re-joins the split text, no stray characters */
+    });
+  }
+
+  function apply(recs) {
+    stripMarks();
+    recs.forEach(function (r) { if (blocks[r.b]) markRange(blocks[r.b], r.s, r.e); });
+    cursor = -1;
+    save();
+  }
+
+  function remember(state) {
+    undoStack.push(state || snapshot());
+    if (undoStack.length > DEPTH) undoStack.shift();
+    redoStack.length = 0;
+  }
+
+  function undo() {
+    if (!undoStack.length) { toast("Nothing left to undo."); return; }
+    redoStack.push(snapshot());
+    apply(undoStack.pop());
+  }
+
+  function redo() {
+    if (!redoStack.length) return;
+    undoStack.push(snapshot());
+    apply(redoStack.pop());
+  }
+
+  /* ---- the bar ----------------------------------------------------------- */
+  var bar = document.createElement("div");
+  bar.className = "hl-bar";
+  bar.innerHTML =
+    '<button class="hl-toggle" title="Marker — or press H">&#9646;&#9646; Marker</button>' +
+    '<span class="hl-sep"></span>' +
+    '<button class="hl-nav hl-prev" title="Previous marked passage">&#9664;</button>' +
+    '<span class="hl-count">0</span>' +
+    '<button class="hl-nav hl-next" title="Next marked passage">&#9654;</button>' +
+    '<span class="hl-sep"></span>' +
+    '<button class="hl-undo" title="Undo — Cmd+Z">&#8630;</button>' +
+    '<button class="hl-clear" title="Clear every mark">Clear</button>';
+  document.body.appendChild(bar);
+
+  var btnToggle = bar.querySelector(".hl-toggle"),
+      btnPrev   = bar.querySelector(".hl-prev"),
+      btnNext   = bar.querySelector(".hl-next"),
+      btnUndo   = bar.querySelector(".hl-undo"),
+      btnClear  = bar.querySelector(".hl-clear"),
+      elCount   = bar.querySelector(".hl-count");
+
+  function paint() {
+    var n = passages().length;
+    elCount.textContent = n;
+    bar.setAttribute("data-empty", n ? "0" : "1");
+    btnToggle.classList.toggle("on", armed);
+    btnUndo.disabled = !undoStack.length;
+    document.body.classList.toggle("hl-armed", armed);
+    btnToggle.setAttribute("aria-pressed", armed ? "true" : "false");
+  }
+
+  var toastEl = null, toastTimer = 0;
+  function toast(msg) {
+    if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "hl-toast"; }
+    toastEl.textContent = msg;
+    document.body.appendChild(toastEl);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      if (toastEl && toastEl.parentNode) toastEl.parentNode.removeChild(toastEl);
+    }, 5200);
+  }
+
+  function setArmed(on) {
+    armed = on;
+    paint();
+    if (armed) toast("Marker on. Drag across a passage to mark it; click a mark to remove it.");
+  }
+
+  btnToggle.addEventListener("click", function () { setArmed(!armed); });
+
+  btnUndo.addEventListener("click", undo);
+
+  btnClear.addEventListener("click", function () {
+    var n = passages().length;
+    if (!n) return;
+    if (!window.confirm("Remove all " + n + " marked passage" + (n === 1 ? "" : "s") + "?")) return;
+    remember();                                        /* Cmd+Z brings them all back */
+    apply([]);
+  });
+
+  function jump(dir) {
+    var list = passages();
+    if (!list.length) return;
+    cursor = (cursor + dir + list.length) % list.length;
+    var m = list[cursor];
+    var panel = m.closest(".tabpanel");
+    if (panel && panel.hidden) {                       /* marked passage is on another tab */
+      var owner = document.getElementById(panel.getAttribute("aria-labelledby"));
+      if (owner) owner.click();
+    }
+    m.scrollIntoView({ block: "center", behavior: "smooth" });
+    m.classList.add("hlt-flash");
+    setTimeout(function () { m.classList.remove("hlt-flash"); }, 900);
+  }
+  btnPrev.addEventListener("click", function () { jump(-1); });
+  btnNext.addEventListener("click", function () { jump(1); });
+
+  /* ---- marking ----------------------------------------------------------- */
+  document.addEventListener("mouseup", function () {
+    if (!armed) return;
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return;
+    var range = sel.getRangeAt(0);
+    if (bar.contains(range.commonAncestorContainer)) return;
+    var before = snapshot();                           /* taken before the DOM moves */
+    var hit = false;
+    blocks.forEach(function (block) {
+      if (!range.intersectsNode(block)) return;
+      var pos = 0, s = -1, e = -1;
+      textNodes(block).forEach(function (n) {
+        var a = pos, b = pos + n.length;
+        pos = b;
+        if (!range.intersectsNode(n)) return;
+        var from = a, to = b;
+        if (n === range.startContainer && range.startContainer.nodeType === 3) from = a + range.startOffset;
+        if (n === range.endContainer   && range.endContainer.nodeType === 3)   to   = a + range.endOffset;
+        if (to <= from) return;
+        if (s < 0 || from < s) s = from;
+        if (to > e) e = to;
+      });
+      if (s >= 0 && e > s) { markRange(block, s, e); hit = true; }
+    });
+    if (!hit) return;
+    remember(before);
+    sel.removeAllRanges();
+    lastMark = Date.now();
+    cursor = -1;
+    save();
+  });
+
+  main.addEventListener("click", function (ev) {
+    if (!armed) return;
+    if (Date.now() - lastMark < 350) return;           /* the drag that just made it */
+    var m = ev.target.closest && ev.target.closest("mark.hlt");
+    if (!m) return;
+    ev.preventDefault();
+    remember();
+    var p = m.parentNode;
+    while (m.firstChild) p.insertBefore(m.firstChild, m);
+    p.removeChild(m);
+    p.normalize();
+    cursor = -1;
+    save();
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    var t = ev.target, tag = t && t.tagName;
+    if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT" || (t && t.isContentEditable)) return;
+    /* Cmd+Z on a Mac, Ctrl+Z elsewhere; add Shift to step forward again.
+       This runs whether or not the marker is armed — an undo should always work. */
+    if ((ev.metaKey || ev.ctrlKey) && !ev.altKey && (ev.key === "z" || ev.key === "Z")) {
+      ev.preventDefault();
+      if (ev.shiftKey) redo(); else undo();
+      return;
+    }
+    if ((ev.metaKey || ev.ctrlKey) && !ev.altKey && (ev.key === "y" || ev.key === "Y")) {
+      ev.preventDefault(); redo(); return;             /* the Windows habit */
+    }
+    if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    if (ev.key === "h" || ev.key === "H") { ev.preventDefault(); setArmed(!armed); }
+    else if (armed && ev.key === "Escape") { ev.preventDefault(); setArmed(false); }
+  });
+
+  restore();
+  paint();
+})();
+</script><script>
+/* Comments — a review layer with the manners of Google Docs.
+
+   Select a passage, leave a note, reply to it, resolve it. Threads live in the
+   reader's own browser under "dm-comments:<path>" and are never written back
+   into the Markdown, so a rebuild cannot destroy them and a comment cannot
+   leak into the document.
+
+   Two deliberate decisions:
+
+   1. Comments share the marker's block index (data-hb) and its plain-text
+      character offsets, so the two features sit on the same passage without
+      fighting: the marker only ever touches mark.hlt, and a comment only ever
+      touches span.cmt-anchor.
+   2. When the document is rebuilt and the offsets no longer match, the thread
+      is re-found by searching for its own quote. Only if the quoted words have
+      gone does it become "no longer attached" — and it is kept and shown, not
+      silently dropped. Someone's comment is not ours to delete. */
+(function () {
+  var main = document.querySelector("main");
+  if (!main) return;
+
+  var PATH = location.pathname.replace(/index\.html?$/i, "").replace(/\/+$/, "");
+  var KEY  = "dm-comments:" + PATH;
+  var AKEY = "dm-comment-author";
+  var OKEY = "dm-comments-open:" + PATH;
+
+  /* ---- addressing: reuse the marker's blocks, or lay them down ourselves -- */
+  var blocks = [];
+  Array.prototype.forEach.call(main.querySelectorAll("[data-hb]"), function (el) {
+    blocks[+el.getAttribute("data-hb")] = el;
+  });
+  if (!blocks.length) {
+    Array.prototype.forEach.call(
+      main.querySelectorAll("p,li,td,th,h1,h2,h3,h4,h5,h6,blockquote,pre,dt,dd,figcaption"),
+      function (el) {
+        if (el.querySelector("p,li,td,th,blockquote,pre")) return;   /* leaves only */
+        el.setAttribute("data-hb", blocks.length);
+        blocks.push(el);
+      });
+  }
+  if (!blocks.length) return;
+
+  function fingerprint() { return blocks.length + ":" + main.textContent.length; }
+  function uid() { return "c" + Date.now().toString(36) + Math.random().toString(36).slice(2, 6); }
+  function byId(id) {
+    for (var i = 0; i < state.threads.length; i++)
+      if (state.threads[i].id === id) return state.threads[i];
+    return null;
+  }
+
+  var state = { v: 1, fp: fingerprint(), threads: [] };
+
+  function load() {
+    try {
+      var raw = localStorage.getItem(KEY);
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      if (d && Array.isArray(d.threads)) state.threads = d.threads;
+    } catch (err) { /* a browser that will not read is not an error worth shouting about */ }
+  }
+  function save() {
+    state.fp = fingerprint();
+    try { localStorage.setItem(KEY, JSON.stringify(state)); }
+    catch (err) { toast("This browser will not store the comments, so they will go on reload."); }
+  }
+
+  /* ---- text plumbing ----------------------------------------------------- */
+  function textNodes(root) {
+    var out = [], w = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false), n;
+    while ((n = w.nextNode())) if (n.nodeValue) out.push(n);
+    return out;
+  }
+  function offsetIn(block, node, off) {
+    var pos = 0, list = textNodes(block);
+    for (var i = 0; i < list.length; i++) {
+      if (list[i] === node) return pos + off;
+      pos += list[i].nodeValue.length;
+    }
+    return -1;
+  }
+  function blockOf(node) {
+    var el = node && node.nodeType === 1 ? node : (node ? node.parentNode : null);
+    while (el && el !== main && !(el.hasAttribute && el.hasAttribute("data-hb"))) el = el.parentNode;
+    return el && el !== main && el.hasAttribute && el.hasAttribute("data-hb") ? el : null;
+  }
+
+  function wrap(block, s, e, id) {
+    if (!block || !(e > s)) return false;
+    var pos = 0, hit = false;
+    textNodes(block).forEach(function (node) {
+      var len = node.nodeValue.length, a = pos, b = pos + len;
+      pos = b;
+      var from = Math.max(s, a), to = Math.min(e, b);
+      if (to <= from) return;
+      var parent = node.parentNode;
+      if (parent && parent.classList && parent.classList.contains("cmt-anchor") &&
+          parent.getAttribute("data-t") === id) { hit = true; return; }
+      var t = node;
+      if (to - a < len) t.splitText(to - a);
+      if (from > a) t = t.splitText(from - a);
+      var sp = document.createElement("span");
+      sp.className = "cmt-anchor";
+      sp.setAttribute("data-t", id);
+      sp.setAttribute("tabindex", "0");
+      sp.setAttribute("role", "button");
+      t.parentNode.insertBefore(sp, t);
+      sp.appendChild(t);
+      hit = true;
+    });
+    return hit;
+  }
+  function unwrap(id) {
+    var sel = id ? '.cmt-anchor[data-t="' + id + '"]' : ".cmt-anchor";
+    Array.prototype.forEach.call(main.querySelectorAll(sel), function (sp) {
+      var p = sp.parentNode;
+      while (sp.firstChild) p.insertBefore(sp.firstChild, sp);
+      p.removeChild(sp);
+      p.normalize();
+    });
+  }
+
+  /* ---- anchoring, and the search that survives a rebuild ------------------ */
+  function textAt(t) {
+    var el = blocks[t.b];
+    return el ? el.textContent.slice(t.s, t.e) : null;
+  }
+  function refind(t) {
+    if (!t.quote) return false;
+    var order = [], i;
+    if (blocks[t.b]) order.push(t.b);
+    for (i = 0; i < blocks.length; i++) if (i !== t.b) order.push(i);
+    for (i = 0; i < order.length; i++) {
+      var at = blocks[order[i]].textContent.indexOf(t.quote);
+      if (at >= 0) { t.b = order[i]; t.s = at; t.e = at + t.quote.length; return true; }
+    }
+    return false;
+  }
+  function place() {
+    var moved = 0, lost = 0;
+    state.threads.forEach(function (t) {
+      t.detached = false;
+      if (textAt(t) !== t.quote) {
+        if (refind(t)) moved++;
+        else { t.detached = true; lost++; return; }
+      }
+      wrap(blocks[t.b], t.s, t.e, t.id);
+    });
+    if (moved || lost) {
+      save();
+      toast("The document changed since these comments were written. " +
+            moved + " moved with the text" + (lost ? ", " + lost + " no longer attached" : "") + ".");
+    }
+  }
+  function paintAnchors() {
+    Array.prototype.forEach.call(main.querySelectorAll(".cmt-anchor"), function (a) {
+      var t = byId(a.getAttribute("data-t"));
+      a.classList.toggle("on", active === a.getAttribute("data-t"));
+      a.classList.toggle("resolved", !!(t && t.resolved));
+      if (t) a.setAttribute("title", (t.notes[0] && t.notes[0].author ? t.notes[0].author + ": " : "") +
+        (t.notes[0] ? t.notes[0].text.slice(0, 90) : ""));
+    });
+  }
+
+  /* ---- what is selected -------------------------------------------------- */
+  function currentSpec() {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed || !sel.rangeCount) return null;
+    var r = sel.getRangeAt(0);
+    if (!main.contains(r.startContainer)) return null;
+    var block = blockOf(r.startContainer);
+    if (!block) return null;
+    var s = offsetIn(block, r.startContainer, r.startOffset);
+    if (s < 0) return null;
+    var e = blockOf(r.endContainer) === block
+      ? offsetIn(block, r.endContainer, r.endOffset)
+      : block.textContent.length;
+    if (e <= s) return null;
+    /* A selection that runs past the end of its opening block is anchored to the
+       part inside that block. The quote shown is exactly what was anchored, so
+       nobody is misled about where the note sits. */
+    var raw = block.textContent.slice(s, e);
+    s += raw.length - raw.replace(/^\s+/, "").length;
+    e -= raw.length - raw.replace(/\s+$/, "").length;
+    if (e <= s) return null;
+    return { b: +block.getAttribute("data-hb"), s: s, e: e, quote: block.textContent.slice(s, e) };
+  }
+
+  /* ---- furniture --------------------------------------------------------- */
+  var toastEl = null, toastTimer = 0;
+  function toast(msg) {
+    if (!toastEl) { toastEl = document.createElement("div"); toastEl.className = "hl-toast"; }
+    toastEl.textContent = msg;
+    document.body.appendChild(toastEl);
+    clearTimeout(toastTimer);
+    toastTimer = setTimeout(function () {
+      if (toastEl && toastEl.parentNode) toastEl.parentNode.removeChild(toastEl);
+    }, 5200);
+  }
+
+  var BUBBLE = '<svg viewBox="0 0 16 16" aria-hidden="true"><path fill="currentColor" ' +
+    'd="M2.2 1.6h11.6c.7 0 1.2.6 1.2 1.2v7.6c0 .7-.5 1.2-1.2 1.2H6.4L3 14.6v-3H2.2c-.7 0-1.2-.5-1.2-1.2V2.8c0-.6.5-1.2 1.2-1.2z"/></svg>';
+
+  var bar = document.querySelector(".hl-bar");
+  if (!bar) {
+    bar = document.createElement("div");
+    bar.className = "hl-bar";
+    document.body.appendChild(bar);
+  } else {
+    var sep = document.createElement("span");
+    sep.className = "hl-sep";
+    sep.setAttribute("aria-hidden", "true");
+    bar.appendChild(sep);
+  }
+  var btn = document.createElement("button");
+  btn.type = "button";
+  btn.className = "hl-comment";
+  btn.title = "Comments (C)";
+  btn.setAttribute("aria-expanded", "false");
+  btn.innerHTML = BUBBLE + '<span>Comments</span><span class="hl-cnum">0</span>';
+  bar.appendChild(btn);
+
+  var chip = document.createElement("button");
+  chip.type = "button";
+  chip.className = "cmt-chip";
+  chip.style.display = "none";
+  chip.innerHTML = BUBBLE + "Comment";
+  document.body.appendChild(chip);
+
+  var panel = document.createElement("aside");
+  panel.className = "cmt-panel";
+  panel.setAttribute("aria-label", "Comments");
+  panel.innerHTML =
+    '<div class="cmt-head">' +
+      '<h2>Comments</h2><span class="cmt-tally"></span><span class="cmt-spacer"></span>' +
+      '<button type="button" class="cmt-filter on" data-act="filter">Open only</button>' +
+      '<button type="button" class="cmt-close" data-act="close" aria-label="Close comments">&times;</button>' +
+    '</div>' +
+    '<div class="cmt-body"></div>' +
+    '<div class="cmt-foot">' +
+      '<button type="button" data-act="add">Comment on selection</button>' +
+      '<button type="button" data-act="copy">Copy all</button>' +
+      '<button type="button" data-act="export">Export</button>' +
+      '<button type="button" data-act="import">Import</button>' +
+    '</div>';
+  document.body.appendChild(panel);
+
+  var picker = document.createElement("input");
+  picker.type = "file";
+  picker.accept = "application/json,.json";
+  picker.style.display = "none";
+  document.body.appendChild(picker);
+
+  /* ---- drawing ----------------------------------------------------------- */
+  var pending = null, replyTo = null, active = null, openOnly = true;
+
+  function esc(s) {
+    return String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+  function author() { try { return localStorage.getItem(AKEY) || ""; } catch (err) { return ""; } }
+  function when(iso) {
+    var d = new Date(iso);
+    if (isNaN(d.getTime())) return "";
+    var M = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    return d.getDate() + " " + M[d.getMonth()] + " " + d.getFullYear() + ", " +
+           ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
+  }
+  function sorted() {
+    return state.threads.slice().sort(function (a, b) {
+      if (!!a.detached !== !!b.detached) return a.detached ? 1 : -1;
+      if (a.b !== b.b) return a.b - b.b;
+      return a.s - b.s;
+    });
+  }
+  function formHTML(placeholder, act, id) {
+    return '<form class="cmt-form" data-act="' + act + '"' + (id ? ' data-t="' + id + '"' : '') + '>' +
+      '<input type="text" class="cmt-who" placeholder="Your name" value="' + esc(author()) + '">' +
+      '<textarea class="cmt-what" placeholder="' + placeholder + '"></textarea>' +
+      '<div class="cmt-actions">' +
+        '<button type="submit" class="cmt-send">Comment</button>' +
+        '<button type="button" data-act="cancel">Cancel</button>' +
+      '</div><p class="cmt-hint">⌘ + Return sends it.</p></form>';
+  }
+  function cardHTML(t) {
+    var h = '<article class="cmt-thread' + (t.resolved ? " done" : "") +
+            (t.detached ? " lost" : "") + (active === t.id ? " on" : "") +
+            '" data-t="' + t.id + '">';
+    h += '<blockquote class="cmt-quote" data-act="goto">' + esc(t.quote) + "</blockquote>";
+    if (t.detached)
+      h += '<p class="cmt-meta"><b>No longer attached</b> — these words are not in this version.</p>';
+    h += '<div class="cmt-notes">';
+    t.notes.forEach(function (n) {
+      h += '<div class="cmt-note"><p class="cmt-meta"><b>' + esc(n.author || "Anonymous") +
+           "</b> · " + when(n.at) + '</p><p class="cmt-text">' + esc(n.text) + "</p></div>";
+    });
+    h += "</div>";
+    if (replyTo === t.id) h += formHTML("Reply…", "reply", t.id);
+    h += '<div class="cmt-actions">' +
+      '<button type="button" data-act="reply">Reply</button>' +
+      '<button type="button" data-act="toggle">' + (t.resolved ? "Reopen" : "Resolve") + "</button>" +
+      '<button type="button" class="cmt-del" data-act="delete">Delete</button>' +
+      "</div></article>";
+    return h;
+  }
+  function draw() {
+    var open = 0;
+    state.threads.forEach(function (t) { if (!t.resolved) open++; });
+    panel.querySelector(".cmt-tally").textContent =
+      open + " open · " + state.threads.length + " in all";
+    btn.querySelector(".hl-cnum").textContent = open;
+    btn.classList.toggle("has", open > 0);
+    var filter = panel.querySelector(".cmt-filter");
+    filter.textContent = openOnly ? "Open only" : "All";
+    filter.classList.toggle("on", openOnly);
+
+    var body = panel.querySelector(".cmt-body"), html = "";
+    if (pending)
+      html += '<article class="cmt-thread on"><blockquote class="cmt-quote">' +
+              esc(pending.quote) + "</blockquote>" + formHTML("Leave a comment…", "new") + "</article>";
+    var shown = sorted().filter(function (t) { return openOnly ? !t.resolved : true; });
+    if (!shown.length && !pending)
+      html += '<p class="cmt-empty">' + (state.threads.length
+        ? "No open comments. Switch to <b>All</b> for the resolved ones."
+        : "Select any passage in the document, then press <b>Comment</b>.") + "</p>";
+    shown.forEach(function (t) { html += cardHTML(t); });
+    body.innerHTML = html;
+
+    var box = body.querySelector(".cmt-what");
+    if (box) box.focus();
+    paintAnchors();
+  }
+  function setOpen(on) {
+    document.body.classList.toggle("cmt-open", !!on);
+    btn.classList.toggle("on", !!on);
+    btn.setAttribute("aria-expanded", on ? "true" : "false");
+    try { localStorage.setItem(OKEY, on ? "1" : "0"); } catch (err) {}
+    if (on) draw();
+  }
+  function reveal(id) {
+    var a = main.querySelector('.cmt-anchor[data-t="' + id + '"]');
+    if (!a) { toast("That comment is no longer attached to any passage."); return; }
+    var tab = a.closest ? a.closest(".tabpanel") : null;
+    if (tab && tab.hidden) {
+      var owner = document.getElementById(tab.getAttribute("aria-labelledby"));
+      if (owner) owner.click();
+    }
+    a.scrollIntoView({ block: "center", behavior: "smooth" });
+    a.classList.add("cmt-flash");
+    setTimeout(function () { a.classList.remove("cmt-flash"); }, 950);
+  }
+
+  /* ---- the selection chip ------------------------------------------------ */
+  function hideChip() { chip.style.display = "none"; }
+  function offerChip() {
+    if (document.body.classList.contains("hl-armed")) return hideChip();  /* the marker owns the drag */
+    var spec = currentSpec();
+    if (!spec) return hideChip();
+    var r = window.getSelection().getRangeAt(0).getBoundingClientRect();
+    if (!r || (!r.width && !r.height)) return hideChip();
+    chip.style.display = "inline-flex";
+    var w = chip.offsetWidth || 110, h = chip.offsetHeight || 30;
+    var left = Math.min(Math.max(8, r.left + r.width / 2 - w / 2), window.innerWidth - w - 8);
+    var top = r.bottom + 8 + h > window.innerHeight ? r.top - h - 8 : r.bottom + 8;
+    chip.style.left = Math.round(left) + "px";
+    chip.style.top = Math.round(Math.max(8, top)) + "px";
+  }
+  function compose() {
+    var spec = currentSpec();
+    if (!spec) { toast("Select a passage first, then press Comment."); return; }
+    pending = spec;
+    replyTo = null;
+    hideChip();
+    setOpen(true);
+    draw();
+  }
+  document.addEventListener("mouseup", function (ev) {
+    if (bar.contains(ev.target) || panel.contains(ev.target) || ev.target === chip) return;
+    setTimeout(offerChip, 0);
+  });
+  document.addEventListener("selectionchange", function () {
+    var sel = window.getSelection();
+    if (!sel || sel.isCollapsed) hideChip();
+  });
+  window.addEventListener("scroll", hideChip, { passive: true });
+  chip.addEventListener("mousedown", function (ev) { ev.preventDefault(); });  /* keep the selection */
+  chip.addEventListener("click", compose);
+
+  /* ---- clicks ------------------------------------------------------------ */
+  btn.addEventListener("click", function () {
+    setOpen(!document.body.classList.contains("cmt-open"));
+  });
+
+  main.addEventListener("click", function (ev) {
+    var a = ev.target.closest ? ev.target.closest(".cmt-anchor") : null;
+    if (!a) return;
+    var id = a.getAttribute("data-t"), t = byId(id);
+    if (!t) return;
+    active = id;
+    if (t.resolved) openOnly = false;
+    setOpen(true);
+    var card = panel.querySelector('.cmt-thread[data-t="' + id + '"]');
+    if (card) card.scrollIntoView({ block: "center", behavior: "smooth" });
+  });
+
+  panel.addEventListener("click", function (ev) {
+    var el = ev.target.closest ? ev.target.closest("[data-act]") : null;
+    if (!el || el.tagName === "FORM") return;
+    var act = el.getAttribute("data-act");
+    var card = el.closest(".cmt-thread");
+    var id = card ? card.getAttribute("data-t") : null;
+    var t = id ? byId(id) : null;
+
+    if (act === "close") { setOpen(false); return; }
+    if (act === "filter") { openOnly = !openOnly; draw(); return; }
+    if (act === "add") { compose(); return; }
+    if (act === "copy") { copyAll(); return; }
+    if (act === "export") { exportJSON(); return; }
+    if (act === "import") { picker.click(); return; }
+    if (act === "cancel") { pending = null; replyTo = null; draw(); return; }
+    if (act === "goto" && id) { active = id; reveal(id); draw(); return; }
+    if (!t) return;
+    if (act === "reply") { replyTo = replyTo === id ? null : id; draw(); return; }
+    if (act === "toggle") { t.resolved = !t.resolved; save(); draw(); return; }
+    if (act === "delete") {
+      if (!window.confirm("Delete this comment thread? It cannot be undone.")) return;
+      state.threads = state.threads.filter(function (x) { return x.id !== id; });
+      unwrap(id);
+      if (active === id) active = null;
+      save(); draw();
+    }
+  });
+
+  panel.addEventListener("submit", function (ev) {
+    ev.preventDefault();
+    var form = ev.target, act = form.getAttribute("data-act");
+    var who = (form.querySelector(".cmt-who").value || "").trim();
+    var what = (form.querySelector(".cmt-what").value || "").trim();
+    if (!what) { form.querySelector(".cmt-what").focus(); return; }
+    if (who) { try { localStorage.setItem(AKEY, who); } catch (err) {} }
+    var note = { id: uid(), author: who || "Anonymous", text: what, at: new Date().toISOString() };
+
+    if (act === "new" && pending) {
+      var t = { id: uid(), b: pending.b, s: pending.s, e: pending.e,
+                quote: pending.quote, resolved: false, notes: [note] };
+      state.threads.push(t);
+      pending = null;
+      active = t.id;
+      wrap(blocks[t.b], t.s, t.e, t.id);
+    } else if (act === "reply") {
+      var th = byId(form.getAttribute("data-t"));
+      if (th) th.notes.push(note);
+      replyTo = null;
+    }
+    save();
+    draw();
+  });
+
+  panel.addEventListener("keydown", function (ev) {
+    if (ev.key !== "Enter" || !(ev.metaKey || ev.ctrlKey)) return;
+    var form = ev.target.closest ? ev.target.closest("form") : null;
+    if (!form) return;
+    ev.preventDefault();
+    if (form.requestSubmit) form.requestSubmit();
+    else form.dispatchEvent(new Event("submit", { cancelable: true }));
+  });
+
+  document.addEventListener("keydown", function (ev) {
+    var tag = (ev.target.tagName || "").toLowerCase();
+    if (tag === "input" || tag === "textarea" || ev.target.isContentEditable) return;
+    if (ev.metaKey || ev.ctrlKey || ev.altKey) return;
+    if (ev.key === "c" || ev.key === "C") {
+      ev.preventDefault();
+      if (currentSpec()) compose();
+      else setOpen(!document.body.classList.contains("cmt-open"));
+    } else if (ev.key === "Escape" && document.body.classList.contains("cmt-open")) {
+      ev.preventDefault();
+      if (pending || replyTo) { pending = null; replyTo = null; draw(); }
+      else setOpen(false);
+    }
+  });
+
+  /* ---- getting the comments out of the browser --------------------------- */
+  function asMarkdown() {
+    var out = ["# Comments on " + (document.title || location.pathname), "",
+               "Written in the browser, " + when(new Date().toISOString()) + ".", ""];
+    var list = sorted();
+    if (!list.length) out.push("No comments.");
+    list.forEach(function (t, i) {
+      out.push("## " + (i + 1) + ". " + (t.resolved ? "[resolved] " : "") +
+               (t.detached ? "[no longer attached] " : "") +
+               t.quote.replace(/\s+/g, " ").slice(0, 70));
+      out.push("");
+      out.push("> " + t.quote.replace(/\s+/g, " "));
+      out.push("");
+      t.notes.forEach(function (n) {
+        out.push("**" + (n.author || "Anonymous") + "** · " + when(n.at));
+        out.push("");
+        out.push(n.text);
+        out.push("");
+      });
+    });
+    return out.join("\n");
+  }
+  function copyAll() {
+    var text = asMarkdown();
+    function fallback() {
+      var ta = document.createElement("textarea");
+      ta.value = text;
+      ta.style.position = "fixed";
+      ta.style.opacity = "0";
+      document.body.appendChild(ta);
+      ta.select();
+      var ok = false;
+      try { ok = document.execCommand("copy"); } catch (err) {}
+      document.body.removeChild(ta);
+      toast(ok ? "All comments copied as Markdown — paste them anywhere."
+               : "This browser would not let the page copy. Use Export instead.");
+    }
+    if (navigator.clipboard && navigator.clipboard.writeText && window.isSecureContext) {
+      navigator.clipboard.writeText(text).then(function () {
+        toast("All comments copied as Markdown — paste them anywhere.");
+      }, fallback);
+    } else fallback();
+  }
+  function exportJSON() {
+    var blob = new Blob([JSON.stringify(state, null, 2)], { type: "application/json" });
+    var a = document.createElement("a");
+    a.href = URL.createObjectURL(blob);
+    a.download = (location.pathname.split("/").pop() || "document").replace(/\.html?$/, "") + "-comments.json";
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    setTimeout(function () { URL.revokeObjectURL(a.href); }, 4000);
+  }
+  picker.addEventListener("change", function () {
+    var file = picker.files && picker.files[0];
+    if (!file) return;
+    var reader = new FileReader();
+    reader.onload = function () {
+      var added = 0;
+      try {
+        var d = JSON.parse(String(reader.result));
+        if (!d || !Array.isArray(d.threads)) throw new Error("not a comment file");
+        d.threads.forEach(function (t) {
+          if (!t || !t.id || byId(t.id)) return;
+          state.threads.push(t);
+          added++;
+        });
+      } catch (err) { toast("That file is not a comment export."); picker.value = ""; return; }
+      unwrap();
+      place();
+      save();
+      setOpen(true);
+      draw();
+      toast(added + " comment thread(s) merged in.");
+      picker.value = "";
+    };
+    reader.readAsText(file);
+  });
+
+  /* ---- a second tab of the same page ------------------------------------- */
+  window.addEventListener("storage", function (ev) {
+    if (ev.key !== KEY) return;
+    unwrap();
+    state.threads = [];
+    load();
+    place();
+    draw();
+  });
+
+  load();
+  place();
+  draw();
+  try { if (localStorage.getItem(OKEY) === "1") setOpen(true); } catch (err) {}
 })();
 </script>
 </body>
