@@ -1,0 +1,888 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--
+  07 — The Threshold · scroll journey test · Husband Retail
+  Version 0.6 · 06.09.2026 · published for review at
+  https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex; local preview:
+  python3 -m http.server 8795 --directory "Husband Retail/Website")
+
+  What this is: one full-viewport page that plays the first chapter of the homepage film the way
+  theoceanmarketing.com plays its dive — a pinned stage, a tall scroll track, and a film that follows the
+  scroll frame by frame — built from the accepted clips, as the Veo tab of
+  05-homepage-production.html instructs, with the approach (V0a take 1) stitched to the front on instruction:
+
+    V0a · The Approach · V0a_1.mp4 (take 1, stitched on instruction 06.09.) · plays ONCE on arrival, on the
+          clock, never scrubbed: all 192 native frames at 24 fps, as the Veo tab (V0a, D18) describes. Eyebrow,
+          headline and wordmark stand from frame 0; the sub-line, the scroll cue and the concierge card blend in
+          as the forecourt arrives. A scroll before the eight seconds are over runs the clip on at catch-up
+          speed, never a cut; "Skip the approach" sits lower right. Phones, viewports under 900 px and reduced
+          motion go straight to the hold (no portrait approach exists). A half-second dissolve hands into the
+          loop. The playbook's verdict on take 1 stands (dissolve inside the clip at 4.9–5.3 s, last-frame pin
+          0.774 against the plate): the vault shifts once at the hand-off.
+    V1a · Shots 0–1 · the living hold · W1_3.mp4 (take 3, accepted 06.09.) · played as a LOOP, not scrubbed,
+          with a half-second cross-fade at the seam. Over it, composed in HTML: eyebrow, H1, sub-line, the
+          scroll cue and the concierge card (a real form). The wordmark in brushed gold.
+    V1b · Shot 2 · the push-in · V1b_3.mp4 frames 0–100 (take 3, accepted in part) · scroll-scrubbed, all
+          101 native frames, sub-frame blended: the visitor supplies the easing. The hero copy fades out over
+          the first quarter of the move; the wordmark stays. The film ends on the doors, open, centred.
+
+  After the doors the page rests on the last frame and the paper section follows: W7 The Concierge Desk.
+  Shots 3–12 are not generated yet and nothing stands in for them — the page says so where the film ends.
+  No copy was rewritten; nothing is published; nothing paid was run.
+
+  The set never freezes (v0.5): at every scroll position — the hold, any point of the push-in, the held doors —
+  the picture keeps living on the clock: a slow lens breath, ripples across the wet forecourt, the light between
+  the ribs pulsing, dust in the air with real depth that flies past as the camera pushes in. WebGL on desktop,
+  a 2D canvas on touch; off under reduced motion. ?life=0 shows the page without it; ?pre=0 skips the approach.
+
+  Footage: media/ocean-journey/approach-sd.bin (1024×576, 192 WebP frames at 24 fps = V0a_1 whole, desktop only,
+  streams first; poster 00-approach.jpg = its frame 0) and threshold-sd.bin (1024×576) / threshold-m.bin (800×450):
+  96 loop frames at 12 fps + 101 push-in frames at 24 fps = 197 WebP frames. Posters: 01-threshold.jpg (the plate's
+  first frame = the accepted Vault frame), 02-doors.jpg (push-in frame 100 = W1-threshold-B-v2).
+
+  Open (not decided here): D13 mobile hero without the card + sticky Call · Enquire bar (built as the CD's
+  recommendation, PO call open); D7 frame budget; the figures in shot 2 (A = clean re-run $1.92, B = keep);
+  no portrait plate exists — the phone reuses the 16:9 frames, cropped to the doors.
+
+  Change log
+  0.6 · 06.09.2026 · Published to GitHub Pages under /homepage-journey-prototype/ with the two accepted
+        frame packs and the approach pack alongside it. A browser icon and a share thumbnail built from the
+        page’s own film tokens (ink, brushed gold, Iowan Old Style): the icon is the threshold — two leaves
+        parting on a beam of gold, reflected on the wet forecourt; the thumbnail is the film’s last frame,
+        the doors open, under an ink scrim carrying the eyebrow, the H1 and the gold rule. Built by
+        bin/make-journey-share-assets.py. Nothing in the film, the copy or the engine changed.
+  0.5 · 06.09.2026 · The approach stitched to the front: V0a_1 as a second frame pack (approach-sd.bin, 192 frames
+        at 24 fps, desktop only) streamed first and played once on arrival; catch-up on scroll; "Skip the approach"
+        lower right; headline from frame 0; sub-line, cue and card blend in with the forecourt; half-second hand-off
+        dissolve into the loop (Veo tab V0a, D18). The set breathes at every scroll position: lens breath, ripples
+        on the wet forecourt, the light pulsing, dust with depth (WebGL desktop, 2D canvas touch; ?life=0 to compare).
+        Engine: loop-wrap epsilon, snap to the scroll target, the loop resumes from inside the clock with a
+        dissolve, header state on every scroll event.
+  0.4 · 06.09.2026 · Film rebuilt from the two accepted clips only (W1_3 loop + V1b_3 frames 0–100); the
+        six stand-in rooms, the route rail, the Practices menu and the ocean palette are gone. Hero copy and the
+        concierge card composed over the hold as the Veo/Script tabs instruct; copy fades over the first quarter
+        of the push-in; loop seam cross-fade (0.5 s); a 0.4 s dissolve carries the hold into the scrub and the
+        loop resumes when the visitor scrolls back to the top. Mobile: card cut, sticky Call · Enquire bar (D13).
+        Desk section carries the W7 words. Look moved to the film tokens of the production file (ink, gold, paper, serif).
+  0.3 · 06.09.2026 · The film is a packed frame sequence (12 fps WebP) decoded on the fly and drawn on a canvas,
+        the two frames around the scroll position blended by its sub-frame fraction: every scrolled pixel renders,
+        no video seeks, no jumps. Follow-speed is time-based (CFG.scrub). Touch devices draw on a plain 2D canvas.
+  0.2 · 06.09.2026 · One stitched film scrubbed end to end; water ripple replaced by a cursor-free film grade.
+  0.1 · 06.09.2026 · First build.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Husband Retail — The Threshold · scroll journey test · v0.6</title>
+<meta name="description" content="The first chapter of the Husband Retail homepage film: the approach, the living hold, and the push-in to the open doors — scrolled.">
+<!-- the tab: the threshold itself, two leaves parting on a beam of brushed gold -->
+<link rel="icon" type="image/svg+xml" href="assets/journey/favicon.svg">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/journey/favicon-32.png">
+<link rel="icon" type="image/png" sizes="192x192" href="assets/journey/favicon-192.png">
+<link rel="icon" href="assets/journey/favicon.ico" sizes="any">
+<link rel="apple-touch-icon" href="assets/journey/apple-touch-icon.png">
+<meta name="theme-color" content="#16140F">
+<!-- the shared link: the film's last frame under an ink scrim, with the hero words -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Husband Retail">
+<meta property="og:title" content="Husband Retail — The Threshold">
+<meta property="og:description" content="Retail real estate, advised from the owner's side. The first chapter of the homepage film, scrolled.">
+<meta property="og:image" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/assets/journey/og-card.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The vault doors open on brushed gold, with the words: Retail real estate, advised from the owner's side.">
+<meta property="og:url" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+/* ---------- tokens: the film look of 05-homepage-production.html (--film-*) ---------- */
+:root{
+  --ink:#16140F; --ink-deep:#0B0A08; --type:#EDE7DA; --mute:#B8B1A3; --dim:#8c8677;
+  --gold:#A98A57; --gold-hi:#D9C08A; --paper:#F3EFE7; --paper-ink:#1c1912; --paper-mute:#6b6557; --rule:#d9d2c2;
+  --sans:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --nav-h:64px;
+}
+html,body{margin:0;overflow-x:clip;background:var(--ink);color:var(--type);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+*,*::before,*::after{box-sizing:border-box;}
+a{color:inherit;}
+.dev{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);}
+
+/* ---------- wordmark + site header (the wordmark stays through the push-in) ---------- */
+.site-nav{position:fixed;left:0;right:0;top:0;z-index:220;height:var(--nav-h);transition:background .3s;}
+.site-nav.is-scrolled{background:rgba(22,20,15,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.topbar{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(20px,5vw,72px);}
+.brand{text-decoration:none;font:400 15px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;
+  background:linear-gradient(100deg,#8f7443 0%,#d9c08a 28%,#a98a57 52%,#e3cd9c 74%,#9c7f4b 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  text-shadow:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));}
+.nav-right{display:flex;align-items:center;gap:22px;}
+.nav-link{text-decoration:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--type);opacity:.85;}
+.nav-link:hover{opacity:1;}
+.cta{text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#14100A;background:var(--gold);padding:12px 18px;}
+.cta:hover{background:#bb9a63;}
+@media (max-width:860px){ :root{--nav-h:56px;} .nav-right{display:none;} .brand{font-size:13px;letter-spacing:.3em;} }
+
+/* ---------- the scroll world ---------- */
+.sw-loader{position:fixed;inset:0;z-index:230;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(ellipse at 50% 40%,#2a2419 0%,#16140F 55%,#0B0A08 100%);transition:opacity .6s ease;}
+.sw-loader--gone{opacity:0;pointer-events:none;}
+.sw-loader__mark{font:400 clamp(1rem,2vw,1.3rem)/1 var(--serif);letter-spacing:.34em;color:var(--gold-hi);animation:sw-breathe 2.6s ease-in-out infinite;}
+@keyframes sw-breathe{0%,100%{opacity:.55;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.sw-loader__label{color:var(--mute);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;}
+.sw-loader__bar{width:220px;max-width:62vw;height:2px;overflow:hidden;background:rgba(237,231,218,.14);}
+.sw-loader__bar i{display:block;height:100%;width:0%;background:var(--gold);transition:width .25s ease-out;}
+.sw-loader__pct{color:var(--dim);font-size:.7rem;letter-spacing:.16em;font-variant-numeric:tabular-nums;margin-top:-12px;}
+.sw-sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(#1a2233 0%,#16140F 60%,#0B0A08 100%);}
+.sw-stage{position:fixed;inset:0;z-index:10;pointer-events:none;}
+.sw-film{position:absolute;inset:0;}
+.sw-film__poster,.sw-film__rest{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;}
+.sw-film__poster{z-index:2;transition:opacity .35s;will-change:transform;transform-origin:50% 42%;}
+.sw-film__rest{z-index:3;opacity:0;transition:opacity .5s;}
+.sw-film.has-clip .sw-film__poster{opacity:0;}
+.sw-fx{position:fixed;inset:0;width:100%;height:100%;z-index:15;pointer-events:none;opacity:0;transition:opacity .4s ease;}
+.sw-fx.is-on{opacity:1;}
+.sw-life{position:fixed;inset:0;width:100%;height:100%;z-index:15;pointer-events:none;opacity:0;transition:opacity 1.2s ease;}
+.sw-life.is-on{opacity:1;}
+.sw-skip{position:fixed;right:28px;bottom:26px;z-index:40;display:none;align-items:center;gap:10px;padding:11px 16px;border:1px solid rgba(237,231,218,.26);border-radius:2px;
+  background:rgba(14,18,25,.55);color:var(--mute);font:500 .66rem/1 system-ui,-apple-system,"Helvetica Neue",Arial,sans-serif;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;
+  -webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);transition:color .2s,border-color .2s;}
+.sw-skip.is-on{display:inline-flex;}
+.sw-skip:hover,.sw-skip:focus-visible{color:var(--type);border-color:var(--gold);outline:none;}
+.sw-skip i{display:block;width:14px;height:1px;background:currentColor;}
+.hero .sub,.hero .cue,.hero .card{transition:opacity .9s ease,transform .9s ease;}
+.hero.is-pre .sub,.hero.is-pre .cue,.hero.is-pre .card{opacity:0;transform:translateY(10px);pointer-events:none;}
+.sw-scrim{position:fixed;inset:0;z-index:16;pointer-events:none;display:none;
+  background:linear-gradient(180deg,rgba(22,20,15,.38) 0%,rgba(22,20,15,0) 22%,rgba(22,20,15,0) 48%,rgba(22,20,15,.82) 100%);}
+.sw-track{position:relative;z-index:1;width:100%;pointer-events:none;}
+
+/* ---------- the words, composed in HTML over the film ---------- */
+.sw-copylayer{position:fixed;inset:0;z-index:20;pointer-events:none;}
+.hero{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:clamp(24px,4vw,72px);
+  padding:calc(var(--nav-h) + 8vh) clamp(24px,6vw,96px) 8vh;pointer-events:none;will-change:opacity,transform;}
+.hero__copy{max-width:min(46vw,600px);align-self:start;}          /* the quiet upper-left sky */
+.hero.is-live .hero__copy,.hero.is-live .card{pointer-events:auto;}
+.eyebrow{margin:0 0 18px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.hero h1{margin:0 0 20px;font:400 clamp(30px,3.5vw,52px)/1.08 var(--serif);letter-spacing:-.01em;max-width:13em;
+  text-shadow:0 1px 2px rgba(11,10,8,.5),0 2px 22px rgba(11,10,8,.45);}
+.sub{margin:0;font-size:17px;line-height:1.55;color:var(--type);max-width:34em;text-shadow:0 1px 2px rgba(11,10,8,.5),0 1px 16px rgba(11,10,8,.4);}
+.cue{display:flex;align-items:center;gap:12px;margin-top:34px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);}
+.cue i{display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden;}
+.cue i::after{content:"";position:absolute;left:0;top:-34px;width:1px;height:34px;background:var(--gold-hi);animation:sw-cue 1.8s ease-in-out infinite;}
+@keyframes sw-cue{0%{top:-34px}60%{top:34px}100%{top:34px}}
+.card{width:360px;justify-self:end;align-self:end;                 /* the lower-right water */
+  background:rgba(14,18,25,.72);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);
+  border:1px solid rgba(237,231,218,.16);padding:24px 24px 22px;}
+.card h3{font:400 20px/1.2 var(--serif);margin:0 0 16px;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--mute);margin-bottom:5px;}
+.field .opt{text-transform:none;letter-spacing:0;color:var(--dim);}
+.field input,.field select{width:100%;background:rgba(237,231,218,.06);color:var(--type);border:1px solid rgba(237,231,218,.20);border-radius:0;padding:10px 11px;font:400 14px/1.3 var(--sans);appearance:none;-webkit-appearance:none;}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 17px) 18px,calc(100% - 12px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
+.field select option{color:#14100A;}
+.field input:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent;}
+.btn{width:100%;margin-top:6px;padding:13px 14px;border:0;cursor:pointer;background:var(--gold);color:#14100A;font:600 13px/1 var(--sans);letter-spacing:.06em;}
+.btn:hover{background:#bb9a63;}
+.note{font-size:11px;color:var(--dim);margin:12px 0 0;line-height:1.4;}
+.rest{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px);text-align:center;padding:0 24px;opacity:0;visibility:hidden;}
+.rest p{margin:0;font:400 clamp(16px,1.5vw,20px)/1.4 var(--serif);color:var(--type);text-shadow:0 1px 2px rgba(11,10,8,.6),0 1px 18px rgba(11,10,8,.5);}
+.rest .dev{display:block;margin-top:10px;color:var(--mute);text-shadow:0 1px 2px rgba(11,10,8,.6);}
+
+/* ---------- mobile: the Descent — same words, card cut, sticky Call · Enquire (D13, open) ---------- */
+.sticky-bar{display:none;}
+@media (max-width:860px){
+  .sw-scrim{display:block;}
+  .hero{grid-template-columns:1fr;padding:0 20px calc(92px + env(safe-area-inset-bottom));align-content:end;text-align:center;}
+  .hero__copy{max-width:none;}
+  .hero h1{max-width:none;font-size:29px;margin-bottom:14px;}
+  .sub{font-size:14.5px;max-width:none;}
+  .eyebrow{margin-bottom:14px;font-size:11px;}
+  .cue{justify-content:center;margin-top:22px;} .cue i{height:20px;} .cue i::after{height:20px;top:-20px;} @keyframes sw-cue{0%{top:-20px}60%{top:20px}100%{top:20px}}
+  .card{display:none;}                                                /* D13: the card is cut on the phone */
+  .rest{bottom:calc(84px + env(safe-area-inset-bottom));}
+  .sticky-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:210;
+    background:rgba(14,18,25,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(237,231,218,.14);
+    padding-bottom:env(safe-area-inset-bottom);}
+  .sticky-bar a{display:flex;align-items:center;justify-content:center;height:54px;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);}
+  .sticky-bar a + a{border-left:1px solid rgba(237,231,218,.14);color:#14100A;background:var(--gold);}
+}
+@media (prefers-reduced-motion:reduce){ .cue i::after{animation:none;} .sw-loader__mark{animation:none;} }
+
+/* ---------- W7 · The Concierge Desk (paper) ---------- */
+.desk{position:relative;z-index:200;background:var(--paper);color:var(--paper-ink);padding:clamp(72px,10vh,120px) clamp(24px,6vw,96px) 48px;}
+.desk__inner{max-width:1120px;margin:0 auto;}
+.desk__num{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.desk h2{margin:0 0 42px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:14em;}
+.desk__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:start;}
+.desk .field label{color:var(--paper-mute);} .desk .field .opt{color:#8f887a;}
+.desk .field input,.desk .field select{background:#fff;color:var(--paper-ink);border:1px solid var(--rule);}
+.desk .field select{background-image:linear-gradient(45deg,transparent 50%,var(--paper-mute) 50%),linear-gradient(135deg,var(--paper-mute) 50%,transparent 50%);}
+.desk .note{color:#8f887a;}
+.desk__side p{margin:0 0 14px;font-size:16px;line-height:1.6;}
+.desk__reply{font:400 clamp(20px,2vw,26px)/1.3 var(--serif);margin:0 0 8px !important;}
+.desk__side .dev{margin-bottom:26px;}
+.desk__side address{font-style:normal;color:var(--paper-mute);font-size:14px;line-height:1.7;}
+.desk__side address a{color:var(--paper-ink);text-decoration-color:var(--gold);}
+.desk__foot{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:12px;color:var(--paper-mute);}
+.desk__foot details{font-size:12px;} .desk__foot summary{cursor:pointer;color:var(--gold);} .desk__foot ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;}
+@media (max-width:860px){ .desk{padding-bottom:calc(72px + env(safe-area-inset-bottom));} .desk__grid{grid-template-columns:1fr;gap:36px;} }
+</style>
+</head>
+<body>
+
+<header class="site-nav" id="siteNav">
+  <nav class="topbar" aria-label="Main">
+    <a class="brand" href="#threshold" aria-label="Husband Retail home">Husband Retail</a>
+    <div class="nav-right">
+      <a class="nav-link" href="#enquiry">The Concierge Desk</a>
+      <a class="cta" href="#enquiry">Request a call</a>
+    </div>
+  </nav>
+</header>
+
+<main id="world" aria-label="The Threshold"></main>
+
+<!-- the words over the film: none of this is in the plate (Veo tab, V1a · DOM adds) -->
+<div class="sw-copylayer" id="copylayer">
+  <div class="hero" id="hero">
+    <div class="hero__copy" id="threshold">
+      <p class="eyebrow">Husband Retail — Hong Kong, since 1998.</p>
+      <h1>Retail real estate, advised from the owner's side.</h1>
+      <p class="sub">We help developers, landlords and investors make luxury retail destinations perform — in Hong Kong and in more than twenty markets on three continents.</p>
+      <div class="cue" id="cue"><i></i><span>Scroll to the door</span></div>
+    </div>
+    <aside class="card" id="card" aria-labelledby="cardtitle">
+      <h3 id="cardtitle">Speak to Paul's office</h3>
+      <form id="heroForm" novalidate>
+        <div class="field"><label for="h-tel">Telephone <span class="opt">(required)</span></label><input id="h-tel" name="tel" type="tel" autocomplete="tel" required></div>
+        <div class="field"><label for="h-name">Name</label><input id="h-name" name="name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="h-email">Email <span class="opt">(optional)</span></label><input id="h-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="h-brief">Brief</label>
+          <select id="h-brief" name="brief"><option>New development</option><option>Existing asset</option><option>Acquisition</option><option>Leasing brief</option></select></div>
+        <button class="btn" type="submit">Request a call</button>
+        <p class="note" id="heroNote">Test page — the form sends nothing yet.</p>
+      </form>
+    </aside>
+  </div>
+  <div class="rest" id="rest">
+    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone reuses the 16:9 frames and skips the approach; no portrait plate exists.</span></p>
+  </div>
+</div>
+
+<button class="sw-skip" id="skip" type="button" aria-label="Skip the approach">Skip the approach <i></i></button>
+<nav class="sticky-bar" aria-label="Call or enquire"><a href="tel:+85226599280">Call</a><a href="#enquiry">Enquire</a></nav>
+
+<!-- W7 · The Concierge Desk: the Script tab's words -->
+<section class="desk" id="enquiry">
+  <div class="desk__inner">
+    <span class="desk__num">The Concierge Desk</span>
+    <h2>Tell us about the asset.</h2>
+    <div class="desk__grid">
+      <form id="enquiryForm" novalidate>
+        <div class="field"><label for="f-tel">Telephone <span class="opt">(required)</span></label><input id="f-tel" name="tel" type="tel" autocomplete="tel" required></div>
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-org">Organisation</label><input id="f-org" name="org" type="text" autocomplete="organization"></div>
+        <div class="field"><label for="f-brief">Brief</label>
+          <select id="f-brief" name="brief"><option>New development</option><option>Existing asset</option><option>Acquisition</option><option>Leasing brief</option></select></div>
+        <button class="btn" type="submit">Request a call</button>
+        <p class="note" id="formNote">Test page — the form sends nothing yet.</p>
+      </form>
+      <aside class="desk__side">
+        <p class="desk__reply">Replies come from Paul's office.</p>
+        <p class="dev">Wording to confirm with the client.</p>
+        <address>
+          <a href="mailto:hello@husband-retail.com">hello@husband-retail.com</a><br>
+          <a href="tel:+85226599280">+852 2659 9280</a><br>
+          Room 301, 8 Queen's Road East, Wanchai, Hong Kong
+        </address>
+      </aside>
+    </div>
+    <footer class="desk__foot">
+      <span>07 — The Threshold · scroll journey test · <strong>v0.5</strong> · 06.09.2026 · local preview only, not published</span>
+      <details><summary>Change log</summary>
+        <ul>
+          <li><b>0.5</b> · The approach (V0a take 1) stitched to the front as a second frame pack, played once on arrival, catch-up on scroll, Skip lower right, headline from frame 0, sub-line/cue/card blending in with the forecourt, half-second hand-off dissolve into the loop. The set breathes at every scroll position: lens breath, ripples on the wet forecourt, the light pulsing, dust in the air with depth (?life=0 to compare). Engine fixes: loop wrap, snap to target, loop resumes from the clock, header sync.</li>
+          <li><b>0.4</b> · Film rebuilt from the two accepted clips only: W1_3 as the living hold (loop, 12 fps, half-second seam cross-fade) and V1b_3 frames 0–100 as the push-in (scroll-scrubbed, all 101 frames blended). Hero copy and the concierge card composed over the hold as the Veo/Script tabs instruct; copy fades over the first quarter of the move; the wordmark stays. Stand-in rooms, route rail, Practices menu and the ocean palette removed. Mobile: card cut, sticky Call · Enquire (D13 open). Desk carries the W7 words.</li>
+          <li><b>0.3</b> · Packed frame sequence scrubbed with sub-frame blending; time-based follow.</li>
+          <li><b>0.2</b> · One stitched film; cursor-free grade.</li>
+          <li><b>0.1</b> · First build.</li>
+        </ul>
+      </details>
+    </footer>
+  </div>
+</section>
+
+<script>
+/* ============================================================================
+   The Threshold — scroll engine, v0.5.
+   Three accepted-or-instructed clips, two frame packs, one scroll:
+     · the approach (desktop only): V0a_1 as 192 frames at 24 fps in its own pack, played ONCE on arrival, on the
+       clock, never scrubbed. A scroll before it ends runs it on at catch-up speed (CFG.catchUp), never a cut;
+       "Skip the approach" ends it at once. Its last frame dissolves into the hold (CFG.handoff);
+     · the hold: W1_3 as a 96-frame loop at 12 fps, played on the clock (never scrubbed), with a half-second
+       cross-fade at the seam — the plate's first and last frames match, so the seam is a soft hand-over;
+     · the walk: V1b_3 frames 0–100 at 24 fps, scrubbed by the scroll with sub-frame blending; the visitor supplies
+       the easing; the film ends on frame 100 and holds there.
+   Leaving the hold dissolves the last loop frame into the scrub (0.4 s); scrolling back to the top resumes the loop.
+   The set never freezes: on the clock, at every scroll position, a slow lens breath, ripples across the wet
+   forecourt and a pulsing light run inside the grade shader (WebGL) or on the 2D canvas (touch), and a field of dust
+   with real depth drifts on its own canvas and flies past as the camera pushes in (its depth follows the scroll, so
+   it reverses cleanly). Frames are decoded in a sliding window around the position; the film surface is WebGL with
+   the grade on fine pointers, a plain 2D canvas on touch. Reduced motion shows the two stills, nothing moves.
+   ========================================================================== */
+(function(){
+'use strict';
+const M = 'media/ocean-journey/';
+const FILM = { sd:'threshold-sd.bin', m:'threshold-m.bin', pre:'approach-sd.bin',
+               poster:'01-threshold.jpg', posterM:'01-threshold-m.jpg', posterPre:'00-approach.jpg', rest:'02-doors.jpg', restM:'02-doors-m.jpg',
+               loopFps:12, loopN:96, loopEnd:8, seam:.5,      /* W1_3: 8 s, 96 frames at 12 fps, seam cross-fade 0.5 s */
+               pushFps:24, pushN:101,                         /* V1b_3: frames 0–100 at 24 fps = 4.17 s */
+               preFps:24, preN:192, preFirst:24 };            /* V0a_1: 8 s, 192 frames at 24 fps; the first second in = start */
+FILM.end = FILM.loopEnd + (FILM.pushN - 1) / FILM.pushFps;    /* film time at the doors: 12.167 s */
+FILM.pre0 = FILM.loopN + FILM.pushN;                          /* the approach's frames are indexed above the main pack's: 197–388 */
+FILM.preEnd = (FILM.preN - 1) / FILM.preFps;                  /* 7.958 s: the approach's last frame */
+const CFG = { hold:.15,      /* viewports of scroll before the push-in begins (the loop keeps living) */
+              push:2.4,      /* viewports of scroll that carry the push-in (D7 open) */
+              rest:.6,       /* viewports the doors are held before the Desk rises */
+              fadeOver:.25,  /* the hero copy fades out over the first quarter of the move (Veo tab) */
+              dissolve:.4,   /* seconds: the last loop frame dissolves into the scrub, and back */
+              handoff:.5,    /* seconds: the approach's last frame dissolves into the hold (Veo tab V0a) */
+              catchUp:4,     /* the approach runs at this speed once the visitor scrolls (Veo tab V0a: catch-up, never a cut) */
+              arrive:.9,     /* seconds: sub-line, cue and card blend in as the forecourt arrives (CSS transition) */
+              scrub:.24,     /* how closely the film follows the scroll: fraction of the remaining distance per 1/60 s */
+              loaderText:'Preparing the walk', loaderTextPre:'Preparing the approach',
+              grade:{ halation:.34, grain:.045, vignette:.26, dollyBlur:.03 },
+              /* the living set: lens breath (zoom), drift (frame fraction), ripple amplitude (frame fraction), light pulse (fraction of the
+                 halation), dust count desktop / touch, dolly depth the dust travels over the push, depth of the dust field */
+              life:{ breath:.008, drift:.0025, water:.0032, water2d:1.6, light:.16, motes:90, motesM:44, dolly:2.2, depth:3, zMin:.35 } };
+const posOf = t => t < FILM.loopEnd ? t * FILM.loopFps : FILM.loopN + (t - FILM.loopEnd) * FILM.pushFps; /* film time → frame index */
+
+const root = document.getElementById('world');
+const hero = document.getElementById('hero'), rest = document.getElementById('rest'), skip = document.getElementById('skip');
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+const isMobile = coarse || innerWidth <= 860;
+const PRE = !reduced && !isMobile && innerWidth >= 900 && !/[?&]pre=0/.test(location.search);  /* the approach: desktop only (Veo tab V0a) */
+const LIFE = !reduced && !/[?&]life=0/.test(location.search);                                    /* the living set */
+const clamp = (x,a,b) => x < a ? a : x > b ? b : x;
+const smooth = x => { x = clamp(x,0,1); return x*x*(3-2*x); };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const el = (tag, cls) => { const e = document.createElement(tag); if (cls) e.className = cls; return e; };
+const TAU = Math.PI * 2;
+
+/* ---- DOM ---- */
+const sky = el('div','sw-sky');
+const stage = el('div','sw-stage'), film = el('div','sw-film');
+const poster = document.createElement('img'); poster.className = 'sw-film__poster'; poster.alt = ''; poster.decoding = 'async';
+poster.src = M + (isMobile ? FILM.posterM : PRE ? FILM.posterPre : FILM.poster);
+const restStill = document.createElement('img'); restStill.className = 'sw-film__rest'; restStill.alt = ''; restStill.decoding = 'async'; restStill.src = M + (isMobile ? FILM.restM : FILM.rest);
+film.append(poster, restStill); stage.append(film);
+const fx = document.createElement('canvas'); fx.className = 'sw-fx';
+const life = document.createElement('canvas'); life.className = 'sw-life';
+const scrim = el('div','sw-scrim');
+const track = el('div','sw-track');
+root.append(sky, stage, fx, life, scrim, track);
+if (PRE) hero.classList.add('is-pre');   /* eyebrow and headline from frame 0; sub-line, cue and card wait for the forecourt */
+
+/* ---- loader ---- */
+let loader = null, loaderHidden = false, painted = false, failed = false;
+const t0 = performance.now();
+if (!reduced) {
+  loader = el('div','sw-loader');
+  loader.innerHTML = '<div class="sw-loader__mark">HUSBAND RETAIL</div><div class="sw-loader__label">' + esc(PRE ? CFG.loaderTextPre : CFG.loaderText) + '</div><div class="sw-loader__bar"><i></i></div><div class="sw-loader__pct">0%</div>';
+  root.append(loader);
+  setTimeout(hideLoader, 12000);
+  if (coarse) setTimeout(hideLoader, 1500);
+}
+function setProgress(p){ if (!loader) return; p = clamp(p,0,1); loader.querySelector('.sw-loader__bar i').style.width = (p*100).toFixed(1) + '%'; loader.querySelector('.sw-loader__pct').textContent = Math.round(p*100) + '%'; }
+function hideLoader(){ if (!loader || loaderHidden) return; loaderHidden = true; loader.classList.add('sw-loader--gone'); setTimeout(() => { loader.remove(); update(); }, 650); }
+let firstDone = false;
+function firstReady(){ if (firstDone) return; firstDone = true; setProgress(1); const elapsed = performance.now() - t0; setTimeout(hideLoader, Math.max(420, 1100 - elapsed)); }
+
+/* ---- layout: hold · push · rest, in viewports (the approach consumes no scroll budget) ---- */
+let V = innerHeight, W = innerWidth, lastW = innerWidth, holdPx = 0, pushPx = 1, restPx = 0;
+function layout(){
+  V = innerHeight; W = innerWidth;
+  holdPx = CFG.hold * V; pushPx = CFG.push * V; restPx = CFG.rest * V;
+  track.style.height = (holdPx + pushPx + restPx) + 'px';
+  sizeFx();
+}
+
+/* ---- phases: pre (the approach, on the clock) → hold (the loop, on the clock) → walk (the scrub) ---- */
+let pre = PRE, ambient = !reduced && !PRE, ticking = false, r = 0;
+let preT = 0, preSpeed = 1, preScrolled = false, lifeT0 = 0;
+let targetT = FILM.loopEnd, curT = 0, lastY = 0, lastTs = 0, vel = 0, xf = null;
+function update(){
+  const y = scrollY;
+  r = clamp((y - holdPx) / pushPx, 0, 1);                              /* 0 = the hold, 1 = the doors */
+  targetT = FILM.loopEnd + r * (FILM.end - FILM.loopEnd);
+  if (pre && y > 2) preScrolled = true;                                /* the approach runs on at catch-up speed */
+  /* the words: full through the hold, gone by a quarter of the move; the wordmark (header) stays */
+  const co = r <= 0 ? 1 : smooth(1 - r / CFG.fadeOver);
+  hero.style.opacity = co.toFixed(3);
+  hero.style.visibility = co > 0.001 ? 'visible' : 'hidden';
+  hero.classList.toggle('is-live', co > 0.5 && !pre);                  /* the card is not clickable until the forecourt arrives */
+  hero.style.transform = reduced ? 'none' : 'translateY(' + (-Math.min(y, holdPx + pushPx * CFG.fadeOver) * 0.12).toFixed(1) + 'px)';
+  scrim.style.opacity = co.toFixed(3);
+  const ro = smooth((r - 0.88) / 0.12);                                 /* the foot note over the held doors */
+  rest.style.opacity = ro.toFixed(3); rest.style.visibility = ro > 0.001 ? 'visible' : 'hidden';
+  if (!painted) poster.style.transform = 'scale(' + (1 + (reduced ? 0 : r * 0.12)).toFixed(4) + ')';
+  if (reduced) restStill.style.opacity = r < 0.5 ? '0' : '1';
+  /* hold → walk: the last loop frame dissolves into the scrub (walk → hold is decided inside the clock, see loop()) */
+  if (!pre && ambient && r > 0 && painted) { ambient = false; if (ia >= 0) { xf = { from: ia, t0: performance.now(), dur: CFG.dissolve }; FR.pin = ia; } curT = targetT; }
+  /* scroll speed in viewports per second, for the dolly blur */
+  const now = performance.now(); if (lastTs) { const dt = Math.max(8, now - lastTs) / 1000; vel = Math.min(4, Math.abs(y - lastY) / V / dt); } lastY = y; lastTs = now;
+}
+/* the approach ends: on its last frame, on Skip, or when its pack is missing — its last frame dissolves into wherever the scroll is */
+function endPre(now){
+  if (!pre) return;
+  pre = false; preSpeed = 1;
+  skip.classList.remove('is-on'); hero.classList.remove('is-pre');
+  if (ia >= 0) { FR.pin = ia; xf = { from: ia, t0: now, dur: CFG.handoff }; }
+  if (r > 0) { ambient = false; curT = FILM.loopEnd; } else { ambient = true; curT = 0; }
+  lifeT0 = now;
+  update();
+}
+function dropPre(){ /* no approach pack: straight to the hold, as on a phone */
+  if (!pre) return;
+  if (painted) { endPre(performance.now()); return; }
+  pre = false; ambient = true; curT = 0; hero.classList.remove('is-pre'); skip.classList.remove('is-on'); poster.src = M + FILM.poster;
+  if (loader) loader.querySelector('.sw-loader__label').textContent = CFG.loaderText;
+}
+skip.addEventListener('click', () => { if (pre && painted) endPre(performance.now()); });
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive:true });
+addEventListener('resize', () => { if (coarse && innerWidth === lastW) return; lastW = innerWidth; layout(); update(); });
+addEventListener('orientationchange', () => setTimeout(() => { lastW = innerWidth; layout(); update(); }, 80));
+addEventListener('load', () => { layout(); update(); });
+
+/* ---- the frame store: two packed files streamed in (the approach first), frames decoded in a sliding window ---- */
+const mkPack = () => ({ n:0, fps:24, w:16, h:9, buf:null, offs:null, base:0, avail:0, complete:false });
+const PK = { main: mkPack(), pre: mkPack() };
+const FR = { bmp:new Map(), pend:new Map(), center:0, pin:-1 };
+const WIN = coarse ? { ahead:10, behind:4, keep:12, max:40 } : { ahead:16, behind:6, keep:20, max:64 };
+const HAND = 3; /* the first push frames stay decoded during the hold, the first loop frames during the approach: every hand-over lands on a real frame */
+const canBitmap = typeof createImageBitmap === 'function';
+const pkOf = i => i >= FILM.pre0 ? PK.pre : PK.main;
+const local = i => i >= FILM.pre0 ? i - FILM.pre0 : i;
+const mainReady = () => PK.main.avail >= Math.min(PK.main.n || 1e9, FILM.loopN + HAND);
+function frameBlob(i){ const pk = pkOf(i), li = local(i); return new Blob([pk.buf.subarray(pk.base + pk.offs[li], pk.base + pk.offs[li+1])], { type:'image/webp' }); }
+function imgDecode(blob){ return new Promise((res, rej) => { const u = URL.createObjectURL(blob); const im = new Image(); im.onload = () => { URL.revokeObjectURL(u); res(im); }; im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('image decode')); }; im.src = u; }); }
+function release(b){ if (b && b.close) b.close(); }
+function decode(i){
+  if (i < 0 || FR.bmp.has(i) || FR.pend.has(i)) return null;
+  const pk = pkOf(i), li = local(i);
+  if (!pk.buf || li >= pk.avail) return null;
+  const p = (canBitmap ? createImageBitmap(frameBlob(i)) : imgDecode(frameBlob(i)))
+    .then(b => { FR.pend.delete(i); FR.bmp.set(i, b); })
+    .catch(e => { FR.pend.delete(i); console.warn('[threshold] frame ' + i + ' failed', e); });
+  FR.pend.set(i, p); return p;
+}
+/* the decoded frame closest to i inside [lo, hi] — the position never waits on a decode; ahead of the download it holds the last frame in.
+   The range keeps the approach's frames and the main pack's apart: one never stands in for the other. */
+function nearest(i, lo, hi){
+  if (i < lo) i = lo; if (i > hi) i = hi;
+  const pk = pkOf(i), top = Math.min(hi, (pk === PK.pre ? FILM.pre0 : 0) + pk.avail - 1);
+  if (top < lo) return -1;
+  if (i > top) i = top;
+  if (FR.bmp.has(i)) return i;
+  for (let d = 1; d <= WIN.keep; d++) { if (i - d >= lo && FR.bmp.has(i - d)) return i - d; if (i + d <= hi && FR.bmp.has(i + d)) return i + d; }
+  let best = -1, bd = 1e9; for (const k of FR.bmp.keys()) { if (k < lo || k > hi) continue; const d = Math.abs(k - i); if (d < bd) { bd = d; best = k; } }
+  return best;
+}
+const wrapIdx = (i, N) => { if (!N) return i; i %= N; return i < 0 ? i + N : i; };
+const dist = (a, b, N) => { const d = Math.abs(a - b); return N ? Math.min(d % N, N - d % N) : d; };
+const farness = (i, c, N) => (N && i >= N) ? N : dist(i, c, N); /* in the loop, walk and approach frames are far — the circular distance must not pull them near */
+function prefetch(c, dir, N, lo, hi){
+  const pk = pkOf(c), top = (pk === PK.pre ? FILM.pre0 : 0) + pk.avail - 1;
+  if (!N) c = Math.min(c, top);
+  FR.center = c;
+  /* ahead of the position, spaced by how far the film will move next tick, so a fast scroll (or the catch-up) still lands on frames */
+  const fps = N ? FILM.loopFps : pre ? FILM.preFps : FILM.pushFps;
+  const step = N ? 1 : Math.max(1, Math.round(pre ? preSpeed * FILM.preFps / 60 * 1.2 : Math.abs(targetT - curT) * fps * CFG.scrub));
+  const at = i => N ? wrapIdx(i, N) : clamp(i, lo, hi);
+  for (let k = 0; k <= WIN.ahead; k++) decode(at(c + k*step*dir));
+  for (let k = 1; k <= WIN.behind; k++) decode(at(c - k*dir));
+  const land = N ? c : pre ? Math.min(hi, c + WIN.ahead * step) : Math.min(top, Math.floor(posOf(targetT))); /* where the film is heading */
+  if (N) { for (let k = 0; k < HAND; k++) decode(FILM.loopN + k); }
+  else if (pre) { for (let k = 0; k < HAND; k++) decode(k); }
+  else { for (let k = -2; k <= 3; k++) decode(clamp(land + k, lo, hi)); }
+  if (FR.bmp.size > WIN.keep + WIN.ahead) {
+    for (const [i, b] of FR.bmp) {
+      if (i === FR.pin || (N && i >= FILM.loopN && i < FILM.loopN + HAND) || (pre && i < HAND)) continue;
+      const onPath = !N && (i - c) * (land - c) > 0 && Math.abs(i - c) < Math.abs(land - c) && Math.abs(i - c) <= WIN.ahead * step;
+      if (farness(i, c, N) > WIN.keep && Math.abs(i - land) > 6 && !onPath) { release(b); FR.bmp.delete(i); }
+    }
+    if (FR.bmp.size > WIN.max) { /* hard cap on decoded frames: drop the farthest from the position */
+      const far = [...FR.bmp.keys()].sort((a, b) => farness(b, c, N) - farness(a, c, N));
+      for (const i of far) { if (FR.bmp.size <= WIN.max) break; if (i === c || i === FR.pin) continue; release(FR.bmp.get(i)); FR.bmp.delete(i); }
+    }
+  }
+}
+
+/* ---- the living set: one state per tick, read by the shader, the 2D path and the dust ---- */
+const LS = { s:1, dx:0, dy:0, water:0, light:1, ph:[0,0,0,0] };
+function lifeStep(now){
+  if (!LIFE) return;
+  const t = now / 1000, L = CFG.life;
+  const bz = 0.5 + 0.5 * Math.sin(t * 0.57 + 0.4) * Math.cos(t * 0.21);          /* the breath, slow and uneven */
+  LS.s = 1 / (1 + L.drift * 2 + L.breath * bz);
+  LS.dx = L.drift * Math.sin(t * 0.31); LS.dy = L.drift * 0.7 * Math.cos(t * 0.47 + 1.1);
+  const ramp = pre ? 0 : smooth((now - lifeT0) / 1200);                            /* the water wakes after the hand-off */
+  LS.water = L.water * (1 - 0.5 * r) * ramp;                                       /* the forecourt leaves the frame during the push */
+  LS.light = 1 + L.light * (0.6 * Math.sin(t * 0.9) * Math.sin(t * 0.53) + 0.25 * Math.sin(t * 6.3) * Math.sin(t * 4.1) + 0.15 * Math.sin(t * 1.7 + 0.9));
+  LS.ph[0] = (t * 1.9) % TAU; LS.ph[1] = (t * 1.3) % TAU; LS.ph[2] = (t * 1.5) % TAU; LS.ph[3] = (t * 2.3) % TAU;
+}
+
+/* ---- draw: the two frames either side of the position, blended by the fraction between them ---- */
+let ia = -1, ib = -1, mixv = 0, last2d = '', seamOn = false;
+function render(now){
+  let a, b, f;
+  seamOn = false;
+  if (pre) {
+    /* the approach: 192 frames on the clock (or at catch-up speed); ahead of the download it holds */
+    if (!PK.pre.avail) return;
+    const lo = FILM.pre0, hi = FILM.pre0 + FILM.preN - 1;
+    const pos = clamp(preT * FILM.preFps, 0, FILM.preN - 1);
+    let i0 = Math.floor(pos), i1 = Math.min(i0 + 1, FILM.preN - 1); f = pos - i0; if (i1 === i0) f = 0;
+    const g0 = lo + i0, g1 = lo + i1;
+    prefetch(g0, 1, 0, lo, hi);
+    a = nearest(g0, lo, hi); b = nearest(g1, lo, hi);
+    if (a < 0) return;
+    if (b < 0 || b === a || a !== g0 || b !== g1) { b = a; f = 0; }
+  } else if (ambient) {
+    /* the hold: 96 frames on the clock; the last half second cross-fades into the first */
+    if (!PK.main.avail) { if (xf) xf.t0 = now; return; }
+    const N = FILM.loopN, hi = PK.main.n - 1, u = clamp(curT, 0, FILM.loopEnd - 1e-4), pos = u * FILM.loopFps;
+    const i0 = Math.floor(pos) % N, i1 = (i0 + 1) % N; f = pos - Math.floor(pos);
+    prefetch(i0, 1, N, 0, hi);
+    a = nearest(i0, 0, hi); b = nearest(i1, 0, hi);
+    if (a < 0) { if (xf) xf.t0 = now; return; }                        /* the loop is not in yet: hold the last picture, the dissolve waits */
+    if (b < 0 || b === a || a !== i0 || b !== i1) { b = a; f = 0; }
+    if (u >= FILM.loopEnd - FILM.seam) {
+      const m = (u - (FILM.loopEnd - FILM.seam)) / FILM.seam;
+      const ai = nearest(Math.min(Math.round(pos), N - 1), 0, hi), bi = nearest(Math.round((u - (FILM.loopEnd - FILM.seam)) * FILM.loopFps) % N, 0, hi);
+      if (ai >= 0 && bi >= 0 && ai !== bi) { a = ai; b = bi; f = m; seamOn = true; }
+    }
+    if (xf) { /* the approach's last frame, or the walk's first, dissolves into the loop */
+      const m = (now - xf.t0) / (xf.dur * 1000);
+      if (m >= 1) { FR.pin = -1; xf = null; }
+      else { const cur = nearest(i0, 0, hi); if (cur >= 0 && FR.bmp.has(xf.from) && cur !== xf.from) { a = xf.from; b = cur; f = smooth(m); seamOn = false; } }
+    }
+  } else {
+    /* the walk: V1b_3 frames 0–100 follow the scroll; the film holds on the doors */
+    if (!PK.main.avail) { if (xf) xf.t0 = now; return; }
+    const n = PK.main.n, av = PK.main.avail, hi = n - 1;
+    const pos = clamp(posOf(curT), FILM.loopN, hi);
+    let i0 = Math.floor(pos), i1 = i0 + 1; f = pos - i0;
+    if (i1 > hi) { i1 = hi; f = 0; }
+    if (i1 >= av) { i0 = Math.min(i0, av - 1); i1 = i0; f = 0; }
+    prefetch(i0, targetT >= curT ? 1 : -1, 0, 0, hi);
+    a = nearest(i0, 0, hi); b = nearest(i1, 0, hi);
+    if (a < 0) { if (xf) xf.t0 = now; return; }
+    if (b < 0 || b === a || a !== i0 || b !== i1) { b = a; f = 0; }
+    if (xf) { /* the last loop frame (or the approach's last) dissolves into the scrub */
+      const m = (now - xf.t0) / (xf.dur * 1000);
+      if (m >= 1) { FR.pin = -1; xf = null; }
+      else { const cur = nearest(Math.round(pos), 0, hi); if (cur >= 0 && FR.bmp.has(xf.from) && cur !== xf.from) { a = xf.from; b = cur; f = smooth(m); } }
+    }
+  }
+  if (gl) drawGL(a, b, f, now); else if (ctx) draw2D(a, b, f, now);
+  mixv = f;
+}
+let buf2 = null, bctx = null;
+function draw2D(a, b, f, now){
+  const cw = fx.width, ch = fx.height, pk = pkOf(a);
+  const key = a + ':' + b + ':' + f.toFixed(3) + ':' + cw + 'x' + ch + (LIFE ? ':' + (now >> 4) : '');
+  if (key === last2d) return; last2d = key;
+  const sc = Math.max(cw/pk.w, ch/pk.h), dw = pk.w*sc, dh = pk.h*sc, dx = (cw-dw)*0.5, dy = (ch-dh)*(isMobile ? 0.45 : 0.42);
+  const c = LIFE && bctx ? bctx : ctx;
+  if (c === bctx) { /* the breath: a hair of zoom about the anchor and a slow drift */
+    const z = 1 / LS.s, ax = cw * 0.5, ay = ch * (isMobile ? 0.45 : 0.42);
+    c.setTransform(z, 0, 0, z, ax - ax * z - LS.dx * cw, ay - ay * z - LS.dy * ch);
+  }
+  c.globalAlpha = 1; c.drawImage(FR.bmp.get(a), dx, dy, dw, dh);
+  if (b !== a && f > 0.004) { c.globalAlpha = f; c.drawImage(FR.bmp.get(b), dx, dy, dw, dh); c.globalAlpha = 1; }
+  if (c === bctx) {
+    c.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.drawImage(buf2, 0, 0);
+    /* ripples across the wet forecourt: the lower band re-drawn in strips, each nudged sideways on its own wave */
+    const y0 = Math.floor(ch * 0.56), K = 14, sh = Math.ceil((ch - y0) / K), amp = LS.water * CFG.life.water2d * cw;
+    if (amp > 0.05) for (let k = 0; k < K; k++) {
+      const sy = y0 + k * sh, h = Math.min(sh + 1, ch - sy); if (h <= 0) break;
+      const uy = (sy + sh * 0.5) / ch, wm = smooth((uy - 0.56) / 0.28);
+      const off = wm * amp * (Math.sin(uy * 38 + LS.ph[0]) * 0.55 + Math.sin(uy * 21 - LS.ph[1]) * 0.45) * 0.6;
+      if (Math.abs(off) < 0.3) continue;
+      ctx.drawImage(buf2, 0, sy, cw, h, off, sy, cw, h);
+    }
+    /* the light between the ribs, pulsing */
+    const pulse = 0.5 + 0.5 * (LS.light - 1) / CFG.life.light;
+    const g = ctx.createRadialGradient(cw * 0.5, ch * 0.47, 0, cw * 0.5, ch * 0.47, ch * 0.6);
+    g.addColorStop(0, 'rgba(255,214,150,' + (0.03 + 0.06 * pulse).toFixed(3) + ')'); g.addColorStop(1, 'rgba(255,214,150,0)');
+    ctx.globalCompositeOperation = 'lighter'; ctx.fillStyle = g; ctx.fillRect(0, 0, cw, ch); ctx.globalCompositeOperation = 'source-over';
+  }
+  ia = a; ib = b;
+}
+
+/* ---- the dust: a field with depth on its own canvas; the camera's depth follows the scroll, so the push-in flies through it
+        and scrolling back brings it back. Drifts, wobbles and twinkles on the clock; hidden until the forecourt arrives. ---- */
+let lctx = null, motes = [], sprite = null, motesDrawn = 0;
+if (LIFE) {
+  try { lctx = life.getContext('2d'); } catch (e) { lctx = null; }
+  if (lctx) {
+    const n = coarse ? CFG.life.motesM : CFG.life.motes, asp = Math.max(1, W / Math.max(1, V));
+    for (let i = 0; i < n; i++) motes.push({ ox:(Math.random()*2-1)*1.6*asp, oy:(Math.random()*2-1)*1.7, z:Math.random()*CFG.life.depth, ws:.4+Math.random()*1.2, ph:Math.random()*TAU,
+                                             sz:Math.random(), tw:.6+Math.random()*2.4, vy:.008+Math.random()*.022, a:.35+Math.random()*.65 });
+    sprite = document.createElement('canvas'); sprite.width = sprite.height = 32;
+    const sc = sprite.getContext('2d'), g = sc.createRadialGradient(16, 16, 0, 16, 16, 16);
+    g.addColorStop(0, 'rgba(255,236,190,1)'); g.addColorStop(0.35, 'rgba(217,192,138,0.55)'); g.addColorStop(1, 'rgba(217,192,138,0)');
+    sc.fillStyle = g; sc.fillRect(0, 0, 32, 32);
+  }
+}
+function drawMotes(now, dt){
+  if (!lctx) return;
+  const cw = life.width, ch = life.height, H = ch, cx = cw * 0.5, cy = ch * 0.45, L = CFG.life, t = now / 1000;
+  lctx.setTransform(1, 0, 0, 1, 0, 0); lctx.clearRect(0, 0, cw, ch);
+  const fade = pre ? smooth((preT - 5.5) / 2.5) : 1;
+  if (fade <= 0) { motesDrawn = 0; return; }
+  lctx.globalCompositeOperation = 'lighter';
+  const cam = r * L.dolly, span = L.depth; let drawn = 0;
+  for (const m of motes) {
+    m.oy -= m.vy * dt; if (m.oy < -1.7) m.oy += 3.4;
+    let ze = (m.z - cam) % span; if (ze < 0) ze += span; ze += L.zMin;
+    const p = 0.9 / ze;
+    const near = smooth((ze - L.zMin) / 0.45), far = smooth((span + L.zMin - ze) / 0.7);
+    const wob = Math.sin(t * m.ws + m.ph) * 0.03;
+    const x = cx + (m.ox + wob) * p * H, y = cy + m.oy * p * H;
+    const sz = clamp((0.6 + m.sz * 1.6) * p * (H / 900) * 2.2, 0.8, 16);
+    if (x < -sz || x > cw + sz || y < -sz || y > ch + sz) continue;
+    const tw = 0.55 + 0.45 * Math.sin(t * m.tw + m.ph * 2);
+    lctx.globalAlpha = clamp(m.a * near * far * tw * fade * 0.85, 0, 1);
+    lctx.drawImage(sprite, x - sz, y - sz, sz * 2, sz * 2); drawn++;
+  }
+  lctx.globalAlpha = 1; lctx.globalCompositeOperation = 'source-over';
+  motesDrawn = drawn;
+}
+
+/* ---- the film: stream the approach first (desktop), then the main pack; the approach begins on its first second,
+        the hold on its own frames plus the first push frames; the rest arrives while the picture is already living ---- */
+let started = false;
+async function streamPack(url, pk, onHeader, onFrames){
+  const res = await fetch(url, { priority:'high' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const total = +res.headers.get('content-length') || 0;
+  const reader = res.body.getReader();
+  let buf = new Uint8Array(total || (1 << 22)), got = 0, hdr = false;
+  for (;;) {
+    const { done, value } = await reader.read(); if (done) break;
+    if (got + value.length > buf.length) { const nb = new Uint8Array(Math.max(buf.length * 2, got + value.length)); nb.set(buf.subarray(0, got)); buf = nb; if (hdr) pk.buf = buf; }
+    buf.set(value, got); got += value.length;
+    if (!hdr && got >= 20) {
+      if (String.fromCharCode(buf[0], buf[1], buf[2], buf[3]) !== 'SWF1') throw new Error('not a frame pack');
+      const dv = new DataView(buf.buffer), nf = dv.getUint32(4, true);
+      if (got >= 20 + 4 * (nf + 1)) {
+        pk.n = nf; pk.fps = dv.getUint32(8, true) / 1000; pk.w = dv.getUint32(12, true); pk.h = dv.getUint32(16, true);
+        pk.offs = new Uint32Array(nf + 1); for (let i = 0; i <= nf; i++) pk.offs[i] = dv.getUint32(20 + 4*i, true);
+        pk.base = 20 + 4 * (nf + 1); pk.buf = buf; hdr = true;
+        onHeader(pk);
+      }
+    }
+    if (hdr) { while (pk.avail < pk.n && pk.base + pk.offs[pk.avail + 1] <= got) pk.avail++; onFrames(pk, got); }
+  }
+  if (!hdr) throw new Error('short file');
+  pk.buf = buf; pk.avail = pk.n; pk.complete = true; onFrames(pk, got);
+}
+async function loadFilm(){
+  const fail = e => { console.warn('[threshold] film failed', e); failed = true; firstReady(); };
+  const start = async () => {
+    if (started) return; started = true;
+    const i0 = pre ? FILM.pre0 : 0;
+    const first = decode(i0); for (let i = 1; i < WIN.ahead; i++) decode(i0 + i);
+    await first;
+    if (!FR.bmp.has(i0)) throw new Error('first frame failed');
+    setProgress(0.96);
+    painted = true; lifeT0 = performance.now(); render(performance.now());
+    film.classList.add('has-clip'); fx.classList.add('is-on'); if (lctx) life.classList.add('is-on'); if (pre) skip.classList.add('is-on');
+    firstReady(); update();
+  };
+  try {
+    if (pre) {
+      let need = 1;
+      try {
+        await streamPack(M + FILM.pre, PK.pre,
+          pk => { if (pk.n !== FILM.preN) console.warn('[threshold] approach pack has ' + pk.n + ' frames, expected ' + FILM.preN); need = pk.base + pk.offs[Math.min(pk.n, FILM.preFirst)]; },
+          (pk, got) => { if (!started) { setProgress(Math.min(1, got / need) * 0.9); if (pk.avail >= Math.min(pk.n, FILM.preFirst)) { start().catch(fail); setTimeout(firstReady, 3500); } } });
+      } catch (e) { console.warn('[threshold] approach pack failed — straight to the hold', e); dropPre(); }
+    }
+    let need = 1;
+    await streamPack(M + (isMobile ? FILM.m : FILM.sd), PK.main,
+      pk => { if (pk.n !== FILM.loopN + FILM.pushN) console.warn('[threshold] pack has ' + pk.n + ' frames, expected ' + (FILM.loopN + FILM.pushN)); need = pk.base + pk.offs[Math.min(pk.n, FILM.loopN + HAND)]; },
+      (pk, got) => { if (!started) { setProgress(Math.min(1, got / need) * 0.9); if (pk.avail >= Math.min(pk.n, FILM.loopN + HAND)) { start().catch(fail); setTimeout(firstReady, 3500); } } });
+    if (!started) { setTimeout(firstReady, 3500); await start(); }
+  } catch (e) { fail(e); }
+}
+
+/* ---- the clock: the approach and the hold run on time; the walk follows the scroll (time-based, so 60 and 120 Hz feel the same) ---- */
+let lastNow = 0;
+function loop(now){
+  const dt = lastNow ? Math.min(0.05, (now - lastNow) / 1000) : 1/60; lastNow = now;
+  if (painted) {
+    if (pre) {
+      if (loaderHidden || !loader) {                                     /* the approach starts once the loader lifts */
+        const want = preScrolled ? CFG.catchUp : 1;
+        preSpeed += (want - preSpeed) * (1 - Math.pow(0.8, dt * 60));
+        const nt = Math.min(FILM.preEnd, preT + dt * preSpeed);
+        const need = Math.min(FILM.preN - 1, Math.ceil(nt * FILM.preFps));
+        if (PK.pre.avail > need) preT = nt;                              /* ahead of the download the approach holds, never skips */
+      }
+    } else if (ambient) {
+      if (mainReady()) { curT += dt; if (curT >= FILM.loopEnd - 1e-6) curT -= FILM.loopEnd - FILM.seam; } /* past the seam the incoming side carries on */
+    } else {
+      const k = reduced ? 1 : 1 - Math.pow(1 - CFG.scrub, dt * 60);
+      curT += (targetT - curT) * k;
+      if (Math.abs(targetT - curT) < 0.002) curT = targetT;             /* land exactly, never creep */
+      /* walk → hold: once the film is back at its first push frame, the loop resumes under a dissolve */
+      if (r <= 0 && !xf && Math.abs(curT - FILM.loopEnd) < 1 / FILM.pushFps) { ambient = true; if (ia >= 0) { xf = { from: ia, t0: now, dur: CFG.dissolve }; FR.pin = ia; } curT = 0; }
+    }
+    lifeStep(now);
+    render(now);
+    drawMotes(now, dt);
+    if (pre && preT >= FILM.preEnd - 1e-6) endPre(now);              /* its last frame is on the canvas: pin it, dissolve from it */
+  }
+  vel += (0 - vel) * 0.04; /* settle when the scroll rests */
+  requestAnimationFrame(loop);
+}
+
+/* ---- the film grade (WebGL, fine pointer only): halation on the highlights, fine grain, a soft vignette, a little dolly blur
+        while the scroll is moving — and the living set: lens breath and drift, ripples across the wet forecourt, the light pulsing.
+        Never reacts to the cursor. Touch gets the plain frames with the 2D living set. ---- */
+let gl = null, ctx = null, prog = null, texA = null, texB = null, uni = {}, pr = Math.min(devicePixelRatio || 1, 1.5), blur = 0;
+if (!reduced) {
+  if (!coarse && matchMedia('(hover: hover) and (pointer: fine)').matches && CFG.grade) initFx();
+  if (!gl) { try { ctx = fx.getContext('2d', { alpha:false }); if (LIFE) { buf2 = document.createElement('canvas'); bctx = buf2.getContext('2d', { alpha:false }); } } catch (e) { ctx = null; } }
+}
+function initFx(){
+  try {
+    gl = fx.getContext('webgl', { alpha:false, antialias:false, powerPreference:'high-performance' });
+    if (!gl) return;
+    const vs = 'attribute vec2 a;varying vec2 v;void main(){v=a*0.5+0.5;gl_Position=vec4(a,0.0,1.0);}';
+    const fs = [
+      'precision mediump float;varying vec2 v;',
+      'uniform sampler2D u_a,u_b;uniform vec2 u_res,u_tres;uniform float u_mix,u_t,u_blur,u_grain,u_halo,u_vig,u_light;uniform vec4 u_life,u_ph;',
+      'vec2 cover(vec2 uv){float ra=u_res.x/u_res.y,rt=u_tres.x/u_tres.y;vec2 s=ra>rt?vec2(1.0,rt/ra):vec2(ra/rt,1.0);vec2 an=vec2(0.5,0.42);return clamp(an+(uv-an)*s,0.001,0.999);}',
+      'vec3 film(vec2 uv){vec2 c=cover(uv);return mix(texture2D(u_a,c).rgb,texture2D(u_b,c).rgb,u_mix);}',
+      'float lum(vec3 c){return dot(c,vec3(0.299,0.587,0.114));}',
+      'float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
+      'void main(){',
+      ' vec2 uv=vec2(v.x,1.0-v.y);vec2 an=vec2(0.5,0.42);float asp=u_res.y/u_res.x;',
+      /* the living set: breath and drift (u_life.xyz), ripples across the lower band (u_life.w = amplitude, u_ph = wave phases) */
+      ' float wm=smoothstep(0.56,0.84,uv.y);',
+      ' vec2 w=vec2((sin(uv.y*38.0+u_ph.x)*0.55+sin(uv.y*21.0-u_ph.y+uv.x*5.0)*0.45)*0.6*asp,sin(uv.y*29.0+u_ph.z+uv.x*3.0)*0.6+sin(uv.y*47.0-u_ph.w)*0.4);',
+      ' uv=an+(uv-an)*u_life.x+u_life.yz+w*wm*u_life.w;',
+      ' vec2 dir=(uv-an)*u_blur;vec3 col=vec3(0.0);',
+      ' for(int i=0;i<7;i++){float f=float(i)/6.0-0.5;col+=film(uv-dir*f);}',
+      ' col/=7.0;',
+      ' vec3 glow=vec3(0.0);',
+      ' for(int i=0;i<8;i++){float a=float(i)*0.7854;vec2 o=vec2(cos(a)*asp,sin(a))*0.014;vec3 c=film(uv+o);glow+=c*smoothstep(0.52,0.95,lum(c));}',
+      ' for(int i=0;i<6;i++){float a=float(i)*1.0472+0.5;vec2 o=vec2(cos(a)*asp,sin(a))*0.032;vec3 c=film(uv+o);glow+=c*smoothstep(0.52,0.95,lum(c))*0.7;}',
+      ' col+=glow/14.0*u_halo*u_light*vec3(1.0,0.86,0.66);',
+      ' col*=1.0+(u_light-1.0)*0.18;',
+      ' float d=distance(uv,vec2(0.5,0.5))/0.7071;col*=1.0-u_vig*smoothstep(0.45,1.05,d);',
+      ' float g=hash(floor(gl_FragCoord.xy/1.5)+vec2(fract(u_t*7.3)*100.0,fract(u_t*3.1)*100.0))-0.5;',
+      ' col+=g*u_grain*(1.0-0.6*lum(col));',
+      ' gl_FragColor=vec4(col,1.0);}'
+    ].join('\n');
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+    prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    ['u_a','u_b','u_res','u_tres','u_mix','u_t','u_blur','u_grain','u_halo','u_vig','u_light','u_life','u_ph'].forEach(k => uni[k] = gl.getUniformLocation(prog, k));
+    const mk = () => { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([22,20,15])); return t; };
+    texA = mk(); texB = mk();
+    gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
+    gl.uniform1i(uni.u_a, 0); gl.uniform1i(uni.u_b, 1);
+    sizeFx();
+  } catch (e) { console.warn('[threshold] grade off:', e.message); gl = null; }
+}
+function sizeFx(){
+  if (lctx) { const p = Math.min(devicePixelRatio || 1, 1.5); life.width = Math.round(W * p); life.height = Math.round(V * p); }
+  if (!gl && !ctx) return;
+  const p = gl ? pr : Math.min(devicePixelRatio || 1, LIFE ? 1.5 : 2);
+  fx.width = Math.round(W * p); fx.height = Math.round(V * p);
+  if (buf2) { buf2.width = fx.width; buf2.height = fx.height; }
+  if (gl) gl.viewport(0, 0, fx.width, fx.height);
+  last2d = ''; if (painted) render(performance.now());
+}
+function upload(t, i){ gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, FR.bmp.get(i)); }
+function drawGL(a, b, f, now){
+  /* one step forward or back: swap the two textures, upload only the new one */
+  if (a === ib && a !== ia) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
+  else if (b === ia && b !== ib) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
+  gl.activeTexture(gl.TEXTURE0); if (a !== ia) { upload(texA, a); ia = a; } else gl.bindTexture(gl.TEXTURE_2D, texA);
+  gl.activeTexture(gl.TEXTURE1); if (b !== ib) { upload(texB, b); ib = b; } else gl.bindTexture(gl.TEXTURE_2D, texB);
+  blur += ((ambient || pre ? 0 : CFG.grade.dollyBlur * smooth((vel - 0.15) / 1.45)) - blur) * 0.18;
+  const pk = pkOf(a);
+  gl.uniform2f(uni.u_res, fx.width, fx.height); gl.uniform2f(uni.u_tres, pk.w, pk.h);
+  gl.uniform1f(uni.u_mix, f); gl.uniform1f(uni.u_t, (now / 1000) % 100); gl.uniform1f(uni.u_blur, blur);
+  gl.uniform1f(uni.u_grain, CFG.grade.grain); gl.uniform1f(uni.u_halo, CFG.grade.halation); gl.uniform1f(uni.u_vig, CFG.grade.vignette);
+  gl.uniform1f(uni.u_light, LS.light); gl.uniform4f(uni.u_life, LS.s, LS.dx, LS.dy, LS.water); gl.uniform4f(uni.u_ph, LS.ph[0], LS.ph[1], LS.ph[2], LS.ph[3]);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+/* ---- go ---- */
+layout(); update(); requestAnimationFrame(loop);
+if (!reduced) loadFilm();
+
+/* exposed for the render checks */
+window.__sw = { FILM, CFG, posOf, preOn: PRE, get V(){ return V; }, get holdPx(){ return holdPx; }, get pushPx(){ return pushPx; }, get restPx(){ return restPx; },
+                get r(){ return r; }, get pre(){ return pre; }, get preT(){ return preT; }, set preT(v){ preT = v; }, get preSpeed(){ return preSpeed; }, skip(){ if (pre && painted) endPre(performance.now()); },
+                get ambient(){ return ambient; }, get dissolving(){ return !!xf; }, get seam(){ return seamOn; },
+                get mode(){ return gl ? 'gl' : ctx ? '2d' : null; }, get fx(){ return !!gl; },
+                get frames(){ return { n: PK.main.n, fps: PK.main.fps, w: PK.main.w, h: PK.main.h, avail: PK.main.avail, complete: PK.main.complete, decoded: FR.bmp.size, pending: FR.pend.size, max: WIN.max, pin: FR.pin,
+                                       pre: { n: PK.pre.n, avail: PK.pre.avail, complete: PK.pre.complete } }; },
+                get frame(){ return { a: ia, b: ib, mix: mixv }; },
+                get life(){ return { on: LIFE, motes: motes.length, drawn: motesDrawn, s: LS.s, dx: LS.dx, dy: LS.dy, water: LS.water, light: LS.light }; },
+                get painted(){ return painted; }, get failed(){ return failed; }, get targetT(){ return targetT; },
+                get curT(){ return curT; }, set curT(v){ curT = v; }, get blur(){ return blur; }, get vel(){ return vel; } };
+})();
+
+/* ---- header, forms, anchors ---- */
+(function(){
+  const nav = document.getElementById('siteNav'), desk = document.getElementById('enquiry');
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const sync = () => { nav.classList.toggle('is-scrolled', desk.getBoundingClientRect().top < 64); };
+  addEventListener('scroll', sync, { passive:true });
+  addEventListener('load', sync); sync();
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    if (id === 'threshold') { e.preventDefault(); scrollTo({ top:0, behavior: reduced ? 'auto' : 'smooth' }); return; }
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: reduced ? 'auto' : 'smooth' }); }
+  });
+  const wire = (formId, noteId) => {
+    const f = document.getElementById(formId), n = document.getElementById(noteId); if (!f) return;
+    f.addEventListener('submit', e => {
+      e.preventDefault();
+      const tel = f.querySelector('input[name="tel"]');
+      if (!tel.value.trim()) { n.textContent = 'Telephone is required.'; tel.focus(); return; }
+      n.textContent = 'Test page — nothing was sent.';
+    });
+  };
+  wire('heroForm', 'heroNote'); wire('enquiryForm', 'formNote');
+})();
+
+/* dev only: reload when the file changes on the local server */
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') (function(){
+  let last = null;
+  setInterval(async () => {
+    try { const r = await fetch(location.pathname, { method:'HEAD', cache:'no-store' }); const m = r.headers.get('last-modified'); if (last && m && m !== last) location.reload(); if (m) last = m; } catch (e) {}
+  }, 1500);
+})();
+</script>
+</body>
+</html>
