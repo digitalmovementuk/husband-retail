@@ -3,7 +3,7 @@
 <head>
 <!--
   07 — The Threshold · scroll journey test · Husband Retail
-  Version 0.9 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
+  Version 0.10 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
   local preview: python3 -m http.server 8795 --directory "Husband Retail/Website"
   Built by Claude (Fable 5.1) on instruction. Test page: the words over the film are the locked hero copy from the
   Chapter 1 brief; the globe's and the descent's words are new and sourced (see "The words"). Published for review only, at the address
@@ -59,6 +59,13 @@
   (Veo, $0.96 a take, not started) · hold length (CFG.hold) · D7 push length · D18 · figures A/B not run.
 
   Change log
+  0.10 · 07.09.2026 · The zoom is steered to Hong Kong, on instruction ("the zoom should be coherent with the Hong Kong landmark"): the generated
+         plate zooms toward a point in the sea some 290 px west of Hong Kong, so the descent seemed to land elsewhere. plateMap() now pans the plate
+         along Hong Kong's tracked position so the marker stays where it was at frame 0 while the picture grows about it (12 % more by frame 32,
+         more where a plate edge would show), holds to frame 36 and eases back to the plain cover-fit by frame 52 inside the clouds; the 2D draw,
+         the GL cover (new u_an, u_h0, u_ht, u_zoom uniforms), the markers and the verifier's sampler share the one mapping. The GL cover's vertical
+         anchor now follows the phone value (0.45) like the 2D draw. The footnote's dev note shortened (on a phone it stood 396 px tall) and its geography sentences swapped for a one-line phone variant (still 365 px). Phone markers grow only 12 % by frame 32 (was 25 %): at 25 % the Hong Kong label had no room on either side of its dot on a 390-px screen and was hidden while Macau's stayed. Phone labels: the label box collapsed to its narrowest
+         width inside the 0-px marker and wrapped word by word ("The / Landmark · / Elements"); it now takes its natural width (max-content).
   0.9 · 07.09.2026 · The globe's markers, on instruction: a gently pulsing red dot, a hairline and a label for every advised
         place in view, pinned to the plate and following the zoom — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) is the
         largest, the rest scale and dim with their distance from the viewer (the sphere's facing), so the far side of the globe
@@ -102,7 +109,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:,">
-<title>Husband Retail — The Threshold · scroll journey test · v0.9</title>
+<title>Husband Retail — The Threshold · scroll journey test · v0.10</title>
 <style>
 /* ---------- tokens: the film look of 05-homepage-production.html (--film-*) ---------- */
 :root{
@@ -224,7 +231,7 @@ a{color:inherit;}
 .note{font-size:11px;color:var(--dim);margin:12px 0 0;line-height:1.4;}
 .rest{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px);text-align:center;padding:0 24px;opacity:0;visibility:hidden;}
 .rest p{margin:0;font:400 clamp(16px,1.5vw,20px)/1.4 var(--serif);color:var(--type);text-shadow:0 1px 2px rgba(11,10,8,.6),0 1px 18px rgba(11,10,8,.5);}
-.rest .dev{display:block;margin-top:10px;color:var(--mute);text-shadow:0 1px 2px rgba(11,10,8,.6);}
+.rest .dev{display:block;margin-top:10px;color:var(--mute);text-shadow:0 1px 2px rgba(11,10,8,.6);} .dev-geo-s{display:none;}
 
 @media (prefers-reduced-motion:reduce){ .cue i::after{animation:none;} .sw-loader__mark{animation:none;} }
 
@@ -265,7 +272,7 @@ a{color:inherit;}
   /* the beats: at the top of the phone screen, over the dark space and the dusk sky; their shade comes from above */
   .sw-beats::before{background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.46) 38%,rgba(11,10,8,0) 68%);}
   .beat{left:24px;right:24px;top:calc(var(--nav-h) + 28px);max-width:none;}
-  .gm__place{font-size:9.5px;letter-spacing:.14em;} .gm__what{font-size:11px;white-space:normal;max-width:150px;} .gm--l .gm__what{margin-left:auto;}
+  .gm__label{width:max-content;} .gm__place{font-size:9.5px;letter-spacing:.14em;} .gm__what{font-size:11px;white-space:normal;max-width:150px;} .gm--l .gm__what{margin-left:auto;}
   .gm--hero .gm__place{font-size:10.5px;} .gm--hero .gm__what{font-size:12.5px;max-width:170px;}
   .beat .eyebrow{margin-bottom:12px;font-size:13px;letter-spacing:.14em;}
   .beat__h{font-size:36px;line-height:1.1;margin-bottom:16px;max-width:none;}
@@ -283,7 +290,7 @@ a{color:inherit;}
   .card{display:none;}                                                /* D13: the card is cut on the phone; the bar stands in for it */
   .rest{bottom:calc(88px + env(safe-area-inset-bottom));padding:0 24px;text-align:left;}     /* left, like the hero */
   .rest p{font-size:17px;}
-  .rest .dev{font-size:11px;}
+  .rest .dev{font-size:11px;} .dev-geo{display:none;} .dev-geo-s{display:inline;}   /* the geography note in one line on the phone, so the foot note stays under mid-screen */
   /* the bar: Call · Enquire, 54 px; in from below with the forecourt's card beat, away again over the Desk */
   .sticky-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:210;
     background:rgba(14,18,25,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(237,231,218,.14);
@@ -358,7 +365,7 @@ a{color:inherit;}
     </aside>
   </div>
   <div class="rest" id="rest">
-    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone plays the same three takes from a portrait centre crop (405 × 720) of the 16:9 plates; no portrait plate was generated. The globe is a generated plate with approximate geography: the markers were placed by fitting a sphere to its horizon and its brightest city clusters (Pearl River Delta, Taipei, Tokyo, Manila, Seoul, Osaka, the Yangtze delta), projecting each place's real coordinates through it and correcting onto the drawn cities, then tracked through the zoom to the clouds; the plate's coastlines drift from the real ones by 10–50 px, so the markers sit on the drawn geography, not on survey positions. Places on the far side or out of the frame carry no marker: London (Covent Garden), Dubai and Lusail, Sydney, Singapore.</span></p>
+    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone plays the same three takes from a portrait centre crop (405 × 720) of the 16:9 plates; no portrait plate was generated. <span class="dev-geo">The globe is a generated plate with approximate geography, so the markers sit on its drawn cities rather than on survey positions: a sphere fitted to the plate's horizon and city glows places each city's real coordinates, snapped to the drawn city and tracked through the zoom; the drawn coastlines drift 10–50 px from the real ones. Not marked, on the far side or out of frame: London (Covent Garden), Dubai and Lusail, Sydney, Singapore. The zoom is steered to hold Hong Kong in place, because the plate itself zooms toward the sea west of it.</span><span class="dev-geo-s">The globe is a generated plate with approximate geography; the markers sit on its drawn cities, and the zoom is steered to hold Hong Kong in place.</span></span></p>
   </div>
 </div>
 
@@ -409,9 +416,10 @@ a{color:inherit;}
       </aside>
     </div>
     <footer class="desk__foot">
-      <span>07 — The Threshold · scroll journey test · <strong>v0.8</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
+      <span>07 — The Threshold · scroll journey test · <strong>v0.10</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
       <details><summary>Change log</summary>
         <ul>
+          <li><b>0.10</b> · The zoom steered to Hong Kong: the generated plate zooms toward the sea west of it, so the picture is now panned along Hong Kong's tracked position and magnified about it (12 % more by frame 32), easing back to the plain framing inside the clouds; the markers ride the same mapping. Dev note shortened.</li>
           <li><b>0.9</b> · The globe's markers: a pulsing red dot, a hairline and a label for every advised place in view — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) largest, the rest scaled and dimmed by their distance from the viewer; pinned to the plate through the zoom, gone into the clouds; labels that would cover the words, each other, the header or the phone's bar are hidden. Placement by a sphere fitted to the generated plate (see the dev note).</li>
           <li><b>0.8</b> · Phone legibility, after The Ocean Marketing's mobile view: a dark gradient rises from the bottom of the phone screen behind the hero's words and the doors' foot note, near-solid at the bottom and gone by the upper fifth; off mid-walk. Deeper header shade and a flat bright-gold wordmark on the phone; the foot note left-aligned. The beats keep their shade from above. Dev note corrected (the phone plays the approach since 0.7).</li>
           <li><b>0.7</b> · The whole journey on phones: the approach (five viewports on touch), hold, walk and doors from two portrait packs (the centre 9:16 of each take, 405×720); the beats at the top of the phone screen, the hero at the bottom, at bizee scale (17 px inputs, 52 px fields); the Call · Enquire bar arrives with the forecourt and leaves for the Desk; the canvas re-fits when the Safari toolbar folds; the hold never borrows a push frame; published for review on GitHub Pages (noindex), superseding the 06.09 copy labelled 0.6.</li>
@@ -429,7 +437,7 @@ a{color:inherit;}
 
 <script>
 /* ============================================================================
-   The Threshold — scroll engine, v0.8.
+   The Threshold — scroll engine, v0.10.
    Three accepted-or-instructed clips, two frame packs, one scroll from the first frame of the globe:
      · the approach (every screen; portrait packs on phones): V0a_1 as 192 frames at 24 fps in its own pack, SCRUBBED by the scroll in both
        directions over CFG.approach viewports; ahead of the download it holds the last frame in, never skips. Until the
@@ -731,6 +739,32 @@ const MARK_FADE = [26, 34];                                   /* approach frames
 let marksOn = false, marksKey = '';
 function marksVisible(v){ if (v !== marksOn) { marksOn = v; marksEl.classList.toggle('is-on', v); } }
 function rectHit(a, b, pad){ return !(a.r + pad < b.l || a.l - pad > b.r || a.b + pad < b.t || a.t - pad > b.b); }
+/* ---------- the focus: the plate zooms about Hong Kong.
+   The generated plate zooms toward a point in the South China Sea, some 290 px west of Hong Kong on the 1920-px plate, so the
+   descent seemed to land somewhere else. plateMap() places the plate on the screen so that Hong Kong's tracked position stays
+   where it was at frame 0 while the picture grows about it: a pan following the marker track to frame 32, a magnification of
+   12 % by frame 32 (more where the pan would otherwise expose a plate edge), held to frame 36 and eased back to the plain
+   cover-fit by frame 52, inside the clouds. Everything that places the plate goes through it: the 2D draw, the GL cover, the
+   markers and the verifier's sampler. Frame 0 is the plain cover-fit, so the poster and the first frame agree. ---------- */
+const HK = MARKS.find(m => m.id === 'hk');
+function plateMap(pos, cw, ch){
+  const pk = PK.pre, pw = pk.w || (portrait ? 405 : 1920), ph = pk.h || (portrait ? 720 : 1080);
+  const sc = Math.max(cw / pw, ch / ph), dw = pw * sc, dh = ph * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
+  const ps = pw / (portrait ? 608 : 1920), x0 = portrait ? 656 : 0;                       /* plate px -> pack px */
+  const M = { pw, ph, sc, dw, dh, dx, dy, ps, x0, m: 1, hx: 0.5, hy: 0.5, h0x: 0.5, h0y: 0.5, X: dx, Y: dy, W: dw, H: dh };
+  if (!(pos >= 0) || pos >= 52) return M;
+  const at = q => { const p = clamp(q, 0, 32), k = Math.min(15, Math.floor(p / 2)), t = p / 2 - k, a = HK.pts[k], b = HK.pts[k + 1];
+                    return [((a[0] + (b[0] - a[0]) * t) - x0) * ps / pw, (a[1] + (b[1] - a[1]) * t) * ps / ph]; };
+  const h0 = at(0), h = at(pos), e = pos <= 36 ? 1 : 1 - smooth((pos - 36) / 16);
+  const hx = h0[0] + (h[0] - h0[0]) * e, hy = h0[1] + (h[1] - h0[1]) * e;
+  const Px = dx + h0[0] * dw, Py = dy + h0[1] * dh;                                        /* Hong Kong's place on the screen, fixed */
+  const raw = Math.max(Px / (hx * dw), (cw - Px) / ((1 - hx) * dw), Py / (hy * dh), (ch - Py) / ((1 - hy) * dh));
+  const need = 1 + Math.max(0, raw - 1) * 1.02;                                             /* the least magnification that keeps the plate over the whole screen */
+  const m = Math.max(need, 1 + 0.12 * smooth(pos / 32) * e);
+  M.m = m; M.hx = hx; M.hy = hy; M.h0x = h0[0]; M.h0y = h0[1];
+  M.X = dx + (h0[0] - hx * m) * dw; M.Y = dy + (h0[1] - hy * m) * dh; M.W = dw * m; M.H = dh * m;
+  return M;
+}
 function marks(pos){
   /* pos: the approach's continuous frame (0–191), or -1 when the approach is not on the canvas */
   const last = MARK_KF[MARK_KF.length - 1];
@@ -740,10 +774,8 @@ function marks(pos){
   const key = pos.toFixed(2) + ':' + cw + 'x' + ch + ':' + OP.b1.toFixed(2) + ':' + OP.b2.toFixed(2);
   if (key === marksKey) { marksVisible(true); return; } marksKey = key;
   /* the plate on the screen: the same cover-fit as the canvas (draw2D / the GL cover); the portrait pack is the plate's centre 608 px */
-  const pw = pk.w || (portrait ? 405 : 1920), ph = pk.h || (portrait ? 720 : 1080);
-  const sc = Math.max(cw / pw, ch / ph), dw = pw * sc, dh = ph * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
-  const plateScale = pw / (portrait ? 608 : 1920), plateX0 = portrait ? 656 : 0;   /* plate px -> pack px */
-  const zoom = 1 + 0.25 * clamp(pos / 32, 0, 1);                                    /* the picture grows about a quarter by frame 32 */
+  const M = plateMap(pos, cw, ch);                                                  /* the plate on the screen, zooming about Hong Kong */
+  const zoom = 1 + (isMobile ? 0.12 : 0.25) * clamp(pos / 32, 0, 1);              /* the markers grow with the picture: a quarter by frame 32; on the phone only with the focus (12 %), so the Hong Kong label keeps its room at the left */
   const p = clamp(pos, 0, last), k0 = Math.min(MARK_KF.length - 2, Math.floor(p / 2)), t = clamp(p / 2 - k0, 0, 1);
   const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
   const safeT = navH + 6, safeB = ch - (isMobile ? 64 : 10);
@@ -754,7 +786,7 @@ function marks(pos){
   for (const q of MK) {
     const a = q.m.pts[k0], b = q.m.pts[k0 + 1];
     const u = a[0] + (b[0] - a[0]) * t, v = a[1] + (b[1] - a[1]) * t, fc = a[2] + (b[2] - a[2]) * t;
-    const x = dx + ((u - plateX0) * plateScale) * sc, y = dy + (v * plateScale) * sc;
+    const x = M.X + ((u - M.x0) * M.ps / M.pw) * M.W, y = M.Y + (v * M.ps / M.ph) * M.H;
     let show = fc > 0.08 && x > 4 && x < cw - 4 && y > safeT && y < safeB;
     if (show) {
       const s = (0.7 + 0.3 * fc) * (q.m.hero ? 1.18 : 1) * zoom;
@@ -830,15 +862,18 @@ function render(now){
     if (b < 0 || b === a || a !== i0 || b !== i1) { b = a; f = 0; }
     if (xf) { const d = dissolveInto(now, nearest(Math.round(pos), 0, hi)); if (d) { a = d.a; b = d.b; f = d.f; } }
   }
-  if (gl) drawGL(a, b, f, now); else if (ctx) draw2D(a, b, f);
+  const fpos = pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1;              /* the approach frame under the scroll, -1 elsewhere */
+  if (gl) drawGL(a, b, f, now, fpos); else if (ctx) draw2D(a, b, f, fpos);
   mixv = f;
-  marks(pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1);
+  marks(fpos);
 }
-function draw2D(a, b, f){
+function draw2D(a, b, f, fpos){
   const cw = fx.width, ch = fx.height, pk = pkOf(a);
-  const key = a + ':' + b + ':' + f.toFixed(3) + ':' + cw + 'x' + ch;
+  const key = a + ':' + b + ':' + f.toFixed(3) + ':' + cw + 'x' + ch + ':' + fpos.toFixed(2);
   if (key === last2d) return; last2d = key;
-  const sc = Math.max(cw/pk.w, ch/pk.h), dw = pk.w*sc, dh = pk.h*sc, dx = (cw-dw)*0.5, dy = (ch-dh)*(isMobile ? 0.45 : 0.42);
+  let dx, dy, dw, dh;
+  if (pk === PK.pre) { const M = plateMap(fpos, cw, ch); dx = M.X; dy = M.Y; dw = M.W; dh = M.H; }
+  else { const sc = Math.max(cw/pk.w, ch/pk.h); dw = pk.w*sc; dh = pk.h*sc; dx = (cw-dw)*0.5; dy = (ch-dh)*(isMobile ? 0.45 : 0.42); }
   ctx.globalAlpha = 1; ctx.drawImage(FR.bmp.get(a), dx, dy, dw, dh);
   if (b !== a && f > 0.004) { ctx.globalAlpha = f; ctx.drawImage(FR.bmp.get(b), dx, dy, dw, dh); ctx.globalAlpha = 1; }
   ia = a; ib = b;
@@ -943,8 +978,8 @@ function initFx(){
     const vs = 'attribute vec2 a;varying vec2 v;void main(){v=a*0.5+0.5;gl_Position=vec4(a,0.0,1.0);}';
     const fs = [
       'precision mediump float;varying vec2 v;',
-      'uniform sampler2D u_a,u_b;uniform vec2 u_res,u_tres;uniform float u_mix,u_t,u_blur,u_grain,u_halo,u_vig;',
-      'vec2 cover(vec2 uv){float ra=u_res.x/u_res.y,rt=u_tres.x/u_tres.y;vec2 s=ra>rt?vec2(1.0,rt/ra):vec2(ra/rt,1.0);vec2 an=vec2(0.5,0.42);return clamp(an+(uv-an)*s,0.001,0.999);}',
+      'uniform sampler2D u_a,u_b;uniform vec2 u_res,u_tres,u_an,u_h0,u_ht;uniform float u_mix,u_t,u_blur,u_grain,u_halo,u_vig,u_zoom;',
+      'vec2 cover(vec2 uv){float ra=u_res.x/u_res.y,rt=u_tres.x/u_tres.y;vec2 s=ra>rt?vec2(1.0,rt/ra):vec2(ra/rt,1.0);vec2 c=u_an+(uv-u_an)*s;c=u_ht+(c-u_h0)/u_zoom;return clamp(c,0.001,0.999);}',
       'vec3 film(vec2 uv){vec2 c=cover(uv);return mix(texture2D(u_a,c).rgb,texture2D(u_b,c).rgb,u_mix);}',
       'float lum(vec3 c){return dot(c,vec3(0.299,0.587,0.114));}',
       'float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
@@ -968,7 +1003,7 @@ function initFx(){
     gl.useProgram(prog);
     const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
     const loc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
-    ['u_a','u_b','u_res','u_tres','u_mix','u_t','u_blur','u_grain','u_halo','u_vig'].forEach(k => uni[k] = gl.getUniformLocation(prog, k));
+    ['u_a','u_b','u_res','u_tres','u_an','u_h0','u_ht','u_zoom','u_mix','u_t','u_blur','u_grain','u_halo','u_vig'].forEach(k => uni[k] = gl.getUniformLocation(prog, k));
     const mk = () => { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
       gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
@@ -987,7 +1022,7 @@ function sizeFx(){
   last2d = ''; if (painted) render(performance.now());
 }
 function upload(t, i){ gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, FR.bmp.get(i)); }
-function drawGL(a, b, f, now){
+function drawGL(a, b, f, now, fpos){
   /* one step forward or back: swap the two textures, upload only the new one */
   if (a === ib && a !== ia) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
   else if (b === ia && b !== ib) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
@@ -995,7 +1030,9 @@ function drawGL(a, b, f, now){
   gl.activeTexture(gl.TEXTURE1); if (b !== ib) { upload(texB, b); ib = b; } else gl.bindTexture(gl.TEXTURE_2D, texB);
   blur += ((ambient ? 0 : CFG.grade.dollyBlur * smooth((vel - 0.15) / 1.45)) - blur) * 0.18;
   const pk = pkOf(a);
-  gl.uniform2f(uni.u_res, fx.width, fx.height); gl.uniform2f(uni.u_tres, pk.w, pk.h);
+  gl.uniform2f(uni.u_res, fx.width, fx.height); gl.uniform2f(uni.u_tres, pk.w, pk.h); gl.uniform2f(uni.u_an, 0.5, isMobile ? 0.45 : 0.42);
+  const M = pk === PK.pre ? plateMap(fpos, fx.width, fx.height) : null;             /* the focus: the approach zooms about Hong Kong */
+  gl.uniform2f(uni.u_h0, M ? M.h0x : 0.5, M ? M.h0y : 0.5); gl.uniform2f(uni.u_ht, M ? M.hx : 0.5, M ? M.hy : 0.5); gl.uniform1f(uni.u_zoom, M ? M.m : 1);
   gl.uniform1f(uni.u_mix, f); gl.uniform1f(uni.u_t, (now / 1000) % 100); gl.uniform1f(uni.u_blur, blur);
   gl.uniform1f(uni.u_grain, CFG.grade.grain); gl.uniform1f(uni.u_halo, CFG.grade.halation); gl.uniform1f(uni.u_vig, CFG.grade.vignette);
   gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
@@ -1006,11 +1043,11 @@ layout(); update(); requestAnimationFrame(loop);
 if (!reduced) loadFilm();
 
 /* exposed for the render checks */
-window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS, get marksOn(){ return marksOn; },
+window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS, get marksOn(){ return marksOn; }, plateMap: pos => plateMap(pos, innerWidth, innerHeight),
                 sample(x, y){ /* verifier: mean luminance of the drawn approach frame under a screen point (r ≤ 4 px) and in a ring around it (12–18 px) */
                   const pk = PK.pre, i = FILM.pre0 + Math.round(clamp(preT * FILM.preFps, 0, FILM.preN - 1)), bmp = FR.bmp.get(i); if (!bmp || !pk.w) return null;
-                  const cw = innerWidth, ch = innerHeight, sc = Math.max(cw / pk.w, ch / pk.h), dw = pk.w * sc, dh = pk.h * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
-                  const c = document.createElement('canvas'); c.width = c.height = 41; const g = c.getContext('2d'); g.drawImage(bmp, dx - x + 20, dy - y + 20, dw, dh);
+                  const M = plateMap(i - FILM.pre0, innerWidth, innerHeight);
+                  const c = document.createElement('canvas'); c.width = c.height = 41; const g = c.getContext('2d'); g.drawImage(bmp, M.X - x + 20, M.Y - y + 20, M.W, M.H);
                   const d = g.getImageData(0, 0, 41, 41).data; let sd = 0, nd = 0, sr = 0, nr = 0;
                   for (let j = 0; j < 41; j++) for (let k = 0; k < 41; k++) { const r = Math.hypot(k - 20, j - 20), o = (j * 41 + k) * 4, l = 0.299 * d[o] + 0.587 * d[o + 1] + 0.114 * d[o + 2]; if (r <= 4) { sd += l; nd++; } else if (r >= 12 && r <= 18) { sr += l; nr++; } }
                   return { dot: +(sd / nd).toFixed(1), ring: +(sr / nr).toFixed(1), frame: i - FILM.pre0 }; },
