@@ -3,7 +3,7 @@
 <head>
 <!--
   07 — The Threshold · scroll journey test · Husband Retail
-  Version 0.10 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
+  Version 0.11 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
   local preview: python3 -m http.server 8795 --directory "Husband Retail/Website"
   Built by Claude (Fable 5.1) on instruction. Test page: the words over the film are the locked hero copy from the
   Chapter 1 brief; the globe's and the descent's words are new and sourced (see "The words"). Published for review only, at the address
@@ -59,6 +59,7 @@
   (Veo, $0.96 a take, not started) · hold length (CFG.hold) · D7 push length · D18 · figures A/B not run.
 
   Change log
+  0.11 · 07.09.2026 · After the doors the page continues as a site, in The Ocean Marketing’s order and the house’s own words (document 03): the firm (four figures, four credentials), the four practices as tabs with their sub-services and a link that presets the Desk’s select, why a boutique, how an engagement runs with the six steps, the record (the thirteen marked places), the founder on paper, a start-here band, seven questions, then the Desk and a full footer (links, practices, contact, legal placeholders, back to top, this log, the wordmark). Header links to the sections; the sticky Call · Enquire bar stays through the sections and leaves at the Desk. The Desk’s mailbox repeated in the footer; no general mailbox exists, so none is invented. The §12 claims of document 03 cut or softened; no client or brand names.
   0.10 · 07.09.2026 · The zoom is steered to Hong Kong, on instruction ("the zoom should be coherent with the Hong Kong landmark"): the generated
          plate zooms toward a point in the sea some 290 px west of Hong Kong, so the descent seemed to land elsewhere. plateMap() now pans the plate
          along Hong Kong's tracked position so the marker stays where it was at frame 0 while the picture grows about it (12 % more by frame 32,
@@ -109,7 +110,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:,">
-<title>Husband Retail — The Threshold · scroll journey test · v0.10</title>
+<title>Husband Retail — The Threshold · scroll journey test · v0.11</title>
 <style>
 /* ---------- tokens: the film look of 05-homepage-production.html (--film-*) ---------- */
 :root{
@@ -256,6 +257,159 @@ a{color:inherit;}
 .desk__side address a{color:var(--paper-ink);text-decoration-color:var(--gold);}
 .desk__foot{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:12px;color:var(--paper-mute);}
 .desk__foot details{font-size:12px;} .desk__foot summary{cursor:pointer;color:var(--gold);} .desk__foot ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;}
+/* ---------- after the doors (v0.11): the firm, the practices, why a boutique, how we work, the record, the founder, start here, the questions — then the Desk and the footer ---------- */
+.after{position:relative;z-index:200;background:var(--ink);color:var(--type);}
+.sec{padding:clamp(72px,9vw,120px) clamp(24px,6vw,96px);border-top:1px solid rgba(237,231,218,.08);}
+.sec--deep{background:var(--ink-deep);}
+.sec--paper{background:var(--paper);color:var(--paper-ink);border-top:0;}
+.sec__inner{max-width:1120px;margin:0 auto;}
+.sec__grid{display:grid;grid-template-columns:168px minmax(0,1fr);gap:32px clamp(32px,5vw,72px);align-items:start;}
+.rail{position:sticky;top:calc(var(--nav-h) + 24px);}
+.rail__rule{display:block;width:48px;height:1px;background:var(--gold-hi);margin:0 0 14px;}
+.rail__eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.rail__index{margin:0;font:400 40px/1 var(--serif);color:var(--type);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
+.sec--paper .rail__index{color:var(--paper-ink);} .sec--paper .rail__eyebrow{color:var(--gold);} .sec--paper .rail__rule{background:var(--gold);}
+.sec h2{margin:0 0 22px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:15em;}
+.sec h2 .dimline{display:block;color:var(--mute);}
+.sec--paper h2 .dimline{color:var(--paper-mute);}
+.sec p{margin:0 0 16px;font-size:17px;line-height:1.6;color:var(--mute);max-width:36em;}
+.sec--paper p{color:#4a4538;}
+.sec .dev{color:var(--dim);} .sec--paper .dev{color:#8f887a;}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start;}
+.split--faq{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);}
+/* the firm: four figures, four lines */
+.figures{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(237,231,218,.12);border:1px solid rgba(237,231,218,.12);}
+.figure{background:var(--ink);padding:26px 24px;}
+.figure b{display:block;font:400 clamp(36px,3.6vw,52px)/1 var(--serif);color:var(--gold-hi);letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-bottom:10px;}
+.figure span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+.creds{margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(237,231,218,.12);}
+.cred{padding:20px 22px;border-left:1px solid rgba(237,231,218,.12);}
+.cred:first-child{border-left:0;}
+.cred small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.cred strong{font-weight:500;font-size:15px;line-height:1.4;color:var(--type);}
+/* the practices: four tabs, one panel */
+.prac{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,3vw,40px);align-items:start;margin-top:8px;}
+.prac__list{margin:0;padding:0;list-style:none;border:1px solid rgba(237,231,218,.12);}
+.prac__tab{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:14px;width:100%;text-align:left;padding:18px 20px;background:transparent;border:0;border-top:1px solid rgba(237,231,218,.10);color:var(--type);font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;}
+.prac__list li:first-child .prac__tab{border-top:0;}
+.prac__tab i{font:400 15px/1 var(--serif);color:var(--gold);font-style:normal;font-variant-numeric:tabular-nums;}
+.prac__tab b{display:block;font-weight:500;font-size:16px;line-height:1.3;}
+.prac__tab small{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+.prac__tab:hover{background:rgba(237,231,218,.04);}
+.prac__tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.prac__tab[aria-selected="true"]{background:rgba(169,138,87,.10);box-shadow:inset 3px 0 0 var(--gold);}
+.prac__tab[aria-selected="true"] small{color:var(--gold-hi);}
+.prac__panel{position:relative;border:1px solid rgba(217,192,138,.28);background:linear-gradient(180deg,rgba(237,231,218,.05),rgba(237,231,218,.02));padding:clamp(24px,3vw,40px);}
+.prac__panel[hidden]{display:none;}
+.prac__panel .kicker{margin:0 0 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);}
+.prac__panel h3{margin:0 0 14px;font:400 clamp(24px,2.4vw,32px)/1.15 var(--serif);max-width:12em;}
+.prac__panel p{font-size:16px;}
+.prac__big{position:absolute;right:24px;top:14px;font:400 clamp(56px,7vw,96px)/1 var(--serif);color:var(--gold);opacity:.16;pointer-events:none;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;padding:0;list-style:none;}
+.chips li{font-size:12.5px;line-height:1.2;padding:7px 10px;border:1px solid rgba(237,231,218,.18);color:var(--mute);}
+.more{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-hi);border-bottom:1px solid rgba(217,192,138,.4);padding-bottom:6px;}
+.more:hover{border-color:var(--gold-hi);}
+/* why a boutique · how we work */
+.pull{font:400 clamp(24px,2.4vw,32px)/1.25 var(--serif);color:var(--type) !important;margin:0 0 22px;max-width:16em !important;}
+.numlist{margin:0;padding:0;list-style:none;}
+.numlist li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid rgba(237,231,218,.12);}
+.numlist li:first-child{border-top:0;padding-top:0;}
+.numlist i{font:400 15px/1.5 var(--serif);color:var(--gold);font-style:normal;}
+.numlist h4{margin:0 0 6px;font:500 16px/1.35 var(--sans);color:var(--type);}
+.numlist p{margin:0;font-size:15px;}
+.steps__head{color:var(--type) !important;margin-bottom:6px !important;}
+.steps{margin:0;padding:0;list-style:none;}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid rgba(237,231,218,.12);}
+.steps li:first-child{border-top:0;}
+.steps i{font:400 14px/1.5 var(--serif);color:var(--gold);font-style:normal;}
+.steps b{font-weight:500;font-size:16px;color:var(--type);}
+.steps span{display:block;margin-top:2px;font-size:14.5px;color:var(--mute);}
+/* the record: the thirteen marked places */
+.places{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(237,231,218,.10);border:1px solid rgba(237,231,218,.10);}
+.place{background:var(--ink);padding:20px 20px 22px;min-height:112px;}
+.place small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:8px;}
+.place b{font:400 17px/1.35 var(--serif);color:var(--type);}
+.place--hero{grid-column:1 / -1;display:flex;align-items:baseline;gap:24px;min-height:0;padding:22px 20px;}
+.place--hero small{margin:0;} .place--hero b{font-size:20px;}
+.places__note{margin:18px 0 0 !important;font-size:13.5px !important;color:var(--dim) !important;max-width:none !important;}
+/* the founder, on paper */
+.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:center;}
+.founder__img{width:100%;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 28%;display:block;border:1px solid var(--rule);}
+.founder__lead{font:400 clamp(20px,2vw,26px)/1.35 var(--serif);color:var(--paper-ink) !important;margin:0 0 18px;max-width:22em;}
+.founder__facts{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;}
+.founder__facts li{font-size:14.5px;line-height:1.5;color:#4a4538;padding-top:10px;border-top:1px solid var(--rule);}
+.founder__facts li b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;font-weight:500;}
+/* start here */
+.start{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,6vw,96px);align-items:center;}
+.start h2{font-size:clamp(34px,4vw,56px);}
+.start__line{font-size:14px !important;color:var(--mute);}
+.start__line a{color:var(--gold-hi);text-decoration:none;font-weight:500;}
+.ctas{display:grid;gap:12px;}
+.cta--lg{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-size:13px;}
+.cta--ghost{background:transparent;color:var(--type);border:1px solid rgba(237,231,218,.22);}
+.cta--ghost:hover{background:rgba(237,231,218,.06);}
+/* the questions */
+.faq{margin:0;padding:0;border-top:1px solid rgba(237,231,218,.12);}
+.faq details{border-bottom:1px solid rgba(237,231,218,.12);}
+.faq summary{display:grid;grid-template-columns:40px minmax(0,1fr) 28px;gap:16px;align-items:baseline;padding:20px 0;cursor:pointer;list-style:none;color:var(--type);}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary i{font:400 13px/1.6 var(--serif);color:var(--gold);font-style:normal;}
+.faq summary b{font:400 clamp(18px,1.6vw,21px)/1.35 var(--serif);}
+.faq summary span{justify-self:end;font-size:20px;line-height:1;color:var(--gold-hi);transition:transform .25s;}
+.faq details[open] summary span{transform:rotate(45deg);}
+.faq .a{padding:0 0 22px 56px;}
+.faq .a p{font-size:16px;margin:0;}
+/* the footer, after The Ocean Marketing's */
+.foot{position:relative;z-index:200;background:var(--ink-deep);color:var(--type);padding:clamp(56px,7vw,88px) clamp(24px,6vw,96px) 0;border-top:1px solid rgba(237,231,218,.10);overflow:hidden;}
+.foot__inner{max-width:1120px;margin:0 auto;}
+.foot__grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px clamp(24px,4vw,56px);}
+.foot__brand .brand{font-size:16px;}
+.foot__brand p{margin:18px 0 22px;font-size:15px;line-height:1.6;color:var(--mute);max-width:30em;}
+.foot__brand .cta{display:inline-block;}
+.foot h4{margin:0 0 16px;font:500 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--type);}
+.foot ul{margin:0;padding:0;list-style:none;}
+.foot li{margin:0 0 10px;}
+.foot li a{text-decoration:none;font-size:14.5px;color:var(--mute);}
+.foot li a:hover{color:var(--type);}
+.foot .contact li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;margin-bottom:16px;}
+.foot .contact i{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(237,231,218,.18);color:var(--gold-hi);}
+.foot .contact svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.foot .contact small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
+.foot .contact span{font-size:14.5px;color:var(--mute);line-height:1.5;overflow-wrap:anywhere;} .foot .contact a{color:inherit;text-decoration:none;} .foot .contact a:hover{color:var(--type);}
+.foot .contact span.dev{font-size:11px;}
+.foot__legal{margin-top:clamp(40px,5vw,64px);padding:22px 0;border-top:1px solid rgba(237,231,218,.10);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--dim);}
+.foot__legal nav{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;}
+.foot__legal nav a{text-decoration:none;color:var(--mute);}
+.foot__legal nav a[aria-disabled="true"]{color:var(--dim);cursor:default;}
+.totop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(237,231,218,.22);color:var(--gold-hi) !important;text-decoration:none;font-size:16px;margin-left:8px;}
+.foot__review{padding:16px 0 20px;border-top:1px solid rgba(237,231,218,.08);font-size:12px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;}
+.foot__review details{font-size:12px;} .foot__review summary{cursor:pointer;color:var(--gold);} .foot__review ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;color:var(--mute);}
+.foot__sig{display:block;text-align:center;font:400 clamp(64px,14vw,200px)/1 var(--serif);letter-spacing:.06em;color:var(--gold);opacity:.07;margin:8px 0 -.34em;white-space:nowrap;pointer-events:none;user-select:none;-webkit-user-select:none;}
+@media (max-width:1180px){ .nav-link--wide{display:none;} }
+/* the sections on the phone (≤860 px): one column, the rail on top, 24 px gutters, 56 px targets */
+@media (max-width:860px){
+  .sec{padding:56px 24px;}
+  .sec__grid{grid-template-columns:1fr;gap:22px;}
+  .rail{position:static;} .rail__index{font-size:32px;}
+  .sec h2{font-size:32px;line-height:1.12;max-width:none;}
+  .sec p{font-size:17px;max-width:none;}
+  .split,.split--faq{grid-template-columns:1fr;gap:32px;}
+  .figure{padding:20px 18px;} .figure b{font-size:34px;}
+  .creds{grid-template-columns:1fr 1fr;margin-top:32px;} .cred{padding:16px 18px;} .cred:nth-child(3){border-left:0;} .cred:nth-child(n+3){border-top:1px solid rgba(237,231,218,.12);}
+  .prac{grid-template-columns:1fr;gap:16px;}
+  .prac__tab{padding:16px;grid-template-columns:36px minmax(0,1fr);min-height:56px;}
+  .prac__panel{padding:24px 20px;} .prac__big{right:14px;top:6px;font-size:44px;opacity:.12;}
+  .places{grid-template-columns:1fr 1fr;} .place{padding:16px;min-height:0;} .place--hero{display:block;padding:16px;} .place--hero b{font-size:18px;} .place--hero small{margin-bottom:8px;}
+  .founder{grid-template-columns:1fr;gap:28px;} .founder__img{max-width:320px;aspect-ratio:1 / 1;}
+  .founder__facts{grid-template-columns:1fr;}
+  .start{grid-template-columns:1fr;gap:28px;} .start h2{font-size:36px;}
+  .cta--lg{min-height:56px;}
+  .faq summary{grid-template-columns:32px minmax(0,1fr) 24px;gap:12px;padding:18px 0;} .faq summary b{font-size:18px;} .faq .a{padding-left:44px;}
+  .foot{padding:56px 24px 0;}
+  .foot__grid{grid-template-columns:1fr 1fr;gap:36px 24px;} .foot__brand{grid-column:1 / -1;} .foot .contact-col{grid-column:1 / -1;}
+  .foot__legal{flex-direction:column;align-items:flex-start;}
+  .foot__sig{font-size:19vw;}
+}
 /* ---------- mobile (≤860 px, iPhone first): the same journey from the portrait packs, at bizee scale — this block stays LAST ---------- */
 .sticky-bar{display:none;}
 @media (max-width:860px){
@@ -333,7 +487,7 @@ a{color:inherit;}
 <header class="site-nav" id="siteNav">
   <nav class="topbar" aria-label="Main">
     <a class="brand" href="#threshold" aria-label="Husband Retail home">Husband Retail</a>
-    <div class="nav-right">
+    <div class="nav-right"><a class="nav-link nav-link--wide" href="#firm">The firm</a><a class="nav-link" href="#practices">Practices</a><a class="nav-link" href="#process">How we work</a><a class="nav-link nav-link--wide" href="#faq">Questions</a>
       <a class="nav-link" href="#enquiry">The Concierge Desk</a>
       <a class="cta" href="#enquiry">Request a call</a>
     </div>
@@ -388,6 +542,227 @@ a{color:inherit;}
 </div>
 <nav class="sticky-bar" aria-label="Call or enquire"><a href="tel:+85226599280">Call</a><a href="#enquiry">Enquire</a></nav>
 
+<!-- v0.11 · after the doors: the site continues, after The Ocean Marketing's order, in the house's own words (document 03) -->
+<div class="after" id="after">
+
+  <!-- 01 · The firm -->
+  <section class="sec" id="firm">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The firm</p><p class="rail__index">01</p></aside>
+      <div>
+        <h2>One firm, every stage of the asset. <span class="dimline">Advised from the owner's side, since 1998.</span></h2>
+        <div class="split">
+          <div>
+            <p>We act for the principals in retail property: developers, landlords, asset managers and institutional investors. Our clients develop shopping centres, lifestyle destinations, integrated resorts and mixed-use schemes, or they acquire and manage them.</p>
+            <p>We do not advise retailers on the occupier side: store networks, formats, operations. The strategy houses do that work. If you hold the asset, or intend to, this is the firm for it.</p>
+            <p>A retail destination is one continuous piece of work, and we treat it that way: development consultancy, leasing, positioning and repositioning, and investment advisory, from one team.</p>
+          </div>
+          <ul class="figures" aria-label="The record in four figures">
+            <li class="figure"><b>100+</b><span>projects advised</span></li>
+            <li class="figure"><b>60+</b><span>planned and leased</span></li>
+            <li class="figure"><b>20+</b><span>markets</span></li>
+            <li class="figure"><b>3</b><span>continents</span></li>
+          </ul>
+        </div>
+        <ul class="creds">
+          <li class="cred"><small>Founded</small><strong>Hong Kong, 1998, by Paul Husband</strong></li>
+          <li class="cred"><small>Led by</small><strong>Paul Husband, on every mandate</strong></li>
+          <li class="cred"><small>Acts for</small><strong>Developers, landlords and investors</strong></li>
+          <li class="cred"><small>Does not act for</small><strong>Retailers on the occupier side</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · The practices -->
+  <section class="sec sec--deep" id="practices">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">What we do</p><p class="rail__index">02</p></aside>
+      <div>
+        <h2>Four practices, one piece of work. <span class="dimline">Choose the one your asset needs today.</span></h2>
+        <div class="prac">
+          <ul class="prac__list" role="tablist" aria-label="The four practices">
+            <li><button class="prac__tab" role="tab" id="tab-dev" aria-controls="panel-dev" aria-selected="true"><i>01</i><span><b>Development consultancy</b><small>Market · concept · merchandising plan</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-lease" aria-controls="panel-lease" aria-selected="false" tabindex="-1"><i>02</i><span><b>Leasing</b><small>Heads of terms to signature</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-pos" aria-controls="panel-pos" aria-selected="false" tabindex="-1"><i>03</i><span><b>Positioning and repositioning</b><small>Centres already trading</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-inv" aria-controls="panel-inv" aria-selected="false" tabindex="-1"><i>04</i><span><b>Investment advisory</b><small>Acquisitions · disposals · asset plans</small></span></button></li>
+          </ul>
+          <div class="prac__panels">
+            <div class="prac__panel" role="tabpanel" id="panel-dev" aria-labelledby="tab-dev">
+              <span class="prac__big" aria-hidden="true">01</span>
+              <p class="kicker">Development consultancy · 01 of 04</p>
+              <h3>It starts with the market.</h3>
+              <p>Trade area, catchment, competing supply and spend capture. From that study come the concept, the positioning, the tenant mix and a merchandising plan that zones the GLA so the whole asset trades.</p>
+              <ul class="chips"><li>Trade area and catchment</li><li>Competing supply</li><li>Spend capture</li><li>Concept and positioning</li><li>Tenant mix</li><li>Merchandising plan</li></ul>
+              <a class="more" href="#enquiry" data-brief="New development">Discuss a development brief <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-lease" aria-labelledby="tab-lease" hidden>
+              <span class="prac__big" aria-hidden="true">02</span>
+              <p class="kicker">Leasing · 02 of 04</p>
+              <h3>Then we lease it.</h3>
+              <p>Leasing strategy, project marketing, negotiation and documentation, from heads of terms to signature. A plan nobody signs is just paper. We only handle leasing for developments we have worked on.</p>
+              <ul class="chips"><li>Leasing strategy</li><li>Project marketing</li><li>Negotiation</li><li>Documentation</li><li>Heads of terms to signature</li></ul>
+              <a class="more" href="#enquiry" data-brief="Leasing brief">Discuss a leasing mandate <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-pos" aria-labelledby="tab-pos" hidden>
+              <span class="prac__big" aria-hidden="true">03</span>
+              <p class="kicker">Positioning and repositioning · 03 of 04</p>
+              <h3>Once the centre opens, the work changes but does not stop.</h3>
+              <p>We set the positioning, run the marketing programme and write the asset plan that holds the tenant mix to the concept. Repositioning starts as a new project does, with an honest read of the trade area and the existing mix, and ends with a plan for the leasing and the marketing programme.</p>
+              <ul class="chips"><li>Positioning</li><li>Marketing programme</li><li>Asset plan</li><li>Tenant mix review</li><li>Repositioning</li></ul>
+              <a class="more" href="#enquiry" data-brief="Existing asset">Discuss an existing asset <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-inv" aria-labelledby="tab-inv" hidden>
+              <span class="prac__big" aria-hidden="true">04</span>
+              <p class="kicker">Investment advisory · 04 of 04</p>
+              <h3>For investors, the retail assumptions the deal depends on.</h3>
+              <p>We advise on acquisitions, disposals and the business planning behind them: feasibility, the retail assumptions in the underwriting, the asset plan the deal depends on.</p>
+              <ul class="chips"><li>Acquisitions</li><li>Disposals</li><li>Business planning</li><li>Feasibility</li><li>Underwriting assumptions</li><li>Asset plan</li></ul>
+              <a class="more" href="#enquiry" data-brief="Acquisition">Discuss an acquisition <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Why a boutique -->
+  <section class="sec" id="boutique">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Why a boutique</p><p class="rail__index">03</p></aside>
+      <div class="split">
+        <div>
+          <h2>Why a boutique and not a giant.</h2>
+          <p>The large property firms are good at what they do. Offices in every market, data on everything. For valuations, agency work at scale and research, they are often the right appointment.</p>
+          <p>We offer something narrower. Senior attention on one asset at a time, and one discipline that shapes everything: we only handle leasing for developments we have worked on.</p>
+          <p class="pull">We will not lease a centre we did not help plan.</p>
+          <p>If you want your asset treated as one file among hundreds, we are the wrong appointment.</p>
+        </div>
+        <ol class="numlist">
+          <li><i>01</i><div><h4>Senior attention, one asset at a time</h4><p>We take few mandates and give each the founder's time. The people you meet in the first conversation do the work.</p></div></li>
+          <li><i>02</i><div><h4>One discipline</h4><p>We only handle leasing for developments we have worked on, so we cannot hand you a plan we would not have to deliver ourselves.</p></div></li>
+          <li><i>03</i><div><h4>Advice we may have to sell across the table</h4><p>Every recommendation in our reports is one we may have to sell later. That keeps the advice honest.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · How we work -->
+  <section class="sec sec--deep" id="process">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">How we work</p><p class="rail__index">04</p></aside>
+      <div class="split">
+        <div>
+          <h2>How an engagement runs.</h2>
+          <p>It begins with a conversation about one asset. Yours. We ask what you hold or intend to build, where it stands in its cycle, and what the mandate should deliver. If we can do the work, we scope it and agree it with you before anything starts.</p>
+          <p>The people you meet in that first conversation do the work. Husband Retail is a small firm by design. Paul Husband leads every mandate, and the team around him has both planned centres and leased them. That combination is rarer than it sounds.</p>
+          <p>Someone who has negotiated heads of terms with a luxury brand's head of real estate writes a very different merchandising plan from someone who has only modelled one.</p>
+        </div>
+        <div>
+          <p class="steps__head">The work runs in sequence. One team from first meeting to handover, the same senior people throughout.</p>
+          <ol class="steps">
+            <li><i>01</i><div><b>Feasibility</b><span>Trade area, catchment, competing supply</span></div></li>
+            <li><i>02</i><div><b>Concept</b><span>Positioning, retail mix, anchors</span></div></li>
+            <li><i>03</i><div><b>Merchandising plan</b><span>Zoning, adjacencies, unit strategy</span></div></li>
+            <li><i>04</i><div><b>Leasing</b><span>Heads of terms to signature</span></div></li>
+            <li><i>05</i><div><b>Opening</b><span>Launch marketing, trading readiness</span></div></li>
+            <li><i>06</i><div><b>Asset plan</b><span>The plan the centre trades to</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · The record -->
+  <section class="sec" id="record">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The record</p><p class="rail__index">05</p></aside>
+      <div>
+        <h2>The places we have done it. <span class="dimline">The markets marked on the globe, and the projects behind the marks.</span></h2>
+        <p>More than 100 projects advised, sixty-plus of them planned and leased, in more than twenty markets across Asia, the Middle East and Europe.</p>
+        <ul class="places" aria-label="Advised places and projects">
+          <li class="place place--hero"><small>Hong Kong</small><b>The Landmark · Elements · Lee Gardens · Sky City</b></li>
+          <li class="place"><small>Macau</small><b>Galaxy Macau · The Venetian</b></li>
+          <li class="place"><small>Taipei</small><b>Bellavita</b></li>
+          <li class="place"><small>Shanghai</small><b>Shanghai Village · Three on the Bund</b></li>
+          <li class="place"><small>Suzhou</small><b>Suzhou Village</b></li>
+          <li class="place"><small>Beijing</small><b>Park Life</b></li>
+          <li class="place"><small>Seoul</small><b>Seoul IFC Mall · CJ Live</b></li>
+          <li class="place"><small>Bangkok</small><b>MahaNakhon · The Cube</b></li>
+          <li class="place"><small>Phú Quốc</small><b>Sun Group project</b></li>
+          <li class="place"><small>Yangon</small><b>Landmark Yangon</b></li>
+          <li class="place"><small>Kuala Lumpur</small><b>Merdeka 118</b></li>
+          <li class="place"><small>New Delhi</small><b>DLF Emporio</b></li>
+          <li class="place"><small>Colombo</small><b>Colombo City Centre</b></li>
+        </ul>
+        <p class="places__note">Also advised: London, Doha, Dubai, Sydney and Singapore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · The founder -->
+  <section class="sec sec--paper" id="founder">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The founder</p><p class="rail__index">06</p></aside>
+      <div class="founder">
+        <img class="founder__img" src="media/paul-husband-1024.jpg" alt="Paul Husband" width="1024" height="1024" loading="lazy">
+        <div>
+          <h2>Paul Husband.</h2>
+          <p class="founder__lead">More than 30 years in Asian retail real estate, first at Swire Properties, then under his own name.</p>
+          <p>Paul Husband was head of marketing at Swire Properties for around ten years, joining in 1988 with Pacific Place in Hong Kong. He founded Husband Retail in 1998 and has since planned more than 100 retail projects across Asia Pacific and the Middle East. He wrote The Cult of the Luxury Brand in 2006 and taught as a professional instructor for the International Council of Shopping Centres in Asia Pacific.</p>
+          <ul class="founder__facts">
+            <li><b>Founded</b>Husband Retail, Hong Kong, 1998</li>
+            <li><b>Before that</b>Head of marketing, Swire Properties, from 1988, beginning with Pacific Place</li>
+            <li><b>Wrote</b>The Cult of the Luxury Brand, 2006</li>
+            <li><b>Taught</b>Professional instructor, International Council of Shopping Centres, Asia Pacific</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Start here -->
+  <section class="sec sec--deep" id="start">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Start here</p><p class="rail__index">07</p></aside>
+      <div class="start">
+        <div>
+          <h2>Talk to us about the asset.</h2>
+          <p>One message is enough to begin. Name the asset, its location and its stage: a site, a master plan, a scheme under construction, or a centre already trading.</p>
+          <p class="start__line">Room 301, 8 Queen's Road East, Wanchai, Hong Kong · <a href="tel:+85226599280">+852 2659 9280</a></p>
+        </div>
+        <div class="ctas">
+          <a class="cta cta--lg" href="#enquiry">Request a call <span aria-hidden="true">→</span></a>
+          <a class="cta cta--lg cta--ghost" href="tel:+85226599280">Call +852 2659 9280 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · The questions -->
+  <section class="sec" id="faq">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Questions</p><p class="rail__index">08</p></aside>
+      <div class="split split--faq">
+        <div>
+          <h2>Questions principals ask.</h2>
+          <p>The ones that come up in the first conversation, answered the way we answer them in the room.</p>
+        </div>
+        <div class="faq">
+          <details open><summary><i>01</i><b>Do you act for owners or for occupiers?</b><span aria-hidden="true">+</span></summary><div class="a"><p>For owners only. Developers, landlords and investors instruct us. We negotiate with brands on behalf of the asset, never the reverse. The advice carries no occupier conflict.</p></div></details>
+          <details><summary><i>02</i><b>What happens if the feasibility work says the scheme does not stack up?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We tell you, in writing, before you commit capex. A study that only ever says yes is worthless. When the answer is no, we set out what would have to change for it to become yes.</p></div></details>
+          <details><summary><i>03</i><b>We have already mandated a global agency. Where do you fit?</b><span aria-hidden="true">+</span></summary><div class="a"><p>Often alongside them. We have done this before, usually holding the concept, the retail mix and the luxury leasing while they run the rest of the scheme. We are clear about the division of scope.</p></div></details>
+          <details><summary><i>04</i><b>Who runs the engagement day to day?</b><span aria-hidden="true">+</span></summary><div class="a"><p>The senior people you meet at the start. Paul Husband leads every mandate personally. We do not run a model where partners win the work and pass it down. The firm stays small so that this stays true.</p></div></details>
+          <details><summary><i>05</i><b>Can you bring the leading luxury houses into our asset?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We have recruited them into centres we planned. No adviser can commit a named brand. We can shape the asset those brands ask for, then make the case to people we have dealt with for years.</p></div></details>
+          <details><summary><i>06</i><b>Our centre is trading below its catchment. Is repositioning still viable?</b><span aria-hidden="true">+</span></summary><div class="a"><p>Usually, yes. Repositioning is one of our four practice areas. It starts as a new project does, with an honest read of the trade area and the existing mix, and ends with a plan for the leasing and the marketing programme.</p></div></details>
+          <details><summary><i>07</i><b>Which markets do you cover?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We have advised in more than 20 markets across Asia, the Middle East and Europe, from Hong Kong and Seoul to Doha, Dubai and London. We are based in Hong Kong and travel to the asset.</p></div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
 <!-- W7 · The Concierge Desk: the Script tab's words -->
 <section class="desk" id="enquiry">
   <div class="desk__inner">
@@ -409,16 +784,68 @@ a{color:inherit;}
         <p class="desk__reply">Replies come from Paul's office.</p>
         <p class="dev">Wording to confirm with the client.</p>
         <address>
-          <a href="mailto:hello@husband-retail.com">hello@husband-retail.com</a><br>
+          <a href="mailto:carmen.law@husband-retail.com">carmen.law@husband-retail.com</a><br>
           <a href="tel:+85226599280">+852 2659 9280</a><br>
           Room 301, 8 Queen's Road East, Wanchai, Hong Kong
         </address>
       </aside>
     </div>
-    <footer class="desk__foot">
-      <span>07 — The Threshold · scroll journey test · <strong>v0.10</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
+  </div>
+</section>
+
+<!-- v0.11 · the footer, after The Ocean Marketing's -->
+<footer class="foot" id="foot">
+  <div class="foot__inner">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="brand" href="#threshold">Husband Retail</a>
+        <p>Retail real estate, advised from the owner's side. Developers, landlords and investors, in Hong Kong and in more than twenty markets on three continents, since 1998.</p>
+        <a class="cta" href="#enquiry">Request a call</a>
+      </div>
+      <nav aria-label="Quick links">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="#threshold">The threshold</a></li>
+          <li><a href="#firm">The firm</a></li>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#record">The record</a></li>
+          <li><a href="#founder">Paul Husband</a></li>
+          <li><a href="#faq">Questions</a></li>
+          <li><a href="#enquiry">The Concierge Desk</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Practices">
+        <h4>Practices</h4>
+        <ul>
+          <li><a href="#practices" data-tab="0">Development consultancy</a></li>
+          <li><a href="#practices" data-tab="1">Leasing</a></li>
+          <li><a href="#practices" data-tab="2">Positioning and repositioning</a></li>
+          <li><a href="#practices" data-tab="3">Investment advisory</a></li>
+        </ul>
+      </nav>
+      <div class="contact-col">
+        <h4>Contact</h4>
+        <ul class="contact">
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></i><div><small>Telephone</small><span><a href="tel:+85226599280">+852 2659 9280</a></span></div></li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></i><div><small>Office</small><span>Room 301, 8 Queen's Road East,<br>Wanchai, Hong Kong</span></div></li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/></svg></i><div><small>Email</small><span><a href="mailto:carmen.law@husband-retail.com">carmen.law@husband-retail.com</a></span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Husband Retail. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="#foot" aria-disabled="true" title="Page to follow">Terms of use</a>
+        <a href="#foot" aria-disabled="true" title="Page to follow">Privacy policy</a>
+        <a href="#foot" aria-disabled="true" title="Page to follow">Cookie notice</a>
+        <span class="dev">Legal pages to follow; the links are placeholders.</span>
+        <a class="totop" href="#threshold" aria-label="Back to the top">↑</a>
+      </nav>
+    </div>
+    <div class="foot__review"><span>07 — The Threshold · scroll journey test · <strong>v0.11</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
       <details><summary>Change log</summary>
         <ul>
+          <li><b>0.11</b> · After the doors the page continues as a site, in The Ocean Marketing’s order and the house’s own words (document 03): the firm (four figures, four credentials), the four practices as tabs with their sub-services and a link that presets the Desk’s select, why a boutique, how an engagement runs with the six steps, the record (the thirteen marked places), the founder on paper, a start-here band, seven questions, then the Desk and a full footer (links, practices, contact, legal placeholders, back to top, this log, the wordmark). Header links to the sections; the sticky Call · Enquire bar stays through the sections and leaves at the Desk. The Desk’s mailbox repeated in the footer; no general mailbox exists, so none is invented. The §12 claims of document 03 cut or softened; no client or brand names.</li>
           <li><b>0.10</b> · The zoom steered to Hong Kong: the generated plate zooms toward the sea west of it, so the picture is now panned along Hong Kong's tracked position and magnified about it (12 % more by frame 32), easing back to the plain framing inside the clouds; the markers ride the same mapping. Dev note shortened.</li>
           <li><b>0.9</b> · The globe's markers: a pulsing red dot, a hairline and a label for every advised place in view — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) largest, the rest scaled and dimmed by their distance from the viewer; pinned to the plate through the zoom, gone into the clouds; labels that would cover the words, each other, the header or the phone's bar are hidden. Placement by a sphere fitted to the generated plate (see the dev note).</li>
           <li><b>0.8</b> · Phone legibility, after The Ocean Marketing's mobile view: a dark gradient rises from the bottom of the phone screen behind the hero's words and the doors' foot note, near-solid at the bottom and gone by the upper fifth; off mid-walk. Deeper header shade and a flat bright-gold wordmark on the phone; the foot note left-aligned. The beats keep their shade from above. Dev note corrected (the phone plays the approach since 0.7).</li>
@@ -430,14 +857,14 @@ a{color:inherit;}
           <li><b>0.2</b> · One stitched film; cursor-free grade.</li>
           <li><b>0.1</b> · First build.</li>
         </ul>
-      </details>
-    </footer>
+      </details></div>
+    <span class="foot__sig" aria-hidden="true">Husband Retail</span>
   </div>
-</section>
+</footer>
 
 <script>
 /* ============================================================================
-   The Threshold — scroll engine, v0.10.
+   The Threshold — scroll engine, v0.11 (the film engine is unchanged since 0.10).
    Three accepted-or-instructed clips, two frame packs, one scroll from the first frame of the globe:
      · the approach (every screen; portrait packs on phones): V0a_1 as 192 frames at 24 fps in its own pack, SCRUBBED by the scroll in both
        directions over CFG.approach viewports; ahead of the download it holds the last frame in, never skips. Until the
@@ -1067,13 +1494,13 @@ window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS,
 
 /* ---- header, forms, anchors ---- */
 (function(){
-  const nav = document.getElementById('siteNav'), desk = document.getElementById('enquiry');
+  const nav = document.getElementById('siteNav'), desk = document.getElementById('enquiry'), after = document.getElementById('after') || desk;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bar = document.querySelector('.sticky-bar');
-  const sync = () => { const top = desk.getBoundingClientRect().top; nav.classList.toggle('is-scrolled', top < 64); if (bar) bar.classList.toggle('is-desk', top < innerHeight * 0.6); };
+  const sync = () => { const top = desk.getBoundingClientRect().top, atop = after.getBoundingClientRect().top; nav.classList.toggle('is-scrolled', atop < 64); if (bar) bar.classList.toggle('is-desk', top < innerHeight * 0.6); };
   addEventListener('scroll', sync, { passive:true });
   addEventListener('load', sync); sync();
-  if ('IntersectionObserver' in window) new IntersectionObserver(sync, { rootMargin:'-64px 0px 0px 0px', threshold:[0, 0.001] }).observe(desk);
+  if ('IntersectionObserver' in window) new IntersectionObserver(sync, { rootMargin:'-64px 0px 0px 0px', threshold:[0, 0.001] }).observe(after);
   document.addEventListener('click', e => {
     const a = e.target.closest('a[href^="#"]'); if (!a) return;
     const id = a.getAttribute('href').slice(1);
@@ -1091,6 +1518,25 @@ window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS,
     });
   };
   wire('heroForm', 'heroNote'); wire('enquiryForm', 'formNote');
+})();
+
+/* ---- v0.11: the practices' tabs, the brief presets, the footer's practice links ---- */
+(function(){
+  const tabs = [...document.querySelectorAll('.prac__tab')], panels = [...document.querySelectorAll('.prac__panel')];
+  if (!tabs.length) return;
+  const show = (i, focus) => { tabs.forEach((t, k) => { const on = k === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; panels[k].hidden = !on; }); if (focus) tabs[i].focus(); };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(i));
+    t.addEventListener('keydown', e => {
+      const n = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? i + 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+      if (n === null) return; e.preventDefault(); show((n + tabs.length) % tabs.length, true);
+    });
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-tab]'); if (a && tabs[+a.dataset.tab]) show(+a.dataset.tab);
+    const b = e.target.closest('[data-brief]');
+    if (b) { const v = b.dataset.brief; ['f-brief', 'h-brief'].forEach(id => { const s = document.getElementById(id); if (!s) return; const o = [...s.options].find(o => o.value === v || o.textContent.trim() === v); if (o) s.value = o.value; }); }
+  });
 })();
 
 /* dev only: reload when the file changes on the local server */
