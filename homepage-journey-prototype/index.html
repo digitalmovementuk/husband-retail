@@ -3,7 +3,7 @@
 <head>
 <!--
   07 — The Threshold · scroll journey test · Husband Retail
-  Version 0.8 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
+  Version 0.9 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
   local preview: python3 -m http.server 8795 --directory "Husband Retail/Website"
   Built by Claude (Fable 5.1) on instruction. Test page: the words over the film are the locked hero copy from the
   Chapter 1 brief; the globe's and the descent's words are new and sourced (see "The words"). Published for review only, at the address
@@ -59,6 +59,13 @@
   (Veo, $0.96 a take, not started) · hold length (CFG.hold) · D7 push length · D18 · figures A/B not run.
 
   Change log
+  0.9 · 07.09.2026 · The globe's markers, on instruction: a gently pulsing red dot, a hairline and a label for every advised
+        place in view, pinned to the plate and following the zoom — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) is the
+        largest, the rest scale and dim with their distance from the viewer (the sphere's facing), so the far side of the globe
+        reads as far. Placement: a sphere fitted to the plate's horizon and its brightest city clusters, the real coordinates
+        projected through it, then corrected onto the drawn cities and tracked frame by frame to the clouds (see the dev note).
+        Labels that would cover the beat's words, each other, the header or the phone's bar are hidden; the dots fade into the
+        clouds (frames 26–34). No new media; the page grows by the marker table (~14 KB).
   0.8 · 07.09.2026 · Phone legibility, after The Ocean Marketing's mobile view (reference sent 07.09.): a dark gradient rises
         from the bottom of the phone screen behind the hero's words and behind the doors' foot note (near-solid at the
         bottom, gone by the upper fifth), so the copy reads over the bright vault; it comes with the hero's words and again
@@ -95,7 +102,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
 <link rel="icon" href="data:,">
-<title>Husband Retail — The Threshold · scroll journey test · v0.8</title>
+<title>Husband Retail — The Threshold · scroll journey test · v0.9</title>
 <style>
 /* ---------- tokens: the film look of 05-homepage-production.html (--film-*) ---------- */
 :root{
@@ -153,6 +160,25 @@ a{color:inherit;}
   background:linear-gradient(180deg,rgba(22,20,15,.40) 0%,rgba(22,20,15,0) 20%,rgba(22,20,15,0) 42%,rgba(22,20,15,.58) 60%,rgba(22,20,15,.90) 100%);}
 .sw-track{position:relative;z-index:1;width:100%;pointer-events:none;}
 
+/* ---------- the globe's markers: the advised places, pinned to the plate and following the zoom (see MARKS in the engine) ---------- */
+.sw-marks{position:fixed;inset:0;z-index:17;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .6s ease;will-change:opacity;}
+.sw-marks.is-on{opacity:1;visibility:visible;}
+.gm{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity;--gm-red:#E2483B;}
+.gm__dot{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--gm-red);box-shadow:0 0 0 1px rgba(11,10,8,.55),0 0 8px 1px rgba(226,72,59,.75);}
+.gm__dot::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(226,72,59,.85);opacity:0;transform:scale(.35);
+  animation:gm-pulse 2.8s cubic-bezier(.2,.6,.3,1) infinite;animation-delay:var(--gm-delay,0s);}
+@keyframes gm-pulse{0%{transform:scale(.35);opacity:.95}65%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+.gm__line{position:absolute;left:0;top:0;height:1px;width:var(--gm-len,48px);transform-origin:0 50%;transform:rotate(var(--gm-ang,0deg));
+  background:linear-gradient(90deg,rgba(226,72,59,.95) 0,rgba(217,192,138,.7) 100%);box-shadow:0 1px 3px rgba(11,10,8,.6);}
+.gm__label{position:absolute;left:0;top:0;white-space:nowrap;transform:translate(var(--gm-lx,0px),var(--gm-ly,0px));
+  text-shadow:0 1px 2px rgba(11,10,8,.95),0 1px 10px rgba(11,10,8,.8);}
+.gm--l .gm__label{text-align:right;}
+.gm__place{display:block;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.gm__what{display:block;margin-top:2px;font:400 12px/1.3 var(--sans);color:var(--type);opacity:.92;}
+.gm--hero .gm__place{font-size:12px;letter-spacing:.18em;}
+.gm--hero .gm__what{font-size:14px;font-weight:500;}
+.gm--hero .gm__dot{width:8px;height:8px;left:-4px;top:-4px;box-shadow:0 0 0 1px rgba(11,10,8,.55),0 0 12px 2px rgba(226,72,59,.85);}
+@media (prefers-reduced-motion:reduce){ .gm__dot::before{animation:none;opacity:.5;transform:scale(1);} }
 /* ---------- the beats: the globe's words and the descent's, in the hero's upper-left, a pure function of the scroll ---------- */
 .sw-beats{position:fixed;inset:0;z-index:20;pointer-events:none;}
 .sw-beats::before{content:'';position:absolute;inset:0;opacity:var(--beat-scrim,0);will-change:opacity;
@@ -239,6 +265,8 @@ a{color:inherit;}
   /* the beats: at the top of the phone screen, over the dark space and the dusk sky; their shade comes from above */
   .sw-beats::before{background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.46) 38%,rgba(11,10,8,0) 68%);}
   .beat{left:24px;right:24px;top:calc(var(--nav-h) + 28px);max-width:none;}
+  .gm__place{font-size:9.5px;letter-spacing:.14em;} .gm__what{font-size:11px;white-space:normal;max-width:150px;} .gm--l .gm__what{margin-left:auto;}
+  .gm--hero .gm__place{font-size:10.5px;} .gm--hero .gm__what{font-size:12.5px;max-width:170px;}
   .beat .eyebrow{margin-bottom:12px;font-size:13px;letter-spacing:.14em;}
   .beat__h{font-size:36px;line-height:1.1;margin-bottom:16px;max-width:none;}
   .beat--2 .beat__h{font-size:32px;max-width:none;}
@@ -330,11 +358,12 @@ a{color:inherit;}
     </aside>
   </div>
   <div class="rest" id="rest">
-    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone plays the same three takes from a portrait centre crop (405 × 720) of the 16:9 plates; no portrait plate was generated.</span></p>
+    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone plays the same three takes from a portrait centre crop (405 × 720) of the 16:9 plates; no portrait plate was generated. The globe is a generated plate with approximate geography: the markers were placed by fitting a sphere to its horizon and its brightest city clusters (Pearl River Delta, Taipei, Tokyo, Manila, Seoul, Osaka, the Yangtze delta), projecting each place's real coordinates through it and correcting onto the drawn cities, then tracked through the zoom to the clouds; the plate's coastlines drift from the real ones by 10–50 px, so the markers sit on the drawn geography, not on survey positions. Places on the far side or out of the frame carry no marker: London (Covent Garden), Dubai and Lusail, Sydney, Singapore.</span></p>
   </div>
 </div>
 
 <!-- the beats: the globe's words and the descent's (desktop, over the approach) — sourced, see the head comment -->
+<div class="sw-marks" id="marks" aria-hidden="true"></div>
 <div class="sw-beats" id="beats" hidden aria-hidden="true">
   <div class="beat beat--1" id="beat1">
     <p class="eyebrow">Retail real estate advisory</p>
@@ -383,6 +412,7 @@ a{color:inherit;}
       <span>07 — The Threshold · scroll journey test · <strong>v0.8</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
       <details><summary>Change log</summary>
         <ul>
+          <li><b>0.9</b> · The globe's markers: a pulsing red dot, a hairline and a label for every advised place in view — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) largest, the rest scaled and dimmed by their distance from the viewer; pinned to the plate through the zoom, gone into the clouds; labels that would cover the words, each other, the header or the phone's bar are hidden. Placement by a sphere fitted to the generated plate (see the dev note).</li>
           <li><b>0.8</b> · Phone legibility, after The Ocean Marketing's mobile view: a dark gradient rises from the bottom of the phone screen behind the hero's words and the doors' foot note, near-solid at the bottom and gone by the upper fifth; off mid-walk. Deeper header shade and a flat bright-gold wordmark on the phone; the foot note left-aligned. The beats keep their shade from above. Dev note corrected (the phone plays the approach since 0.7).</li>
           <li><b>0.7</b> · The whole journey on phones: the approach (five viewports on touch), hold, walk and doors from two portrait packs (the centre 9:16 of each take, 405×720); the beats at the top of the phone screen, the hero at the bottom, at bizee scale (17 px inputs, 52 px fields); the Call · Enquire bar arrives with the forecourt and leaves for the Desk; the canvas re-fits when the Safari toolbar folds; the hold never borrows a push frame; published for review on GitHub Pages (noindex), superseding the 06.09 copy labelled 0.6.</li>
           <li><b>0.6</b> · The approach (V0a take 1) is scrubbed by the scroll in both directions from the first frame of the globe, four viewports of scroll; before the first scroll the page drifts forward on its own, slowly, and stops the moment the visitor moves. Copy beats on the globe ("100+ projects. Three continents. 30+ years.") and the descent ("Founded here in 1998 by Paul Husband."), the locked hero revealed in order at the forecourt. The synthetic living set of 0.5 removed: the people walk and the water moves at the hold because the footage moves them. Paul's portrait as a round avatar on the card and at the Desk. Skip button gone. Engine: phase switching on the scroll position both ways, a dissolve on every hand-over, doors snap, header sync by IntersectionObserver. Polish: a shade behind the beats and under the header on bright frames, a stronger phone scrim, a gold hairline along the top edge that fills with the journey, the doors held for a full viewport before the Desk rises (at 0.6 viewports the Desk already covered the doors and the foot note), the Desk fills the screen (on a 900 px desktop it was 777 px tall, so its top never passed under the header), whole-pixel phase heights so the doors land exactly on any screen, the scroll-speed blur settles by time.</li>
@@ -409,6 +439,10 @@ a{color:inherit;}
        cross-fade at the seam — the people walk and the water moves while the camera holds;
      · the walk: V1b_3 frames 0–100 at 24 fps, scrubbed by the scroll with sub-frame blending; the film ends on
        frame 100 and holds there (snaps exactly).
+   The markers (0.9): MARKS holds every advised place in view with its plate position per approach keyframe (0–40, every second
+   frame) and its facing (the cosine between the surface and the view: 1 = straight at the viewer, 0 = the horizon); marks()
+   runs after each approach draw, maps the plate through the same cover-fit as the canvas, scales and dims by the facing, hides
+   what would collide (the beat's words, other labels, the header, the phone's bar, the edges) and fades them into the clouds.
    The words: two beats over the approach (globe, descent) and the hero's parts at the forecourt, all pure functions of
    the scroll position, so scrolling back reverses them. Frames are decoded in a sliding window around the position; the
    film surface is WebGL with the grade on fine pointers, a plain 2D canvas on touch. Reduced motion: two stills.
@@ -528,6 +562,7 @@ function update(){
   /* the phase follows the scroll position, both ways; before the first paint the approach's own frames are what gets decoded */
   if (PRE && painted) { const wantPre = preOK && y < appPx; if (pre && !wantPre) endPre(now); else if (!pre && wantPre) enterPre(now); }
   beats();
+  if (painted) marks(pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1);
   /* the words: full through the hold, gone by a quarter of the move; the wordmark (header) stays */
   const co = r <= 0 ? 1 : smooth(1 - r / CFG.fadeOver);
   hero.style.opacity = co.toFixed(3);
@@ -663,6 +698,94 @@ function dissolveInto(now, cur){ /* the pinned frame of the last phase dissolves
   if (cur >= 0 && FR.bmp.has(xf.from) && cur !== xf.from) return { a: xf.from, b: cur, f: smooth(m) };
   return null;
 }
+const MARKS = [
+  { id:'hk', name:'Hong Kong', what:'The Landmark · Elements · Lee Gardens · Sky City', short:'The Landmark · Elements', ang:28, len:62, hero:true, pts:[[1087.3,648.7,0.799],[1087.3,648.7,0.799],[1087.3,648.7,0.799],[1087.4,648.7,0.799],[1087.6,648.8,0.799],[1088.2,649,0.8],[1089.2,649.3,0.801],[1090.7,650,0.801],[1092.8,651.4,0.803],[1095.8,653.1,0.804],[1100,655.6,0.806],[1105.1,659.3,0.809],[1111.9,663.5,0.812],[1119.9,668.6,0.815],[1129.9,675,0.819],[1141,683.1,0.822],[1154.1,692.4,0.825],[1169.8,706.3,0.825],[1193.2,717.2,0.825],[1227,713.9,0.825],[1256.2,755.4,0.825]] },
+  { id:'mo', name:'Macau', what:'Galaxy Macau · The Venetian', short:'Galaxy Macau', ang:152, len:46, hero:false, pts:[[1074.2,649.4,0.793],[1074.2,649.4,0.793],[1074.2,649.4,0.793],[1074.3,649.5,0.793],[1074.5,649.6,0.793],[1075,649.8,0.794],[1075.9,650.1,0.794],[1077.3,650.7,0.795],[1079.1,652.1,0.796],[1081.9,653.8,0.798],[1085.6,656.3,0.8],[1090.1,660,0.802],[1096.3,664.2,0.805],[1103.4,669.2,0.808],[1112.4,675.6,0.812],[1122.3,683.6,0.815],[1134.1,692.9,0.818],[1148.4,707.4,0.818],[1170.4,718.7,0.818],[1203.9,715.7,0.818],[1233.8,758.6,0.818]] },
+  { id:'tpe', name:'Taipei', what:'Bellavita', short:'Bellavita', ang:22, len:46, hero:false, pts:[[1262.3,614.5,0.843],[1262.3,614.5,0.843],[1262.4,614.5,0.843],[1262.6,614.5,0.843],[1263.2,614.6,0.843],[1264.5,614.8,0.843],[1266.7,615,0.844],[1270.3,615.4,0.845],[1275.7,616.5,0.846],[1283.5,617.6,0.848],[1293.8,619.4,0.85],[1306.8,622,0.853],[1323,625.1,0.857],[1343,628.8,0.86],[1367.1,633.3,0.865],[1395.2,639.1,0.869],[1428.9,645.6,0.874],[1461.8,649.3,0.874],[1504,650.9,0.874],[1541.2,643.9,0.874],[1558.9,665.7,0.874]] },
+  { id:'sha', name:'Shanghai', what:'Shanghai Village · Three on the Bund', short:'Shanghai Village', ang:-18, len:52, hero:false, pts:[[1297.4,482.6,0.75],[1297.4,482.6,0.75],[1297.5,482.6,0.75],[1297.7,482.6,0.75],[1298.4,482.4,0.75],[1299.9,482.1,0.75],[1302.3,481.4,0.75],[1306.2,480.3,0.751],[1312.1,478.9,0.752],[1320.6,476.5,0.753],[1331.9,473.6,0.754],[1346.1,470.2,0.755],[1363.7,466.4,0.757],[1385.4,461,0.759],[1411.4,454.8,0.761],[1441.7,447.7,0.762],[1477.9,438.8,0.763],[1508.9,427.4,0.763],[1550.2,413.1,0.763],[1585.7,402.5,0.763],[1586.2,426.6,0.763]] },
+  { id:'szv', name:'Suzhou', what:'Suzhou Village', short:'Suzhou Village', ang:-150, len:46, hero:false, pts:[[1280,479.2,0.743],[1280,479.2,0.743],[1280.1,479.2,0.743],[1280.2,479.2,0.743],[1280.9,479,0.743],[1282.3,478.6,0.743],[1284.6,477.9,0.743],[1288.3,476.7,0.744],[1293.9,475.2,0.744],[1301.9,472.7,0.746],[1312.6,469.7,0.747],[1326,466.1,0.748],[1342.6,462.1,0.75],[1363,456.5,0.752],[1387.6,450,0.753],[1416.2,442.6,0.755],[1450.2,433.4,0.755],[1479.2,422.3,0.755],[1518.3,408.2,0.755],[1553.4,397.9,0.755],[1554.3,424.2,0.755]] },
+  { id:'bj', name:'Beijing', what:'Park Life', short:'Park Life', ang:-140, len:46, hero:false, pts:[[1264.5,324.8,0.56],[1264.5,324.8,0.56],[1264.6,324.8,0.56],[1264.8,324.7,0.56],[1265.4,324.2,0.559],[1266.7,323.3,0.559],[1268.8,321.6,0.559],[1272.1,318.8,0.559],[1277.2,314.7,0.559],[1284.4,308.5,0.559],[1294.1,300.6,0.558],[1306.1,290.8,0.557],[1321,279.7,0.556],[1339.3,265,0.555],[1361,248,0.552],[1386.3,228.3,0.549],[1415.9,204.9,0.544],[1436.8,179.3,0.544],[1468.5,149.6,0.544],[1500.5,136.4,0.544],[1485,171.9,0.544]] },
+  { id:'sel', name:'Seoul', what:'Seoul IFC Mall · CJ Live', short:'Seoul IFC Mall', ang:-12, len:44, hero:false, pts:[[1457,377.5,0.662],[1457,377.5,0.662],[1457.1,377.4,0.662],[1457.4,377.4,0.662],[1458.4,377.1,0.662],[1460.5,376.4,0.661],[1463.9,375.1,0.661],[1469.6,372.9,0.661],[1478.3,369.7,0.661],[1490.6,364.8,0.661],[1507.2,358.5,0.66],[1528,350.5,0.659],[1553.3,341.7,0.658],[1584.9,329.8,0.656],[1622.6,315.6,0.654],[1667.1,298.9,0.65],[1720.1,278.5,0.645],[1763.3,250.1,0.645],[1818.5,219.1,0.645],[1855.7,203.5,0.645],[1836.9,213.7,0.645]] },
+  { id:'bkk', name:'Bangkok', what:'MahaNakhon, The Cube', short:'MahaNakhon', ang:-156, len:46, hero:false, pts:[[765.6,790.7,0.619],[765.6,790.7,0.619],[765.5,790.7,0.619],[765.5,790.8,0.619],[765.1,791,0.618],[764.2,791.6,0.619],[763.1,792.4,0.619],[761.1,794.2,0.619],[757.8,797.3,0.618],[753.3,801.5,0.618],[747.6,807.3,0.616],[740.3,815.4,0.614],[732.4,824.2,0.612],[722,835.2,0.609],[711.1,848.8,0.605],[697.9,865.3,0.599],[682.5,884.7,0.591],[671.3,923.5,0.591],[665.1,958.3,0.591],[694.1,963.2,0.591],[751.8,1035.1,0.591]] },
+  { id:'pq', name:'Phú Quốc', what:'Sun Group project', short:'Sun Group', ang:156, len:44, hero:false, pts:[[789.1,889.7,0.688],[789.1,889.7,0.688],[789.1,889.7,0.688],[789.1,889.9,0.688],[788.6,890.4,0.687],[787.8,891.4,0.688],[786.8,892.9,0.688],[784.9,895.9,0.688],[781.8,901,0.687],[777.5,907.8,0.686],[772.1,917.3,0.685],[765.1,929.9,0.683],[757.7,944.1,0.681],[747.6,962,0.678],[737.1,983.6,0.674],[724.2,1009.6,0.667],[709,1040.3,0.659],[703.5,1088.9,0.659],[702.5,1134.2,0.659],[733.8,1141.1,0.659],[802.5,1206.4,0.659]] },
+  { id:'rgn', name:'Yangon', what:'Landmark Yangon', short:'Landmark Yangon', ang:-160, len:44, hero:false, pts:[[737.6,709.1,0.529],[737.6,709.1,0.529],[737.6,709.1,0.529],[737.6,709.2,0.529],[737.1,709.2,0.528],[736.2,709.4,0.529],[735,709.7,0.529],[732.9,710.5,0.528],[729.4,712,0.528],[724.6,714,0.527],[718.6,717,0.525],[710.9,721.3,0.522],[702.7,725.9,0.52],[691.8,731.4,0.516],[680.6,738.7,0.511],[667.2,747.8,0.504],[651.8,758.4,0.496],[635.4,789.5,0.496],[624.2,815.9,0.496],[651.5,819.3,0.496],[700.4,897.2,0.496]] },
+  { id:'kl', name:'Kuala Lumpur', what:'Merdeka 118', short:'Merdeka 118', ang:180, len:44, hero:false, pts:[[704.2,1055,0.627],[704.2,1055,0.627],[704.1,1055.1,0.627],[704.1,1055.3,0.627],[703.4,1056,0.626],[702.2,1057.6,0.626],[700.5,1060.1,0.626],[697.7,1064.7,0.625],[693.1,1072.3,0.623],[686.9,1082.7,0.621],[678.9,1096.9,0.617],[668.8,1115.6,0.612],[657.5,1136.6,0.607],[642.8,1163.2,0.6],[627.3,1194.9,0.59],[608.6,1232.6,0.578],[586.6,1277.1,0.564],[578.9,1344.8,0.564],[574.3,1409.8,0.564],[606.4,1421.4,0.564],[696.8,1489.2,0.564]] },
+  { id:'del', name:'New Delhi', what:'DLF Emporio', short:'DLF Emporio', ang:-146, len:40, hero:false, pts:[[728,482.7,0.159],[728,482.7,0.159],[728,482.7,0.159],[728,482.7,0.158],[727.8,482.4,0.158],[727,481.7,0.158],[725.9,480.6,0.158],[724.2,479.2,0.157],[721.5,477,0.156],[717.8,473.7,0.155],[713.3,470,0.152],[707.8,465.8,0.149],[701.9,460.6,0.146],[694.5,453.9,0.141],[687.5,447.2,0.135],[679.8,440.2,0.128],[671.4,432.9,0.118],[648,441.6,0.118],[631.2,444.2,0.118],[655.1,442.7,0.118],[678.5,528.5,0.118]] },
+  { id:'cmb', name:'Colombo', what:'Colombo City Centre', short:'Colombo City Centre', ang:176, len:40, hero:false, pts:[[534.8,860.9,0.209],[534.8,860.9,0.209],[534.8,860.9,0.209],[534.7,861,0.209],[534,861.2,0.209],[532.4,861.7,0.209],[530.2,862.4,0.208],[526.6,864.1,0.207],[521,866.8,0.205],[513.3,870.3,0.202],[503.7,875.6,0.197],[492,882.8,0.191],[478.8,890.3,0.185],[462.3,899.5,0.177],[445.6,910.9,0.168],[426.9,924.6,0.156],[406.1,940.7,0.142],[377.7,990.3,0.142],[352.8,1035,0.142],[378.6,1043.8,0.142],[448.5,1135.2,0.142]] }
+];
+const MARK_KF = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40];   /* approach frames the table is keyed to (every second frame, 0–40) */
+
+/* ---- the markers: built once, placed on every approach draw (see render) ---- */
+const marksEl = document.getElementById('marks'), MK = [];
+(function buildMarks(){
+  MARKS.forEach((m, i) => {
+    const el = document.createElement('div'); el.className = 'gm' + (m.hero ? ' gm--hero' : '');
+    el.style.setProperty('--gm-delay', (-(i * 0.37) % 2.8).toFixed(2) + 's');
+    el.innerHTML = '<i class="gm__dot"></i><i class="gm__line"></i><span class="gm__label"><b class="gm__place"></b><span class="gm__what"></span></span>';
+    el.querySelector('.gm__place').textContent = m.name;
+    el.querySelector('.gm__what').textContent = isMobile ? m.short : m.what;
+    marksEl.appendChild(el); MK.push({ m, el, lab: el.querySelector('.gm__label'), line: el.querySelector('.gm__line'), on: false });
+  });
+})();
+const MARK_FADE = [26, 34];                                   /* approach frames: full to 26, gone by 34 (the clouds) */
+let marksOn = false, marksKey = '';
+function marksVisible(v){ if (v !== marksOn) { marksOn = v; marksEl.classList.toggle('is-on', v); } }
+function rectHit(a, b, pad){ return !(a.r + pad < b.l || a.l - pad > b.r || a.b + pad < b.t || a.t - pad > b.b); }
+function marks(pos){
+  /* pos: the approach's continuous frame (0–191), or -1 when the approach is not on the canvas */
+  const last = MARK_KF[MARK_KF.length - 1];
+  const fade = pos < 0 ? 0 : clamp((MARK_FADE[1] - pos) / (MARK_FADE[1] - MARK_FADE[0]), 0, 1);
+  if (fade <= 0) { marksVisible(false); return; }
+  const cw = innerWidth, ch = innerHeight, pk = PK.pre;
+  const key = pos.toFixed(2) + ':' + cw + 'x' + ch + ':' + OP.b1.toFixed(2) + ':' + OP.b2.toFixed(2);
+  if (key === marksKey) { marksVisible(true); return; } marksKey = key;
+  /* the plate on the screen: the same cover-fit as the canvas (draw2D / the GL cover); the portrait pack is the plate's centre 608 px */
+  const pw = pk.w || (portrait ? 405 : 1920), ph = pk.h || (portrait ? 720 : 1080);
+  const sc = Math.max(cw / pw, ch / ph), dw = pw * sc, dh = ph * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
+  const plateScale = pw / (portrait ? 608 : 1920), plateX0 = portrait ? 656 : 0;   /* plate px -> pack px */
+  const zoom = 1 + 0.25 * clamp(pos / 32, 0, 1);                                    /* the picture grows about a quarter by frame 32 */
+  const p = clamp(pos, 0, last), k0 = Math.min(MARK_KF.length - 2, Math.floor(p / 2)), t = clamp(p / 2 - k0, 0, 1);
+  const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+  const safeT = navH + 6, safeB = ch - (isMobile ? 64 : 10);
+  const blocks = [];
+  if (OP.b1 > 0.04) { const r = beat1.getBoundingClientRect(); if (r.width) blocks.push({ l: r.left, t: r.top, r: r.right, b: r.bottom }); }
+  if (OP.b2 > 0.04) { const r = beat2.getBoundingClientRect(); if (r.width) blocks.push({ l: r.left, t: r.top, r: r.right, b: r.bottom }); }
+  const placed = [];
+  for (const q of MK) {
+    const a = q.m.pts[k0], b = q.m.pts[k0 + 1];
+    const u = a[0] + (b[0] - a[0]) * t, v = a[1] + (b[1] - a[1]) * t, fc = a[2] + (b[2] - a[2]) * t;
+    const x = dx + ((u - plateX0) * plateScale) * sc, y = dy + (v * plateScale) * sc;
+    let show = fc > 0.08 && x > 4 && x < cw - 4 && y > safeT && y < safeB;
+    if (show) {
+      const s = (0.7 + 0.3 * fc) * (q.m.hero ? 1.18 : 1) * zoom;
+      const len = q.m.len * s; let ang = q.m.ang;
+      /* the label box, from the line's end; mirrored when it would leave the screen */
+      const lw0 = q.lab.offsetWidth || 120, lh0 = q.lab.offsetHeight || 28, lw = lw0 * s, lh = lh0 * s;   /* layout size (local units) and on screen */
+      const place = (ang) => { const rad = ang * Math.PI / 180, ex = x + Math.cos(rad) * len, ey = y + Math.sin(rad) * len; const left = Math.cos(rad) < 0;
+                               return { ang, left, ex, ey, l: left ? ex - lw - 4 : ex + 4, t: ey - lh * 0.5 }; };
+      let L = place(ang);
+      if (L.l < 6 || L.l + lw > cw - 6) { L = place(180 - ang); }
+      if (L.l < 6 || L.l + lw > cw - 6 || L.t < safeT || L.t + lh > safeB) show = false;
+      else {
+        const box = { l: L.l, t: L.t, r: L.l + lw, b: L.t + lh };
+        for (const bl of blocks) if (rectHit(box, bl, 8)) { show = false; break; }
+        if (show) for (const pl of placed) if (rectHit(box, pl, 6)) { show = false; break; }
+        if (show) {
+          placed.push(box);
+          q.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + s.toFixed(3) + ')';
+          q.el.style.opacity = ((0.55 + 0.45 * fc) * fade).toFixed(3);
+          q.line.style.setProperty('--gm-len', (q.m.len).toFixed(0) + 'px'); q.line.style.setProperty('--gm-ang', L.ang + 'deg');
+          const rad = L.ang * Math.PI / 180, lx = Math.cos(rad) * q.m.len + (L.left ? -lw0 - 4 : 4), ly = Math.sin(rad) * q.m.len - lh0 * 0.5;   /* local units: the marker is scaled as a whole */
+          q.lab.style.setProperty('--gm-lx', lx.toFixed(1) + 'px'); q.lab.style.setProperty('--gm-ly', ly.toFixed(1) + 'px');
+          q.el.classList.toggle('gm--l', L.left);
+        }
+      }
+    }
+    if (!show && q.on) { q.el.style.opacity = '0'; }
+    q.on = show;
+  }
+  marksVisible(true);
+}
 function render(now){
   let a, b, f;
   seamOn = false;
@@ -709,6 +832,7 @@ function render(now){
   }
   if (gl) drawGL(a, b, f, now); else if (ctx) draw2D(a, b, f);
   mixv = f;
+  marks(pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1);
 }
 function draw2D(a, b, f){
   const cw = fx.width, ch = fx.height, pk = pkOf(a);
@@ -882,7 +1006,15 @@ layout(); update(); requestAnimationFrame(loop);
 if (!reduced) loadFilm();
 
 /* exposed for the render checks */
-window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, get fxSize(){ return { w: fx.width, h: fx.height }; }, get packs(){ return { main: PK.main.w + 'x' + PK.main.h, pre: PK.pre.w + 'x' + PK.pre.h }; }, get bar(){ return bar ? { pre: bar.classList.contains('is-pre'), desk: bar.classList.contains('is-desk') } : null; }, get preOK(){ return preOK; }, get V(){ return V; }, get appPx(){ return appPx; }, get holdPx(){ return holdPx; }, get pushPx(){ return pushPx; }, get restPx(){ return restPx; },
+window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS, get marksOn(){ return marksOn; },
+                sample(x, y){ /* verifier: mean luminance of the drawn approach frame under a screen point (r ≤ 4 px) and in a ring around it (12–18 px) */
+                  const pk = PK.pre, i = FILM.pre0 + Math.round(clamp(preT * FILM.preFps, 0, FILM.preN - 1)), bmp = FR.bmp.get(i); if (!bmp || !pk.w) return null;
+                  const cw = innerWidth, ch = innerHeight, sc = Math.max(cw / pk.w, ch / pk.h), dw = pk.w * sc, dh = pk.h * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
+                  const c = document.createElement('canvas'); c.width = c.height = 41; const g = c.getContext('2d'); g.drawImage(bmp, dx - x + 20, dy - y + 20, dw, dh);
+                  const d = g.getImageData(0, 0, 41, 41).data; let sd = 0, nd = 0, sr = 0, nr = 0;
+                  for (let j = 0; j < 41; j++) for (let k = 0; k < 41; k++) { const r = Math.hypot(k - 20, j - 20), o = (j * 41 + k) * 4, l = 0.299 * d[o] + 0.587 * d[o + 1] + 0.114 * d[o + 2]; if (r <= 4) { sd += l; nd++; } else if (r >= 12 && r <= 18) { sr += l; nr++; } }
+                  return { dot: +(sd / nd).toFixed(1), ring: +(sr / nr).toFixed(1), frame: i - FILM.pre0 }; },
+                get marks(){ return MK.map(q => ({ id: q.m.id, on: q.on, op: +q.el.style.opacity || 0, tf: q.el.style.transform, rect: q.on ? q.el.getBoundingClientRect() : null, lab: q.on ? q.lab.getBoundingClientRect() : null })); }, get fxSize(){ return { w: fx.width, h: fx.height }; }, get packs(){ return { main: PK.main.w + 'x' + PK.main.h, pre: PK.pre.w + 'x' + PK.pre.h }; }, get bar(){ return bar ? { pre: bar.classList.contains('is-pre'), desk: bar.classList.contains('is-desk') } : null; }, get preOK(){ return preOK; }, get V(){ return V; }, get appPx(){ return appPx; }, get holdPx(){ return holdPx; }, get pushPx(){ return pushPx; }, get restPx(){ return restPx; },
                 get r(){ return r; }, get rA(){ return rA; }, get pre(){ return pre; }, get preT(){ return preT; }, set preT(v){ preT = v; }, get targetPreT(){ return targetPreT; },
                 get ambient(){ return ambient; }, get dissolving(){ return !!xf; }, get seam(){ return seamOn; },
                 get mode(){ return gl ? 'gl' : ctx ? '2d' : null; }, get fx(){ return !!gl; },
