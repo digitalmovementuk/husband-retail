@@ -3,7 +3,8 @@
 <head>
 <!--
   07 — The Threshold · scroll journey test · Husband Retail
-  Version 0.12 · 07.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/ (noindex, robots blocked)
+  Version 0.13 (v2) · 23.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/ (noindex, robots blocked);
+  v0.12 (v1) stays online, unchanged, at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/
   local preview: python3 -m http.server 8795 --directory "Husband Retail/Website"
   Built by Claude (Fable 5.1) on instruction. Test page: the words over the film are the locked hero copy from the
   Chapter 1 brief; the globe's and the descent's words are new and sourced (see "The words"). Published for review only, at the address
@@ -59,6 +60,21 @@
   (Veo, $0.96 a take, not started) · hold length (CFG.hold) · D7 push length · D18 · figures A/B not run.
 
   Change log
+  0.13 · 23.09.2026 · The Husband Retail design system (Claude Design, Sept 2026 light corporate direction) applied. After
+        the doors the site is light: white sections alternating with warm-grey bands (#F5F4F1), the founder and the Desk
+        on warm paper, near-black ink type (#15171C), slate body (#4A4D55), solid ink primary actions with white text, deep
+        gold (#7A5F33 / #6B5330) for eyebrows, rails, indices and rules, brand gold (#957743) for the large figures. The
+        film palette of 0.1–0.12 is kept as the .hr-dark scope wherever words sit on footage (header until the site
+        begins, loader, beats, markers, hero, card, foot note, the thread), on the phone's Call · Enquire bar and on the
+        footer. The header turns white with a hairline once the sections begin, its film shade clipped at their edge. Type:
+        Charis SIL (self-hosted, preloaded) as the open stand-in for Iowan Old Style; eyebrows 600 at .12em. The HR monogram
+        before the wordmark in the header and footer. The design system's audited hero shade (100°, .84 → 0 by 68 %)
+        arrives with the headline on desktop. Fixed on the way: the rail eyebrows, the rail indices (01–08), the pull
+        quote and the founder's lead were being reset to 17 px by `.sec p` (base resets now sit in :where()); the
+        founder's portrait was 1024 px tall (its height attribute overrode the 4:5); the Desk's dev note set at 16 px.
+        Charis's wide plus set smaller in "100+", "60+", "20+" and "30+". Balanced headings. No copy, film or engine
+        behaviour changed. Published as v2 at …/homepage-journey-prototype/v2/, beside v0.12, which stays unchanged at the
+        original address so the two can be compared; v2 reads the film packs, stills, portrait and icons from v1's folder.
   0.12 · 07.09.2026 · The link now travels with its picture: the v1.5 film card (the forecourt, the vault,
         the couple; Claude/share-card/v1.5/og-card-film.jpg) and the threshold mark as the tab icon wired into
         the head; noindex kept — this is still the review copy, not the site.
@@ -112,17 +128,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Husband Retail — Homepage journey, review copy · v0.12</title>
+<title>Husband Retail — Homepage journey v2, review copy · v0.13</title>
 <meta name="description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
-<link rel="canonical" href="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/">
-<link rel="icon" href="assets/journey/favicon.ico" sizes="any">
-<link rel="icon" type="image/svg+xml" href="assets/journey/favicon.svg">
-<link rel="apple-touch-icon" href="assets/journey/apple-touch-icon.png">
+<link rel="canonical" href="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/">
+<link rel="icon" href="../assets/journey/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="../assets/journey/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/journey/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/charis-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
 <meta name="theme-color" content="#16140F">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Husband Retail — Hong Kong, since 1998">
 <meta property="og:locale" content="en_GB">
-<meta property="og:url" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/">
+<meta property="og:url" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/">
 <meta property="og:title" content="Retail real estate, advised from the owner's side.">
 <meta property="og:description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
 <meta property="og:image" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/assets/journey/og-card.jpg">
@@ -135,35 +152,69 @@
 <meta name="twitter:description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
 <meta name="twitter:image" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/assets/journey/og-card.jpg">
 <style>
-/* ---------- tokens: the film look of 05-homepage-production.html (--film-*) ---------- */
+/* ---------- the Husband Retail design system (Sept 2026, light corporate direction), applied in v0.13 ----------
+   Light by default: white page, warm-grey bands, warm paper, near-black ink type, solid ink primary actions, deep gold
+   for eyebrows, rails and rules. The film palette of 0.1–0.12 lives on as the .hr-dark scope: over the footage (header
+   until the doors, loader, beats, markers, hero, card, foot note, the thread), on the phone's bar and on the footer. */
+@font-face{font-family:"Charis SIL";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/charis-normal-400-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Charis SIL";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/charis-normal-400-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* ---------- tokens (design system tokens/colors.css) ---------- */
 :root{
-  --ink:#16140F; --ink-deep:#0B0A08; --type:#EDE7DA; --mute:#B8B1A3; --dim:#8c8677;
-  --gold:#A98A57; --gold-hi:#D9C08A; --paper:#F3EFE7; --paper-ink:#1c1912; --paper-mute:#6b6557; --rule:#d9d2c2;
+  --ink:#FFFFFF; --ink-deep:#F5F4F1; --paper:#F3EFE7;                         /* page · alternate band · warm paper */
+  --type:#15171C; --mute:#4A4D55; --dim:#5F626B;                              /* primary · body · notes */
+  --gold:#7A5F33; --gold-hi:#6B5330; --gold-soft:#957743; --gold-ink:#FFFFFF;  /* rules and indices · eyebrows · large figures · text on an action */
+  --action:#15171C; --action-hover:#2E323B;                                   /* primary actions: solid ink */
+  --paper-ink:#15171C; --paper-body:#3F4249; --paper-mute:#5E616A; --paper-dim:#65686F; --rule:#DCD8D0;
+  --line-08:rgba(21,23,28,.07); --line-10:rgba(21,23,28,.09); --line-12:rgba(21,23,28,.12); --line-14:rgba(21,23,28,.13);
+  --line-16:rgba(21,23,28,.15); --line-18:rgba(21,23,28,.17); --line-20:rgba(21,23,28,.22); --line-22:rgba(21,23,28,.24);
+  --line-gold:rgba(122,95,51,.35);
+  --surface-nav:rgba(255,255,255,.96); --surface-field:#FFFFFF; --surface-hover:rgba(21,23,28,.035); --surface-selected:rgba(122,95,51,.08);
   --sans:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
-  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+  --serif:"Charis SIL","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;   /* Charis SIL: the open stand-in for Iowan Old Style */
+  --ease-out:cubic-bezier(.2,.7,.2,1);
   --nav-h:64px;
 }
-html,body{margin:0;overflow-x:clip;background:var(--ink);color:var(--type);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+/* the film palette: over the footage, the phone's bar and the footer */
+.hr-dark{
+  --ink:#16140F; --ink-deep:#0B0A08;
+  --type:#EDE7DA; --mute:#B8B1A3; --dim:#8c8677;
+  --gold:#A98A57; --gold-hi:#D9C08A; --gold-soft:#D9C08A; --gold-ink:#14100A;
+  --action:#A98A57; --action-hover:#bb9a63;
+  --line-08:rgba(237,231,218,.08); --line-10:rgba(237,231,218,.10); --line-12:rgba(237,231,218,.12); --line-14:rgba(237,231,218,.14);
+  --line-16:rgba(237,231,218,.16); --line-18:rgba(237,231,218,.18); --line-20:rgba(237,231,218,.20); --line-22:rgba(237,231,218,.22);
+  --line-gold:rgba(217,192,138,.28);
+  --surface-nav:rgba(22,20,15,.92); --surface-field:rgba(237,231,218,.06); --surface-hover:rgba(237,231,218,.04); --surface-selected:rgba(169,138,87,.10);
+  color:var(--type);
+}
+html{background:#0B0A08;overflow-x:clip;}                             /* the overscroll above the sky and below the footer stays dark */
+body{margin:0;overflow-x:clip;color:var(--type);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
 *,*::before,*::after{box-sizing:border-box;}
-a{color:inherit;}
+:where(a){color:inherit;}
+:where(a,button,summary):focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
 .dev{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);}
+:where(h1,h2,h3,.eyebrow,.rail__eyebrow,.kicker,.desk__num){text-wrap:balance;}
+:where(.sec,.desk,.foot,.beat,.hero) p{text-wrap:pretty;}
 
-/* ---------- wordmark + site header (the wordmark stays through the push-in) ---------- */
-.site-nav{position:fixed;left:0;right:0;top:0;z-index:220;height:var(--nav-h);transition:background .3s;}
-.site-nav::before{content:'';position:absolute;left:0;right:0;top:0;height:220%;z-index:-1;pointer-events:none;transition:opacity .3s;
+/* ---------- wordmark + site header: film palette over the footage, white with a hairline once the site begins ---------- */
+.site-nav{position:fixed;left:0;right:0;top:0;z-index:220;height:var(--nav-h);color:var(--type);transition:background-color .3s,box-shadow .3s;}
+.site-nav::before{content:'';position:absolute;left:0;right:0;top:0;height:min(220%,var(--shade-to,100vh));z-index:-1;pointer-events:none;transition:opacity .3s;
   background:linear-gradient(180deg,rgba(11,10,8,.58) 0%,rgba(11,10,8,.22) 55%,rgba(11,10,8,0) 100%);}
 .site-nav.is-scrolled::before{opacity:0;}
-.site-nav.is-scrolled{background:rgba(22,20,15,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.site-nav.is-scrolled{background:var(--surface-nav);box-shadow:0 1px 0 var(--line-12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
 .topbar{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(20px,5vw,72px);}
-.brand{text-decoration:none;font:400 15px/1 var(--serif);letter-spacing:.34em;text-transform:uppercase;
-  background:linear-gradient(100deg,#8f7443 0%,#d9c08a 28%,#a98a57 52%,#e3cd9c 74%,#9c7f4b 100%);
+/* the lockup: the HR monogram, then the serif caps — ink on light, brushed gold over the film */
+.brand{display:inline-flex;align-items:center;gap:.9em;min-height:44px;text-decoration:none;white-space:nowrap;font:400 15px/1 var(--serif);}
+.brand__mark{display:block;flex:none;width:auto;height:32px;}
+.brand__word{letter-spacing:.34em;text-transform:uppercase;color:var(--type);}
+.hr-dark .brand__word{background:linear-gradient(100deg,#8f7443 0%,#d9c08a 28%,#a98a57 52%,#e3cd9c 74%,#9c7f4b 100%);
   -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
   text-shadow:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));}
+.hr-dark .brand__mark{filter:drop-shadow(0 1px 2px rgba(11,10,8,.55));}
 .nav-right{display:flex;align-items:center;gap:22px;}
-.nav-link{text-decoration:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--type);opacity:.85;}
+.nav-link{white-space:nowrap;text-decoration:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--type);opacity:.85;transition:opacity .2s;}
 .nav-link:hover{opacity:1;}
-.cta{text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:#14100A;background:var(--gold);padding:12px 18px;}
-.cta:hover{background:#bb9a63;}
+.cta{display:inline-block;white-space:nowrap;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);background:var(--action);padding:12px 18px;transition:background-color .2s;}
+.cta:hover{background:var(--action-hover);}
 
 /* ---------- the scroll world ---------- */
 .sw-loader{position:fixed;inset:0;z-index:230;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(ellipse at 50% 40%,#2a2419 0%,#16140F 55%,#0B0A08 100%);transition:opacity .6s ease;}
@@ -171,7 +222,7 @@ a{color:inherit;}
 .sw-loader__mark{font:400 clamp(1rem,2vw,1.3rem)/1 var(--serif);letter-spacing:.34em;color:var(--gold-hi);animation:sw-breathe 2.6s ease-in-out infinite;}
 @keyframes sw-breathe{0%,100%{opacity:.55;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
 .sw-loader__label{color:var(--mute);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;}
-.sw-loader__bar{width:220px;max-width:62vw;height:2px;overflow:hidden;background:rgba(237,231,218,.14);}
+.sw-loader__bar{width:220px;max-width:62vw;height:2px;overflow:hidden;background:var(--line-14);}
 .sw-loader__bar i{display:block;height:100%;width:0%;background:var(--gold);transition:width .25s ease-out;}
 .sw-loader__pct{color:var(--dim);font-size:.7rem;letter-spacing:.16em;font-variant-numeric:tabular-nums;margin-top:-12px;}
 .sw-sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(#1a2233 0%,#16140F 60%,#0B0A08 100%);}
@@ -204,7 +255,7 @@ a{color:inherit;}
 .gm__label{position:absolute;left:0;top:0;white-space:nowrap;transform:translate(var(--gm-lx,0px),var(--gm-ly,0px));
   text-shadow:0 1px 2px rgba(11,10,8,.95),0 1px 10px rgba(11,10,8,.8);}
 .gm--l .gm__label{text-align:right;}
-.gm__place{display:block;font:500 10.5px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.gm__place{display:block;font:500 11px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
 .gm__what{display:block;margin-top:2px;font:400 12px/1.3 var(--sans);color:var(--type);opacity:.92;}
 .gm--hero .gm__place{font-size:12px;letter-spacing:.18em;}
 .gm--hero .gm__what{font-size:14px;font-weight:500;}
@@ -227,9 +278,14 @@ a{color:inherit;}
 .sw-copylayer{position:fixed;inset:0;z-index:20;pointer-events:none;}
 .hero{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:clamp(24px,4vw,72px);
   padding:calc(var(--nav-h) + 8vh) clamp(24px,6vw,96px) 8vh;pointer-events:none;will-change:opacity,transform;}
+/* the design system's hero shade: text on photography always sits on a directional shade (100°, .84 → 0 by 68 %);
+   it arrives with the headline (--hero-shade, set from the scroll) and leaves with the words */
+.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--hero-shade,1);
+  background:linear-gradient(100deg,rgba(11,10,8,.84) 0%,rgba(11,10,8,.7) 36%,rgba(11,10,8,.2) 56%,rgba(11,10,8,0) 68%);}
+.hero.is-pre::before{opacity:var(--hero-shade,0);}
 .hero__copy{max-width:min(46vw,600px);align-self:start;}          /* the quiet upper-left sky */
 .hero.is-live .hero__copy,.hero.is-live .card{pointer-events:auto;}
-.eyebrow{margin:0 0 18px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.eyebrow{margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);}
 .hero h1{margin:0 0 20px;font:400 clamp(30px,3.5vw,52px)/1.08 var(--serif);letter-spacing:-.01em;max-width:13em;
   text-shadow:0 1px 2px rgba(11,10,8,.5),0 2px 22px rgba(11,10,8,.45);}
 .sub{margin:0;font-size:17px;line-height:1.55;color:var(--type);max-width:34em;text-shadow:0 1px 2px rgba(11,10,8,.5),0 1px 16px rgba(11,10,8,.4);}
@@ -240,18 +296,18 @@ a{color:inherit;}
 @keyframes sw-cue{0%{top:-34px}60%{top:34px}100%{top:34px}}
 .card{width:360px;justify-self:end;align-self:end;                 /* the lower-right water */
   background:rgba(14,18,25,.72);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);
-  border:1px solid rgba(237,231,218,.16);padding:24px 24px 22px;}
+  border:1px solid var(--line-16);padding:24px 24px 22px;}
 .card__head{display:flex;align-items:center;gap:14px;margin:0 0 16px;}
 .card h3{font:400 20px/1.2 var(--serif);margin:0;}
 .field{margin-bottom:12px;}
 .field label{display:block;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--mute);margin-bottom:5px;}
 .field .opt{text-transform:none;letter-spacing:0;color:var(--dim);}
-.field input,.field select{width:100%;background:rgba(237,231,218,.06);color:var(--type);border:1px solid rgba(237,231,218,.20);border-radius:0;padding:10px 11px;font:400 14px/1.3 var(--sans);appearance:none;-webkit-appearance:none;}
+.field input,.field select{width:100%;background-color:var(--surface-field);color:var(--type);border:1px solid var(--line-20);border-radius:0;padding:10px 11px;font:400 14px/1.3 var(--sans);appearance:none;-webkit-appearance:none;}
 .field select{background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 17px) 18px,calc(100% - 12px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
 .field select option{color:#14100A;}
 .field input:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent;}
-.btn{width:100%;margin-top:6px;padding:13px 14px;border:0;cursor:pointer;background:var(--gold);color:#14100A;font:600 13px/1 var(--sans);letter-spacing:.06em;}
-.btn:hover{background:#bb9a63;}
+.btn{width:100%;margin-top:6px;padding:13px 14px;border:0;border-radius:0;cursor:pointer;background:var(--action);color:var(--gold-ink);font:600 13px/1 var(--sans);letter-spacing:.06em;transition:background-color .2s;}
+.btn:hover{background:var(--action-hover);}
 .note{font-size:11px;color:var(--dim);margin:12px 0 0;line-height:1.4;}
 .rest{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px);text-align:center;padding:0 24px;opacity:0;visibility:hidden;}
 .rest p{margin:0;font:400 clamp(16px,1.5vw,20px)/1.4 var(--serif);color:var(--type);text-shadow:0 1px 2px rgba(11,10,8,.6),0 1px 18px rgba(11,10,8,.5);}
@@ -262,118 +318,120 @@ a{color:inherit;}
 /* ---------- W7 · The Concierge Desk (paper) ---------- */
 .desk{position:relative;z-index:200;background:var(--paper);color:var(--paper-ink);padding:clamp(72px,10vh,120px) clamp(24px,6vw,96px) 48px;
   min-height:100vh;min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;}   /* the Desk fills the screen: the last act on paper, and the header can go solid over it on any screen */
-.desk__inner{max-width:1120px;margin:0 auto;}
+.desk__inner{max-width:1120px;margin:0 auto;width:100%;}
 .desk__num{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
 .desk h2{margin:0 0 42px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:14em;}
 .desk__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:start;}
-.desk .field label{color:var(--paper-mute);} .desk .field .opt{color:#8f887a;}
-.desk .field input,.desk .field select{background:#fff;color:var(--paper-ink);border:1px solid var(--rule);}
+.desk .field label{color:var(--paper-mute);} .desk .field .opt{color:var(--paper-dim);}
+.desk .field input,.desk .field select{background-color:#fff;color:var(--paper-ink);border:1px solid var(--rule);}
 .desk .field select{background-image:linear-gradient(45deg,transparent 50%,var(--paper-mute) 50%),linear-gradient(135deg,var(--paper-mute) 50%,transparent 50%);}
-.desk .note{color:#8f887a;}
+.desk .note{color:var(--paper-dim);}
 .desk__side p{margin:0 0 14px;font-size:16px;line-height:1.6;}
 .desk__reply{font:400 clamp(20px,2vw,26px)/1.3 var(--serif);margin:0 0 8px !important;}
 /* Paul, round: the portrait from the prototype with Paul in section 1 (Design/husband-v1-digitalmovement) */
 .avatar{display:block;width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 42%;flex:none;border:1px solid rgba(217,192,138,.55);box-shadow:0 0 0 3px rgba(14,18,25,.5);}
 .avatar--lg{width:76px;height:76px;margin:0 0 20px;border-color:var(--gold);box-shadow:0 0 0 4px #fff,0 6px 22px rgba(28,25,18,.14);}
-.desk__side .dev{margin-bottom:26px;}
+.desk__side .dev{margin-bottom:26px;font-size:11px;color:var(--paper-dim);}
 .desk__side address{font-style:normal;color:var(--paper-mute);font-size:14px;line-height:1.7;}
 .desk__side address a{color:var(--paper-ink);text-decoration-color:var(--gold);}
 .desk__foot{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:12px;color:var(--paper-mute);}
 .desk__foot details{font-size:12px;} .desk__foot summary{cursor:pointer;color:var(--gold);} .desk__foot ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;}
-/* ---------- after the doors (v0.11): the firm, the practices, why a boutique, how we work, the record, the founder, start here, the questions — then the Desk and the footer ---------- */
+/* ---------- after the doors: the firm, the practices, why a boutique, how we work, the record, the founder, start here, the questions — then the Desk and the footer.
+   White sections alternate with warm-grey bands, the founder on paper. Base resets sit in :where() so component classes always win. ---------- */
 .after{position:relative;z-index:200;background:var(--ink);color:var(--type);}
-.sec{padding:clamp(72px,9vw,120px) clamp(24px,6vw,96px);border-top:1px solid rgba(237,231,218,.08);}
+.sec{padding:clamp(72px,9vw,120px) clamp(24px,6vw,96px);border-top:1px solid var(--line-08);background:var(--ink);}
 .sec--deep{background:var(--ink-deep);}
 .sec--paper{background:var(--paper);color:var(--paper-ink);border-top:0;}
 .sec__inner{max-width:1120px;margin:0 auto;}
 .sec__grid{display:grid;grid-template-columns:168px minmax(0,1fr);gap:32px clamp(32px,5vw,72px);align-items:start;}
 .rail{position:sticky;top:calc(var(--nav-h) + 24px);}
 .rail__rule{display:block;width:48px;height:1px;background:var(--gold-hi);margin:0 0 14px;}
-.rail__eyebrow{margin:0 0 8px;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.rail__eyebrow{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);}
 .rail__index{margin:0;font:400 40px/1 var(--serif);color:var(--type);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
 .sec--paper .rail__index{color:var(--paper-ink);} .sec--paper .rail__eyebrow{color:var(--gold);} .sec--paper .rail__rule{background:var(--gold);}
-.sec h2{margin:0 0 22px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:15em;}
-.sec h2 .dimline{display:block;color:var(--mute);}
-.sec--paper h2 .dimline{color:var(--paper-mute);}
-.sec p{margin:0 0 16px;font-size:17px;line-height:1.6;color:var(--mute);max-width:36em;}
-.sec--paper p{color:#4a4538;}
-.sec .dev{color:var(--dim);} .sec--paper .dev{color:#8f887a;}
+:where(.sec) h2{margin:0 0 22px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:15em;}
+.dimline{display:block;color:var(--mute);}
+.sec--paper .dimline{color:var(--paper-mute);}
+:where(.sec) p{margin:0 0 16px;font-size:17px;line-height:1.6;color:var(--mute);max-width:36em;}
+:where(.sec--paper) p{color:var(--paper-body);}
+.sec .dev{color:var(--dim);} .sec--paper .dev{color:var(--paper-dim);}
 .split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start;}
 .split--faq{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);}
 /* the firm: four figures, four lines */
-.figures{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:1px;background:rgba(237,231,218,.12);border:1px solid rgba(237,231,218,.12);}
-.figure{background:var(--ink);padding:26px 24px;}
-.figure b{display:block;font:400 clamp(36px,3.6vw,52px)/1 var(--serif);color:var(--gold-hi);letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-bottom:10px;}
+.figures{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line-12);border:1px solid var(--line-12);}
+.figure{background:var(--ink);padding:26px clamp(16px,2vw,24px);min-width:0;}
+.figure b{display:block;font:400 clamp(36px,3.6vw,52px)/1 var(--serif);color:var(--gold-soft);letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-bottom:10px;}
+.plus{margin-left:-.04em;font-size:.72em;vertical-align:.2em;}
 .figure span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
-.creds{margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border:1px solid rgba(237,231,218,.12);}
-.cred{padding:20px 22px;border-left:1px solid rgba(237,231,218,.12);}
+.creds{margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line-12);}
+.cred{padding:20px 22px;border-left:1px solid var(--line-12);}
 .cred:first-child{border-left:0;}
 .cred small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
 .cred strong{font-weight:500;font-size:15px;line-height:1.4;color:var(--type);}
 /* the practices: four tabs, one panel */
 .prac{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,3vw,40px);align-items:start;margin-top:8px;}
-.prac__list{margin:0;padding:0;list-style:none;border:1px solid rgba(237,231,218,.12);}
-.prac__tab{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:14px;width:100%;text-align:left;padding:18px 20px;background:transparent;border:0;border-top:1px solid rgba(237,231,218,.10);color:var(--type);font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;}
+.prac__list{margin:0;padding:0;list-style:none;border:1px solid var(--line-12);}
+.prac__tab{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:14px;width:100%;text-align:left;padding:18px 20px;background:transparent;border:0;border-top:1px solid var(--line-10);color:var(--type);font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;transition:background-color .2s;}
 .prac__list li:first-child .prac__tab{border-top:0;}
 .prac__tab i{font:400 15px/1 var(--serif);color:var(--gold);font-style:normal;font-variant-numeric:tabular-nums;}
 .prac__tab b{display:block;font-weight:500;font-size:16px;line-height:1.3;}
-.prac__tab small{display:block;margin-top:4px;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
-.prac__tab:hover{background:rgba(237,231,218,.04);}
+.prac__tab small{display:block;margin-top:4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+.prac__tab:hover{background:var(--surface-hover);}
 .prac__tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
-.prac__tab[aria-selected="true"]{background:rgba(169,138,87,.10);box-shadow:inset 3px 0 0 var(--gold);}
+.prac__tab[aria-selected="true"]{background:var(--surface-selected);box-shadow:inset 3px 0 0 var(--gold);}
 .prac__tab[aria-selected="true"] small{color:var(--gold-hi);}
-.prac__panel{position:relative;border:1px solid rgba(217,192,138,.28);background:linear-gradient(180deg,rgba(237,231,218,.05),rgba(237,231,218,.02));padding:clamp(24px,3vw,40px);}
+.prac__panel{position:relative;border:1px solid var(--line-gold);background:linear-gradient(180deg,var(--surface-hover),transparent);padding:clamp(24px,3vw,40px);}
 .prac__panel[hidden]{display:none;}
-.prac__panel .kicker{margin:0 0 14px;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);}
-.prac__panel h3{margin:0 0 14px;font:400 clamp(24px,2.4vw,32px)/1.15 var(--serif);max-width:12em;}
+.prac__panel .kicker{margin:0 0 14px;padding-right:clamp(64px,8vw,110px);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);}
+.prac__panel h3{margin:0 0 14px;padding-right:clamp(48px,6vw,90px);font:400 clamp(24px,2.4vw,32px)/1.15 var(--serif);max-width:12em;}
 .prac__panel p{font-size:16px;}
 .prac__big{position:absolute;right:24px;top:14px;font:400 clamp(56px,7vw,96px)/1 var(--serif);color:var(--gold);opacity:.16;pointer-events:none;}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;padding:0;list-style:none;}
-.chips li{font-size:12.5px;line-height:1.2;padding:7px 10px;border:1px solid rgba(237,231,218,.18);color:var(--mute);}
-.more{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-hi);border-bottom:1px solid rgba(217,192,138,.4);padding-bottom:6px;}
+.chips li{font-size:12.5px;line-height:1.2;padding:7px 10px;border:1px solid var(--line-18);color:var(--mute);}
+.more{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-hi);border-bottom:1px solid var(--line-gold);padding-bottom:6px;transition:border-color .2s;}
 .more:hover{border-color:var(--gold-hi);}
 /* why a boutique · how we work */
-.pull{font:400 clamp(24px,2.4vw,32px)/1.25 var(--serif);color:var(--type) !important;margin:0 0 22px;max-width:16em !important;}
+.pull{font:400 clamp(24px,2.4vw,32px)/1.25 var(--serif);color:var(--type);margin:0 0 22px;max-width:16em;}
 .numlist{margin:0;padding:0;list-style:none;}
-.numlist li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid rgba(237,231,218,.12);}
+.numlist li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid var(--line-12);}
 .numlist li:first-child{border-top:0;padding-top:0;}
 .numlist i{font:400 15px/1.5 var(--serif);color:var(--gold);font-style:normal;}
 .numlist h4{margin:0 0 6px;font:500 16px/1.35 var(--sans);color:var(--type);}
 .numlist p{margin:0;font-size:15px;}
-.steps__head{color:var(--type) !important;margin-bottom:6px !important;}
+.steps__head{color:var(--type);margin-bottom:6px;}
 .steps{margin:0;padding:0;list-style:none;}
-.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid rgba(237,231,218,.12);}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line-12);}
 .steps li:first-child{border-top:0;}
 .steps i{font:400 14px/1.5 var(--serif);color:var(--gold);font-style:normal;}
 .steps b{font-weight:500;font-size:16px;color:var(--type);}
 .steps span{display:block;margin-top:2px;font-size:14.5px;color:var(--mute);}
 /* the record: the thirteen marked places */
-.places{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(237,231,218,.10);border:1px solid rgba(237,231,218,.10);}
+.places{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--line-10);border:1px solid var(--line-10);}
 .place{background:var(--ink);padding:20px 20px 22px;min-height:112px;}
 .place small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:8px;}
 .place b{font:400 17px/1.35 var(--serif);color:var(--type);}
 .place--hero{grid-column:1 / -1;display:flex;align-items:baseline;gap:24px;min-height:0;padding:22px 20px;}
 .place--hero small{margin:0;} .place--hero b{font-size:20px;}
-.places__note{margin:18px 0 0 !important;font-size:13.5px !important;color:var(--dim) !important;max-width:none !important;}
+.places__note{margin:18px 0 0;font-size:13.5px;color:var(--dim);max-width:none;}
 /* the founder, on paper */
-.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:center;}
-.founder__img{width:100%;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 28%;display:block;border:1px solid var(--rule);}
-.founder__lead{font:400 clamp(20px,2vw,26px)/1.35 var(--serif);color:var(--paper-ink) !important;margin:0 0 18px;max-width:22em;}
-.founder__facts{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:14px 24px;}
-.founder__facts li{font-size:14.5px;line-height:1.5;color:#4a4538;padding-top:10px;border-top:1px solid var(--rule);}
+.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:start;}
+.founder__img{width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 28%;display:block;border:1px solid var(--rule);}
+.founder__lead{font:400 clamp(20px,2vw,26px)/1.35 var(--serif);color:var(--paper-ink);margin:0 0 18px;max-width:22em;}
+.founder__facts{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;}
+.founder__facts li{font-size:14.5px;line-height:1.5;color:var(--paper-body);padding-top:10px;border-top:1px solid var(--rule);}
 .founder__facts li b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;font-weight:500;}
 /* start here */
 .start{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,6vw,96px);align-items:center;}
 .start h2{font-size:clamp(34px,4vw,56px);}
-.start__line{font-size:14px !important;color:var(--mute);}
+.start__line{font-size:14px;color:var(--mute);}
 .start__line a{color:var(--gold-hi);text-decoration:none;font-weight:500;}
 .ctas{display:grid;gap:12px;}
 .cta--lg{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-size:13px;}
-.cta--ghost{background:transparent;color:var(--type);border:1px solid rgba(237,231,218,.22);}
-.cta--ghost:hover{background:rgba(237,231,218,.06);}
+.cta--ghost{background:transparent;color:var(--type);border:1px solid var(--line-22);}
+.cta--ghost:hover{background:var(--surface-hover);}
 /* the questions */
-.faq{margin:0;padding:0;border-top:1px solid rgba(237,231,218,.12);}
-.faq details{border-bottom:1px solid rgba(237,231,218,.12);}
+.faq{margin:0;padding:0;border-top:1px solid var(--line-12);}
+.faq details{border-bottom:1px solid var(--line-12);}
 .faq summary{display:grid;grid-template-columns:40px minmax(0,1fr) 28px;gap:16px;align-items:baseline;padding:20px 0;cursor:pointer;list-style:none;color:var(--type);}
 .faq summary::-webkit-details-marker{display:none;}
 .faq summary i{font:400 13px/1.6 var(--serif);color:var(--gold);font-style:normal;}
@@ -382,44 +440,49 @@ a{color:inherit;}
 .faq details[open] summary span{transform:rotate(45deg);}
 .faq .a{padding:0 0 22px 56px;}
 .faq .a p{font-size:16px;margin:0;}
-/* the footer, after The Ocean Marketing's */
-.foot{position:relative;z-index:200;background:var(--ink-deep);color:var(--type);padding:clamp(56px,7vw,88px) clamp(24px,6vw,96px) 0;border-top:1px solid rgba(237,231,218,.10);overflow:hidden;}
+/* the footer, after The Ocean Marketing's — the film palette */
+.foot{position:relative;z-index:200;background:var(--ink-deep);color:var(--type);padding:clamp(56px,7vw,88px) clamp(24px,6vw,96px) 0;border-top:1px solid var(--line-10);overflow:hidden;}
 .foot__inner{max-width:1120px;margin:0 auto;}
 .foot__grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px clamp(24px,4vw,56px);}
 .foot__brand .brand{font-size:16px;}
+.foot__brand .brand__mark{height:36px;}
 .foot__brand p{margin:18px 0 22px;font-size:15px;line-height:1.6;color:var(--mute);max-width:30em;}
 .foot__brand .cta{display:inline-block;}
 .foot h4{margin:0 0 16px;font:500 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--type);}
 .foot ul{margin:0;padding:0;list-style:none;}
 .foot li{margin:0 0 10px;}
-.foot li a{text-decoration:none;font-size:14.5px;color:var(--mute);}
+.foot li a{text-decoration:none;font-size:14.5px;color:var(--mute);transition:color .2s;}
 .foot li a:hover{color:var(--type);}
 .foot .contact li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;margin-bottom:16px;}
-.foot .contact i{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid rgba(237,231,218,.18);color:var(--gold-hi);}
+.foot .contact i{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line-18);color:var(--gold-hi);}
 .foot .contact svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
 .foot .contact small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
 .foot .contact span{font-size:14.5px;color:var(--mute);line-height:1.5;overflow-wrap:anywhere;} .foot .contact a{color:inherit;text-decoration:none;} .foot .contact a:hover{color:var(--type);}
 .foot .contact span.dev{font-size:11px;}
-.foot__legal{margin-top:clamp(40px,5vw,64px);padding:22px 0;border-top:1px solid rgba(237,231,218,.10);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--dim);}
+.foot__legal{margin-top:clamp(40px,5vw,64px);padding:22px 0;border-top:1px solid var(--line-10);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--dim);}
 .foot__legal nav{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;}
 .foot__legal nav a{text-decoration:none;color:var(--mute);}
 .foot__legal nav a[aria-disabled="true"]{color:var(--dim);cursor:default;}
-.totop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid rgba(237,231,218,.22);color:var(--gold-hi) !important;text-decoration:none;font-size:16px;margin-left:8px;}
-.foot__review{padding:16px 0 20px;border-top:1px solid rgba(237,231,218,.08);font-size:12px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;}
+.totop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line-22);color:var(--gold-hi) !important;text-decoration:none;font-size:16px;margin-left:8px;}
+.foot__review{padding:16px 0 20px;border-top:1px solid var(--line-08);font-size:12px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;}
 .foot__review details{font-size:12px;} .foot__review summary{cursor:pointer;color:var(--gold);} .foot__review ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;color:var(--mute);}
 .foot__sig{display:block;text-align:center;font:400 clamp(64px,14vw,200px)/1 var(--serif);letter-spacing:.06em;color:var(--gold);opacity:.07;margin:8px 0 -.34em;white-space:nowrap;pointer-events:none;user-select:none;-webkit-user-select:none;}
-@media (max-width:1180px){ .nav-link--wide{display:none;} }
+@media (max-width:1180px){
+  .nav-link--wide{display:none;}
+  .prac{grid-template-columns:1fr;}                                    /* the design system stacks the tabs above the panel below 1180 px */
+  .foot__grid{grid-template-columns:repeat(3,minmax(0,1fr));} .foot__brand{grid-column:1 / -1;}
+}
 /* the sections on the phone (≤860 px): one column, the rail on top, 24 px gutters, 56 px targets */
 @media (max-width:860px){
   .sec{padding:56px 24px;}
   .sec__grid{grid-template-columns:1fr;gap:22px;}
   .rail{position:static;} .rail__index{font-size:32px;}
-  .sec h2{font-size:32px;line-height:1.12;max-width:none;}
-  .sec p{font-size:17px;max-width:none;}
+  :where(.sec) h2{font-size:32px;line-height:1.12;max-width:none;}
+  :where(.sec) p,.prac__panel p,.numlist p{font-size:17px;max-width:none;}
   .split,.split--faq{grid-template-columns:1fr;gap:32px;}
   .figure{padding:20px 18px;} .figure b{font-size:34px;}
-  .creds{grid-template-columns:1fr 1fr;margin-top:32px;} .cred{padding:16px 18px;} .cred:nth-child(3){border-left:0;} .cred:nth-child(n+3){border-top:1px solid rgba(237,231,218,.12);}
-  .prac{grid-template-columns:1fr;gap:16px;}
+  .creds{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:32px;} .cred{padding:16px 18px;} .cred:nth-child(3){border-left:0;} .cred:nth-child(n+3){border-top:1px solid var(--line-12);}
+  .prac{gap:16px;}
   .prac__tab{padding:16px;grid-template-columns:36px minmax(0,1fr);min-height:56px;}
   .prac__panel{padding:24px 20px;} .prac__big{right:14px;top:6px;font-size:44px;opacity:.12;}
   .places{grid-template-columns:1fr 1fr;} .place{padding:16px;min-height:0;} .place--hero{display:block;padding:16px;} .place--hero b{font-size:18px;} .place--hero small{margin-bottom:8px;}
@@ -438,20 +501,23 @@ a{color:inherit;}
 @media (max-width:860px){
   :root{--nav-h:56px;}
   .nav-right{display:none;}
-  .brand{display:inline-flex;align-items:center;min-height:44px;font-size:13px;letter-spacing:.3em;     /* a 44 px tap target */
-    background:none;color:var(--gold-hi);-webkit-text-fill-color:var(--gold-hi);filter:none;                /* flat bright gold: the gradient gold vanished over the lit arch */
-    text-shadow:0 1px 2px rgba(11,10,8,.75),0 1px 14px rgba(11,10,8,.55);}
-  .site-nav::before{height:300%;background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.42) 40%,rgba(11,10,8,0) 100%);}   /* deeper shade under the header on the phone */
+  .brand{font-size:13px;gap:12px;}
+  .brand__mark{height:32px;}
+  .brand__word{letter-spacing:.3em;}
+  .hr-dark .brand__word{background:none;color:var(--gold-hi);-webkit-text-fill-color:var(--gold-hi);filter:none;}          /* flat bright gold on the phone: the gradient gold vanished over the lit arch */
+  .site-nav.hr-dark .brand__word{text-shadow:0 1px 2px rgba(11,10,8,.75),0 1px 14px rgba(11,10,8,.55);}                   /* and a shade under it, over the film */
+  .site-nav::before{height:min(300%,var(--shade-to,100vh));background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.42) 40%,rgba(11,10,8,0) 100%);}   /* deeper shade under the header on the phone */
   /* the text shade, after The Ocean Marketing's mobile view: a dark gradient rising from the bottom of the screen, near-solid
      under the words, gone by the upper fifth — anchored in pixels from the bottom, where the hero and the foot note stand;
      it comes with the hero's words at the forecourt and again with the foot note at the doors (see update()) */
   .sw-scrim{display:block;background:linear-gradient(0deg,rgba(11,10,8,.94) 0,rgba(11,10,8,.92) 120px,rgba(11,10,8,.87) 320px,rgba(11,10,8,.80) 460px,rgba(11,10,8,.42) 550px,rgba(11,10,8,.10) 640px,rgba(11,10,8,0) 720px);}
+  .hero::before{display:none;}                                         /* the phone's shade rises from the bottom instead (.sw-scrim) */
   /* the beats: at the top of the phone screen, over the dark space and the dusk sky; their shade comes from above */
   .sw-beats::before{background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.46) 38%,rgba(11,10,8,0) 68%);}
   .beat{left:24px;right:24px;top:calc(var(--nav-h) + 28px);max-width:none;}
   .gm__label{width:max-content;} .gm__place{font-size:9.5px;letter-spacing:.14em;} .gm__what{font-size:11px;white-space:normal;max-width:150px;} .gm--l .gm__what{margin-left:auto;}
   .gm--hero .gm__place{font-size:10.5px;} .gm--hero .gm__what{font-size:12.5px;max-width:170px;}
-  .beat .eyebrow{margin-bottom:12px;font-size:13px;letter-spacing:.14em;}
+  .beat .eyebrow{margin-bottom:12px;font-size:13px;letter-spacing:.12em;}
   .beat__h{font-size:36px;line-height:1.1;margin-bottom:16px;max-width:none;}
   .beat--2 .beat__h{font-size:32px;max-width:none;}
   .beat__rule{margin-bottom:16px;}
@@ -460,7 +526,7 @@ a{color:inherit;}
   /* the hero: left-aligned at the bottom of the screen, above the bar */
   .hero{grid-template-columns:1fr;padding:0 24px calc(96px + env(safe-area-inset-bottom));align-content:end;text-align:left;}
   .hero__copy{max-width:none;}
-  .hero .eyebrow{margin-bottom:14px;font-size:13px;letter-spacing:.14em;}
+  .hero .eyebrow{margin-bottom:14px;font-size:13px;letter-spacing:.12em;}
   .hero h1{max-width:none;font-size:40px;line-height:1.12;margin-bottom:16px;}
   .sub{font-size:17px;line-height:1.5;max-width:none;}
   .cue{justify-content:flex-start;margin-top:24px;font-size:13px;} .cue i{height:22px;} .cue i::after{height:22px;top:-22px;} @keyframes sw-cue{0%{top:-22px}60%{top:22px}100%{top:22px}}
@@ -468,13 +534,13 @@ a{color:inherit;}
   .rest{bottom:calc(88px + env(safe-area-inset-bottom));padding:0 24px;text-align:left;}     /* left, like the hero */
   .rest p{font-size:17px;}
   .rest .dev{font-size:11px;} .dev-geo{display:none;} .dev-geo-s{display:inline;}   /* the geography note in one line on the phone, so the foot note stays under mid-screen */
-  /* the bar: Call · Enquire, 54 px; in from below with the forecourt's card beat, away again over the Desk */
+  /* the bar: Call · Enquire, 54 px, in the film palette; in from below with the forecourt's card beat, away again over the Desk */
   .sticky-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:210;
-    background:rgba(14,18,25,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid rgba(237,231,218,.14);
-    padding-bottom:env(safe-area-inset-bottom);transition:transform .4s cubic-bezier(.2,.7,.2,1),opacity .4s;will-change:transform;}
+    background:rgba(14,18,25,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line-14);
+    padding-bottom:env(safe-area-inset-bottom);transition:transform .4s var(--ease-out),opacity .4s;will-change:transform;}
   .sticky-bar.is-pre,.sticky-bar.is-desk{transform:translateY(110%);opacity:0;pointer-events:none;}
   .sticky-bar a{display:flex;align-items:center;justify-content:center;height:54px;text-decoration:none;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);}
-  .sticky-bar a + a{border-left:1px solid rgba(237,231,218,.14);color:#14100A;background:var(--gold);}
+  .sticky-bar a + a{border-left:1px solid var(--line-14);color:var(--gold-ink);background:var(--action);}
   /* the Desk at bizee scale: 24 px gutters, 52 px fields and button, 17 px inputs (under 16 px iOS zooms the page on focus) */
   .desk{padding:64px 24px calc(56px + env(safe-area-inset-bottom));}
   .desk__num{font-size:13px;}
@@ -507,9 +573,9 @@ a{color:inherit;}
 </head>
 <body>
 
-<header class="site-nav" id="siteNav">
+<header class="site-nav hr-dark" id="siteNav">
   <nav class="topbar" aria-label="Main">
-    <a class="brand" href="#threshold" aria-label="Husband Retail home">Husband Retail</a>
+    <a class="brand" href="#threshold" aria-label="Husband Retail home"><img class="brand__mark" src="assets/brand/monogram.png" alt="" width="53" height="60"><span class="brand__word">Husband Retail</span></a>
     <div class="nav-right"><a class="nav-link nav-link--wide" href="#firm">The firm</a><a class="nav-link" href="#practices">Practices</a><a class="nav-link" href="#process">How we work</a><a class="nav-link nav-link--wide" href="#faq">Questions</a>
       <a class="nav-link" href="#enquiry">The Concierge Desk</a>
       <a class="cta" href="#enquiry">Request a call</a>
@@ -520,7 +586,7 @@ a{color:inherit;}
 <main id="world" aria-label="The Threshold"></main>
 
 <!-- the words over the film: none of this is in the plate (Veo tab, V1a · DOM adds) -->
-<div class="sw-copylayer" id="copylayer">
+<div class="sw-copylayer hr-dark" id="copylayer">
   <div class="hero" id="hero">
     <div class="hero__copy" id="threshold">
       <p class="eyebrow">Husband Retail — Hong Kong, since 1998.</p>
@@ -529,7 +595,7 @@ a{color:inherit;}
       <div class="cue" id="cue"><i></i><span>Scroll to the door</span></div>
     </div>
     <aside class="card" id="card" aria-labelledby="cardtitle">
-      <div class="card__head"><img class="avatar" src="media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="44" height="44" decoding="async"><h3 id="cardtitle">Speak to Paul's office</h3></div>
+      <div class="card__head"><img class="avatar" src="../media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="44" height="44" decoding="async"><h3 id="cardtitle">Speak to Paul's office</h3></div>
       <form id="heroForm" novalidate>
         <div class="field"><label for="h-tel">Telephone <span class="opt">(required)</span></label><input id="h-tel" name="tel" type="tel" autocomplete="tel" required></div>
         <div class="field"><label for="h-name">Name</label><input id="h-name" name="name" type="text" autocomplete="name"></div>
@@ -547,11 +613,11 @@ a{color:inherit;}
 </div>
 
 <!-- the beats: the globe's words and the descent's (desktop, over the approach) — sourced, see the head comment -->
-<div class="sw-marks" id="marks" aria-hidden="true"></div>
-<div class="sw-beats" id="beats" hidden aria-hidden="true">
+<div class="sw-marks hr-dark" id="marks" aria-hidden="true"></div>
+<div class="sw-beats hr-dark" id="beats" hidden aria-hidden="true">
   <div class="beat beat--1" id="beat1">
     <p class="eyebrow">Retail real estate advisory</p>
-    <h2 class="beat__h">100+ projects. Three continents. 30+ years.</h2>
+    <h2 class="beat__h">100<span class="plus">+</span> projects. Three continents. 30<span class="plus">+</span> years.</h2>
     <i class="beat__rule"></i>
     <p class="beat__line">Sixty-plus of them planned and leased, in more than twenty markets.</p>
     <div class="cue"><i></i><span>Scroll</span></div>
@@ -563,7 +629,7 @@ a{color:inherit;}
     <p class="beat__line">New developments, existing assets, acquisitions and leasing briefs.</p>
   </div>
 </div>
-<nav class="sticky-bar" aria-label="Call or enquire"><a href="tel:+85226599280">Call</a><a href="#enquiry">Enquire</a></nav>
+<nav class="sticky-bar hr-dark" aria-label="Call or enquire"><a href="tel:+85226599280">Call</a><a href="#enquiry">Enquire</a></nav>
 
 <!-- v0.11 · after the doors: the site continues, after The Ocean Marketing's order, in the house's own words (document 03) -->
 <div class="after" id="after">
@@ -581,9 +647,9 @@ a{color:inherit;}
             <p>A retail destination is one continuous piece of work, and we treat it that way: development consultancy, leasing, positioning and repositioning, and investment advisory, from one team.</p>
           </div>
           <ul class="figures" aria-label="The record in four figures">
-            <li class="figure"><b>100+</b><span>projects advised</span></li>
-            <li class="figure"><b>60+</b><span>planned and leased</span></li>
-            <li class="figure"><b>20+</b><span>markets</span></li>
+            <li class="figure"><b>100<span class="plus">+</span></b><span>projects advised</span></li>
+            <li class="figure"><b>60<span class="plus">+</span></b><span>planned and leased</span></li>
+            <li class="figure"><b>20<span class="plus">+</span></b><span>markets</span></li>
             <li class="figure"><b>3</b><span>continents</span></li>
           </ul>
         </div>
@@ -728,7 +794,7 @@ a{color:inherit;}
     <div class="sec__inner sec__grid">
       <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The founder</p><p class="rail__index">06</p></aside>
       <div class="founder">
-        <img class="founder__img" src="media/paul-husband-1024.jpg" alt="Paul Husband" width="1024" height="1024" loading="lazy">
+        <img class="founder__img" src="../media/paul-husband-1024.jpg" alt="Paul Husband" width="1024" height="1024" loading="lazy">
         <div>
           <h2>Paul Husband.</h2>
           <p class="founder__lead">More than 30 years in Asian retail real estate, first at Swire Properties, then under his own name.</p>
@@ -803,7 +869,7 @@ a{color:inherit;}
         <p class="note" id="formNote">Test page — the form sends nothing yet.</p>
       </form>
       <aside class="desk__side">
-        <img class="avatar avatar--lg" src="media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="76" height="76" loading="lazy" decoding="async">
+        <img class="avatar avatar--lg" src="../media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="76" height="76" loading="lazy" decoding="async">
         <p class="desk__reply">Replies come from Paul's office.</p>
         <p class="dev">Wording to confirm with the client.</p>
         <address>
@@ -817,11 +883,11 @@ a{color:inherit;}
 </section>
 
 <!-- v0.11 · the footer, after The Ocean Marketing's -->
-<footer class="foot" id="foot">
+<footer class="foot hr-dark" id="foot">
   <div class="foot__inner">
     <div class="foot__grid">
       <div class="foot__brand">
-        <a class="brand" href="#threshold">Husband Retail</a>
+        <a class="brand" href="#threshold"><img class="brand__mark" src="assets/brand/monogram.png" alt="" width="53" height="60"><span class="brand__word">Husband Retail</span></a>
         <p>Retail real estate, advised from the owner's side. Developers, landlords and investors, in Hong Kong and in more than twenty markets on three continents, since 1998.</p>
         <a class="cta" href="#enquiry">Request a call</a>
       </div>
@@ -865,9 +931,10 @@ a{color:inherit;}
         <a class="totop" href="#threshold" aria-label="Back to the top">↑</a>
       </nav>
     </div>
-    <div class="foot__review"><span>07 — The Threshold · scroll journey test · <strong>v0.12</strong> · 07.09.2026 · review copy on GitHub Pages, not indexed</span>
+    <div class="foot__review"><span>07 — The Threshold · scroll journey test · <strong>v2 · 0.13</strong> · 23.09.2026 · review copy on GitHub Pages, not indexed · <a href="../">v1 (0.12) stays online</a></span>
       <details><summary>Change log</summary>
         <ul>
+          <li><b>0.13</b> · The Husband Retail design system applied: after the doors the site is light — white sections and warm-grey bands, the founder and the Desk on warm paper, ink type, solid ink buttons, deep gold for eyebrows, rails and rules; the film palette kept wherever words sit on footage, on the phone's bar and on the footer. Charis SIL for the serif, the HR monogram before the wordmark, the design system's hero shade on desktop, a white header with a hairline over the sections. Fixed: rail labels and indices, the pull quote and the founder's lead now at their designed sizes; the founder's portrait at 4:5. No copy, film or engine behaviour changed. Published as v2 at …/homepage-journey-prototype/v2/; v0.12 stays unchanged at the original address.</li>
           <li><b>0.12</b> · The link now travels with its picture: the v1.5 film card (the forecourt, the vault, the couple) and the threshold mark as the tab icon wired into the head; noindex kept — this is still the review copy, not the site.</li>
           <li><b>0.11</b> · After the doors the page continues as a site, in The Ocean Marketing’s order and the house’s own words (document 03): the firm (four figures, four credentials), the four practices as tabs with their sub-services and a link that presets the Desk’s select, why a boutique, how an engagement runs with the six steps, the record (the thirteen marked places), the founder on paper, a start-here band, seven questions, then the Desk and a full footer (links, practices, contact, legal placeholders, back to top, this log, the wordmark). Header links to the sections; the sticky Call · Enquire bar stays through the sections and leaves at the Desk. The Desk’s mailbox repeated in the footer; no general mailbox exists, so none is invented. The §12 claims of document 03 cut or softened; no client or brand names.</li>
           <li><b>0.10</b> · The zoom steered to Hong Kong: the generated plate zooms toward the sea west of it, so the picture is now panned along Hong Kong's tracked position and magnified about it (12 % more by frame 32), easing back to the plain framing inside the clouds; the markers ride the same mapping. Dev note shortened.</li>
@@ -908,7 +975,7 @@ a{color:inherit;}
    ========================================================================== */
 (function(){
 'use strict';
-const M = 'media/ocean-journey/';
+const M = '../media/ocean-journey/';                /* v2 shares the film packs, stills and portrait with v1, one folder up */
 const FILM = { sd:'threshold-sd.bin', m:'threshold-m.bin', p:'threshold-p.bin', pre:'approach-sd.bin', preP:'approach-p.bin',   /* -p: the centre 9:16 of each take, for portrait screens */
                poster:'01-threshold.jpg', posterM:'01-threshold-m.jpg', posterPre:'00-approach.jpg', rest:'02-doors.jpg', restM:'02-doors-m.jpg',
                loopFps:12, loopN:96, loopEnd:8, seam:.5,      /* W1_3: 8 s, 96 frames at 12 fps, seam cross-fade 0.5 s */
@@ -960,7 +1027,7 @@ const fx = document.createElement('canvas'); fx.className = 'sw-fx';
 const scrim = el('div','sw-scrim');
 const track = el('div','sw-track');
 root.append(sky, stage, fx, scrim, track);
-const hair = el('div', 'sw-progress'); document.body.append(hair);   /* the gold thread along the top edge */
+const hair = el('div', 'sw-progress hr-dark'); document.body.append(hair);   /* the gold thread along the top edge */
 const bar = document.querySelector('.sticky-bar');                    /* the phone's Call · Enquire bar: in with the forecourt's card beat, away over the Desk (header sync) */
 if (bar && PRE) bar.classList.add('is-pre');                         /* off-screen from the first paint while the approach is on; beats() brings it in with the card beat */
 if (PRE) { hero.classList.add('is-pre'); beatsEl.hidden = false; }   /* the globe's words from frame 0; the hero's parts wait for the forecourt */
@@ -969,7 +1036,7 @@ if (PRE) { hero.classList.add('is-pre'); beatsEl.hidden = false; }   /* the glob
 let loader = null, loaderHidden = false, loaderGone = false, painted = false, failed = false;
 const t0 = performance.now();
 if (!reduced) {
-  loader = el('div','sw-loader');
+  loader = el('div','sw-loader hr-dark');
   loader.innerHTML = '<div class="sw-loader__mark">HUSBAND RETAIL</div><div class="sw-loader__label">' + esc(PRE ? CFG.loaderTextPre : CFG.loaderText) + '</div><div class="sw-loader__bar"><i></i></div><div class="sw-loader__pct">0%</div>';
   root.append(loader);
   setTimeout(hideLoader, 12000);
@@ -1004,10 +1071,12 @@ function beats(){ /* the words over the approach and the hero's parts at the for
   for (const k of ['head','sub','card','cue']) { OP[k] = fadeIn(rA, BT[k]); for (const e of heroParts[k]) place(e, OP[k], 14 * (1 - OP[k])); }
   if (bar) bar.classList.toggle('is-pre', OP.card < 0.5);
   beatsEl.style.setProperty('--beat-scrim', Math.max(OP.b1, OP.b2).toFixed(3));
+  hero.style.setProperty('--hero-shade', OP.head.toFixed(3));        /* the hero's shade comes with its headline */
 }
 function resetWords(){ /* no approach after all: the hero stands as on a phone */
   beatsEl.hidden = true; hero.classList.remove('is-pre');
   for (const k in heroParts) for (const e of heroParts[k]) e.removeAttribute('style');
+  hero.style.removeProperty('--hero-shade');
   OP.b1 = 0; OP.b2 = 0; OP.head = OP.sub = OP.card = OP.cue = 1;
   if (bar) bar.classList.remove('is-pre');
 }
@@ -1521,7 +1590,7 @@ window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS,
   const nav = document.getElementById('siteNav'), desk = document.getElementById('enquiry'), after = document.getElementById('after') || desk;
   const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
   const bar = document.querySelector('.sticky-bar');
-  const sync = () => { const top = desk.getBoundingClientRect().top, atop = after.getBoundingClientRect().top; nav.classList.toggle('is-scrolled', atop < 64); if (bar) bar.classList.toggle('is-desk', top < innerHeight * 0.6); };
+  const sync = () => { const top = desk.getBoundingClientRect().top, atop = after.getBoundingClientRect().top; const solid = atop < 64; nav.classList.toggle('is-scrolled', solid); nav.classList.toggle('hr-dark', !solid); nav.style.setProperty('--shade-to', Math.max(0, Math.round(atop)) + 'px'); if (bar) bar.classList.toggle('is-desk', top < innerHeight * 0.6); };
   addEventListener('scroll', sync, { passive:true });
   addEventListener('load', sync); sync();
   if ('IntersectionObserver' in window) new IntersectionObserver(sync, { rootMargin:'-64px 0px 0px 0px', threshold:[0, 0.001] }).observe(after);
