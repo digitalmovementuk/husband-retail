@@ -1,0 +1,1644 @@
+<!doctype html>
+<html lang="en">
+<head>
+<!--
+  07 — The Threshold · scroll journey test · Husband Retail
+  Version 0.13 (v2) · 23.09.2026 · review copy at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/ (noindex, robots blocked);
+  v0.12 (v1) stays online, unchanged, at https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/
+  local preview: python3 -m http.server 8795 --directory "Husband Retail/Website"
+  Built by Claude (Fable 5.1) on instruction. Test page: the words over the film are the locked hero copy from the
+  Chapter 1 brief; the globe's and the descent's words are new and sourced (see "The words"). Published for review only, at the address
+  above (on instruction, 07.09.2026); nothing else is published.
+
+  What this is
+  One scroll from the first frame of the globe to the open doors, made of three accepted-or-instructed clips:
+    · the approach (every screen, phones included): V0a take 1 as 192 frames at 24 fps, scrubbed by the scroll in BOTH
+      directions from frame 0. Four viewports of scroll carry it, five on touch screens (CFG.approach / approachTouch —
+      a flick covers more of the page than a wheel notch). Before the visitor touches the page it drifts forward on
+      its own, slowly at first (CFG.drift: 0.05 → 0.28 viewports/s), and stops the moment the visitor scrolls, presses a
+      key or touches the page — from then on the scroll sets the pace, and scrolling faster is the acceleration.
+      Playbook note (05, Veo tab, V0a): the playbook plays the approach once, on the clock, and skips it on phones; this
+      test scrubs it on instruction (07.09.2026) and, since 0.7, plays it on phones too, from the portrait packs below.
+    · the hold: W1_3 as a 96-frame loop at 12 fps on the clock (half-second seam cross-fade) — the people walk and the
+      water moves while the camera holds, whatever the scroll does;
+    · the walk: V1b_3 frames 0–100 at 24 fps, scrubbed by the scroll to the doors, held there, then the Desk.
+  Every hand-over is a half-second dissolve on a pinned frame, in both directions (approach ⇄ hold ⇄ walk).
+
+  The words
+  Three beats in the same upper-left position, each a pure function of the scroll position (scrolling back reverses them):
+    1 · the globe — "100+ projects. Three continents. 30+ years." with "Sixty-plus of them planned and leased, in more
+        than twenty markets." Sources: Dossier v3.0 / sales-strategy map (100+ projects advised, 60+ planned and leased,
+        20+ markets, three continents); "30+ years in retail real estate" is Paul Husband's own record (the firm dates
+        from 1998) — flagged in the report. "22 projects" from the brief is in no source document and was not used.
+    2 · the descent to Hong Kong — "Founded here in 1998 by Paul Husband." and the four briefs the practice takes
+        (new development, existing asset, acquisition, leasing brief — the card's own list).
+    3 · the forecourt — the locked hero copy, then the sub-line, the card and the cue, in that order, as the forecourt arrives.
+  The header wordmark stays throughout. The cue reads "Scroll" on the globe and "Scroll to the door" at the forecourt.
+
+  "The objects keep moving" — what the footage allows (brief of 07.09.)
+  Camera and objects move together in one take. At the hold the camera stands still and the people walk, the water
+  moves — on the clock. Mid-approach and mid-walk a stopped scroll is a still: separating the figures from the camera
+  would need held plates at those positions (paid Veo takes, not started — Claude never starts a paid generation).
+  The synthetic living layer of v0.5 (lens breath, ripples, light pulse, dust) is removed on instruction.
+
+  Paul
+  His portrait (Design/husband-v1-digitalmovement/assets/paul-husband.jpg, the prototype with Paul in section 1),
+  cropped square, as a round avatar on the card ("Speak to Paul's office") and at the Desk ("Replies come from Paul's office").
+
+  Footage and packs (media/ocean-journey/)
+    approach-sd.bin  V0a_1 · 192 frames · 1024×576 · 13.0 MB · landscape screens
+    threshold-sd.bin W1_3 loop (96) + V1b_3 push (101) · 1024×576 · 19.2 MB   threshold-m.bin 800×450 · 11.2 MB (small landscape screens)
+    approach-p.bin · threshold-p.bin  the same frames as the centre 9:16 of each take (608×1080 of the 1920×1080 plate) at 405×720 ·
+                     8.0 + 13.7 MB · portrait screens (phones, tablets); the plate's centre carries the globe, the tower and the arch
+    00-approach.jpg (globe, frame 0) · 01-threshold(-m).jpg · 02-doors(-m).jpg — cover-cropped, so on a phone they frame as the portrait packs do
+
+  Gates
+    reduced motion: two stills, nothing moves · ?pre=0 (or a failed approach pack): no approach, the page starts at the forecourt
+    WebGL grade (halation, grain, vignette, dolly blur) on fine pointers only; touch draws the plain frames.
+
+  Open items (one ask each, in the report): the phone's weight (22 MB of frames, streamed; a 12 fps push would save ~4 MB) · held plates at other stops
+  (Veo, $0.96 a take, not started) · hold length (CFG.hold) · D7 push length · D18 · figures A/B not run.
+
+  Change log
+  0.13 · 23.09.2026 · The Husband Retail design system (Claude Design, Sept 2026 light corporate direction) applied. After
+        the doors the site is light: white sections alternating with warm-grey bands (#F5F4F1), the founder and the Desk
+        on warm paper, near-black ink type (#15171C), slate body (#4A4D55), solid ink primary actions with white text, deep
+        gold (#7A5F33 / #6B5330) for eyebrows, rails, indices and rules, brand gold (#957743) for the large figures. The
+        film palette of 0.1–0.12 is kept as the .hr-dark scope wherever words sit on footage (header until the site
+        begins, loader, beats, markers, hero, card, foot note, the thread), on the phone's Call · Enquire bar and on the
+        footer. The header turns white with a hairline once the sections begin, its film shade clipped at their edge. Type:
+        Charis SIL (self-hosted, preloaded) as the open stand-in for Iowan Old Style; eyebrows 600 at .12em. The HR monogram
+        before the wordmark in the header and footer. The design system's audited hero shade (100°, .84 → 0 by 68 %)
+        arrives with the headline on desktop. Fixed on the way: the rail eyebrows, the rail indices (01–08), the pull
+        quote and the founder's lead were being reset to 17 px by `.sec p` (base resets now sit in :where()); the
+        founder's portrait was 1024 px tall (its height attribute overrode the 4:5); the Desk's dev note set at 16 px.
+        Charis's wide plus set smaller in "100+", "60+", "20+" and "30+". Balanced headings. No copy, film or engine
+        behaviour changed. Published as v2 at …/homepage-journey-prototype/v2/, beside v0.12, which stays unchanged at the
+        original address so the two can be compared; v2 reads the film packs, stills, portrait and icons from v1's folder.
+  0.12 · 07.09.2026 · The link now travels with its picture: the v1.5 film card (the forecourt, the vault,
+        the couple; Claude/share-card/v1.5/og-card-film.jpg) and the threshold mark as the tab icon wired into
+        the head; noindex kept — this is still the review copy, not the site.
+  0.11 · 07.09.2026 · After the doors the page continues as a site, in The Ocean Marketing’s order and the house’s own words (document 03): the firm (four figures, four credentials), the four practices as tabs with their sub-services and a link that presets the Desk’s select, why a boutique, how an engagement runs with the six steps, the record (the thirteen marked places), the founder on paper, a start-here band, seven questions, then the Desk and a full footer (links, practices, contact, legal placeholders, back to top, this log, the wordmark). Header links to the sections; the sticky Call · Enquire bar stays through the sections and leaves at the Desk. The Desk’s mailbox repeated in the footer; no general mailbox exists, so none is invented. The §12 claims of document 03 cut or softened; no client or brand names.
+  0.10 · 07.09.2026 · The zoom is steered to Hong Kong, on instruction ("the zoom should be coherent with the Hong Kong landmark"): the generated
+         plate zooms toward a point in the sea some 290 px west of Hong Kong, so the descent seemed to land elsewhere. plateMap() now pans the plate
+         along Hong Kong's tracked position so the marker stays where it was at frame 0 while the picture grows about it (12 % more by frame 32,
+         more where a plate edge would show), holds to frame 36 and eases back to the plain cover-fit by frame 52 inside the clouds; the 2D draw,
+         the GL cover (new u_an, u_h0, u_ht, u_zoom uniforms), the markers and the verifier's sampler share the one mapping. The GL cover's vertical
+         anchor now follows the phone value (0.45) like the 2D draw. The footnote's dev note shortened (on a phone it stood 396 px tall) and its geography sentences swapped for a one-line phone variant (still 365 px). Phone markers grow only 12 % by frame 32 (was 25 %): at 25 % the Hong Kong label had no room on either side of its dot on a 390-px screen and was hidden while Macau's stayed. Phone labels: the label box collapsed to its narrowest
+         width inside the 0-px marker and wrapped word by word ("The / Landmark · / Elements"); it now takes its natural width (max-content).
+  0.9 · 07.09.2026 · The globe's markers, on instruction: a gently pulsing red dot, a hairline and a label for every advised
+        place in view, pinned to the plate and following the zoom — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) is the
+        largest, the rest scale and dim with their distance from the viewer (the sphere's facing), so the far side of the globe
+        reads as far. Placement: a sphere fitted to the plate's horizon and its brightest city clusters, the real coordinates
+        projected through it, then corrected onto the drawn cities and tracked frame by frame to the clouds (see the dev note).
+        Labels that would cover the beat's words, each other, the header or the phone's bar are hidden; the dots fade into the
+        clouds (frames 26–34). No new media; the page grows by the marker table (~14 KB).
+  0.8 · 07.09.2026 · Phone legibility, after The Ocean Marketing's mobile view (reference sent 07.09.): a dark gradient rises
+        from the bottom of the phone screen behind the hero's words and behind the doors' foot note (near-solid at the
+        bottom, gone by the upper fifth), so the copy reads over the bright vault; it comes with the hero's words and again
+        with the foot note, and is off mid-walk. The header's shade is deeper on the phone and the wordmark is flat bright
+        gold there (the gradient gold vanished over the lit arch). The foot note sits left, like the hero. The globe's and
+        the descent's words keep their shade from above (they stand at the top of the phone screen). Dev note corrected:
+        the phone plays the approach from the portrait packs since 0.7. Contrast measured on the renders (see the audit).
+  0.7 · 07.09.2026 · iPhone: the whole journey on phones — the approach (five viewports of scroll on touch), the hold, the
+        walk and the doors from two portrait packs (the centre 9:16 of each take at 405×720: a sharp picture instead of a
+        quarter of a landscape frame); the globe's and the descent's words at the top of the phone screen, the hero's at
+        the bottom, at bizee scale (24 px gutters, 40 px headline, 17 px lead, 52 px fields and button, 17 px inputs so
+        iOS does not zoom on focus); the Call · Enquire bar arrives with the forecourt's card beat and leaves for the Desk;
+        the canvas re-fits when the Safari toolbar folds, without re-budgeting the scroll; the hold never borrows a push
+        frame (run-3 seam miss); the phone's poster is the globe; ?pre=0 still starts at the forecourt. Published for
+        review on GitHub Pages (noindex), replacing the 06.09 copy that was labelled 0.6.
+  0.6 · 07.09.2026 · The approach is scrubbed by the scroll, both ways, from frame 0 (four viewports); a slow self-drift
+        until the first scroll; copy beats on the globe and the descent, the hero revealed in order at the forecourt;
+        the living-set layer removed (objects move where the footage moves them); Paul's portrait as a round avatar on
+        the card and at the Desk; Skip button gone (no need: everything scrubs). Engine: phase switching on the scroll
+        position in both directions, a dissolve on every hand-over, doors snap, header sync by IntersectionObserver.
+        Polish: a shade behind the beats and under the header on bright frames, a gold hairline along the top edge that fills with the journey,
+        the doors held for a full viewport before the Desk rises, whole-pixel phase heights (the doors land exactly on any screen), blur settles by time.
+  0.5 · 06.09.2026 · The approach stitched to the front as a second frame pack, played once on the clock, catch-up on
+        scroll, Skip; a synthetic living set (breath, ripples, light, dust). Engine fixes: loop wrap, snap, header sync.
+  0.4 · 06.09.2026 · Film rebuilt from the two accepted clips only: W1_3 as the living hold (loop, 12 fps, half-second
+        seam cross-fade) and V1b_3 frames 0–100 as the push-in, scroll-scrubbed. three.js / Unreal: not needed.
+  0.3 · 06.09.2026 · The film is a packed frame sequence (12 fps WebP) decoded on the fly and drawn on a canvas,
+        the two frames around the scroll position blended by its sub-frame fraction: every scrolled pixel renders,
+        no video seeks, no jumps. Follow-speed is time-based (CFG.scrub). Touch devices draw on a plain 2D canvas.
+  0.2 · 06.09.2026 · One stitched film scrubbed end to end; water ripple replaced by a cursor-free film grade.
+  0.1 · 06.09.2026 · First build.
+-->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Husband Retail — Homepage journey v2, review copy · v0.13</title>
+<meta name="description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
+<link rel="canonical" href="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/">
+<link rel="icon" href="../assets/journey/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="../assets/journey/favicon.svg">
+<link rel="apple-touch-icon" href="../assets/journey/apple-touch-icon.png">
+<link rel="preload" href="assets/fonts/charis-normal-400-latin.woff2" as="font" type="font/woff2" crossorigin>
+<meta name="theme-color" content="#16140F">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Husband Retail — Hong Kong, since 1998">
+<meta property="og:locale" content="en_GB">
+<meta property="og:url" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/v2/">
+<meta property="og:title" content="Retail real estate, advised from the owner's side.">
+<meta property="og:description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
+<meta property="og:image" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/assets/journey/og-card.jpg">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Two people walking across a wet forecourt at dusk towards the lit opening of a vaulted retail destination.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Retail real estate, advised from the owner's side.">
+<meta name="twitter:description" content="A working review copy of the Husband Retail homepage — the walk to the door as it will read on the site. Not the live site.">
+<meta name="twitter:image" content="https://digitalmovementuk.github.io/husband-retail/homepage-journey-prototype/assets/journey/og-card.jpg">
+<style>
+/* ---------- the Husband Retail design system (Sept 2026, light corporate direction), applied in v0.13 ----------
+   Light by default: white page, warm-grey bands, warm paper, near-black ink type, solid ink primary actions, deep gold
+   for eyebrows, rails and rules. The film palette of 0.1–0.12 lives on as the .hr-dark scope: over the footage (header
+   until the doors, loader, beats, markers, hero, card, foot note, the thread), on the phone's bar and on the footer. */
+@font-face{font-family:"Charis SIL";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/charis-normal-400-latin-ext.woff2") format("woff2");unicode-range:U+0100-02BA,U+02BD-02C5,U+02C7-02CC,U+02CE-02D7,U+02DD-02FF,U+0304,U+0308,U+0329,U+1D00-1DBF,U+1E00-1E9F,U+1EF2-1EFF,U+2020,U+20A0-20AB,U+20AD-20C0,U+2113,U+2C60-2C7F,U+A720-A7FF;}
+@font-face{font-family:"Charis SIL";font-style:normal;font-weight:400;font-display:swap;src:url("assets/fonts/charis-normal-400-latin.woff2") format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD;}
+/* ---------- tokens (design system tokens/colors.css) ---------- */
+:root{
+  --ink:#FFFFFF; --ink-deep:#F5F4F1; --paper:#F3EFE7;                         /* page · alternate band · warm paper */
+  --type:#15171C; --mute:#4A4D55; --dim:#5F626B;                              /* primary · body · notes */
+  --gold:#7A5F33; --gold-hi:#6B5330; --gold-soft:#957743; --gold-ink:#FFFFFF;  /* rules and indices · eyebrows · large figures · text on an action */
+  --action:#15171C; --action-hover:#2E323B;                                   /* primary actions: solid ink */
+  --paper-ink:#15171C; --paper-body:#3F4249; --paper-mute:#5E616A; --paper-dim:#65686F; --rule:#DCD8D0;
+  --line-08:rgba(21,23,28,.07); --line-10:rgba(21,23,28,.09); --line-12:rgba(21,23,28,.12); --line-14:rgba(21,23,28,.13);
+  --line-16:rgba(21,23,28,.15); --line-18:rgba(21,23,28,.17); --line-20:rgba(21,23,28,.22); --line-22:rgba(21,23,28,.24);
+  --line-gold:rgba(122,95,51,.35);
+  --surface-nav:rgba(255,255,255,.96); --surface-field:#FFFFFF; --surface-hover:rgba(21,23,28,.035); --surface-selected:rgba(122,95,51,.08);
+  --sans:ui-sans-serif,-apple-system,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Charis SIL","Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;   /* Charis SIL: the open stand-in for Iowan Old Style */
+  --ease-out:cubic-bezier(.2,.7,.2,1);
+  --nav-h:64px;
+}
+/* the film palette: over the footage, the phone's bar and the footer */
+.hr-dark{
+  --ink:#16140F; --ink-deep:#0B0A08;
+  --type:#EDE7DA; --mute:#B8B1A3; --dim:#8c8677;
+  --gold:#A98A57; --gold-hi:#D9C08A; --gold-soft:#D9C08A; --gold-ink:#14100A;
+  --action:#A98A57; --action-hover:#bb9a63;
+  --line-08:rgba(237,231,218,.08); --line-10:rgba(237,231,218,.10); --line-12:rgba(237,231,218,.12); --line-14:rgba(237,231,218,.14);
+  --line-16:rgba(237,231,218,.16); --line-18:rgba(237,231,218,.18); --line-20:rgba(237,231,218,.20); --line-22:rgba(237,231,218,.22);
+  --line-gold:rgba(217,192,138,.28);
+  --surface-nav:rgba(22,20,15,.92); --surface-field:rgba(237,231,218,.06); --surface-hover:rgba(237,231,218,.04); --surface-selected:rgba(169,138,87,.10);
+  color:var(--type);
+}
+html{background:#0B0A08;overflow-x:clip;}                             /* the overscroll above the sky and below the footer stays dark */
+body{margin:0;overflow-x:clip;color:var(--type);font-family:var(--sans);-webkit-font-smoothing:antialiased;}
+*,*::before,*::after{box-sizing:border-box;}
+:where(a){color:inherit;}
+:where(a,button,summary):focus-visible{outline:2px solid var(--gold);outline-offset:2px;}
+.dev{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--dim);}
+:where(h1,h2,h3,.eyebrow,.rail__eyebrow,.kicker,.desk__num){text-wrap:balance;}
+:where(.sec,.desk,.foot,.beat,.hero) p{text-wrap:pretty;}
+
+/* ---------- wordmark + site header: film palette over the footage, white with a hairline once the site begins ---------- */
+.site-nav{position:fixed;left:0;right:0;top:0;z-index:220;height:var(--nav-h);color:var(--type);transition:background-color .3s,box-shadow .3s;}
+.site-nav::before{content:'';position:absolute;left:0;right:0;top:0;height:min(220%,var(--shade-to,100vh));z-index:-1;pointer-events:none;transition:opacity .3s;
+  background:linear-gradient(180deg,rgba(11,10,8,.58) 0%,rgba(11,10,8,.22) 55%,rgba(11,10,8,0) 100%);}
+.site-nav.is-scrolled::before{opacity:0;}
+.site-nav.is-scrolled{background:var(--surface-nav);box-shadow:0 1px 0 var(--line-12);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);}
+.topbar{height:100%;display:flex;align-items:center;justify-content:space-between;gap:24px;padding:0 clamp(20px,5vw,72px);}
+/* the lockup: the HR monogram, then the serif caps — ink on light, brushed gold over the film */
+.brand{display:inline-flex;align-items:center;gap:.9em;min-height:44px;text-decoration:none;white-space:nowrap;font:400 15px/1 var(--serif);}
+.brand__mark{display:block;flex:none;width:auto;height:32px;}
+.brand__word{letter-spacing:.34em;text-transform:uppercase;color:var(--type);}
+.hr-dark .brand__word{background:linear-gradient(100deg,#8f7443 0%,#d9c08a 28%,#a98a57 52%,#e3cd9c 74%,#9c7f4b 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent;
+  text-shadow:none;filter:drop-shadow(0 1px 1px rgba(0,0,0,.45));}
+.hr-dark .brand__mark{filter:drop-shadow(0 1px 2px rgba(11,10,8,.55));}
+.nav-right{display:flex;align-items:center;gap:22px;}
+.nav-link{white-space:nowrap;text-decoration:none;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--type);opacity:.85;transition:opacity .2s;}
+.nav-link:hover{opacity:1;}
+.cta{display:inline-block;white-space:nowrap;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;color:var(--gold-ink);background:var(--action);padding:12px 18px;transition:background-color .2s;}
+.cta:hover{background:var(--action-hover);}
+
+/* ---------- the scroll world ---------- */
+.sw-loader{position:fixed;inset:0;z-index:230;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:26px;background:radial-gradient(ellipse at 50% 40%,#2a2419 0%,#16140F 55%,#0B0A08 100%);transition:opacity .6s ease;}
+.sw-loader--gone{opacity:0;pointer-events:none;}
+.sw-loader__mark{font:400 clamp(1rem,2vw,1.3rem)/1 var(--serif);letter-spacing:.34em;color:var(--gold-hi);animation:sw-breathe 2.6s ease-in-out infinite;}
+@keyframes sw-breathe{0%,100%{opacity:.55;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}
+.sw-loader__label{color:var(--mute);font-size:.74rem;letter-spacing:.22em;text-transform:uppercase;}
+.sw-loader__bar{width:220px;max-width:62vw;height:2px;overflow:hidden;background:var(--line-14);}
+.sw-loader__bar i{display:block;height:100%;width:0%;background:var(--gold);transition:width .25s ease-out;}
+.sw-loader__pct{color:var(--dim);font-size:.7rem;letter-spacing:.16em;font-variant-numeric:tabular-nums;margin-top:-12px;}
+.sw-sky{position:fixed;inset:0;z-index:0;pointer-events:none;background:linear-gradient(#1a2233 0%,#16140F 60%,#0B0A08 100%);}
+.sw-stage{position:fixed;inset:0;z-index:10;pointer-events:none;}
+.sw-film{position:absolute;inset:0;}
+.sw-film__poster,.sw-film__rest{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 42%;}
+.sw-film__poster{z-index:2;transition:opacity .35s;will-change:transform;transform-origin:50% 42%;}
+.sw-film__rest{z-index:3;opacity:0;transition:opacity .5s;}
+.sw-film.has-clip .sw-film__poster{opacity:0;}
+.sw-fx{position:fixed;inset:0;width:100%;height:100%;z-index:15;pointer-events:none;opacity:0;transition:opacity .4s ease;}
+.sw-fx.is-on{opacity:1;}
+/* the hero's parts are revealed one by one as the forecourt arrives — set inline from the scroll position (no CSS transition: it scrubs both ways) */
+.hero .eyebrow,.hero h1,.hero .sub,.hero .cue,.hero .card{will-change:opacity,transform;}
+.hero.is-pre .eyebrow,.hero.is-pre h1,.hero.is-pre .sub,.hero.is-pre .cue,.hero.is-pre .card{opacity:0;}
+.hero.is-pre .hero__copy,.hero.is-pre .card{pointer-events:none;}
+.sw-scrim{position:fixed;inset:0;z-index:16;pointer-events:none;display:none;
+  background:linear-gradient(180deg,rgba(22,20,15,.40) 0%,rgba(22,20,15,0) 20%,rgba(22,20,15,0) 42%,rgba(22,20,15,.58) 60%,rgba(22,20,15,.90) 100%);}
+.sw-track{position:relative;z-index:1;width:100%;pointer-events:none;}
+
+/* ---------- the globe's markers: the advised places, pinned to the plate and following the zoom (see MARKS in the engine) ---------- */
+.sw-marks{position:fixed;inset:0;z-index:17;pointer-events:none;opacity:0;visibility:hidden;transition:opacity .6s ease;will-change:opacity;}
+.sw-marks.is-on{opacity:1;visibility:visible;}
+.gm{position:absolute;left:0;top:0;opacity:0;will-change:transform,opacity;--gm-red:#E2483B;}
+.gm__dot{position:absolute;left:-3px;top:-3px;width:6px;height:6px;border-radius:50%;background:var(--gm-red);box-shadow:0 0 0 1px rgba(11,10,8,.55),0 0 8px 1px rgba(226,72,59,.75);}
+.gm__dot::before{content:'';position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(226,72,59,.85);opacity:0;transform:scale(.35);
+  animation:gm-pulse 2.8s cubic-bezier(.2,.6,.3,1) infinite;animation-delay:var(--gm-delay,0s);}
+@keyframes gm-pulse{0%{transform:scale(.35);opacity:.95}65%{transform:scale(1.5);opacity:0}100%{transform:scale(1.5);opacity:0}}
+.gm__line{position:absolute;left:0;top:0;height:1px;width:var(--gm-len,48px);transform-origin:0 50%;transform:rotate(var(--gm-ang,0deg));
+  background:linear-gradient(90deg,rgba(226,72,59,.95) 0,rgba(217,192,138,.7) 100%);box-shadow:0 1px 3px rgba(11,10,8,.6);}
+.gm__label{position:absolute;left:0;top:0;white-space:nowrap;transform:translate(var(--gm-lx,0px),var(--gm-ly,0px));
+  text-shadow:0 1px 2px rgba(11,10,8,.95),0 1px 10px rgba(11,10,8,.8);}
+.gm--l .gm__label{text-align:right;}
+.gm__place{display:block;font:500 11px/1.2 var(--sans);letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);}
+.gm__what{display:block;margin-top:2px;font:400 12px/1.3 var(--sans);color:var(--type);opacity:.92;}
+.gm--hero .gm__place{font-size:12px;letter-spacing:.18em;}
+.gm--hero .gm__what{font-size:14px;font-weight:500;}
+.gm--hero .gm__dot{width:8px;height:8px;left:-4px;top:-4px;box-shadow:0 0 0 1px rgba(11,10,8,.55),0 0 12px 2px rgba(226,72,59,.85);}
+@media (prefers-reduced-motion:reduce){ .gm__dot::before{animation:none;opacity:.5;transform:scale(1);} }
+/* ---------- the beats: the globe's words and the descent's, in the hero's upper-left, a pure function of the scroll ---------- */
+.sw-beats{position:fixed;inset:0;z-index:20;pointer-events:none;}
+.sw-beats::before{content:'';position:absolute;inset:0;opacity:var(--beat-scrim,0);will-change:opacity;
+  background:linear-gradient(100deg,rgba(11,10,8,.66) 0%,rgba(11,10,8,.36) 36%,rgba(11,10,8,0) 66%);}
+/* the journey's hairline: a gold thread along the top edge that fills with the scroll, gone once the Desk has risen */
+.sw-progress{position:fixed;left:0;top:0;width:100%;height:2px;z-index:230;background:var(--gold-hi);transform-origin:0 50%;transform:scaleX(0);opacity:.85;pointer-events:none;will-change:transform,opacity;}
+.beat{position:absolute;left:clamp(24px,6vw,96px);top:calc(var(--nav-h) + 8vh);max-width:min(54vw,760px);opacity:0;visibility:hidden;will-change:opacity,transform;}
+.beat__h{margin:0 0 22px;font:400 clamp(34px,4.5vw,68px)/1.05 var(--serif);letter-spacing:-.012em;color:var(--type);max-width:11.5em;text-shadow:0 2px 28px rgba(0,0,0,.5);}
+.beat--2 .beat__h{font-size:clamp(30px,3.7vw,56px);max-width:12em;}
+.beat__rule{display:block;width:64px;height:1px;background:linear-gradient(90deg,var(--gold-hi),rgba(169,138,87,0));margin:0 0 20px;}
+.beat__line{margin:0;font-size:clamp(15px,1.15vw,18px);line-height:1.55;color:var(--mute);max-width:32em;text-shadow:0 1px 14px rgba(0,0,0,.55);}
+.beat .cue{margin-top:36px;}
+
+/* ---------- the words, composed in HTML over the film ---------- */
+.sw-copylayer{position:fixed;inset:0;z-index:20;pointer-events:none;}
+.hero{position:absolute;inset:0;display:grid;grid-template-columns:minmax(0,1fr) 360px;column-gap:clamp(24px,4vw,72px);
+  padding:calc(var(--nav-h) + 8vh) clamp(24px,6vw,96px) 8vh;pointer-events:none;will-change:opacity,transform;}
+/* the design system's hero shade: text on photography always sits on a directional shade (100°, .84 → 0 by 68 %);
+   it arrives with the headline (--hero-shade, set from the scroll) and leaves with the words */
+.hero::before{content:'';position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:var(--hero-shade,1);
+  background:linear-gradient(100deg,rgba(11,10,8,.84) 0%,rgba(11,10,8,.7) 36%,rgba(11,10,8,.2) 56%,rgba(11,10,8,0) 68%);}
+.hero.is-pre::before{opacity:var(--hero-shade,0);}
+.hero__copy{max-width:min(46vw,600px);align-self:start;}          /* the quiet upper-left sky */
+.hero.is-live .hero__copy,.hero.is-live .card{pointer-events:auto;}
+.eyebrow{margin:0 0 18px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);}
+.hero h1{margin:0 0 20px;font:400 clamp(30px,3.5vw,52px)/1.08 var(--serif);letter-spacing:-.01em;max-width:13em;
+  text-shadow:0 1px 2px rgba(11,10,8,.5),0 2px 22px rgba(11,10,8,.45);}
+.sub{margin:0;font-size:17px;line-height:1.55;color:var(--type);max-width:34em;text-shadow:0 1px 2px rgba(11,10,8,.5),0 1px 16px rgba(11,10,8,.4);}
+.cue{display:flex;align-items:center;gap:12px;margin-top:34px;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--mute);}
+.hero .eyebrow{text-shadow:0 1px 2px rgba(11,10,8,.75),0 1px 16px rgba(11,10,8,.6);}
+.cue i{display:block;width:1px;height:34px;background:linear-gradient(var(--gold),transparent);position:relative;overflow:hidden;}
+.cue i::after{content:"";position:absolute;left:0;top:-34px;width:1px;height:34px;background:var(--gold-hi);animation:sw-cue 1.8s ease-in-out infinite;}
+@keyframes sw-cue{0%{top:-34px}60%{top:34px}100%{top:34px}}
+.card{width:360px;justify-self:end;align-self:end;                 /* the lower-right water */
+  background:rgba(14,18,25,.72);-webkit-backdrop-filter:blur(14px) saturate(1.1);backdrop-filter:blur(14px) saturate(1.1);
+  border:1px solid var(--line-16);padding:24px 24px 22px;}
+.card__head{display:flex;align-items:center;gap:14px;margin:0 0 16px;}
+.card h3{font:400 20px/1.2 var(--serif);margin:0;}
+.field{margin-bottom:12px;}
+.field label{display:block;font-size:11px;letter-spacing:.10em;text-transform:uppercase;color:var(--mute);margin-bottom:5px;}
+.field .opt{text-transform:none;letter-spacing:0;color:var(--dim);}
+.field input,.field select{width:100%;background-color:var(--surface-field);color:var(--type);border:1px solid var(--line-20);border-radius:0;padding:10px 11px;font:400 14px/1.3 var(--sans);appearance:none;-webkit-appearance:none;}
+.field select{background-image:linear-gradient(45deg,transparent 50%,var(--mute) 50%),linear-gradient(135deg,var(--mute) 50%,transparent 50%);background-position:calc(100% - 17px) 18px,calc(100% - 12px) 18px;background-size:5px 5px,5px 5px;background-repeat:no-repeat;}
+.field select option{color:#14100A;}
+.field input:focus,.field select:focus{outline:2px solid var(--gold);outline-offset:1px;border-color:transparent;}
+.btn{width:100%;margin-top:6px;padding:13px 14px;border:0;border-radius:0;cursor:pointer;background:var(--action);color:var(--gold-ink);font:600 13px/1 var(--sans);letter-spacing:.06em;transition:background-color .2s;}
+.btn:hover{background:var(--action-hover);}
+.note{font-size:11px;color:var(--dim);margin:12px 0 0;line-height:1.4;}
+.rest{position:absolute;left:0;right:0;bottom:clamp(28px,7vh,72px);text-align:center;padding:0 24px;opacity:0;visibility:hidden;}
+.rest p{margin:0;font:400 clamp(16px,1.5vw,20px)/1.4 var(--serif);color:var(--type);text-shadow:0 1px 2px rgba(11,10,8,.6),0 1px 18px rgba(11,10,8,.5);}
+.rest .dev{display:block;margin-top:10px;color:var(--mute);text-shadow:0 1px 2px rgba(11,10,8,.6);} .dev-geo-s{display:none;}
+
+@media (prefers-reduced-motion:reduce){ .cue i::after{animation:none;} .sw-loader__mark{animation:none;} }
+
+/* ---------- W7 · The Concierge Desk (paper) ---------- */
+.desk{position:relative;z-index:200;background:var(--paper);color:var(--paper-ink);padding:clamp(72px,10vh,120px) clamp(24px,6vw,96px) 48px;
+  min-height:100vh;min-height:100dvh;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;}   /* the Desk fills the screen: the last act on paper, and the header can go solid over it on any screen */
+.desk__inner{max-width:1120px;margin:0 auto;width:100%;}
+.desk__num{display:block;font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;}
+.desk h2{margin:0 0 42px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:14em;}
+.desk__grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:clamp(32px,6vw,96px);align-items:start;}
+.desk .field label{color:var(--paper-mute);} .desk .field .opt{color:var(--paper-dim);}
+.desk .field input,.desk .field select{background-color:#fff;color:var(--paper-ink);border:1px solid var(--rule);}
+.desk .field select{background-image:linear-gradient(45deg,transparent 50%,var(--paper-mute) 50%),linear-gradient(135deg,var(--paper-mute) 50%,transparent 50%);}
+.desk .note{color:var(--paper-dim);}
+.desk__side p{margin:0 0 14px;font-size:16px;line-height:1.6;}
+.desk__reply{font:400 clamp(20px,2vw,26px)/1.3 var(--serif);margin:0 0 8px !important;}
+/* Paul, round: the portrait from the prototype with Paul in section 1 (Design/husband-v1-digitalmovement) */
+.avatar{display:block;width:44px;height:44px;border-radius:50%;object-fit:cover;object-position:50% 42%;flex:none;border:1px solid rgba(217,192,138,.55);box-shadow:0 0 0 3px rgba(14,18,25,.5);}
+.avatar--lg{width:76px;height:76px;margin:0 0 20px;border-color:var(--gold);box-shadow:0 0 0 4px #fff,0 6px 22px rgba(28,25,18,.14);}
+.desk__side .dev{margin-bottom:26px;font-size:11px;color:var(--paper-dim);}
+.desk__side address{font-style:normal;color:var(--paper-mute);font-size:14px;line-height:1.7;}
+.desk__side address a{color:var(--paper-ink);text-decoration-color:var(--gold);}
+.desk__foot{margin-top:64px;padding-top:18px;border-top:1px solid var(--rule);display:flex;flex-wrap:wrap;gap:10px 28px;align-items:baseline;font-size:12px;color:var(--paper-mute);}
+.desk__foot details{font-size:12px;} .desk__foot summary{cursor:pointer;color:var(--gold);} .desk__foot ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;}
+/* ---------- after the doors: the firm, the practices, why a boutique, how we work, the record, the founder, start here, the questions — then the Desk and the footer.
+   White sections alternate with warm-grey bands, the founder on paper. Base resets sit in :where() so component classes always win. ---------- */
+.after{position:relative;z-index:200;background:var(--ink);color:var(--type);}
+.sec{padding:clamp(72px,9vw,120px) clamp(24px,6vw,96px);border-top:1px solid var(--line-08);background:var(--ink);}
+.sec--deep{background:var(--ink-deep);}
+.sec--paper{background:var(--paper);color:var(--paper-ink);border-top:0;}
+.sec__inner{max-width:1120px;margin:0 auto;}
+.sec__grid{display:grid;grid-template-columns:168px minmax(0,1fr);gap:32px clamp(32px,5vw,72px);align-items:start;}
+.rail{position:sticky;top:calc(var(--nav-h) + 24px);}
+.rail__rule{display:block;width:48px;height:1px;background:var(--gold-hi);margin:0 0 14px;}
+.rail__eyebrow{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--gold-hi);}
+.rail__index{margin:0;font:400 40px/1 var(--serif);color:var(--type);letter-spacing:-.01em;font-variant-numeric:tabular-nums;}
+.sec--paper .rail__index{color:var(--paper-ink);} .sec--paper .rail__eyebrow{color:var(--gold);} .sec--paper .rail__rule{background:var(--gold);}
+:where(.sec) h2{margin:0 0 22px;font:400 clamp(30px,3.4vw,46px)/1.1 var(--serif);letter-spacing:-.01em;max-width:15em;}
+.dimline{display:block;color:var(--mute);}
+.sec--paper .dimline{color:var(--paper-mute);}
+:where(.sec) p{margin:0 0 16px;font-size:17px;line-height:1.6;color:var(--mute);max-width:36em;}
+:where(.sec--paper) p{color:var(--paper-body);}
+.sec .dev{color:var(--dim);} .sec--paper .dev{color:var(--paper-dim);}
+.split{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(32px,6vw,96px);align-items:start;}
+.split--faq{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);}
+/* the firm: four figures, four lines */
+.figures{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:1px;background:var(--line-12);border:1px solid var(--line-12);}
+.figure{background:var(--ink);padding:26px clamp(16px,2vw,24px);min-width:0;}
+.figure b{display:block;font:400 clamp(36px,3.6vw,52px)/1 var(--serif);color:var(--gold-soft);letter-spacing:-.01em;font-variant-numeric:tabular-nums;margin-bottom:10px;}
+.plus{margin-left:-.04em;font-size:.72em;vertical-align:.2em;}
+.figure span{font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute);}
+.creds{margin:clamp(40px,5vw,64px) 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border:1px solid var(--line-12);}
+.cred{padding:20px 22px;border-left:1px solid var(--line-12);}
+.cred:first-child{border-left:0;}
+.cred small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:8px;}
+.cred strong{font-weight:500;font-size:15px;line-height:1.4;color:var(--type);}
+/* the practices: four tabs, one panel */
+.prac{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(24px,3vw,40px);align-items:start;margin-top:8px;}
+.prac__list{margin:0;padding:0;list-style:none;border:1px solid var(--line-12);}
+.prac__tab{display:grid;grid-template-columns:40px minmax(0,1fr);align-items:center;gap:14px;width:100%;text-align:left;padding:18px 20px;background:transparent;border:0;border-top:1px solid var(--line-10);color:var(--type);font:inherit;cursor:pointer;-webkit-appearance:none;appearance:none;border-radius:0;transition:background-color .2s;}
+.prac__list li:first-child .prac__tab{border-top:0;}
+.prac__tab i{font:400 15px/1 var(--serif);color:var(--gold);font-style:normal;font-variant-numeric:tabular-nums;}
+.prac__tab b{display:block;font-weight:500;font-size:16px;line-height:1.3;}
+.prac__tab small{display:block;margin-top:4px;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);}
+.prac__tab:hover{background:var(--surface-hover);}
+.prac__tab:focus-visible{outline:2px solid var(--gold);outline-offset:-2px;}
+.prac__tab[aria-selected="true"]{background:var(--surface-selected);box-shadow:inset 3px 0 0 var(--gold);}
+.prac__tab[aria-selected="true"] small{color:var(--gold-hi);}
+.prac__panel{position:relative;border:1px solid var(--line-gold);background:linear-gradient(180deg,var(--surface-hover),transparent);padding:clamp(24px,3vw,40px);}
+.prac__panel[hidden]{display:none;}
+.prac__panel .kicker{margin:0 0 14px;padding-right:clamp(64px,8vw,110px);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-hi);}
+.prac__panel h3{margin:0 0 14px;padding-right:clamp(48px,6vw,90px);font:400 clamp(24px,2.4vw,32px)/1.15 var(--serif);max-width:12em;}
+.prac__panel p{font-size:16px;}
+.prac__big{position:absolute;right:24px;top:14px;font:400 clamp(56px,7vw,96px)/1 var(--serif);color:var(--gold);opacity:.16;pointer-events:none;}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin:18px 0 26px;padding:0;list-style:none;}
+.chips li{font-size:12.5px;line-height:1.2;padding:7px 10px;border:1px solid var(--line-18);color:var(--mute);}
+.more{display:inline-flex;align-items:center;gap:10px;text-decoration:none;font:600 12px/1 var(--sans);letter-spacing:.1em;text-transform:uppercase;color:var(--gold-hi);border-bottom:1px solid var(--line-gold);padding-bottom:6px;transition:border-color .2s;}
+.more:hover{border-color:var(--gold-hi);}
+/* why a boutique · how we work */
+.pull{font:400 clamp(24px,2.4vw,32px)/1.25 var(--serif);color:var(--type);margin:0 0 22px;max-width:16em;}
+.numlist{margin:0;padding:0;list-style:none;}
+.numlist li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;padding:20px 0;border-top:1px solid var(--line-12);}
+.numlist li:first-child{border-top:0;padding-top:0;}
+.numlist i{font:400 15px/1.5 var(--serif);color:var(--gold);font-style:normal;}
+.numlist h4{margin:0 0 6px;font:500 16px/1.35 var(--sans);color:var(--type);}
+.numlist p{margin:0;font-size:15px;}
+.steps__head{color:var(--type);margin-bottom:6px;}
+.steps{margin:0;padding:0;list-style:none;}
+.steps li{display:grid;grid-template-columns:40px minmax(0,1fr);gap:16px;align-items:baseline;padding:14px 0;border-top:1px solid var(--line-12);}
+.steps li:first-child{border-top:0;}
+.steps i{font:400 14px/1.5 var(--serif);color:var(--gold);font-style:normal;}
+.steps b{font-weight:500;font-size:16px;color:var(--type);}
+.steps span{display:block;margin-top:2px;font-size:14.5px;color:var(--mute);}
+/* the record: the thirteen marked places */
+.places{margin:8px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--line-10);border:1px solid var(--line-10);}
+.place{background:var(--ink);padding:20px 20px 22px;min-height:112px;}
+.place small{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold-hi);margin-bottom:8px;}
+.place b{font:400 17px/1.35 var(--serif);color:var(--type);}
+.place--hero{grid-column:1 / -1;display:flex;align-items:baseline;gap:24px;min-height:0;padding:22px 20px;}
+.place--hero small{margin:0;} .place--hero b{font-size:20px;}
+.places__note{margin:18px 0 0;font-size:13.5px;color:var(--dim);max-width:none;}
+/* the founder, on paper */
+.founder{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:clamp(32px,6vw,80px);align-items:start;}
+.founder__img{width:100%;height:auto;aspect-ratio:4 / 5;object-fit:cover;object-position:50% 28%;display:block;border:1px solid var(--rule);}
+.founder__lead{font:400 clamp(20px,2vw,26px)/1.35 var(--serif);color:var(--paper-ink);margin:0 0 18px;max-width:22em;}
+.founder__facts{margin:22px 0 0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;}
+.founder__facts li{font-size:14.5px;line-height:1.5;color:var(--paper-body);padding-top:10px;border-top:1px solid var(--rule);}
+.founder__facts li b{display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:4px;font-weight:500;}
+/* start here */
+.start{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,.8fr);gap:clamp(32px,6vw,96px);align-items:center;}
+.start h2{font-size:clamp(34px,4vw,56px);}
+.start__line{font-size:14px;color:var(--mute);}
+.start__line a{color:var(--gold-hi);text-decoration:none;font-weight:500;}
+.ctas{display:grid;gap:12px;}
+.cta--lg{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;font-size:13px;}
+.cta--ghost{background:transparent;color:var(--type);border:1px solid var(--line-22);}
+.cta--ghost:hover{background:var(--surface-hover);}
+/* the questions */
+.faq{margin:0;padding:0;border-top:1px solid var(--line-12);}
+.faq details{border-bottom:1px solid var(--line-12);}
+.faq summary{display:grid;grid-template-columns:40px minmax(0,1fr) 28px;gap:16px;align-items:baseline;padding:20px 0;cursor:pointer;list-style:none;color:var(--type);}
+.faq summary::-webkit-details-marker{display:none;}
+.faq summary i{font:400 13px/1.6 var(--serif);color:var(--gold);font-style:normal;}
+.faq summary b{font:400 clamp(18px,1.6vw,21px)/1.35 var(--serif);}
+.faq summary span{justify-self:end;font-size:20px;line-height:1;color:var(--gold-hi);transition:transform .25s;}
+.faq details[open] summary span{transform:rotate(45deg);}
+.faq .a{padding:0 0 22px 56px;}
+.faq .a p{font-size:16px;margin:0;}
+/* the footer, after The Ocean Marketing's — the film palette */
+.foot{position:relative;z-index:200;background:var(--ink-deep);color:var(--type);padding:clamp(56px,7vw,88px) clamp(24px,6vw,96px) 0;border-top:1px solid var(--line-10);overflow:hidden;}
+.foot__inner{max-width:1120px;margin:0 auto;}
+.foot__grid{display:grid;grid-template-columns:minmax(0,1.4fr) repeat(3,minmax(0,1fr));gap:40px clamp(24px,4vw,56px);}
+.foot__brand .brand{font-size:16px;}
+.foot__brand .brand__mark{height:36px;}
+.foot__brand p{margin:18px 0 22px;font-size:15px;line-height:1.6;color:var(--mute);max-width:30em;}
+.foot__brand .cta{display:inline-block;}
+.foot h4{margin:0 0 16px;font:500 13px/1 var(--sans);letter-spacing:.12em;text-transform:uppercase;color:var(--type);}
+.foot ul{margin:0;padding:0;list-style:none;}
+.foot li{margin:0 0 10px;}
+.foot li a{text-decoration:none;font-size:14.5px;color:var(--mute);transition:color .2s;}
+.foot li a:hover{color:var(--type);}
+.foot .contact li{display:grid;grid-template-columns:34px minmax(0,1fr);gap:12px;align-items:start;margin-bottom:16px;}
+.foot .contact i{display:flex;align-items:center;justify-content:center;width:34px;height:34px;border:1px solid var(--line-18);color:var(--gold-hi);}
+.foot .contact svg{width:15px;height:15px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;}
+.foot .contact small{display:block;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);margin-bottom:4px;}
+.foot .contact span{font-size:14.5px;color:var(--mute);line-height:1.5;overflow-wrap:anywhere;} .foot .contact a{color:inherit;text-decoration:none;} .foot .contact a:hover{color:var(--type);}
+.foot .contact span.dev{font-size:11px;}
+.foot__legal{margin-top:clamp(40px,5vw,64px);padding:22px 0;border-top:1px solid var(--line-10);display:flex;flex-wrap:wrap;gap:12px 24px;align-items:center;justify-content:space-between;font-size:12.5px;color:var(--dim);}
+.foot__legal nav{display:flex;flex-wrap:wrap;gap:8px 18px;align-items:center;}
+.foot__legal nav a{text-decoration:none;color:var(--mute);}
+.foot__legal nav a[aria-disabled="true"]{color:var(--dim);cursor:default;}
+.totop{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border:1px solid var(--line-22);color:var(--gold-hi) !important;text-decoration:none;font-size:16px;margin-left:8px;}
+.foot__review{padding:16px 0 20px;border-top:1px solid var(--line-08);font-size:12px;color:var(--dim);display:flex;flex-wrap:wrap;gap:8px 28px;align-items:baseline;}
+.foot__review details{font-size:12px;} .foot__review summary{cursor:pointer;color:var(--gold);} .foot__review ul{margin:8px 0 0;padding-left:18px;line-height:1.6;max-width:70ch;color:var(--mute);}
+.foot__sig{display:block;text-align:center;font:400 clamp(64px,14vw,200px)/1 var(--serif);letter-spacing:.06em;color:var(--gold);opacity:.07;margin:8px 0 -.34em;white-space:nowrap;pointer-events:none;user-select:none;-webkit-user-select:none;}
+@media (max-width:1180px){
+  .nav-link--wide{display:none;}
+  .prac{grid-template-columns:1fr;}                                    /* the design system stacks the tabs above the panel below 1180 px */
+  .foot__grid{grid-template-columns:repeat(3,minmax(0,1fr));} .foot__brand{grid-column:1 / -1;}
+}
+/* the sections on the phone (≤860 px): one column, the rail on top, 24 px gutters, 56 px targets */
+@media (max-width:860px){
+  .sec{padding:56px 24px;}
+  .sec__grid{grid-template-columns:1fr;gap:22px;}
+  .rail{position:static;} .rail__index{font-size:32px;}
+  :where(.sec) h2{font-size:32px;line-height:1.12;max-width:none;}
+  :where(.sec) p,.prac__panel p,.numlist p{font-size:17px;max-width:none;}
+  .split,.split--faq{grid-template-columns:1fr;gap:32px;}
+  .figure{padding:20px 18px;} .figure b{font-size:34px;}
+  .creds{grid-template-columns:repeat(2,minmax(0,1fr));margin-top:32px;} .cred{padding:16px 18px;} .cred:nth-child(3){border-left:0;} .cred:nth-child(n+3){border-top:1px solid var(--line-12);}
+  .prac{gap:16px;}
+  .prac__tab{padding:16px;grid-template-columns:36px minmax(0,1fr);min-height:56px;}
+  .prac__panel{padding:24px 20px;} .prac__big{right:14px;top:6px;font-size:44px;opacity:.12;}
+  .places{grid-template-columns:1fr 1fr;} .place{padding:16px;min-height:0;} .place--hero{display:block;padding:16px;} .place--hero b{font-size:18px;} .place--hero small{margin-bottom:8px;}
+  .founder{grid-template-columns:1fr;gap:28px;} .founder__img{max-width:320px;aspect-ratio:1 / 1;}
+  .founder__facts{grid-template-columns:1fr;}
+  .start{grid-template-columns:1fr;gap:28px;} .start h2{font-size:36px;}
+  .cta--lg{min-height:56px;}
+  .faq summary{grid-template-columns:32px minmax(0,1fr) 24px;gap:12px;padding:18px 0;} .faq summary b{font-size:18px;} .faq .a{padding-left:44px;}
+  .foot{padding:56px 24px 0;}
+  .foot__grid{grid-template-columns:1fr 1fr;gap:36px 24px;} .foot__brand{grid-column:1 / -1;} .foot .contact-col{grid-column:1 / -1;}
+  .foot__legal{flex-direction:column;align-items:flex-start;}
+  .foot__sig{font-size:19vw;}
+}
+/* ---------- mobile (≤860 px, iPhone first): the same journey from the portrait packs, at bizee scale — this block stays LAST ---------- */
+.sticky-bar{display:none;}
+@media (max-width:860px){
+  :root{--nav-h:56px;}
+  .nav-right{display:none;}
+  .brand{font-size:13px;gap:12px;}
+  .brand__mark{height:32px;}
+  .brand__word{letter-spacing:.3em;}
+  .hr-dark .brand__word{background:none;color:var(--gold-hi);-webkit-text-fill-color:var(--gold-hi);filter:none;}          /* flat bright gold on the phone: the gradient gold vanished over the lit arch */
+  .site-nav.hr-dark .brand__word{text-shadow:0 1px 2px rgba(11,10,8,.75),0 1px 14px rgba(11,10,8,.55);}                   /* and a shade under it, over the film */
+  .site-nav::before{height:min(300%,var(--shade-to,100vh));background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.42) 40%,rgba(11,10,8,0) 100%);}   /* deeper shade under the header on the phone */
+  /* the text shade, after The Ocean Marketing's mobile view: a dark gradient rising from the bottom of the screen, near-solid
+     under the words, gone by the upper fifth — anchored in pixels from the bottom, where the hero and the foot note stand;
+     it comes with the hero's words at the forecourt and again with the foot note at the doors (see update()) */
+  .sw-scrim{display:block;background:linear-gradient(0deg,rgba(11,10,8,.94) 0,rgba(11,10,8,.92) 120px,rgba(11,10,8,.87) 320px,rgba(11,10,8,.80) 460px,rgba(11,10,8,.42) 550px,rgba(11,10,8,.10) 640px,rgba(11,10,8,0) 720px);}
+  .hero::before{display:none;}                                         /* the phone's shade rises from the bottom instead (.sw-scrim) */
+  /* the beats: at the top of the phone screen, over the dark space and the dusk sky; their shade comes from above */
+  .sw-beats::before{background:linear-gradient(180deg,rgba(11,10,8,.74) 0%,rgba(11,10,8,.46) 38%,rgba(11,10,8,0) 68%);}
+  .beat{left:24px;right:24px;top:calc(var(--nav-h) + 28px);max-width:none;}
+  .gm__label{width:max-content;} .gm__place{font-size:9.5px;letter-spacing:.14em;} .gm__what{font-size:11px;white-space:normal;max-width:150px;} .gm--l .gm__what{margin-left:auto;}
+  .gm--hero .gm__place{font-size:10.5px;} .gm--hero .gm__what{font-size:12.5px;max-width:170px;}
+  .beat .eyebrow{margin-bottom:12px;font-size:13px;letter-spacing:.12em;}
+  .beat__h{font-size:36px;line-height:1.1;margin-bottom:16px;max-width:none;}
+  .beat--2 .beat__h{font-size:32px;max-width:none;}
+  .beat__rule{margin-bottom:16px;}
+  .beat__line{font-size:17px;line-height:1.5;max-width:none;}
+  .beat .cue{margin-top:24px;}
+  /* the hero: left-aligned at the bottom of the screen, above the bar */
+  .hero{grid-template-columns:1fr;padding:0 24px calc(96px + env(safe-area-inset-bottom));align-content:end;text-align:left;}
+  .hero__copy{max-width:none;}
+  .hero .eyebrow{margin-bottom:14px;font-size:13px;letter-spacing:.12em;}
+  .hero h1{max-width:none;font-size:40px;line-height:1.12;margin-bottom:16px;}
+  .sub{font-size:17px;line-height:1.5;max-width:none;}
+  .cue{justify-content:flex-start;margin-top:24px;font-size:13px;} .cue i{height:22px;} .cue i::after{height:22px;top:-22px;} @keyframes sw-cue{0%{top:-22px}60%{top:22px}100%{top:22px}}
+  .card{display:none;}                                                /* D13: the card is cut on the phone; the bar stands in for it */
+  .rest{bottom:calc(88px + env(safe-area-inset-bottom));padding:0 24px;text-align:left;}     /* left, like the hero */
+  .rest p{font-size:17px;}
+  .rest .dev{font-size:11px;} .dev-geo{display:none;} .dev-geo-s{display:inline;}   /* the geography note in one line on the phone, so the foot note stays under mid-screen */
+  /* the bar: Call · Enquire, 54 px, in the film palette; in from below with the forecourt's card beat, away again over the Desk */
+  .sticky-bar{display:grid;grid-template-columns:1fr 1fr;position:fixed;left:0;right:0;bottom:0;z-index:210;
+    background:rgba(14,18,25,.78);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-top:1px solid var(--line-14);
+    padding-bottom:env(safe-area-inset-bottom);transition:transform .4s var(--ease-out),opacity .4s;will-change:transform;}
+  .sticky-bar.is-pre,.sticky-bar.is-desk{transform:translateY(110%);opacity:0;pointer-events:none;}
+  .sticky-bar a{display:flex;align-items:center;justify-content:center;height:54px;text-decoration:none;font:600 13px/1 var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--gold-hi);}
+  .sticky-bar a + a{border-left:1px solid var(--line-14);color:var(--gold-ink);background:var(--action);}
+  /* the Desk at bizee scale: 24 px gutters, 52 px fields and button, 17 px inputs (under 16 px iOS zooms the page on focus) */
+  .desk{padding:64px 24px calc(56px + env(safe-area-inset-bottom));}
+  .desk__num{font-size:13px;}
+  .desk h2{font-size:34px;line-height:1.12;margin-bottom:28px;max-width:none;}
+  .desk__grid{grid-template-columns:1fr;gap:40px;}
+  .field{margin-bottom:14px;}
+  .field label{font-size:13px;margin-bottom:6px;}
+  .field input,.field select{min-height:52px;padding:12px 14px;font-size:17px;}
+  .field select{background-position:calc(100% - 19px) 23px,calc(100% - 14px) 23px;}
+  .btn{min-height:52px;margin-top:8px;font-size:14px;}
+  .note{font-size:13px;}
+  .desk__side p{font-size:17px;}
+  .desk__reply{font-size:22px;}
+  .desk__side address{font-size:15px;}
+  .desk__foot{margin-top:48px;}
+}
+/* a phone on its side: less height than words — smaller words, no cue */
+@media (max-width:1000px) and (max-height:520px){
+  .hero{padding-bottom:calc(64px + env(safe-area-inset-bottom));}
+  .sw-scrim{background:linear-gradient(0deg,rgba(11,10,8,.92) 0,rgba(11,10,8,.82) 30%,rgba(11,10,8,.34) 62%,rgba(11,10,8,0) 88%);}
+  .hero .eyebrow{margin-bottom:8px;font-size:12px;}
+  .hero h1{font-size:26px;line-height:1.12;margin-bottom:10px;}
+  .sub{font-size:15px;line-height:1.4;}
+  .hero .cue,.beat .cue{display:none;}
+  .beat{top:calc(var(--nav-h) + 12px);}
+  .beat__h{font-size:26px;margin-bottom:10px;} .beat--2 .beat__h{font-size:24px;}
+  .beat__rule{margin-bottom:10px;} .beat__line{font-size:15px;}
+}
+</style>
+</head>
+<body>
+
+<header class="site-nav hr-dark" id="siteNav">
+  <nav class="topbar" aria-label="Main">
+    <a class="brand" href="#threshold" aria-label="Husband Retail home"><img class="brand__mark" src="assets/brand/monogram.png" alt="" width="53" height="60"><span class="brand__word">Husband Retail</span></a>
+    <div class="nav-right"><a class="nav-link nav-link--wide" href="#firm">The firm</a><a class="nav-link" href="#practices">Practices</a><a class="nav-link" href="#process">How we work</a><a class="nav-link nav-link--wide" href="#faq">Questions</a>
+      <a class="nav-link" href="#enquiry">The Concierge Desk</a>
+      <a class="cta" href="#enquiry">Request a call</a>
+    </div>
+  </nav>
+</header>
+
+<main id="world" aria-label="The Threshold"></main>
+
+<!-- the words over the film: none of this is in the plate (Veo tab, V1a · DOM adds) -->
+<div class="sw-copylayer hr-dark" id="copylayer">
+  <div class="hero" id="hero">
+    <div class="hero__copy" id="threshold">
+      <p class="eyebrow">Husband Retail — Hong Kong, since 1998.</p>
+      <h1>Retail real estate, advised from the owner's side.</h1>
+      <p class="sub">We help developers, landlords and investors make luxury retail destinations perform — in Hong Kong and in more than twenty markets on three continents.</p>
+      <div class="cue" id="cue"><i></i><span>Scroll to the door</span></div>
+    </div>
+    <aside class="card" id="card" aria-labelledby="cardtitle">
+      <div class="card__head"><img class="avatar" src="../media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="44" height="44" decoding="async"><h3 id="cardtitle">Speak to Paul's office</h3></div>
+      <form id="heroForm" novalidate>
+        <div class="field"><label for="h-tel">Telephone <span class="opt">(required)</span></label><input id="h-tel" name="tel" type="tel" autocomplete="tel" required></div>
+        <div class="field"><label for="h-name">Name</label><input id="h-name" name="name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="h-email">Email <span class="opt">(optional)</span></label><input id="h-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="h-brief">Brief</label>
+          <select id="h-brief" name="brief"><option>New development</option><option>Existing asset</option><option>Acquisition</option><option>Leasing brief</option></select></div>
+        <button class="btn" type="submit">Request a call</button>
+        <p class="note" id="heroNote">Test page — the form sends nothing yet.</p>
+      </form>
+    </aside>
+  </div>
+  <div class="rest" id="rest">
+    <p>The doors, open, centred. The film ends here for now.<span class="dev">Shots 3–12 are not generated yet — nothing stands in for them. The opening is V0a take 1, stitched on instruction (the playbook rejected it for its own dissolve at 4.9–5.3 s); the vault shifts once where it hands to the loop. The phone plays the same three takes from a portrait centre crop (405 × 720) of the 16:9 plates; no portrait plate was generated. <span class="dev-geo">The globe is a generated plate with approximate geography, so the markers sit on its drawn cities rather than on survey positions: a sphere fitted to the plate's horizon and city glows places each city's real coordinates, snapped to the drawn city and tracked through the zoom; the drawn coastlines drift 10–50 px from the real ones. Not marked, on the far side or out of frame: London (Covent Garden), Dubai and Lusail, Sydney, Singapore. The zoom is steered to hold Hong Kong in place, because the plate itself zooms toward the sea west of it.</span><span class="dev-geo-s">The globe is a generated plate with approximate geography; the markers sit on its drawn cities, and the zoom is steered to hold Hong Kong in place.</span></span></p>
+  </div>
+</div>
+
+<!-- the beats: the globe's words and the descent's (desktop, over the approach) — sourced, see the head comment -->
+<div class="sw-marks hr-dark" id="marks" aria-hidden="true"></div>
+<div class="sw-beats hr-dark" id="beats" hidden aria-hidden="true">
+  <div class="beat beat--1" id="beat1">
+    <p class="eyebrow">Retail real estate advisory</p>
+    <h2 class="beat__h">100<span class="plus">+</span> projects. Three continents. 30<span class="plus">+</span> years.</h2>
+    <i class="beat__rule"></i>
+    <p class="beat__line">Sixty-plus of them planned and leased, in more than twenty markets.</p>
+    <div class="cue"><i></i><span>Scroll</span></div>
+  </div>
+  <div class="beat beat--2" id="beat2">
+    <p class="eyebrow">Hong Kong</p>
+    <h2 class="beat__h">Founded here in 1998 by Paul Husband.</h2>
+    <i class="beat__rule"></i>
+    <p class="beat__line">New developments, existing assets, acquisitions and leasing briefs.</p>
+  </div>
+</div>
+<nav class="sticky-bar hr-dark" aria-label="Call or enquire"><a href="tel:+85226599280">Call</a><a href="#enquiry">Enquire</a></nav>
+
+<!-- v0.11 · after the doors: the site continues, after The Ocean Marketing's order, in the house's own words (document 03) -->
+<div class="after" id="after">
+
+  <!-- 01 · The firm -->
+  <section class="sec" id="firm">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The firm</p><p class="rail__index">01</p></aside>
+      <div>
+        <h2>One firm, every stage of the asset. <span class="dimline">Advised from the owner's side, since 1998.</span></h2>
+        <div class="split">
+          <div>
+            <p>We act for the principals in retail property: developers, landlords, asset managers and institutional investors. Our clients develop shopping centres, lifestyle destinations, integrated resorts and mixed-use schemes, or they acquire and manage them.</p>
+            <p>We do not advise retailers on the occupier side: store networks, formats, operations. The strategy houses do that work. If you hold the asset, or intend to, this is the firm for it.</p>
+            <p>A retail destination is one continuous piece of work, and we treat it that way: development consultancy, leasing, positioning and repositioning, and investment advisory, from one team.</p>
+          </div>
+          <ul class="figures" aria-label="The record in four figures">
+            <li class="figure"><b>100<span class="plus">+</span></b><span>projects advised</span></li>
+            <li class="figure"><b>60<span class="plus">+</span></b><span>planned and leased</span></li>
+            <li class="figure"><b>20<span class="plus">+</span></b><span>markets</span></li>
+            <li class="figure"><b>3</b><span>continents</span></li>
+          </ul>
+        </div>
+        <ul class="creds">
+          <li class="cred"><small>Founded</small><strong>Hong Kong, 1998, by Paul Husband</strong></li>
+          <li class="cred"><small>Led by</small><strong>Paul Husband, on every mandate</strong></li>
+          <li class="cred"><small>Acts for</small><strong>Developers, landlords and investors</strong></li>
+          <li class="cred"><small>Does not act for</small><strong>Retailers on the occupier side</strong></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 · The practices -->
+  <section class="sec sec--deep" id="practices">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">What we do</p><p class="rail__index">02</p></aside>
+      <div>
+        <h2>Four practices, one piece of work. <span class="dimline">Choose the one your asset needs today.</span></h2>
+        <div class="prac">
+          <ul class="prac__list" role="tablist" aria-label="The four practices">
+            <li><button class="prac__tab" role="tab" id="tab-dev" aria-controls="panel-dev" aria-selected="true"><i>01</i><span><b>Development consultancy</b><small>Market · concept · merchandising plan</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-lease" aria-controls="panel-lease" aria-selected="false" tabindex="-1"><i>02</i><span><b>Leasing</b><small>Heads of terms to signature</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-pos" aria-controls="panel-pos" aria-selected="false" tabindex="-1"><i>03</i><span><b>Positioning and repositioning</b><small>Centres already trading</small></span></button></li>
+            <li><button class="prac__tab" role="tab" id="tab-inv" aria-controls="panel-inv" aria-selected="false" tabindex="-1"><i>04</i><span><b>Investment advisory</b><small>Acquisitions · disposals · asset plans</small></span></button></li>
+          </ul>
+          <div class="prac__panels">
+            <div class="prac__panel" role="tabpanel" id="panel-dev" aria-labelledby="tab-dev">
+              <span class="prac__big" aria-hidden="true">01</span>
+              <p class="kicker">Development consultancy · 01 of 04</p>
+              <h3>It starts with the market.</h3>
+              <p>Trade area, catchment, competing supply and spend capture. From that study come the concept, the positioning, the tenant mix and a merchandising plan that zones the GLA so the whole asset trades.</p>
+              <ul class="chips"><li>Trade area and catchment</li><li>Competing supply</li><li>Spend capture</li><li>Concept and positioning</li><li>Tenant mix</li><li>Merchandising plan</li></ul>
+              <a class="more" href="#enquiry" data-brief="New development">Discuss a development brief <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-lease" aria-labelledby="tab-lease" hidden>
+              <span class="prac__big" aria-hidden="true">02</span>
+              <p class="kicker">Leasing · 02 of 04</p>
+              <h3>Then we lease it.</h3>
+              <p>Leasing strategy, project marketing, negotiation and documentation, from heads of terms to signature. A plan nobody signs is just paper. We only handle leasing for developments we have worked on.</p>
+              <ul class="chips"><li>Leasing strategy</li><li>Project marketing</li><li>Negotiation</li><li>Documentation</li><li>Heads of terms to signature</li></ul>
+              <a class="more" href="#enquiry" data-brief="Leasing brief">Discuss a leasing mandate <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-pos" aria-labelledby="tab-pos" hidden>
+              <span class="prac__big" aria-hidden="true">03</span>
+              <p class="kicker">Positioning and repositioning · 03 of 04</p>
+              <h3>Once the centre opens, the work changes but does not stop.</h3>
+              <p>We set the positioning, run the marketing programme and write the asset plan that holds the tenant mix to the concept. Repositioning starts as a new project does, with an honest read of the trade area and the existing mix, and ends with a plan for the leasing and the marketing programme.</p>
+              <ul class="chips"><li>Positioning</li><li>Marketing programme</li><li>Asset plan</li><li>Tenant mix review</li><li>Repositioning</li></ul>
+              <a class="more" href="#enquiry" data-brief="Existing asset">Discuss an existing asset <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="prac__panel" role="tabpanel" id="panel-inv" aria-labelledby="tab-inv" hidden>
+              <span class="prac__big" aria-hidden="true">04</span>
+              <p class="kicker">Investment advisory · 04 of 04</p>
+              <h3>For investors, the retail assumptions the deal depends on.</h3>
+              <p>We advise on acquisitions, disposals and the business planning behind them: feasibility, the retail assumptions in the underwriting, the asset plan the deal depends on.</p>
+              <ul class="chips"><li>Acquisitions</li><li>Disposals</li><li>Business planning</li><li>Feasibility</li><li>Underwriting assumptions</li><li>Asset plan</li></ul>
+              <a class="more" href="#enquiry" data-brief="Acquisition">Discuss an acquisition <span aria-hidden="true">→</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 03 · Why a boutique -->
+  <section class="sec" id="boutique">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Why a boutique</p><p class="rail__index">03</p></aside>
+      <div class="split">
+        <div>
+          <h2>Why a boutique and not a giant.</h2>
+          <p>The large property firms are good at what they do. Offices in every market, data on everything. For valuations, agency work at scale and research, they are often the right appointment.</p>
+          <p>We offer something narrower. Senior attention on one asset at a time, and one discipline that shapes everything: we only handle leasing for developments we have worked on.</p>
+          <p class="pull">We will not lease a centre we did not help plan.</p>
+          <p>If you want your asset treated as one file among hundreds, we are the wrong appointment.</p>
+        </div>
+        <ol class="numlist">
+          <li><i>01</i><div><h4>Senior attention, one asset at a time</h4><p>We take few mandates and give each the founder's time. The people you meet in the first conversation do the work.</p></div></li>
+          <li><i>02</i><div><h4>One discipline</h4><p>We only handle leasing for developments we have worked on, so we cannot hand you a plan we would not have to deliver ourselves.</p></div></li>
+          <li><i>03</i><div><h4>Advice we may have to sell across the table</h4><p>Every recommendation in our reports is one we may have to sell later. That keeps the advice honest.</p></div></li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- 04 · How we work -->
+  <section class="sec sec--deep" id="process">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">How we work</p><p class="rail__index">04</p></aside>
+      <div class="split">
+        <div>
+          <h2>How an engagement runs.</h2>
+          <p>It begins with a conversation about one asset. Yours. We ask what you hold or intend to build, where it stands in its cycle, and what the mandate should deliver. If we can do the work, we scope it and agree it with you before anything starts.</p>
+          <p>The people you meet in that first conversation do the work. Husband Retail is a small firm by design. Paul Husband leads every mandate, and the team around him has both planned centres and leased them. That combination is rarer than it sounds.</p>
+          <p>Someone who has negotiated heads of terms with a luxury brand's head of real estate writes a very different merchandising plan from someone who has only modelled one.</p>
+        </div>
+        <div>
+          <p class="steps__head">The work runs in sequence. One team from first meeting to handover, the same senior people throughout.</p>
+          <ol class="steps">
+            <li><i>01</i><div><b>Feasibility</b><span>Trade area, catchment, competing supply</span></div></li>
+            <li><i>02</i><div><b>Concept</b><span>Positioning, retail mix, anchors</span></div></li>
+            <li><i>03</i><div><b>Merchandising plan</b><span>Zoning, adjacencies, unit strategy</span></div></li>
+            <li><i>04</i><div><b>Leasing</b><span>Heads of terms to signature</span></div></li>
+            <li><i>05</i><div><b>Opening</b><span>Launch marketing, trading readiness</span></div></li>
+            <li><i>06</i><div><b>Asset plan</b><span>The plan the centre trades to</span></div></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 · The record -->
+  <section class="sec" id="record">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The record</p><p class="rail__index">05</p></aside>
+      <div>
+        <h2>The places we have done it. <span class="dimline">The markets marked on the globe, and the projects behind the marks.</span></h2>
+        <p>More than 100 projects advised, sixty-plus of them planned and leased, in more than twenty markets across Asia, the Middle East and Europe.</p>
+        <ul class="places" aria-label="Advised places and projects">
+          <li class="place place--hero"><small>Hong Kong</small><b>The Landmark · Elements · Lee Gardens · Sky City</b></li>
+          <li class="place"><small>Macau</small><b>Galaxy Macau · The Venetian</b></li>
+          <li class="place"><small>Taipei</small><b>Bellavita</b></li>
+          <li class="place"><small>Shanghai</small><b>Shanghai Village · Three on the Bund</b></li>
+          <li class="place"><small>Suzhou</small><b>Suzhou Village</b></li>
+          <li class="place"><small>Beijing</small><b>Park Life</b></li>
+          <li class="place"><small>Seoul</small><b>Seoul IFC Mall · CJ Live</b></li>
+          <li class="place"><small>Bangkok</small><b>MahaNakhon · The Cube</b></li>
+          <li class="place"><small>Phú Quốc</small><b>Sun Group project</b></li>
+          <li class="place"><small>Yangon</small><b>Landmark Yangon</b></li>
+          <li class="place"><small>Kuala Lumpur</small><b>Merdeka 118</b></li>
+          <li class="place"><small>New Delhi</small><b>DLF Emporio</b></li>
+          <li class="place"><small>Colombo</small><b>Colombo City Centre</b></li>
+        </ul>
+        <p class="places__note">Also advised: London, Doha, Dubai, Sydney and Singapore.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 06 · The founder -->
+  <section class="sec sec--paper" id="founder">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">The founder</p><p class="rail__index">06</p></aside>
+      <div class="founder">
+        <img class="founder__img" src="../media/paul-husband-1024.jpg" alt="Paul Husband" width="1024" height="1024" loading="lazy">
+        <div>
+          <h2>Paul Husband.</h2>
+          <p class="founder__lead">More than 30 years in Asian retail real estate, first at Swire Properties, then under his own name.</p>
+          <p>Paul Husband was head of marketing at Swire Properties for around ten years, joining in 1988 with Pacific Place in Hong Kong. He founded Husband Retail in 1998 and has since planned more than 100 retail projects across Asia Pacific and the Middle East. He wrote The Cult of the Luxury Brand in 2006 and taught as a professional instructor for the International Council of Shopping Centres in Asia Pacific.</p>
+          <ul class="founder__facts">
+            <li><b>Founded</b>Husband Retail, Hong Kong, 1998</li>
+            <li><b>Before that</b>Head of marketing, Swire Properties, from 1988, beginning with Pacific Place</li>
+            <li><b>Wrote</b>The Cult of the Luxury Brand, 2006</li>
+            <li><b>Taught</b>Professional instructor, International Council of Shopping Centres, Asia Pacific</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07 · Start here -->
+  <section class="sec sec--deep" id="start">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Start here</p><p class="rail__index">07</p></aside>
+      <div class="start">
+        <div>
+          <h2>Talk to us about the asset.</h2>
+          <p>One message is enough to begin. Name the asset, its location and its stage: a site, a master plan, a scheme under construction, or a centre already trading.</p>
+          <p class="start__line">Room 301, 8 Queen's Road East, Wanchai, Hong Kong · <a href="tel:+85226599280">+852 2659 9280</a></p>
+        </div>
+        <div class="ctas">
+          <a class="cta cta--lg" href="#enquiry">Request a call <span aria-hidden="true">→</span></a>
+          <a class="cta cta--lg cta--ghost" href="tel:+85226599280">Call +852 2659 9280 <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08 · The questions -->
+  <section class="sec" id="faq">
+    <div class="sec__inner sec__grid">
+      <aside class="rail"><span class="rail__rule"></span><p class="rail__eyebrow">Questions</p><p class="rail__index">08</p></aside>
+      <div class="split split--faq">
+        <div>
+          <h2>Questions principals ask.</h2>
+          <p>The ones that come up in the first conversation, answered the way we answer them in the room.</p>
+        </div>
+        <div class="faq">
+          <details open><summary><i>01</i><b>Do you act for owners or for occupiers?</b><span aria-hidden="true">+</span></summary><div class="a"><p>For owners only. Developers, landlords and investors instruct us. We negotiate with brands on behalf of the asset, never the reverse. The advice carries no occupier conflict.</p></div></details>
+          <details><summary><i>02</i><b>What happens if the feasibility work says the scheme does not stack up?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We tell you, in writing, before you commit capex. A study that only ever says yes is worthless. When the answer is no, we set out what would have to change for it to become yes.</p></div></details>
+          <details><summary><i>03</i><b>We have already mandated a global agency. Where do you fit?</b><span aria-hidden="true">+</span></summary><div class="a"><p>Often alongside them. We have done this before, usually holding the concept, the retail mix and the luxury leasing while they run the rest of the scheme. We are clear about the division of scope.</p></div></details>
+          <details><summary><i>04</i><b>Who runs the engagement day to day?</b><span aria-hidden="true">+</span></summary><div class="a"><p>The senior people you meet at the start. Paul Husband leads every mandate personally. We do not run a model where partners win the work and pass it down. The firm stays small so that this stays true.</p></div></details>
+          <details><summary><i>05</i><b>Can you bring the leading luxury houses into our asset?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We have recruited them into centres we planned. No adviser can commit a named brand. We can shape the asset those brands ask for, then make the case to people we have dealt with for years.</p></div></details>
+          <details><summary><i>06</i><b>Our centre is trading below its catchment. Is repositioning still viable?</b><span aria-hidden="true">+</span></summary><div class="a"><p>Usually, yes. Repositioning is one of our four practice areas. It starts as a new project does, with an honest read of the trade area and the existing mix, and ends with a plan for the leasing and the marketing programme.</p></div></details>
+          <details><summary><i>07</i><b>Which markets do you cover?</b><span aria-hidden="true">+</span></summary><div class="a"><p>We have advised in more than 20 markets across Asia, the Middle East and Europe, from Hong Kong and Seoul to Doha, Dubai and London. We are based in Hong Kong and travel to the asset.</p></div></details>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<!-- W7 · The Concierge Desk: the Script tab's words -->
+<section class="desk" id="enquiry">
+  <div class="desk__inner">
+    <span class="desk__num">The Concierge Desk</span>
+    <h2>Tell us about the asset.</h2>
+    <div class="desk__grid">
+      <form id="enquiryForm" novalidate>
+        <div class="field"><label for="f-tel">Telephone <span class="opt">(required)</span></label><input id="f-tel" name="tel" type="tel" autocomplete="tel" required></div>
+        <div class="field"><label for="f-name">Name</label><input id="f-name" name="name" type="text" autocomplete="name"></div>
+        <div class="field"><label for="f-email">Email <span class="opt">(optional)</span></label><input id="f-email" name="email" type="email" autocomplete="email"></div>
+        <div class="field"><label for="f-org">Organisation</label><input id="f-org" name="org" type="text" autocomplete="organization"></div>
+        <div class="field"><label for="f-brief">Brief</label>
+          <select id="f-brief" name="brief"><option>New development</option><option>Existing asset</option><option>Acquisition</option><option>Leasing brief</option></select></div>
+        <button class="btn" type="submit">Request a call</button>
+        <p class="note" id="formNote">Test page — the form sends nothing yet.</p>
+      </form>
+      <aside class="desk__side">
+        <img class="avatar avatar--lg" src="../media/paul-husband-512.jpg" alt="Paul Husband, founder of Husband Retail" width="76" height="76" loading="lazy" decoding="async">
+        <p class="desk__reply">Replies come from Paul's office.</p>
+        <p class="dev">Wording to confirm with the client.</p>
+        <address>
+          <a href="mailto:carmen.law@husband-retail.com">carmen.law@husband-retail.com</a><br>
+          <a href="tel:+85226599280">+852 2659 9280</a><br>
+          Room 301, 8 Queen's Road East, Wanchai, Hong Kong
+        </address>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- v0.11 · the footer, after The Ocean Marketing's -->
+<footer class="foot hr-dark" id="foot">
+  <div class="foot__inner">
+    <div class="foot__grid">
+      <div class="foot__brand">
+        <a class="brand" href="#threshold"><img class="brand__mark" src="assets/brand/monogram.png" alt="" width="53" height="60"><span class="brand__word">Husband Retail</span></a>
+        <p>Retail real estate, advised from the owner's side. Developers, landlords and investors, in Hong Kong and in more than twenty markets on three continents, since 1998.</p>
+        <a class="cta" href="#enquiry">Request a call</a>
+      </div>
+      <nav aria-label="Quick links">
+        <h4>Quick links</h4>
+        <ul>
+          <li><a href="#threshold">The threshold</a></li>
+          <li><a href="#firm">The firm</a></li>
+          <li><a href="#process">How we work</a></li>
+          <li><a href="#record">The record</a></li>
+          <li><a href="#founder">Paul Husband</a></li>
+          <li><a href="#faq">Questions</a></li>
+          <li><a href="#enquiry">The Concierge Desk</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Practices">
+        <h4>Practices</h4>
+        <ul>
+          <li><a href="#practices" data-tab="0">Development consultancy</a></li>
+          <li><a href="#practices" data-tab="1">Leasing</a></li>
+          <li><a href="#practices" data-tab="2">Positioning and repositioning</a></li>
+          <li><a href="#practices" data-tab="3">Investment advisory</a></li>
+        </ul>
+      </nav>
+      <div class="contact-col">
+        <h4>Contact</h4>
+        <ul class="contact">
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></i><div><small>Telephone</small><span><a href="tel:+85226599280">+852 2659 9280</a></span></div></li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 22s7-7.2 7-12a7 7 0 0 0-14 0c0 4.8 7 12 7 12z"/><circle cx="12" cy="10" r="2.5"/></svg></i><div><small>Office</small><span>Room 301, 8 Queen's Road East,<br>Wanchai, Hong Kong</span></div></li>
+          <li><i aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14"/><path d="M3 7l9 6 9-6"/></svg></i><div><small>Email</small><span><a href="mailto:carmen.law@husband-retail.com">carmen.law@husband-retail.com</a></span></div></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot__legal">
+      <span>© 2026 Husband Retail. All rights reserved.</span>
+      <nav aria-label="Legal">
+        <a href="#foot" aria-disabled="true" title="Page to follow">Terms of use</a>
+        <a href="#foot" aria-disabled="true" title="Page to follow">Privacy policy</a>
+        <a href="#foot" aria-disabled="true" title="Page to follow">Cookie notice</a>
+        <span class="dev">Legal pages to follow; the links are placeholders.</span>
+        <a class="totop" href="#threshold" aria-label="Back to the top">↑</a>
+      </nav>
+    </div>
+    <div class="foot__review"><span>07 — The Threshold · scroll journey test · <strong>v2 · 0.13</strong> · 23.09.2026 · review copy on GitHub Pages, not indexed · <a href="../">v1 (0.12) stays online</a></span>
+      <details><summary>Change log</summary>
+        <ul>
+          <li><b>0.13</b> · The Husband Retail design system applied: after the doors the site is light — white sections and warm-grey bands, the founder and the Desk on warm paper, ink type, solid ink buttons, deep gold for eyebrows, rails and rules; the film palette kept wherever words sit on footage, on the phone's bar and on the footer. Charis SIL for the serif, the HR monogram before the wordmark, the design system's hero shade on desktop, a white header with a hairline over the sections. Fixed: rail labels and indices, the pull quote and the founder's lead now at their designed sizes; the founder's portrait at 4:5. No copy, film or engine behaviour changed. Published as v2 at …/homepage-journey-prototype/v2/; v0.12 stays unchanged at the original address.</li>
+          <li><b>0.12</b> · The link now travels with its picture: the v1.5 film card (the forecourt, the vault, the couple) and the threshold mark as the tab icon wired into the head; noindex kept — this is still the review copy, not the site.</li>
+          <li><b>0.11</b> · After the doors the page continues as a site, in The Ocean Marketing’s order and the house’s own words (document 03): the firm (four figures, four credentials), the four practices as tabs with their sub-services and a link that presets the Desk’s select, why a boutique, how an engagement runs with the six steps, the record (the thirteen marked places), the founder on paper, a start-here band, seven questions, then the Desk and a full footer (links, practices, contact, legal placeholders, back to top, this log, the wordmark). Header links to the sections; the sticky Call · Enquire bar stays through the sections and leaves at the Desk. The Desk’s mailbox repeated in the footer; no general mailbox exists, so none is invented. The §12 claims of document 03 cut or softened; no client or brand names.</li>
+          <li><b>0.10</b> · The zoom steered to Hong Kong: the generated plate zooms toward the sea west of it, so the picture is now panned along Hong Kong's tracked position and magnified about it (12 % more by frame 32), easing back to the plain framing inside the clouds; the markers ride the same mapping. Dev note shortened.</li>
+          <li><b>0.9</b> · The globe's markers: a pulsing red dot, a hairline and a label for every advised place in view — Hong Kong (The Landmark, Elements, Lee Gardens, Sky City) largest, the rest scaled and dimmed by their distance from the viewer; pinned to the plate through the zoom, gone into the clouds; labels that would cover the words, each other, the header or the phone's bar are hidden. Placement by a sphere fitted to the generated plate (see the dev note).</li>
+          <li><b>0.8</b> · Phone legibility, after The Ocean Marketing's mobile view: a dark gradient rises from the bottom of the phone screen behind the hero's words and the doors' foot note, near-solid at the bottom and gone by the upper fifth; off mid-walk. Deeper header shade and a flat bright-gold wordmark on the phone; the foot note left-aligned. The beats keep their shade from above. Dev note corrected (the phone plays the approach since 0.7).</li>
+          <li><b>0.7</b> · The whole journey on phones: the approach (five viewports on touch), hold, walk and doors from two portrait packs (the centre 9:16 of each take, 405×720); the beats at the top of the phone screen, the hero at the bottom, at bizee scale (17 px inputs, 52 px fields); the Call · Enquire bar arrives with the forecourt and leaves for the Desk; the canvas re-fits when the Safari toolbar folds; the hold never borrows a push frame; published for review on GitHub Pages (noindex), superseding the 06.09 copy labelled 0.6.</li>
+          <li><b>0.6</b> · The approach (V0a take 1) is scrubbed by the scroll in both directions from the first frame of the globe, four viewports of scroll; before the first scroll the page drifts forward on its own, slowly, and stops the moment the visitor moves. Copy beats on the globe ("100+ projects. Three continents. 30+ years.") and the descent ("Founded here in 1998 by Paul Husband."), the locked hero revealed in order at the forecourt. The synthetic living set of 0.5 removed: the people walk and the water moves at the hold because the footage moves them. Paul's portrait as a round avatar on the card and at the Desk. Skip button gone. Engine: phase switching on the scroll position both ways, a dissolve on every hand-over, doors snap, header sync by IntersectionObserver. Polish: a shade behind the beats and under the header on bright frames, a stronger phone scrim, a gold hairline along the top edge that fills with the journey, the doors held for a full viewport before the Desk rises (at 0.6 viewports the Desk already covered the doors and the foot note), the Desk fills the screen (on a 900 px desktop it was 777 px tall, so its top never passed under the header), whole-pixel phase heights so the doors land exactly on any screen, the scroll-speed blur settles by time.</li>
+          <li><b>0.5</b> · The approach (V0a take 1) stitched to the front as a second frame pack, played once on arrival, catch-up on scroll, Skip lower right, headline from frame 0, sub-line/cue/card blending in with the forecourt, half-second hand-off dissolve into the loop. The set breathes at every scroll position: lens breath, ripples on the wet forecourt, the light pulsing, dust in the air with depth (?life=0 to compare). Engine fixes: loop wrap, snap to target, loop resumes from the clock, header sync.</li>
+          <li><b>0.4</b> · Film rebuilt from the two accepted clips only: W1_3 as the living hold (loop, 12 fps, half-second seam cross-fade) and V1b_3 frames 0–100 as the push-in (scroll-scrubbed, all 101 frames blended). Hero copy and the concierge card composed over the hold as the Veo/Script tabs instruct; copy fades over the first quarter of the move; the wordmark stays. Stand-in rooms, route rail, Practices menu and the ocean palette removed. Mobile: card cut, sticky Call · Enquire (D13 open). Desk carries the W7 words.</li>
+          <li><b>0.3</b> · Packed frame sequence scrubbed with sub-frame blending; time-based follow.</li>
+          <li><b>0.2</b> · One stitched film; cursor-free grade.</li>
+          <li><b>0.1</b> · First build.</li>
+        </ul>
+      </details></div>
+    <span class="foot__sig" aria-hidden="true">Husband Retail</span>
+  </div>
+</footer>
+
+<script>
+/* ============================================================================
+   The Threshold — scroll engine, v0.11 (the film engine is unchanged since 0.10).
+   Three accepted-or-instructed clips, two frame packs, one scroll from the first frame of the globe:
+     · the approach (every screen; portrait packs on phones): V0a_1 as 192 frames at 24 fps in its own pack, SCRUBBED by the scroll in both
+       directions over CFG.approach viewports; ahead of the download it holds the last frame in, never skips. Until the
+       visitor's first scroll the page drifts forward on its own (CFG.drift), slowly at first; any wheel, key, touch or
+       pointer ends the drift for good. Leaving the approach (either way) dissolves the pinned frame into the other side;
+     · the hold: W1_3 as a 96-frame loop at 12 fps, played on the clock (never scrubbed), with a half-second
+       cross-fade at the seam — the people walk and the water moves while the camera holds;
+     · the walk: V1b_3 frames 0–100 at 24 fps, scrubbed by the scroll with sub-frame blending; the film ends on
+       frame 100 and holds there (snaps exactly).
+   The markers (0.9): MARKS holds every advised place in view with its plate position per approach keyframe (0–40, every second
+   frame) and its facing (the cosine between the surface and the view: 1 = straight at the viewer, 0 = the horizon); marks()
+   runs after each approach draw, maps the plate through the same cover-fit as the canvas, scales and dims by the facing, hides
+   what would collide (the beat's words, other labels, the header, the phone's bar, the edges) and fades them into the clouds.
+   The words: two beats over the approach (globe, descent) and the hero's parts at the forecourt, all pure functions of
+   the scroll position, so scrolling back reverses them. Frames are decoded in a sliding window around the position; the
+   film surface is WebGL with the grade on fine pointers, a plain 2D canvas on touch. Reduced motion: two stills.
+   ========================================================================== */
+(function(){
+'use strict';
+const M = '../media/ocean-journey/';                /* v2 shares the film packs, stills and portrait with v1, one folder up */
+const FILM = { sd:'threshold-sd.bin', m:'threshold-m.bin', p:'threshold-p.bin', pre:'approach-sd.bin', preP:'approach-p.bin',   /* -p: the centre 9:16 of each take, for portrait screens */
+               poster:'01-threshold.jpg', posterM:'01-threshold-m.jpg', posterPre:'00-approach.jpg', rest:'02-doors.jpg', restM:'02-doors-m.jpg',
+               loopFps:12, loopN:96, loopEnd:8, seam:.5,      /* W1_3: 8 s, 96 frames at 12 fps, seam cross-fade 0.5 s */
+               pushFps:24, pushN:101,                         /* V1b_3: frames 0–100 at 24 fps = 4.17 s */
+               preFps:24, preN:192, preFirst:24 };            /* V0a_1: 8 s, 192 frames at 24 fps; the first second in = start */
+FILM.end = FILM.loopEnd + (FILM.pushN - 1) / FILM.pushFps;    /* film time at the doors: 12.167 s */
+FILM.pre0 = FILM.loopN + FILM.pushN;                          /* the approach's frames are indexed above the main pack's: 197–388 */
+FILM.preEnd = (FILM.preN - 1) / FILM.preFps;                  /* 7.958 s: the approach's last frame */
+const CFG = { approach:4,    /* viewports of scroll that carry the approach: 48 frames a viewport; the globe zoom is slow */
+              approachTouch:5, /* on touch screens a flick covers more of the page than a wheel notch, so the approach gets a fifth viewport */
+              hold:.45,      /* viewports of scroll the hold lasts (the loop keeps living) before the push-in begins */
+              push:2.4,      /* viewports of scroll that carry the push-in (D7 open) */
+              rest:1,        /* viewports the doors are held before the Desk rises — a full screen, so the foot note shows */
+              fadeOver:.25,  /* the hero copy fades out over the first quarter of the move (Veo tab) */
+              dissolve:.4,   /* seconds: the last loop frame dissolves into the scrub, and back */
+              handoff:.5,    /* seconds: the approach's last frame dissolves into the hold, and back (Veo tab V0a) */
+              scrub:.24,     /* how closely the film follows the scroll: fraction of the remaining distance per 1/60 s */
+              drift:{ v0:.05, vMax:.28, ramp:2 },  /* the self-drift before the first scroll: viewports/s, v0 → vMax with a 2 s half-life (~16 s to the forecourt unaided) */
+              /* the beats, as fractions of the approach (frame = fraction × 191): globe out 38–52, descent in 60–73 and out 107–119
+                 (before the take's own dissolve at 118–127), the forecourt's words, sub-line, card and cue in over frames 134–177 */
+              beats:{ b1Out:[.20,.27], b2In:[.31,.38], b2Out:[.56,.62], head:[.70,.82], sub:[.74,.86], card:[.76,.90], cue:[.82,.92] },
+              loaderText:'Preparing the walk', loaderTextPre:'Preparing the approach',
+              grade:{ halation:.34, grain:.045, vignette:.26, dollyBlur:.03 } };
+const posOf = t => t < FILM.loopEnd ? t * FILM.loopFps : FILM.loopN + (t - FILM.loopEnd) * FILM.pushFps; /* film time → frame index */
+
+const root = document.getElementById('world');
+const hero = document.getElementById('hero'), rest = document.getElementById('rest');
+const beatsEl = document.getElementById('beats'), beat1 = document.getElementById('beat1'), beat2 = document.getElementById('beat2');
+const heroParts = { head:[hero.querySelector('.eyebrow'), hero.querySelector('h1')], sub:[hero.querySelector('.sub')], card:[document.getElementById('card')], cue:[document.getElementById('cue')] };
+const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const coarse = matchMedia('(hover: none) and (pointer: coarse)').matches;
+const isMobile = coarse || innerWidth <= 860;
+const portrait = isMobile && innerHeight > innerWidth;                                             /* portrait phones and tablets draw from the centre-9:16 packs */
+const PRE = !reduced && !/[?&]pre=0/.test(location.search);                                        /* the approach: every screen since 0.7 (the Veo tab skips it on phones; instruction 07.09.) */
+let preOK = PRE;                                                                                   /* false once the approach pack fails */
+const clamp = (x,a,b) => x < a ? a : x > b ? b : x;
+const smooth = x => { x = clamp(x,0,1); return x*x*(3-2*x); };
+const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const el = (tag, cls) => { const e = document.createElement(tag); if (cls) e.className = cls; return e; };
+
+/* ---- DOM ---- */
+const sky = el('div','sw-sky');
+const stage = el('div','sw-stage'), film = el('div','sw-film');
+const poster = document.createElement('img'); poster.className = 'sw-film__poster'; poster.alt = ''; poster.decoding = 'async';
+poster.src = M + (PRE ? FILM.posterPre : isMobile ? FILM.posterM : FILM.poster);
+const restStill = document.createElement('img'); restStill.className = 'sw-film__rest'; restStill.alt = ''; restStill.decoding = 'async'; restStill.src = M + (isMobile ? FILM.restM : FILM.rest);
+film.append(poster, restStill); stage.append(film);
+const fx = document.createElement('canvas'); fx.className = 'sw-fx';
+const scrim = el('div','sw-scrim');
+const track = el('div','sw-track');
+root.append(sky, stage, fx, scrim, track);
+const hair = el('div', 'sw-progress hr-dark'); document.body.append(hair);   /* the gold thread along the top edge */
+const bar = document.querySelector('.sticky-bar');                    /* the phone's Call · Enquire bar: in with the forecourt's card beat, away over the Desk (header sync) */
+if (bar && PRE) bar.classList.add('is-pre');                         /* off-screen from the first paint while the approach is on; beats() brings it in with the card beat */
+if (PRE) { hero.classList.add('is-pre'); beatsEl.hidden = false; }   /* the globe's words from frame 0; the hero's parts wait for the forecourt */
+
+/* ---- loader ---- */
+let loader = null, loaderHidden = false, loaderGone = false, painted = false, failed = false;
+const t0 = performance.now();
+if (!reduced) {
+  loader = el('div','sw-loader hr-dark');
+  loader.innerHTML = '<div class="sw-loader__mark">HUSBAND RETAIL</div><div class="sw-loader__label">' + esc(PRE ? CFG.loaderTextPre : CFG.loaderText) + '</div><div class="sw-loader__bar"><i></i></div><div class="sw-loader__pct">0%</div>';
+  root.append(loader);
+  setTimeout(hideLoader, 12000);
+  if (coarse) setTimeout(hideLoader, 1500);
+}
+function setProgress(p){ if (!loader) return; p = clamp(p,0,1); loader.querySelector('.sw-loader__bar i').style.width = (p*100).toFixed(1) + '%'; loader.querySelector('.sw-loader__pct').textContent = Math.round(p*100) + '%'; }
+function hideLoader(){ if (!loader || loaderHidden) return; loaderHidden = true; loader.classList.add('sw-loader--gone'); setTimeout(() => { loader.remove(); loaderGone = true; update(); }, 650); }
+let firstDone = false;
+function firstReady(){ if (firstDone) return; firstDone = true; setProgress(1); const elapsed = performance.now() - t0; setTimeout(hideLoader, Math.max(420, 1100 - elapsed)); }
+
+/* ---- layout: approach · hold · push · rest, in viewports ---- */
+let V = innerHeight, W = innerWidth, lastW = innerWidth, appPx = 0, holdPx = 0, pushPx = 1, restPx = 0;
+function layout(){
+  V = innerHeight; W = innerWidth;
+  /* whole pixels: a scroll position is an integer, so every phase edge (r = 0, r = 1, the hand-off) must sit on one — on a 844 px phone 2.4 × 844 is not */
+  appPx = preOK ? Math.round((coarse ? CFG.approachTouch : CFG.approach) * V) : 0; holdPx = Math.round(CFG.hold * V); pushPx = Math.round(CFG.push * V); restPx = Math.round(CFG.rest * V);
+  track.style.height = (appPx + holdPx + pushPx + restPx) + 'px';
+  sizeFx();
+}
+
+/* ---- phases: pre (the approach, scrubbed) ⇄ hold (the loop, on the clock) ⇄ walk (the scrub) — decided by the scroll position ---- */
+let pre = PRE, ambient = !reduced && !PRE, ticking = false, r = 0, rA = PRE ? 0 : 1;
+let preT = 0, targetPreT = 0;
+let targetT = FILM.loopEnd, curT = 0, lastY = 0, lastTs = 0, vel = 0, xf = null;
+const BT = CFG.beats, OP = { b1:1, b2:0, head:1, sub:1, card:1, cue:1 };
+const fadeIn = (x, w) => smooth((x - w[0]) / (w[1] - w[0])), fadeOut = (x, w) => 1 - fadeIn(x, w);
+function place(e, op, dy){ e.style.opacity = op.toFixed(3); e.style.transform = 'translateY(' + dy.toFixed(1) + 'px)'; e.style.visibility = op > 0.001 ? 'visible' : 'hidden'; }
+function beats(){ /* the words over the approach and the hero's parts at the forecourt: pure functions of rA */
+  if (!appPx) return;
+  OP.b1 = fadeOut(rA, BT.b1Out); place(beat1, OP.b1, -22 * (1 - OP.b1));
+  const i2 = fadeIn(rA, BT.b2In), o2 = fadeOut(rA, BT.b2Out); OP.b2 = i2 * o2; place(beat2, OP.b2, 18 * (1 - i2) - 22 * (1 - o2));
+  for (const k of ['head','sub','card','cue']) { OP[k] = fadeIn(rA, BT[k]); for (const e of heroParts[k]) place(e, OP[k], 14 * (1 - OP[k])); }
+  if (bar) bar.classList.toggle('is-pre', OP.card < 0.5);
+  beatsEl.style.setProperty('--beat-scrim', Math.max(OP.b1, OP.b2).toFixed(3));
+  hero.style.setProperty('--hero-shade', OP.head.toFixed(3));        /* the hero's shade comes with its headline */
+}
+function resetWords(){ /* no approach after all: the hero stands as on a phone */
+  beatsEl.hidden = true; hero.classList.remove('is-pre');
+  for (const k in heroParts) for (const e of heroParts[k]) e.removeAttribute('style');
+  hero.style.removeProperty('--hero-shade');
+  OP.b1 = 0; OP.b2 = 0; OP.head = OP.sub = OP.card = OP.cue = 1;
+  if (bar) bar.classList.remove('is-pre');
+}
+function update(){
+  const y = scrollY, now = performance.now();
+  rA = appPx > 0 ? clamp(y / appPx, 0, 1) : 1;                          /* 0 = the globe, 1 = the forecourt (the approach's last frame) */
+  targetPreT = rA * FILM.preEnd;
+  const yh = Math.max(0, y - appPx);                                      /* the scroll beyond the approach */
+  r = clamp((yh - holdPx) / pushPx, 0, 1);                                /* 0 = the hold, 1 = the doors */
+  targetT = FILM.loopEnd + r * (FILM.end - FILM.loopEnd);
+  /* the phase follows the scroll position, both ways; before the first paint the approach's own frames are what gets decoded */
+  if (PRE && painted) { const wantPre = preOK && y < appPx; if (pre && !wantPre) endPre(now); else if (!pre && wantPre) enterPre(now); }
+  beats();
+  if (painted) marks(pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1);
+  /* the words: full through the hold, gone by a quarter of the move; the wordmark (header) stays */
+  const co = r <= 0 ? 1 : smooth(1 - r / CFG.fadeOver);
+  hero.style.opacity = co.toFixed(3);
+  hero.style.visibility = co > 0.001 ? 'visible' : 'hidden';
+  hero.classList.toggle('is-live', co > 0.5 && !pre);                    /* the card is not clickable until the forecourt has arrived */
+  hero.style.transform = reduced ? 'none' : 'translateY(' + (-Math.min(yh, holdPx + pushPx * CFG.fadeOver) * 0.12).toFixed(1) + 'px)';
+  const ro = smooth((r - 0.88) / 0.12);                                   /* the foot note over the held doors */
+  scrim.style.opacity = Math.max(co * (appPx ? OP.head : 1), ro).toFixed(3);   /* the phone's shade: with the hero's words (not before them), off mid-walk, back with the foot note */
+  const filmPx = appPx + holdPx + pushPx;                                 /* the hairline: the whole journey, globe to doors */
+  hair.style.transform = 'scaleX(' + clamp(y / filmPx, 0, 1).toFixed(4) + ')';
+  hair.style.opacity = (0.85 * (1 - clamp((y - filmPx) / Math.max(1, restPx), 0, 1))).toFixed(3);
+  rest.style.opacity = ro.toFixed(3); rest.style.visibility = ro > 0.001 ? 'visible' : 'hidden';
+  if (!painted) poster.style.transform = 'scale(' + (1 + (reduced ? 0 : r * 0.12)).toFixed(4) + ')';
+  if (reduced) restStill.style.opacity = r < 0.5 ? '0' : '1';
+  /* hold → walk: the last loop frame dissolves into the scrub (walk → hold is decided inside the clock, see loop()) */
+  if (!pre && ambient && r > 0 && painted) { ambient = false; if (ia >= 0) { xf = { from: ia, t0: now, dur: CFG.dissolve }; FR.pin = ia; } curT = targetT; }
+  /* scroll speed in viewports per second, for the dolly blur */
+  if (lastTs) { const dt = Math.max(8, now - lastTs) / 1000; vel = Math.min(4, Math.abs(y - lastY) / V / dt); } lastY = y; lastTs = now;
+}
+/* the approach ends: the scroll has left its budget (or its pack is missing) — the frame on the canvas dissolves into wherever the scroll is */
+function endPre(now){
+  if (!pre) return;
+  pre = false; hero.classList.remove('is-pre');
+  if (ia >= 0) { FR.pin = ia; xf = { from: ia, t0: now, dur: CFG.handoff }; }
+  if (r > 0) { ambient = false; curT = FILM.loopEnd; } else { ambient = true; curT = 0; }
+}
+/* the approach resumes: the scroll is back inside its budget — the hold's (or the walk's) frame dissolves into its last frame */
+function enterPre(now){
+  if (pre || !preOK) return;
+  pre = true; ambient = false; hero.classList.add('is-pre');
+  preT = FILM.preEnd;
+  if (ia >= 0) { FR.pin = ia; xf = { from: ia, t0: now, dur: CFG.handoff }; }
+}
+function dropPre(){ /* no approach pack: the page starts at the forecourt, as on a phone; its scroll budget collapses */
+  if (!preOK) return;
+  preOK = false; layout();
+  if (!painted) { pre = false; ambient = true; curT = 0; poster.src = M + (isMobile ? FILM.posterM : FILM.poster); if (loader) loader.querySelector('.sw-loader__label').textContent = CFG.loaderText; }
+  resetWords(); update();
+}
+addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(() => { ticking = false; update(); }); } }, { passive:true });
+addEventListener('resize', () => {
+  /* touch, same width: the Safari toolbar folding — re-fit the canvas to the visible height, keep the scroll budget (V) so the position keeps its meaning */
+  if (coarse && innerWidth === lastW) { sizeFx(); update(); return; }
+  lastW = innerWidth; layout(); update();
+});
+addEventListener('orientationchange', () => setTimeout(() => { lastW = innerWidth; layout(); update(); }, 80));
+addEventListener('load', () => { layout(); update(); });
+
+/* ---- the self-drift: once the picture is up and the loader gone, the page scrolls itself, slowly, until the visitor moves ---- */
+const DR = { on:false, done:false, userMoved:false, v:0, acc:0, expect:0 };
+function driftStop(){ DR.on = false; DR.done = true; }
+for (const t of ['wheel','touchstart','keydown','pointerdown']) addEventListener(t, () => { DR.userMoved = true; driftStop(); }, { passive:true });
+function driftStep(dt){
+  if (!DR.on) {
+    if (DR.done || DR.userMoved || !preOK || !pre || !painted || !loaderGone || scrollY > 2) return;
+    DR.on = true; DR.v = CFG.drift.v0; DR.acc = 0; DR.expect = scrollY;
+  }
+  if (Math.abs(scrollY - DR.expect) > 2 || scrollY >= appPx - 1) { driftStop(); return; }  /* moved by someone else, or arrived */
+  DR.v += (CFG.drift.vMax - DR.v) * (1 - Math.pow(0.5, dt / CFG.drift.ramp));
+  DR.acc += DR.v * V * dt; const n = Math.trunc(DR.acc);
+  if (n) { DR.acc -= n; DR.expect = scrollY + n; scrollBy({ top: n, left: 0, behavior: 'instant' }); }
+}
+
+/* ---- the frame store: two packed files streamed in (the approach first), frames decoded in a sliding window ---- */
+const mkPack = () => ({ n:0, fps:24, w:16, h:9, buf:null, offs:null, base:0, avail:0, complete:false });
+const PK = { main: mkPack(), pre: mkPack() };
+const FR = { bmp:new Map(), pend:new Map(), center:0, pin:-1 };
+const WIN = coarse ? { ahead:10, behind:4, keep:12, max:40 } : { ahead:16, behind:6, keep:20, max:64 };
+const HAND = 3; /* the first push frames stay decoded during the hold, the first loop frames during the approach, the approach's last frames during the hold: every hand-over lands on a real frame */
+const canBitmap = typeof createImageBitmap === 'function';
+const pkOf = i => i >= FILM.pre0 ? PK.pre : PK.main;
+const local = i => i >= FILM.pre0 ? i - FILM.pre0 : i;
+const mainReady = () => PK.main.avail >= Math.min(PK.main.n || 1e9, FILM.loopN + HAND);
+function frameBlob(i){ const pk = pkOf(i), li = local(i); return new Blob([pk.buf.subarray(pk.base + pk.offs[li], pk.base + pk.offs[li+1])], { type:'image/webp' }); }
+function imgDecode(blob){ return new Promise((res, rej) => { const u = URL.createObjectURL(blob); const im = new Image(); im.onload = () => { URL.revokeObjectURL(u); res(im); }; im.onerror = () => { URL.revokeObjectURL(u); rej(new Error('image decode')); }; im.src = u; }); }
+function release(b){ if (b && b.close) b.close(); }
+function decode(i){
+  if (i < 0 || FR.bmp.has(i) || FR.pend.has(i)) return null;
+  const pk = pkOf(i), li = local(i);
+  if (!pk.buf || li >= pk.avail) return null;
+  const p = (canBitmap ? createImageBitmap(frameBlob(i)) : imgDecode(frameBlob(i)))
+    .then(b => { FR.pend.delete(i); FR.bmp.set(i, b); })
+    .catch(e => { FR.pend.delete(i); console.warn('[threshold] frame ' + i + ' failed', e); });
+  FR.pend.set(i, p); return p;
+}
+/* the decoded frame closest to i inside [lo, hi] — the position never waits on a decode; ahead of the download it holds the last frame in.
+   The range keeps the approach's frames and the main pack's apart: one never stands in for the other. */
+function nearest(i, lo, hi){
+  if (i < lo) i = lo; if (i > hi) i = hi;
+  const pk = pkOf(i), top = Math.min(hi, (pk === PK.pre ? FILM.pre0 : 0) + pk.avail - 1);
+  if (top < lo) return -1;
+  if (i > top) i = top;
+  if (FR.bmp.has(i)) return i;
+  for (let d = 1; d <= WIN.keep; d++) { if (i - d >= lo && FR.bmp.has(i - d)) return i - d; if (i + d <= hi && FR.bmp.has(i + d)) return i + d; }
+  let best = -1, bd = 1e9; for (const k of FR.bmp.keys()) { if (k < lo || k > hi) continue; const d = Math.abs(k - i); if (d < bd) { bd = d; best = k; } }
+  return best;
+}
+const wrapIdx = (i, N) => { if (!N) return i; i %= N; return i < 0 ? i + N : i; };
+const dist = (a, b, N) => { const d = Math.abs(a - b); return N ? Math.min(d % N, N - d % N) : d; };
+const farness = (i, c, N) => (N && i >= N) ? N : dist(i, c, N); /* in the loop, walk and approach frames are far — the circular distance must not pull them near */
+const preLast = i => preOK && i >= FILM.pre0 + FILM.preN - HAND;   /* the approach's last frames: kept through the hold for the way back */
+function prefetch(c, dir, N, lo, hi){
+  const pk = pkOf(c), top = (pk === PK.pre ? FILM.pre0 : 0) + pk.avail - 1;
+  if (!N) c = Math.min(c, top);
+  FR.center = c;
+  /* ahead of the position, spaced by how far the film will move next tick, so a fast scroll still lands on frames */
+  const fps = N ? FILM.loopFps : pre ? FILM.preFps : FILM.pushFps;
+  const step = N ? 1 : Math.max(1, Math.round((pre ? Math.abs(targetPreT - preT) : Math.abs(targetT - curT)) * fps * CFG.scrub));
+  const at = i => N ? wrapIdx(i, N) : clamp(i, lo, hi);
+  for (let k = 0; k <= WIN.ahead; k++) decode(at(c + k*step*dir));
+  for (let k = 1; k <= WIN.behind; k++) decode(at(c - k*dir));
+  const land = N ? c : pre ? clamp(lo + Math.round(targetPreT * FILM.preFps), lo, Math.min(hi, top)) : Math.min(top, Math.floor(posOf(targetT))); /* where the film is heading */
+  if (N) { for (let k = 0; k < HAND; k++) { decode(FILM.loopN + k); if (preOK) decode(FILM.pre0 + FILM.preN - 1 - k); } }
+  else { if (pre) for (let k = 0; k < HAND; k++) decode(k); for (let k = -2; k <= 3; k++) decode(clamp(land + k, lo, hi)); }
+  if (FR.bmp.size > WIN.keep + WIN.ahead) {
+    for (const [i, b] of FR.bmp) {
+      if (i === FR.pin || (N && i >= FILM.loopN && i < FILM.loopN + HAND) || (N && preLast(i)) || (pre && i < HAND)) continue;
+      const onPath = !N && (i - c) * (land - c) > 0 && Math.abs(i - c) < Math.abs(land - c) && Math.abs(i - c) <= WIN.ahead * step;
+      if (farness(i, c, N) > WIN.keep && Math.abs(i - land) > 6 && !onPath) { release(b); FR.bmp.delete(i); }
+    }
+    if (FR.bmp.size > WIN.max) { /* hard cap on decoded frames: drop the farthest from the position */
+      const far = [...FR.bmp.keys()].sort((a, b) => farness(b, c, N) - farness(a, c, N));
+      for (const i of far) { if (FR.bmp.size <= WIN.max) break; if (i === c || i === FR.pin) continue; release(FR.bmp.get(i)); FR.bmp.delete(i); }
+    }
+  }
+}
+
+/* ---- draw: the two frames either side of the position, blended by the fraction between them ---- */
+let ia = -1, ib = -1, mixv = 0, last2d = '', seamOn = false;
+function dissolveInto(now, cur){ /* the pinned frame of the last phase dissolves into the current picture */
+  const m = (now - xf.t0) / (xf.dur * 1000);
+  if (m >= 1) { FR.pin = -1; xf = null; return null; }
+  if (cur >= 0 && FR.bmp.has(xf.from) && cur !== xf.from) return { a: xf.from, b: cur, f: smooth(m) };
+  return null;
+}
+const MARKS = [
+  { id:'hk', name:'Hong Kong', what:'The Landmark · Elements · Lee Gardens · Sky City', short:'The Landmark · Elements', ang:28, len:62, hero:true, pts:[[1087.3,648.7,0.799],[1087.3,648.7,0.799],[1087.3,648.7,0.799],[1087.4,648.7,0.799],[1087.6,648.8,0.799],[1088.2,649,0.8],[1089.2,649.3,0.801],[1090.7,650,0.801],[1092.8,651.4,0.803],[1095.8,653.1,0.804],[1100,655.6,0.806],[1105.1,659.3,0.809],[1111.9,663.5,0.812],[1119.9,668.6,0.815],[1129.9,675,0.819],[1141,683.1,0.822],[1154.1,692.4,0.825],[1169.8,706.3,0.825],[1193.2,717.2,0.825],[1227,713.9,0.825],[1256.2,755.4,0.825]] },
+  { id:'mo', name:'Macau', what:'Galaxy Macau · The Venetian', short:'Galaxy Macau', ang:152, len:46, hero:false, pts:[[1074.2,649.4,0.793],[1074.2,649.4,0.793],[1074.2,649.4,0.793],[1074.3,649.5,0.793],[1074.5,649.6,0.793],[1075,649.8,0.794],[1075.9,650.1,0.794],[1077.3,650.7,0.795],[1079.1,652.1,0.796],[1081.9,653.8,0.798],[1085.6,656.3,0.8],[1090.1,660,0.802],[1096.3,664.2,0.805],[1103.4,669.2,0.808],[1112.4,675.6,0.812],[1122.3,683.6,0.815],[1134.1,692.9,0.818],[1148.4,707.4,0.818],[1170.4,718.7,0.818],[1203.9,715.7,0.818],[1233.8,758.6,0.818]] },
+  { id:'tpe', name:'Taipei', what:'Bellavita', short:'Bellavita', ang:22, len:46, hero:false, pts:[[1262.3,614.5,0.843],[1262.3,614.5,0.843],[1262.4,614.5,0.843],[1262.6,614.5,0.843],[1263.2,614.6,0.843],[1264.5,614.8,0.843],[1266.7,615,0.844],[1270.3,615.4,0.845],[1275.7,616.5,0.846],[1283.5,617.6,0.848],[1293.8,619.4,0.85],[1306.8,622,0.853],[1323,625.1,0.857],[1343,628.8,0.86],[1367.1,633.3,0.865],[1395.2,639.1,0.869],[1428.9,645.6,0.874],[1461.8,649.3,0.874],[1504,650.9,0.874],[1541.2,643.9,0.874],[1558.9,665.7,0.874]] },
+  { id:'sha', name:'Shanghai', what:'Shanghai Village · Three on the Bund', short:'Shanghai Village', ang:-18, len:52, hero:false, pts:[[1297.4,482.6,0.75],[1297.4,482.6,0.75],[1297.5,482.6,0.75],[1297.7,482.6,0.75],[1298.4,482.4,0.75],[1299.9,482.1,0.75],[1302.3,481.4,0.75],[1306.2,480.3,0.751],[1312.1,478.9,0.752],[1320.6,476.5,0.753],[1331.9,473.6,0.754],[1346.1,470.2,0.755],[1363.7,466.4,0.757],[1385.4,461,0.759],[1411.4,454.8,0.761],[1441.7,447.7,0.762],[1477.9,438.8,0.763],[1508.9,427.4,0.763],[1550.2,413.1,0.763],[1585.7,402.5,0.763],[1586.2,426.6,0.763]] },
+  { id:'szv', name:'Suzhou', what:'Suzhou Village', short:'Suzhou Village', ang:-150, len:46, hero:false, pts:[[1280,479.2,0.743],[1280,479.2,0.743],[1280.1,479.2,0.743],[1280.2,479.2,0.743],[1280.9,479,0.743],[1282.3,478.6,0.743],[1284.6,477.9,0.743],[1288.3,476.7,0.744],[1293.9,475.2,0.744],[1301.9,472.7,0.746],[1312.6,469.7,0.747],[1326,466.1,0.748],[1342.6,462.1,0.75],[1363,456.5,0.752],[1387.6,450,0.753],[1416.2,442.6,0.755],[1450.2,433.4,0.755],[1479.2,422.3,0.755],[1518.3,408.2,0.755],[1553.4,397.9,0.755],[1554.3,424.2,0.755]] },
+  { id:'bj', name:'Beijing', what:'Park Life', short:'Park Life', ang:-140, len:46, hero:false, pts:[[1264.5,324.8,0.56],[1264.5,324.8,0.56],[1264.6,324.8,0.56],[1264.8,324.7,0.56],[1265.4,324.2,0.559],[1266.7,323.3,0.559],[1268.8,321.6,0.559],[1272.1,318.8,0.559],[1277.2,314.7,0.559],[1284.4,308.5,0.559],[1294.1,300.6,0.558],[1306.1,290.8,0.557],[1321,279.7,0.556],[1339.3,265,0.555],[1361,248,0.552],[1386.3,228.3,0.549],[1415.9,204.9,0.544],[1436.8,179.3,0.544],[1468.5,149.6,0.544],[1500.5,136.4,0.544],[1485,171.9,0.544]] },
+  { id:'sel', name:'Seoul', what:'Seoul IFC Mall · CJ Live', short:'Seoul IFC Mall', ang:-12, len:44, hero:false, pts:[[1457,377.5,0.662],[1457,377.5,0.662],[1457.1,377.4,0.662],[1457.4,377.4,0.662],[1458.4,377.1,0.662],[1460.5,376.4,0.661],[1463.9,375.1,0.661],[1469.6,372.9,0.661],[1478.3,369.7,0.661],[1490.6,364.8,0.661],[1507.2,358.5,0.66],[1528,350.5,0.659],[1553.3,341.7,0.658],[1584.9,329.8,0.656],[1622.6,315.6,0.654],[1667.1,298.9,0.65],[1720.1,278.5,0.645],[1763.3,250.1,0.645],[1818.5,219.1,0.645],[1855.7,203.5,0.645],[1836.9,213.7,0.645]] },
+  { id:'bkk', name:'Bangkok', what:'MahaNakhon, The Cube', short:'MahaNakhon', ang:-156, len:46, hero:false, pts:[[765.6,790.7,0.619],[765.6,790.7,0.619],[765.5,790.7,0.619],[765.5,790.8,0.619],[765.1,791,0.618],[764.2,791.6,0.619],[763.1,792.4,0.619],[761.1,794.2,0.619],[757.8,797.3,0.618],[753.3,801.5,0.618],[747.6,807.3,0.616],[740.3,815.4,0.614],[732.4,824.2,0.612],[722,835.2,0.609],[711.1,848.8,0.605],[697.9,865.3,0.599],[682.5,884.7,0.591],[671.3,923.5,0.591],[665.1,958.3,0.591],[694.1,963.2,0.591],[751.8,1035.1,0.591]] },
+  { id:'pq', name:'Phú Quốc', what:'Sun Group project', short:'Sun Group', ang:156, len:44, hero:false, pts:[[789.1,889.7,0.688],[789.1,889.7,0.688],[789.1,889.7,0.688],[789.1,889.9,0.688],[788.6,890.4,0.687],[787.8,891.4,0.688],[786.8,892.9,0.688],[784.9,895.9,0.688],[781.8,901,0.687],[777.5,907.8,0.686],[772.1,917.3,0.685],[765.1,929.9,0.683],[757.7,944.1,0.681],[747.6,962,0.678],[737.1,983.6,0.674],[724.2,1009.6,0.667],[709,1040.3,0.659],[703.5,1088.9,0.659],[702.5,1134.2,0.659],[733.8,1141.1,0.659],[802.5,1206.4,0.659]] },
+  { id:'rgn', name:'Yangon', what:'Landmark Yangon', short:'Landmark Yangon', ang:-160, len:44, hero:false, pts:[[737.6,709.1,0.529],[737.6,709.1,0.529],[737.6,709.1,0.529],[737.6,709.2,0.529],[737.1,709.2,0.528],[736.2,709.4,0.529],[735,709.7,0.529],[732.9,710.5,0.528],[729.4,712,0.528],[724.6,714,0.527],[718.6,717,0.525],[710.9,721.3,0.522],[702.7,725.9,0.52],[691.8,731.4,0.516],[680.6,738.7,0.511],[667.2,747.8,0.504],[651.8,758.4,0.496],[635.4,789.5,0.496],[624.2,815.9,0.496],[651.5,819.3,0.496],[700.4,897.2,0.496]] },
+  { id:'kl', name:'Kuala Lumpur', what:'Merdeka 118', short:'Merdeka 118', ang:180, len:44, hero:false, pts:[[704.2,1055,0.627],[704.2,1055,0.627],[704.1,1055.1,0.627],[704.1,1055.3,0.627],[703.4,1056,0.626],[702.2,1057.6,0.626],[700.5,1060.1,0.626],[697.7,1064.7,0.625],[693.1,1072.3,0.623],[686.9,1082.7,0.621],[678.9,1096.9,0.617],[668.8,1115.6,0.612],[657.5,1136.6,0.607],[642.8,1163.2,0.6],[627.3,1194.9,0.59],[608.6,1232.6,0.578],[586.6,1277.1,0.564],[578.9,1344.8,0.564],[574.3,1409.8,0.564],[606.4,1421.4,0.564],[696.8,1489.2,0.564]] },
+  { id:'del', name:'New Delhi', what:'DLF Emporio', short:'DLF Emporio', ang:-146, len:40, hero:false, pts:[[728,482.7,0.159],[728,482.7,0.159],[728,482.7,0.159],[728,482.7,0.158],[727.8,482.4,0.158],[727,481.7,0.158],[725.9,480.6,0.158],[724.2,479.2,0.157],[721.5,477,0.156],[717.8,473.7,0.155],[713.3,470,0.152],[707.8,465.8,0.149],[701.9,460.6,0.146],[694.5,453.9,0.141],[687.5,447.2,0.135],[679.8,440.2,0.128],[671.4,432.9,0.118],[648,441.6,0.118],[631.2,444.2,0.118],[655.1,442.7,0.118],[678.5,528.5,0.118]] },
+  { id:'cmb', name:'Colombo', what:'Colombo City Centre', short:'Colombo City Centre', ang:176, len:40, hero:false, pts:[[534.8,860.9,0.209],[534.8,860.9,0.209],[534.8,860.9,0.209],[534.7,861,0.209],[534,861.2,0.209],[532.4,861.7,0.209],[530.2,862.4,0.208],[526.6,864.1,0.207],[521,866.8,0.205],[513.3,870.3,0.202],[503.7,875.6,0.197],[492,882.8,0.191],[478.8,890.3,0.185],[462.3,899.5,0.177],[445.6,910.9,0.168],[426.9,924.6,0.156],[406.1,940.7,0.142],[377.7,990.3,0.142],[352.8,1035,0.142],[378.6,1043.8,0.142],[448.5,1135.2,0.142]] }
+];
+const MARK_KF = [0, 2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 26, 28, 30, 32, 34, 36, 38, 40];   /* approach frames the table is keyed to (every second frame, 0–40) */
+
+/* ---- the markers: built once, placed on every approach draw (see render) ---- */
+const marksEl = document.getElementById('marks'), MK = [];
+(function buildMarks(){
+  MARKS.forEach((m, i) => {
+    const el = document.createElement('div'); el.className = 'gm' + (m.hero ? ' gm--hero' : '');
+    el.style.setProperty('--gm-delay', (-(i * 0.37) % 2.8).toFixed(2) + 's');
+    el.innerHTML = '<i class="gm__dot"></i><i class="gm__line"></i><span class="gm__label"><b class="gm__place"></b><span class="gm__what"></span></span>';
+    el.querySelector('.gm__place').textContent = m.name;
+    el.querySelector('.gm__what').textContent = isMobile ? m.short : m.what;
+    marksEl.appendChild(el); MK.push({ m, el, lab: el.querySelector('.gm__label'), line: el.querySelector('.gm__line'), on: false });
+  });
+})();
+const MARK_FADE = [26, 34];                                   /* approach frames: full to 26, gone by 34 (the clouds) */
+let marksOn = false, marksKey = '';
+function marksVisible(v){ if (v !== marksOn) { marksOn = v; marksEl.classList.toggle('is-on', v); } }
+function rectHit(a, b, pad){ return !(a.r + pad < b.l || a.l - pad > b.r || a.b + pad < b.t || a.t - pad > b.b); }
+/* ---------- the focus: the plate zooms about Hong Kong.
+   The generated plate zooms toward a point in the South China Sea, some 290 px west of Hong Kong on the 1920-px plate, so the
+   descent seemed to land somewhere else. plateMap() places the plate on the screen so that Hong Kong's tracked position stays
+   where it was at frame 0 while the picture grows about it: a pan following the marker track to frame 32, a magnification of
+   12 % by frame 32 (more where the pan would otherwise expose a plate edge), held to frame 36 and eased back to the plain
+   cover-fit by frame 52, inside the clouds. Everything that places the plate goes through it: the 2D draw, the GL cover, the
+   markers and the verifier's sampler. Frame 0 is the plain cover-fit, so the poster and the first frame agree. ---------- */
+const HK = MARKS.find(m => m.id === 'hk');
+function plateMap(pos, cw, ch){
+  const pk = PK.pre, pw = pk.w || (portrait ? 405 : 1920), ph = pk.h || (portrait ? 720 : 1080);
+  const sc = Math.max(cw / pw, ch / ph), dw = pw * sc, dh = ph * sc, dx = (cw - dw) * 0.5, dy = (ch - dh) * (isMobile ? 0.45 : 0.42);
+  const ps = pw / (portrait ? 608 : 1920), x0 = portrait ? 656 : 0;                       /* plate px -> pack px */
+  const M = { pw, ph, sc, dw, dh, dx, dy, ps, x0, m: 1, hx: 0.5, hy: 0.5, h0x: 0.5, h0y: 0.5, X: dx, Y: dy, W: dw, H: dh };
+  if (!(pos >= 0) || pos >= 52) return M;
+  const at = q => { const p = clamp(q, 0, 32), k = Math.min(15, Math.floor(p / 2)), t = p / 2 - k, a = HK.pts[k], b = HK.pts[k + 1];
+                    return [((a[0] + (b[0] - a[0]) * t) - x0) * ps / pw, (a[1] + (b[1] - a[1]) * t) * ps / ph]; };
+  const h0 = at(0), h = at(pos), e = pos <= 36 ? 1 : 1 - smooth((pos - 36) / 16);
+  const hx = h0[0] + (h[0] - h0[0]) * e, hy = h0[1] + (h[1] - h0[1]) * e;
+  const Px = dx + h0[0] * dw, Py = dy + h0[1] * dh;                                        /* Hong Kong's place on the screen, fixed */
+  const raw = Math.max(Px / (hx * dw), (cw - Px) / ((1 - hx) * dw), Py / (hy * dh), (ch - Py) / ((1 - hy) * dh));
+  const need = 1 + Math.max(0, raw - 1) * 1.02;                                             /* the least magnification that keeps the plate over the whole screen */
+  const m = Math.max(need, 1 + 0.12 * smooth(pos / 32) * e);
+  M.m = m; M.hx = hx; M.hy = hy; M.h0x = h0[0]; M.h0y = h0[1];
+  M.X = dx + (h0[0] - hx * m) * dw; M.Y = dy + (h0[1] - hy * m) * dh; M.W = dw * m; M.H = dh * m;
+  return M;
+}
+function marks(pos){
+  /* pos: the approach's continuous frame (0–191), or -1 when the approach is not on the canvas */
+  const last = MARK_KF[MARK_KF.length - 1];
+  const fade = pos < 0 ? 0 : clamp((MARK_FADE[1] - pos) / (MARK_FADE[1] - MARK_FADE[0]), 0, 1);
+  if (fade <= 0) { marksVisible(false); return; }
+  const cw = innerWidth, ch = innerHeight, pk = PK.pre;
+  const key = pos.toFixed(2) + ':' + cw + 'x' + ch + ':' + OP.b1.toFixed(2) + ':' + OP.b2.toFixed(2);
+  if (key === marksKey) { marksVisible(true); return; } marksKey = key;
+  /* the plate on the screen: the same cover-fit as the canvas (draw2D / the GL cover); the portrait pack is the plate's centre 608 px */
+  const M = plateMap(pos, cw, ch);                                                  /* the plate on the screen, zooming about Hong Kong */
+  const zoom = 1 + (isMobile ? 0.12 : 0.25) * clamp(pos / 32, 0, 1);              /* the markers grow with the picture: a quarter by frame 32; on the phone only with the focus (12 %), so the Hong Kong label keeps its room at the left */
+  const p = clamp(pos, 0, last), k0 = Math.min(MARK_KF.length - 2, Math.floor(p / 2)), t = clamp(p / 2 - k0, 0, 1);
+  const navH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-h')) || 64;
+  const safeT = navH + 6, safeB = ch - (isMobile ? 64 : 10);
+  const blocks = [];
+  if (OP.b1 > 0.04) { const r = beat1.getBoundingClientRect(); if (r.width) blocks.push({ l: r.left, t: r.top, r: r.right, b: r.bottom }); }
+  if (OP.b2 > 0.04) { const r = beat2.getBoundingClientRect(); if (r.width) blocks.push({ l: r.left, t: r.top, r: r.right, b: r.bottom }); }
+  const placed = [];
+  for (const q of MK) {
+    const a = q.m.pts[k0], b = q.m.pts[k0 + 1];
+    const u = a[0] + (b[0] - a[0]) * t, v = a[1] + (b[1] - a[1]) * t, fc = a[2] + (b[2] - a[2]) * t;
+    const x = M.X + ((u - M.x0) * M.ps / M.pw) * M.W, y = M.Y + (v * M.ps / M.ph) * M.H;
+    let show = fc > 0.08 && x > 4 && x < cw - 4 && y > safeT && y < safeB;
+    if (show) {
+      const s = (0.7 + 0.3 * fc) * (q.m.hero ? 1.18 : 1) * zoom;
+      const len = q.m.len * s; let ang = q.m.ang;
+      /* the label box, from the line's end; mirrored when it would leave the screen */
+      const lw0 = q.lab.offsetWidth || 120, lh0 = q.lab.offsetHeight || 28, lw = lw0 * s, lh = lh0 * s;   /* layout size (local units) and on screen */
+      const place = (ang) => { const rad = ang * Math.PI / 180, ex = x + Math.cos(rad) * len, ey = y + Math.sin(rad) * len; const left = Math.cos(rad) < 0;
+                               return { ang, left, ex, ey, l: left ? ex - lw - 4 : ex + 4, t: ey - lh * 0.5 }; };
+      let L = place(ang);
+      if (L.l < 6 || L.l + lw > cw - 6) { L = place(180 - ang); }
+      if (L.l < 6 || L.l + lw > cw - 6 || L.t < safeT || L.t + lh > safeB) show = false;
+      else {
+        const box = { l: L.l, t: L.t, r: L.l + lw, b: L.t + lh };
+        for (const bl of blocks) if (rectHit(box, bl, 8)) { show = false; break; }
+        if (show) for (const pl of placed) if (rectHit(box, pl, 6)) { show = false; break; }
+        if (show) {
+          placed.push(box);
+          q.el.style.transform = 'translate(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px) scale(' + s.toFixed(3) + ')';
+          q.el.style.opacity = ((0.55 + 0.45 * fc) * fade).toFixed(3);
+          q.line.style.setProperty('--gm-len', (q.m.len).toFixed(0) + 'px'); q.line.style.setProperty('--gm-ang', L.ang + 'deg');
+          const rad = L.ang * Math.PI / 180, lx = Math.cos(rad) * q.m.len + (L.left ? -lw0 - 4 : 4), ly = Math.sin(rad) * q.m.len - lh0 * 0.5;   /* local units: the marker is scaled as a whole */
+          q.lab.style.setProperty('--gm-lx', lx.toFixed(1) + 'px'); q.lab.style.setProperty('--gm-ly', ly.toFixed(1) + 'px');
+          q.el.classList.toggle('gm--l', L.left);
+        }
+      }
+    }
+    if (!show && q.on) { q.el.style.opacity = '0'; }
+    q.on = show;
+  }
+  marksVisible(true);
+}
+function render(now){
+  let a, b, f;
+  seamOn = false;
+  if (pre) {
+    /* the approach: 192 frames following the scroll; ahead of the download it holds the last frame in */
+    if (!PK.pre.avail) { if (xf) xf.t0 = now; return; }
+    const lo = FILM.pre0, hi = FILM.pre0 + FILM.preN - 1;
+    const pos = clamp(preT * FILM.preFps, 0, FILM.preN - 1);
+    let i0 = Math.floor(pos), i1 = Math.min(i0 + 1, FILM.preN - 1); f = pos - i0; if (i1 === i0) f = 0;
+    const g0 = lo + i0, g1 = lo + i1;
+    prefetch(g0, targetPreT >= preT ? 1 : -1, 0, lo, hi);
+    a = nearest(g0, lo, hi); b = nearest(g1, lo, hi);
+    if (a < 0) { if (xf) xf.t0 = now; return; }
+    if (b < 0 || b === a || a !== g0 || b !== g1) { b = a; f = 0; }
+    if (xf) { const d = dissolveInto(now, nearest(lo + Math.round(pos), lo, hi)); if (d) { a = d.a; b = d.b; f = d.f; } }
+  } else if (ambient) {
+    /* the hold: 96 frames on the clock; the last half second cross-fades into the first */
+    if (!PK.main.avail) { if (xf) xf.t0 = now; return; }
+    const N = FILM.loopN, hi = PK.main.n - 1, u = clamp(curT, 0, FILM.loopEnd - 1e-4), pos = u * FILM.loopFps;
+    const i0 = Math.floor(pos) % N, i1 = (i0 + 1) % N; f = pos - Math.floor(pos);
+    prefetch(i0, 1, N, 0, hi);
+    a = nearest(i0, 0, N - 1); b = nearest(i1, 0, N - 1);              /* among the loop's own frames only: the first push frames stay decoded (HAND) but are not the hold's to borrow */
+    if (a < 0) { if (xf) xf.t0 = now; return; }                        /* the loop is not in yet: hold the last picture, the dissolve waits */
+    if (b < 0 || b === a || a !== i0 || b !== i1) { b = a; f = 0; }
+    if (u >= FILM.loopEnd - FILM.seam) {
+      const m = (u - (FILM.loopEnd - FILM.seam)) / FILM.seam;
+      const ai = nearest(Math.min(Math.round(pos), N - 1), 0, N - 1), bi = nearest(Math.round((u - (FILM.loopEnd - FILM.seam)) * FILM.loopFps) % N, 0, N - 1);
+      if (ai >= 0 && bi >= 0 && ai !== bi) { a = ai; b = bi; f = m; seamOn = true; }
+    }
+    if (xf) { const d = dissolveInto(now, nearest(i0, 0, hi)); if (d) { a = d.a; b = d.b; f = d.f; seamOn = false; } }
+  } else {
+    /* the walk: V1b_3 frames 0–100 follow the scroll; the film holds on the doors */
+    if (!PK.main.avail) { if (xf) xf.t0 = now; return; }
+    const n = PK.main.n, av = PK.main.avail, hi = n - 1;
+    const pos = clamp(posOf(curT), FILM.loopN, hi);
+    let i0 = Math.floor(pos), i1 = i0 + 1; f = pos - i0;
+    if (i1 > hi) { i1 = hi; f = 0; }
+    if (i1 >= av) { i0 = Math.min(i0, av - 1); i1 = i0; f = 0; }
+    prefetch(i0, targetT >= curT ? 1 : -1, 0, 0, hi);
+    a = nearest(i0, 0, hi); b = nearest(i1, 0, hi);
+    if (a < 0) { if (xf) xf.t0 = now; return; }
+    if (b < 0 || b === a || a !== i0 || b !== i1) { b = a; f = 0; }
+    if (xf) { const d = dissolveInto(now, nearest(Math.round(pos), 0, hi)); if (d) { a = d.a; b = d.b; f = d.f; } }
+  }
+  const fpos = pre ? clamp(preT * FILM.preFps, 0, FILM.preN - 1) : -1;              /* the approach frame under the scroll, -1 elsewhere */
+  if (gl) drawGL(a, b, f, now, fpos); else if (ctx) draw2D(a, b, f, fpos);
+  mixv = f;
+  marks(fpos);
+}
+function draw2D(a, b, f, fpos){
+  const cw = fx.width, ch = fx.height, pk = pkOf(a);
+  const key = a + ':' + b + ':' + f.toFixed(3) + ':' + cw + 'x' + ch + ':' + fpos.toFixed(2);
+  if (key === last2d) return; last2d = key;
+  let dx, dy, dw, dh;
+  if (pk === PK.pre) { const M = plateMap(fpos, cw, ch); dx = M.X; dy = M.Y; dw = M.W; dh = M.H; }
+  else { const sc = Math.max(cw/pk.w, ch/pk.h); dw = pk.w*sc; dh = pk.h*sc; dx = (cw-dw)*0.5; dy = (ch-dh)*(isMobile ? 0.45 : 0.42); }
+  ctx.globalAlpha = 1; ctx.drawImage(FR.bmp.get(a), dx, dy, dw, dh);
+  if (b !== a && f > 0.004) { ctx.globalAlpha = f; ctx.drawImage(FR.bmp.get(b), dx, dy, dw, dh); ctx.globalAlpha = 1; }
+  ia = a; ib = b;
+}
+
+/* ---- the film: stream the approach first, then the main pack; the approach begins on its first second,
+        the hold on its own frames plus the first push frames; the rest arrives while the picture is already up ---- */
+let started = false;
+async function streamPack(url, pk, onHeader, onFrames){
+  const res = await fetch(url, { priority:'high' });
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const total = +res.headers.get('content-length') || 0;
+  const reader = res.body.getReader();
+  let buf = new Uint8Array(total || (1 << 22)), got = 0, hdr = false;
+  for (;;) {
+    const { done, value } = await reader.read(); if (done) break;
+    if (got + value.length > buf.length) { const nb = new Uint8Array(Math.max(buf.length * 2, got + value.length)); nb.set(buf.subarray(0, got)); buf = nb; if (hdr) pk.buf = buf; }
+    buf.set(value, got); got += value.length;
+    if (!hdr && got >= 20) {
+      if (String.fromCharCode(buf[0], buf[1], buf[2], buf[3]) !== 'SWF1') throw new Error('not a frame pack');
+      const dv = new DataView(buf.buffer), nf = dv.getUint32(4, true);
+      if (got >= 20 + 4 * (nf + 1)) {
+        pk.n = nf; pk.fps = dv.getUint32(8, true) / 1000; pk.w = dv.getUint32(12, true); pk.h = dv.getUint32(16, true);
+        pk.offs = new Uint32Array(nf + 1); for (let i = 0; i <= nf; i++) pk.offs[i] = dv.getUint32(20 + 4*i, true);
+        pk.base = 20 + 4 * (nf + 1); pk.buf = buf; hdr = true;
+        onHeader(pk);
+      }
+    }
+    if (hdr) { while (pk.avail < pk.n && pk.base + pk.offs[pk.avail + 1] <= got) pk.avail++; onFrames(pk, got); }
+  }
+  if (!hdr) throw new Error('short file');
+  pk.buf = buf; pk.avail = pk.n; pk.complete = true; onFrames(pk, got);
+}
+async function loadFilm(){
+  const fail = e => { console.warn('[threshold] film failed', e); failed = true; firstReady(); };
+  const start = async () => {
+    if (started) return; started = true;
+    const i0 = pre ? FILM.pre0 : 0;
+    const first = decode(i0); for (let i = 1; i < WIN.ahead; i++) decode(i0 + i);
+    await first;
+    if (!FR.bmp.has(i0)) throw new Error('first frame failed');
+    setProgress(0.96);
+    if (pre) preT = targetPreT;                     /* the first picture is wherever the scroll already is */
+    painted = true; render(performance.now());
+    film.classList.add('has-clip'); fx.classList.add('is-on');
+    firstReady(); update();
+  };
+  try {
+    if (pre) {
+      let need = 1;
+      try {
+        await streamPack(M + (portrait ? FILM.preP : FILM.pre), PK.pre,
+          pk => { if (pk.n !== FILM.preN) console.warn('[threshold] approach pack has ' + pk.n + ' frames, expected ' + FILM.preN); need = pk.base + pk.offs[Math.min(pk.n, FILM.preFirst)]; },
+          (pk, got) => { if (!started) { setProgress(Math.min(1, got / need) * 0.9); if (pk.avail >= Math.min(pk.n, FILM.preFirst)) { start().catch(fail); setTimeout(firstReady, 3500); } } });
+      } catch (e) { console.warn('[threshold] approach pack failed — straight to the forecourt', e); dropPre(); }
+    }
+    let need = 1;
+    await streamPack(M + (portrait ? FILM.p : isMobile ? FILM.m : FILM.sd), PK.main,
+      pk => { if (pk.n !== FILM.loopN + FILM.pushN) console.warn('[threshold] pack has ' + pk.n + ' frames, expected ' + (FILM.loopN + FILM.pushN)); need = pk.base + pk.offs[Math.min(pk.n, FILM.loopN + HAND)]; },
+      (pk, got) => { if (!started) { setProgress(Math.min(1, got / need) * 0.9); if (pk.avail >= Math.min(pk.n, FILM.loopN + HAND)) { start().catch(fail); setTimeout(firstReady, 3500); } } });
+    if (!started) { setTimeout(firstReady, 3500); await start(); }
+  } catch (e) { fail(e); }
+}
+
+/* ---- the clock: the hold runs on time; the approach and the walk follow the scroll (time-based, so 60 and 120 Hz feel the same) ---- */
+let lastNow = 0;
+function loop(now){
+  const dt = lastNow ? Math.min(0.05, (now - lastNow) / 1000) : 1/60; lastNow = now;
+  if (painted) {
+    const k = reduced ? 1 : 1 - Math.pow(1 - CFG.scrub, dt * 60);
+    if (pre) {
+      let nt = preT + (targetPreT - preT) * k;
+      if (Math.abs(targetPreT - nt) < 1 / (FILM.preFps * 8)) nt = targetPreT;     /* land exactly, never creep */
+      const need = Math.min(FILM.preN - 1, Math.ceil(nt * FILM.preFps));
+      if (nt <= preT || PK.pre.avail > need) preT = nt;                            /* ahead of the download the approach holds, never skips */
+    } else if (ambient) {
+      if (mainReady()) { curT += dt; if (curT >= FILM.loopEnd - 1e-6) curT -= FILM.loopEnd - FILM.seam; } /* past the seam the incoming side carries on */
+    } else {
+      curT += (targetT - curT) * k;
+      if (Math.abs(targetT - curT) < 1 / (FILM.pushFps * 8)) curT = targetT;      /* land exactly, never creep (the doors snap) */
+      /* walk → hold: once the film is back at its first push frame, the loop resumes under a dissolve */
+      if (r <= 0 && !xf && Math.abs(curT - FILM.loopEnd) < 1 / FILM.pushFps) { ambient = true; if (ia >= 0) { xf = { from: ia, t0: now, dur: CFG.dissolve }; FR.pin = ia; } curT = 0; }
+    }
+    render(now);
+    driftStep(dt);
+  }
+  vel *= Math.pow(0.5, dt / 0.3); /* settle when the scroll rests: half-life 0.3 s, whatever the frame rate */
+  requestAnimationFrame(loop);
+}
+
+/* ---- the film grade (WebGL, fine pointer only): halation on the highlights, fine grain, a soft vignette, a little dolly blur
+        while the scroll is moving. Never reacts to the cursor. Touch gets the plain frames. ---- */
+let gl = null, ctx = null, prog = null, texA = null, texB = null, uni = {}, pr = Math.min(devicePixelRatio || 1, 1.5), blur = 0;
+if (!reduced) {
+  if (!coarse && matchMedia('(hover: hover) and (pointer: fine)').matches && CFG.grade) initFx();
+  if (!gl) { try { ctx = fx.getContext('2d', { alpha:false }); } catch (e) { ctx = null; } }
+}
+function initFx(){
+  try {
+    gl = fx.getContext('webgl', { alpha:false, antialias:false, powerPreference:'high-performance' });
+    if (!gl) return;
+    const vs = 'attribute vec2 a;varying vec2 v;void main(){v=a*0.5+0.5;gl_Position=vec4(a,0.0,1.0);}';
+    const fs = [
+      'precision mediump float;varying vec2 v;',
+      'uniform sampler2D u_a,u_b;uniform vec2 u_res,u_tres,u_an,u_h0,u_ht;uniform float u_mix,u_t,u_blur,u_grain,u_halo,u_vig,u_zoom;',
+      'vec2 cover(vec2 uv){float ra=u_res.x/u_res.y,rt=u_tres.x/u_tres.y;vec2 s=ra>rt?vec2(1.0,rt/ra):vec2(ra/rt,1.0);vec2 c=u_an+(uv-u_an)*s;c=u_ht+(c-u_h0)/u_zoom;return clamp(c,0.001,0.999);}',
+      'vec3 film(vec2 uv){vec2 c=cover(uv);return mix(texture2D(u_a,c).rgb,texture2D(u_b,c).rgb,u_mix);}',
+      'float lum(vec3 c){return dot(c,vec3(0.299,0.587,0.114));}',
+      'float hash(vec2 p){return fract(sin(dot(p,vec2(12.9898,78.233)))*43758.5453);}',
+      'void main(){',
+      ' vec2 uv=vec2(v.x,1.0-v.y);vec2 an=vec2(0.5,0.42);float asp=u_res.y/u_res.x;',
+      ' vec2 dir=(uv-an)*u_blur;vec3 col=vec3(0.0);',
+      ' for(int i=0;i<7;i++){float f=float(i)/6.0-0.5;col+=film(uv-dir*f);}',
+      ' col/=7.0;',
+      ' vec3 glow=vec3(0.0);',
+      ' for(int i=0;i<8;i++){float a=float(i)*0.7854;vec2 o=vec2(cos(a)*asp,sin(a))*0.014;vec3 c=film(uv+o);glow+=c*smoothstep(0.52,0.95,lum(c));}',
+      ' for(int i=0;i<6;i++){float a=float(i)*1.0472+0.5;vec2 o=vec2(cos(a)*asp,sin(a))*0.032;vec3 c=film(uv+o);glow+=c*smoothstep(0.52,0.95,lum(c))*0.7;}',
+      ' col+=glow/14.0*u_halo*vec3(1.0,0.86,0.66);',
+      ' float d=distance(uv,vec2(0.5,0.5))/0.7071;col*=1.0-u_vig*smoothstep(0.45,1.05,d);',
+      ' float g=hash(floor(gl_FragCoord.xy/1.5)+vec2(fract(u_t*7.3)*100.0,fract(u_t*3.1)*100.0))-0.5;',
+      ' col+=g*u_grain*(1.0-0.6*lum(col));',
+      ' gl_FragColor=vec4(col,1.0);}'
+    ].join('\n');
+    const sh = (type, src) => { const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if (!gl.getShaderParameter(s, gl.COMPILE_STATUS)) throw new Error(gl.getShaderInfoLog(s)); return s; };
+    prog = gl.createProgram(); gl.attachShader(prog, sh(gl.VERTEX_SHADER, vs)); gl.attachShader(prog, sh(gl.FRAGMENT_SHADER, fs)); gl.linkProgram(prog);
+    if (!gl.getProgramParameter(prog, gl.LINK_STATUS)) throw new Error(gl.getProgramInfoLog(prog));
+    gl.useProgram(prog);
+    const buf = gl.createBuffer(); gl.bindBuffer(gl.ARRAY_BUFFER, buf); gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, 1,1]), gl.STATIC_DRAW);
+    const loc = gl.getAttribLocation(prog, 'a'); gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+    ['u_a','u_b','u_res','u_tres','u_an','u_h0','u_ht','u_zoom','u_mix','u_t','u_blur','u_grain','u_halo','u_vig'].forEach(k => uni[k] = gl.getUniformLocation(prog, k));
+    const mk = () => { const t = gl.createTexture(); gl.bindTexture(gl.TEXTURE_2D, t);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+      gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR); gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MAG_FILTER, gl.LINEAR);
+      gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, 1, 1, 0, gl.RGB, gl.UNSIGNED_BYTE, new Uint8Array([22,20,15])); return t; };
+    texA = mk(); texB = mk();
+    gl.pixelStorei(gl.UNPACK_COLORSPACE_CONVERSION_WEBGL, gl.NONE);
+    gl.uniform1i(uni.u_a, 0); gl.uniform1i(uni.u_b, 1);
+    sizeFx();
+  } catch (e) { console.warn('[threshold] grade off:', e.message); gl = null; }
+}
+function sizeFx(){
+  if (!gl && !ctx) return;
+  const p = gl ? pr : Math.min(devicePixelRatio || 1, 2);
+  fx.width = Math.round(innerWidth * p); fx.height = Math.round(innerHeight * p);   /* the visible box, not the scroll budget: on a phone the toolbar folds and the canvas follows */
+  if (gl) gl.viewport(0, 0, fx.width, fx.height);
+  last2d = ''; if (painted) render(performance.now());
+}
+function upload(t, i){ gl.bindTexture(gl.TEXTURE_2D, t); gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGB, gl.RGB, gl.UNSIGNED_BYTE, FR.bmp.get(i)); }
+function drawGL(a, b, f, now, fpos){
+  /* one step forward or back: swap the two textures, upload only the new one */
+  if (a === ib && a !== ia) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
+  else if (b === ia && b !== ib) { const t = texA; texA = texB; texB = t; const j = ia; ia = ib; ib = j; }
+  gl.activeTexture(gl.TEXTURE0); if (a !== ia) { upload(texA, a); ia = a; } else gl.bindTexture(gl.TEXTURE_2D, texA);
+  gl.activeTexture(gl.TEXTURE1); if (b !== ib) { upload(texB, b); ib = b; } else gl.bindTexture(gl.TEXTURE_2D, texB);
+  blur += ((ambient ? 0 : CFG.grade.dollyBlur * smooth((vel - 0.15) / 1.45)) - blur) * 0.18;
+  const pk = pkOf(a);
+  gl.uniform2f(uni.u_res, fx.width, fx.height); gl.uniform2f(uni.u_tres, pk.w, pk.h); gl.uniform2f(uni.u_an, 0.5, isMobile ? 0.45 : 0.42);
+  const M = pk === PK.pre ? plateMap(fpos, fx.width, fx.height) : null;             /* the focus: the approach zooms about Hong Kong */
+  gl.uniform2f(uni.u_h0, M ? M.h0x : 0.5, M ? M.h0y : 0.5); gl.uniform2f(uni.u_ht, M ? M.hx : 0.5, M ? M.hy : 0.5); gl.uniform1f(uni.u_zoom, M ? M.m : 1);
+  gl.uniform1f(uni.u_mix, f); gl.uniform1f(uni.u_t, (now / 1000) % 100); gl.uniform1f(uni.u_blur, blur);
+  gl.uniform1f(uni.u_grain, CFG.grade.grain); gl.uniform1f(uni.u_halo, CFG.grade.halation); gl.uniform1f(uni.u_vig, CFG.grade.vignette);
+  gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+}
+
+/* ---- go ---- */
+layout(); update(); requestAnimationFrame(loop);
+if (!reduced) loadFilm();
+
+/* exposed for the render checks */
+window.__sw = { FILM, CFG, posOf, preOn: PRE, portrait, isMobile, coarse, MARKS, get marksOn(){ return marksOn; }, plateMap: pos => plateMap(pos, innerWidth, innerHeight),
+                sample(x, y){ /* verifier: mean luminance of the drawn approach frame under a screen point (r ≤ 4 px) and in a ring around it (12–18 px) */
+                  const pk = PK.pre, i = FILM.pre0 + Math.round(clamp(preT * FILM.preFps, 0, FILM.preN - 1)), bmp = FR.bmp.get(i); if (!bmp || !pk.w) return null;
+                  const M = plateMap(i - FILM.pre0, innerWidth, innerHeight);
+                  const c = document.createElement('canvas'); c.width = c.height = 41; const g = c.getContext('2d'); g.drawImage(bmp, M.X - x + 20, M.Y - y + 20, M.W, M.H);
+                  const d = g.getImageData(0, 0, 41, 41).data; let sd = 0, nd = 0, sr = 0, nr = 0;
+                  for (let j = 0; j < 41; j++) for (let k = 0; k < 41; k++) { const r = Math.hypot(k - 20, j - 20), o = (j * 41 + k) * 4, l = 0.299 * d[o] + 0.587 * d[o + 1] + 0.114 * d[o + 2]; if (r <= 4) { sd += l; nd++; } else if (r >= 12 && r <= 18) { sr += l; nr++; } }
+                  return { dot: +(sd / nd).toFixed(1), ring: +(sr / nr).toFixed(1), frame: i - FILM.pre0 }; },
+                get marks(){ return MK.map(q => ({ id: q.m.id, on: q.on, op: +q.el.style.opacity || 0, tf: q.el.style.transform, rect: q.on ? q.el.getBoundingClientRect() : null, lab: q.on ? q.lab.getBoundingClientRect() : null })); }, get fxSize(){ return { w: fx.width, h: fx.height }; }, get packs(){ return { main: PK.main.w + 'x' + PK.main.h, pre: PK.pre.w + 'x' + PK.pre.h }; }, get bar(){ return bar ? { pre: bar.classList.contains('is-pre'), desk: bar.classList.contains('is-desk') } : null; }, get preOK(){ return preOK; }, get V(){ return V; }, get appPx(){ return appPx; }, get holdPx(){ return holdPx; }, get pushPx(){ return pushPx; }, get restPx(){ return restPx; },
+                get r(){ return r; }, get rA(){ return rA; }, get pre(){ return pre; }, get preT(){ return preT; }, set preT(v){ preT = v; }, get targetPreT(){ return targetPreT; },
+                get ambient(){ return ambient; }, get dissolving(){ return !!xf; }, get seam(){ return seamOn; },
+                get mode(){ return gl ? 'gl' : ctx ? '2d' : null; }, get fx(){ return !!gl; },
+                get frames(){ return { n: PK.main.n, fps: PK.main.fps, w: PK.main.w, h: PK.main.h, avail: PK.main.avail, complete: PK.main.complete, decoded: FR.bmp.size, pending: FR.pend.size, max: WIN.max, pin: FR.pin,
+                                       pre: { n: PK.pre.n, avail: PK.pre.avail, complete: PK.pre.complete } }; },
+                get frame(){ return { a: ia, b: ib, mix: mixv }; },
+                get words(){ return { b1: OP.b1, b2: OP.b2, head: OP.head, sub: OP.sub, card: OP.card, cue: OP.cue }; },
+                get drift(){ return { on: DR.on, done: DR.done, userMoved: DR.userMoved, v: DR.v }; },
+                get loaderGone(){ return loaderGone; },
+                get painted(){ return painted; }, get failed(){ return failed; }, get targetT(){ return targetT; },
+                get curT(){ return curT; }, set curT(v){ curT = v; }, get blur(){ return blur; }, get vel(){ return vel; } };
+})();
+
+/* ---- header, forms, anchors ---- */
+(function(){
+  const nav = document.getElementById('siteNav'), desk = document.getElementById('enquiry'), after = document.getElementById('after') || desk;
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const bar = document.querySelector('.sticky-bar');
+  const sync = () => { const top = desk.getBoundingClientRect().top, atop = after.getBoundingClientRect().top; const solid = atop < 64; nav.classList.toggle('is-scrolled', solid); nav.classList.toggle('hr-dark', !solid); nav.style.setProperty('--shade-to', Math.max(0, Math.round(atop)) + 'px'); if (bar) bar.classList.toggle('is-desk', top < innerHeight * 0.6); };
+  addEventListener('scroll', sync, { passive:true });
+  addEventListener('load', sync); sync();
+  if ('IntersectionObserver' in window) new IntersectionObserver(sync, { rootMargin:'-64px 0px 0px 0px', threshold:[0, 0.001] }).observe(after);
+  document.addEventListener('click', e => {
+    const a = e.target.closest('a[href^="#"]'); if (!a) return;
+    const id = a.getAttribute('href').slice(1);
+    if (id === 'threshold') { e.preventDefault(); scrollTo({ top:0, behavior: reduced ? 'auto' : 'smooth' }); return; }
+    const el = document.getElementById(id);
+    if (el) { e.preventDefault(); scrollTo({ top: el.getBoundingClientRect().top + scrollY, behavior: reduced ? 'auto' : 'smooth' }); }
+  });
+  const wire = (formId, noteId) => {
+    const f = document.getElementById(formId), n = document.getElementById(noteId); if (!f) return;
+    f.addEventListener('submit', e => {
+      e.preventDefault();
+      const tel = f.querySelector('input[name="tel"]');
+      if (!tel.value.trim()) { n.textContent = 'Telephone is required.'; tel.focus(); return; }
+      n.textContent = 'Test page — nothing was sent.';
+    });
+  };
+  wire('heroForm', 'heroNote'); wire('enquiryForm', 'formNote');
+})();
+
+/* ---- v0.11: the practices' tabs, the brief presets, the footer's practice links ---- */
+(function(){
+  const tabs = [...document.querySelectorAll('.prac__tab')], panels = [...document.querySelectorAll('.prac__panel')];
+  if (!tabs.length) return;
+  const show = (i, focus) => { tabs.forEach((t, k) => { const on = k === i; t.setAttribute('aria-selected', on ? 'true' : 'false'); t.tabIndex = on ? 0 : -1; panels[k].hidden = !on; }); if (focus) tabs[i].focus(); };
+  tabs.forEach((t, i) => {
+    t.addEventListener('click', () => show(i));
+    t.addEventListener('keydown', e => {
+      const n = (e.key === 'ArrowDown' || e.key === 'ArrowRight') ? i + 1 : (e.key === 'ArrowUp' || e.key === 'ArrowLeft') ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+      if (n === null) return; e.preventDefault(); show((n + tabs.length) % tabs.length, true);
+    });
+  });
+  document.addEventListener('click', e => {
+    const a = e.target.closest('[data-tab]'); if (a && tabs[+a.dataset.tab]) show(+a.dataset.tab);
+    const b = e.target.closest('[data-brief]');
+    if (b) { const v = b.dataset.brief; ['f-brief', 'h-brief'].forEach(id => { const s = document.getElementById(id); if (!s) return; const o = [...s.options].find(o => o.value === v || o.textContent.trim() === v); if (o) s.value = o.value; }); }
+  });
+})();
+
+/* dev only: reload when the file changes on the local server */
+if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') (function(){
+  let last = null;
+  setInterval(async () => {
+    try { const r = await fetch(location.pathname, { method:'HEAD', cache:'no-store' }); const m = r.headers.get('last-modified'); if (last && m && m !== last) location.reload(); if (m) last = m; } catch (e) {}
+  }, 1500);
+})();
+</script>
+</body>
+</html>
