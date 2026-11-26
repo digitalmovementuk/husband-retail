@@ -1,4 +1,4 @@
-/* Husband Retail — service landing page template · hr-landing.css v0.1 (26.11.2026)
+/* Husband Retail — service landing page template · hr-landing.css v0.1.2 (26.11.2026; v0.1.2 = phone slot-table cards)
    Tokens copied from Husband Retail Homepage/retail-consulting.html. Shared by the master and all group pages. */
 :root{
   --ink:#16140F; --ink-2:#2A2620; --muted:#6E6A61;
@@ -220,3 +220,17 @@ p{margin:0 0 1em}
   .foot-top{grid-template-columns:1fr}
 }
 .team-note tr.tn-total td{font-weight:600;color:var(--ink,#1a1a1a);border-top:2px solid var(--gold)}
+/* v0.1.2: slot table stacks as cards on phones so the Rule column needs no sideways scroll */
+@media (max-width:600px){
+  .team-note table.tn-slots thead{display:none}
+  .team-note table.tn-slots,.team-note table.tn-slots tbody,.team-note table.tn-slots tr,.team-note table.tn-slots td{display:block;width:100%}
+  .team-note table.tn-slots tr{padding:10px 0;border-bottom:1px solid var(--line)}
+  .team-note table.tn-slots td{border:0;padding:2px 0}
+  .team-note table.tn-slots td:first-child{font-weight:600;color:var(--ink)}
+  .team-note table.tn-slots td:nth-child(2)::before{content:"Length: ";color:var(--muted)}
+  .team-note table.tn-slots td:nth-child(3)::before{content:"Words: ";color:var(--muted)}
+  .team-note table.tn-slots td:nth-child(4)::before{content:"Rule: ";color:var(--muted)}
+  .team-note table.tn-slots tr.tn-total{border-top:2px solid var(--gold)}
+  .team-note table.tn-slots tr.tn-total td{border-top:0}
+  .team-note table.tn-slots td:empty{display:none}
+}
