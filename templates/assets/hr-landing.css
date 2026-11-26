@@ -234,3 +234,8 @@ p{margin:0 0 1em}
   .team-note table.tn-slots tr.tn-total td{border-top:0}
   .team-note table.tn-slots td:empty{display:none}
 }
+
+/* master template label: in page flow on phones so it never covers the word-count cards (26.11.2026) */
+@media (max-width:640px){
+  .fidelity.fidelity-master{position:static;display:block;max-width:none;margin:20px 16px 24px;text-align:center;white-space:normal;overflow-wrap:anywhere;line-height:1.5;letter-spacing:.1em;box-shadow:none}
+}
